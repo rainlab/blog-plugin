@@ -14,10 +14,16 @@ fields:
     type: textarea
     size: small
 
+  categories:
+    span: right
+    label: Categories
+    type: relation
+
 tabs:
   fields:
     featured_images:
       span: full
+      tab: Images
       label: Featured Images
       type: fileupload
       options:

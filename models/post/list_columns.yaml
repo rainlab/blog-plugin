@@ -4,10 +4,18 @@
 
 columns:
 
-    title:
-        label: Title
+  title:
+    label: Title
 
-    author:
-        label: Author
-        relation: categories
-        select: @name
+  author:
+    label: Author
+    relation: user
+    select: @login
+
+  categories:
+    label: Categories
+    relation: categories
+    select: @name
+
+  created_at:
+    label: Date
