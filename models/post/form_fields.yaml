@@ -5,28 +5,62 @@
 fields:
 
   title:
-    span: left
+    span: full
     label: Title
 
-  excerpt:
-    span: left
-    label: Excerpt
-    type: textarea
-    size: small
-
-  categories:
-    span: right
-    label: Categories
-    type: relation
+  content:
+    span: full
+    label: Content
+    type: richeditor
+    size: huge
 
 tabs:
   fields:
-    featured_images:
+
+    excerpt:
+      tab: Details
       span: full
-      tab: Images
+      label: Excerpt
+      type: textarea
+      size: small
+
+    categories:
+      tab: Details
+      span: full
+      label: Categories
+      type: relation
+
+    featured_images:
+      tab: Attachments
+      span: full
       label: Featured Images
       type: fileupload
       options:
         mode: image
         image-width: 256
         image-height: 144
+
+secondary-tabs:
+  fields:
+
+    status:
+      tab: Publish
+      label: Status
+      type: dropdown
+      options:
+        - Draft
+        - Review
+        - Published
+
+    visibility:
+      tab: Publish
+      label: Visibility
+      type: dropdown
+      options:
+        - Public
+        - Sticky
+        - Private
+
+    published_at:
+      tab: Publish
+      label: Published on
