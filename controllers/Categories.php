@@ -3,7 +3,7 @@
 use BackendMenu;
 use Modules\Backend\Classes\BackendController;
 
-class Posts extends BackendController
+class Categories extends BackendController
 {
     public $implement = [
         'Modules.Backend.Behaviors.FormController',

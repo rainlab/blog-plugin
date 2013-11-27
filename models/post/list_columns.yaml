@@ -6,3 +6,8 @@ columns:
 
     title:
         label: Title
+
+    author:
+        label: Author
+        relation: categories
+        select: @name

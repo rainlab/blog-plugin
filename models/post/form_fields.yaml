@@ -14,11 +14,13 @@ fields:
     type: textarea
     size: small
 
-  featured_images:
-    span: right
-    label: Featured Images
-    type: fileupload
-    options:
-      mode: image-multi
-      image-height: 120
-      image-width: 120
+tabs:
+  fields:
+    featured_images:
+      span: full
+      label: Featured Images
+      type: fileupload
+      options:
+        mode: image
+        image-width: 256
+        image-height: 144

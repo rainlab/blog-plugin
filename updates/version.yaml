@@ -3,3 +3,4 @@
     - create_posts_table.php
     - seed_posts_table.php
     - create_categories_table.php
+    - create_posts_categories_table.php

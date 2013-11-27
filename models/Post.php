@@ -19,6 +19,10 @@ class Post extends Model
     /*
      * Relations
      */
+    public $belongsToMany = [
+        'categories' => ['Plugins\October\Blog\Models\Category', 'table' => 'october_blog_posts_categories']
+    ];
+
     public $morphMany = [
         'featured_images' => ['Modules\System\Models\File', 'name' => 'attachment']
     ];

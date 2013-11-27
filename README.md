@@ -1,4 +1,4 @@
-plugin-blog
+blog-plugin
 ===========
 
-A robust blogging platform.
+A robust blogging platform for October CMS.

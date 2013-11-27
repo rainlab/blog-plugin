@@ -31,7 +31,7 @@ class Plugin extends PluginBase
                 'icon' => 'icon-pencil',
                 'permissions' => ['blog:*'],
                 'order' => 500,
-                'subMenu' => [
+                'sideMenu' => [
                     'posts' => [
                         'label' => 'Posts',
                         'icon' => 'icon-copy',

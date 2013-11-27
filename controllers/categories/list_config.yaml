@@ -1,0 +1,18 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+title: Manage Blog Categories
+list: /plugins/october/blog/models/category/list_columns.yaml
+model-class: Plugins\October\Blog\Models\Category
+record-url: october/blog/categories/update/:id
+no-records-message: backend::lang.list.no_records
+records-per-page: 5
+
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: backend::lang.list.search_prompt
+
+
+
