@@ -1,0 +1,24 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+
+  title:
+    span: left
+    label: Title
+
+  excerpt:
+    span: left
+    label: Excerpt
+    type: textarea
+    size: small
+
+  featured_images:
+    span: right
+    label: Featured Images
+    type: fileupload
+    options:
+      mode: image-multi
+      image-height: 120
+      image-width: 120

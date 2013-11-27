@@ -1,0 +1,16 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+name: Blog Post
+form: /plugins/october/blog/models/post/form_fields.yaml
+model-class: Plugins\October\Blog\Models\Post
+default-redirect: october/blog/posts
+
+create:
+    redirect: october/blog/posts/update/:id
+    redirect-close: october/blog/posts
+
+update:
+    redirect: october/blog/posts
+    redirect-close: october/blog/posts

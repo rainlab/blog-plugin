@@ -1,0 +1,19 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+title: Manage Blog Posts
+list: /plugins/october/blog/models/post/list_columns.yaml
+model-class: Plugins\October\Blog\Models\Post
+record-url: october/blog/posts/update/:id
+no-records-message: backend::lang.list.no_records
+records-per-page: 5
+show-checkboxes: yes
+
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: backend::lang.list.search_prompt
+
+
+

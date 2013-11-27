@@ -1,0 +1,5 @@
+1.0.1:
+    - Initialize plugin
+    - create_posts_table.php
+    - seed_posts_table.php
+    - create_categories_table.php

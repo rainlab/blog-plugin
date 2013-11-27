@@ -1,0 +1,44 @@
+<div class="control-breadcrumb">
+    <ul>
+        <li><a href="<?= Backend::url('october/blog/posts') ?>">Blog Posts</a></li>
+        <li><?= e($this->pageTitle) ?></li>
+    </ul>
+</div>
+
+<?= Form::open(['class'=>'layout-item stretch layout-column']) ?>
+
+    <?= $this->formRender() ?>
+
+    <div class="form-buttons layout-item fix">
+        <div class="loading-indicator-container">
+            <button 
+                type="submit" 
+                data-request="onSave" 
+                data-request-data="redirect:false" 
+                data-hotkey="ctrl+s"
+                data-hotkey-mac="cmd+s"
+                data-load-indicator="Saving Post..." 
+                class="btn btn-primary">
+                <u>S</u>ave
+            </button>
+            <button 
+                type="button" 
+                data-request="onSave" 
+                data-request-data="close:true" 
+                data-hotkey="ctrl+enter"
+                data-hotkey-mac="cmd+enter"
+                data-load-indicator="Saving Post..." 
+                class="btn btn-default">
+                Save and Close
+            </button>
+            <button 
+                type="button" 
+                class="btn btn-danger pull-right" 
+                data-request="onDelete" 
+                data-load-indicator="Deleting Post..." 
+                data-request-confirm="Do you really want to delete this admin?">
+                Delete
+            </button>
+        </div>
+    </div>
+<?= Form::close() ?>
