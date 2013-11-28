@@ -24,12 +24,6 @@ tabs:
       type: textarea
       size: small
 
-    categories:
-      tab: Details
-      span: full
-      label: Categories
-      type: relation
-
     featured_images:
       tab: Attachments
       span: full
@@ -44,23 +38,31 @@ secondary-tabs:
   fields:
 
     status:
+      span: full
       tab: Publish
-      label: Status
-      type: dropdown
+      type: radio
       options:
         - Draft
         - Review
         - Published
 
-    visibility:
+    published_at:
+      span: full
       tab: Publish
-      label: Visibility
-      type: dropdown
+      label: Published on
+
+    categories:
+      tab: Publish
+      span: full
+      label: Categories
+      type: relation
+
+    visibility:
+      span: full
+      tab: Visibility
+      type: radio
       options:
         - Public
         - Sticky
         - Private
 
-    published_at:
-      tab: Publish
-      label: Published on
