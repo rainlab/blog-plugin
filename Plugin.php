@@ -9,16 +9,17 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name' => 'Blog Plugin',
+            'name' => 'Blog',
             'description' => 'A robust blogging platform.',
-            'author' => 'Alexey Bobkov, Samuel Georges'
+            'author' => 'Alexey Bobkov, Samuel Georges',
+            'icon' => 'icon-pencil'
         ];
     }
 
     public function registerComponents()
     {
         return [
-            'Plugins\October\Blog\Components\Post' => 'blogPost'
+            'Plugins\October\Blog\Components\Post' => 'blogPost',
         ];
     }
 
