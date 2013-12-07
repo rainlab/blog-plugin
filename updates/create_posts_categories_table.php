@@ -3,7 +3,7 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class CreatePostsCategoriesTable extends Migration 
+class CreatePostsCategoriesTable extends Migration
 {
 
     public function up()
@@ -13,7 +13,7 @@ class CreatePostsCategoriesTable extends Migration
             $table->engine = 'InnoDB';
             $table->integer('post_id')->unsigned();
             $table->integer('category_id')->unsigned();
-            $table->primary(array('post_id', 'category_id'));
+            $table->primary(['post_id', 'category_id']);
         });
     }
 
