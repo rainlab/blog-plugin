@@ -19,3 +19,4 @@ columns:
 
   created_at:
     label: Date
+    type: datetime

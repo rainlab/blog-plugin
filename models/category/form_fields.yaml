@@ -9,3 +9,5 @@ fields:
 
   slug:
     label: Slug
+    attributes:
+        data-input-preset: 'input[name="Category[name]"]'

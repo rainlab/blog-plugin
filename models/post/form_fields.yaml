@@ -50,6 +50,7 @@ secondary-tabs:
       span: full
       tab: Publish
       label: Published on
+      type: datepicker
 
     categories:
       tab: Publish
