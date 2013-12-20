@@ -5,7 +5,7 @@
 title: Manage Blog Posts
 list: /plugins/october/blog/models/post/list_columns.yaml
 model-class: Plugins\October\Blog\Models\Post
-record-url: october/blog/posts/update/:id
+record-url: october/blog/posts/preview/:id
 no-records-message: backend::lang.list.no_records
 records-per-page: 5
 show-checkboxes: yes
