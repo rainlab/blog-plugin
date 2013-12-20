@@ -1,52 +1,48 @@
-<div class="control-breadcrumb">
-    <ul>
-        <li><a href="<?= Backend::url('october/blog/posts') ?>">Blog Posts</a></li>
-        <li><?= e($this->pageTitle) ?></li>
-    </ul>
-</div>
+<?= Form::open(['class'=>'layout stretch']) ?>
 
-<?= Form::open(['class'=>'layout-item stretch layout-column']) ?>
+    <?php Block::put('form-contents') ?>
 
-    <div class="form-widget form-elements layout" role="form" id="<?= $this->formGetId() ?>">
+        <div class="control-breadcrumb">
+            <ul>
+                <li><a href="<?= Backend::url('october/blog/posts') ?>">Blog Posts</a></li>
+                <li><?= e($this->pageTitle) ?></li>
+            </ul>
+        </div>
 
-        <!-- Passable fields -->
-        <input name="session_key" type="hidden" value="<?= $this->formGetSessionKey() ?>" id="<?= $this->formGetId('session-key') ?>">
+        <?= $this->formRenderOutsideFields() ?>
+        <?= $this->formRenderPrimaryTabs() ?>
 
-        <div class="row">
-            <div class="col-md-8">
-                <?= $this->formRenderOutsideFields() ?>
-                <?= $this->formRenderPrimaryTabs() ?>
-            </div>
-
-            <div class="col-md-4">
-                <?= $this->formRenderSecondaryTabs() ?>
+        <div class="form-buttons layout-item fix">
+            <div class="loading-indicator-container">
+                <button 
+                    type="submit" 
+                    data-request="onSave" 
+                    data-hotkey="ctrl+s"
+                    data-hotkey-mac="cmd+s"
+                    data-load-indicator="Creating Post..." 
+                    class="btn btn-primary">
+                    Create
+                </button>
+                <button 
+                    type="button" 
+                    data-request="onSave" 
+                    data-request-data="close:true" 
+                    data-hotkey="ctrl+enter"
+                    data-hotkey-mac="cmd+enter"
+                    data-load-indicator="Creating Post..." 
+                    class="btn btn-default">
+                    Create and Close
+                </button>
+                <span class="btn-text">or <a href="<?= Backend::url('blog/posts') ?>">Cancel</a></span>
             </div>
         </div>
 
-    </div>
+    <?php Block::endPut() ?>
 
-    <div class="form-buttons layout-item fix">
-        <div class="loading-indicator-container">
-            <button 
-                type="submit" 
-                data-request="onSave" 
-                data-hotkey="ctrl+s"
-                data-hotkey-mac="cmd+s"
-                data-load-indicator="Creating Post..." 
-                class="btn btn-primary">
-                Create
-            </button>
-            <button 
-                type="button" 
-                data-request="onSave" 
-                data-request-data="close:true" 
-                data-hotkey="ctrl+enter"
-                data-hotkey-mac="cmd+enter"
-                data-load-indicator="Creating Post..." 
-                class="btn btn-default">
-                Create and Close
-            </button>
-        </div>
-    </div>
+    <?php Block::put('form-sidebar') ?>
+        <div class="hide-tabs"><?= $this->formRenderSecondaryTabs() ?></div>
+    <?php Block::endPut() ?>
+
+    <?= $this->makeLayout('form-with-sidebar') ?>
 
 <?= Form::close() ?>

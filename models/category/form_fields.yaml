@@ -6,8 +6,10 @@ fields:
 
   name:
     label: Name
+    span: left
 
   slug:
     label: Slug
+    span: right
     attributes:
         data-input-preset: 'input[name="Category[name]"]'

@@ -24,27 +24,8 @@ tabs:
       type: textarea
       size: small
 
-    featured_images:
-      tab: Attachments
-      span: full
-      label: Featured Images
-      type: fileupload
-      options:
-        mode: image
-        image-width: 256
-        image-height: 144
-
 secondary-tabs:
   fields:
-
-    status:
-      span: full
-      tab: Publish
-      type: radio
-      options:
-        - Draft
-        - Review
-        - Published
 
     published_at:
       span: full
@@ -59,11 +40,33 @@ secondary-tabs:
       type: relation
 
     visibility:
+      label: Visibility
       span: full
-      tab: Visibility
-      type: radio
+      tab: Publish
+      type: balloon-selector
       options:
         - Public
         - Sticky
         - Private
+
+    status:
+      label: Status
+      span: full
+      tab: Publish
+      type: balloon-selector
+      options:
+        - Draft
+        - Review
+        - Published
+
+    featured_images:
+      tab: Publish
+      span: full
+      label: Featured Images
+      type: fileupload
+      options:
+        mode: image
+        image-width: 127
+        image-height: 127
+
 

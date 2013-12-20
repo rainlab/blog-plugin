@@ -13,6 +13,8 @@ class Posts extends BackendController
     public $formConfig = 'form_config.yaml';
     public $listConfig = 'list_config.yaml';
 
+    public $bodyClass = 'compact-container';
+
     public function __construct()
     {
         parent::__construct();

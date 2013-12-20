@@ -33,12 +33,13 @@
             </button>
             <button 
                 type="button" 
-                class="btn btn-danger pull-right" 
+                class="oc-icon-trash btn-icon danger pull-right" 
                 data-request="onDelete" 
-                data-load-indicator="Deleting Post..." 
-                data-request-confirm="Do you really want to delete this admin?">
-                Delete
+                data-load-indicator="Deleting Category..." 
+                data-request-confirm="Do you really want to delete this category?">
             </button>
+
+            <span class="btn-text">or <a href="<?= Backend::url('october/blog/categories') ?>">Cancel</a></span>
         </div>
     </div>
 <?= Form::close() ?>
