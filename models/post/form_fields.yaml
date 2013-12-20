@@ -5,11 +5,9 @@
 fields:
 
   title:
-    span: full
     label: Title
 
   content:
-    span: full
     label: Content
     type: richeditor
     size: huge
@@ -19,7 +17,6 @@ tabs:
 
     excerpt:
       tab: Details
-      span: full
       label: Excerpt
       type: textarea
       size: small
@@ -28,20 +25,17 @@ secondary-tabs:
   fields:
 
     published_at:
-      span: full
       tab: Publish
       label: Published on
       type: datepicker
 
     categories:
       tab: Publish
-      span: full
       label: Categories
       type: relation
 
     visibility:
       label: Visibility
-      span: full
       tab: Publish
       type: balloon-selector
       options:
@@ -51,7 +45,6 @@ secondary-tabs:
 
     status:
       label: Status
-      span: full
       tab: Publish
       type: balloon-selector
       options:
@@ -61,7 +54,6 @@ secondary-tabs:
 
     featured_images:
       tab: Publish
-      span: full
       label: Featured Images
       type: fileupload
       options:
