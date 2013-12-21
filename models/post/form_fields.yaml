@@ -33,6 +33,7 @@ secondary-tabs:
       tab: Publish
       label: Categories
       type: relation
+      placeholder: There are no categories, you should create one first!
 
     visibility:
       label: Visibility
