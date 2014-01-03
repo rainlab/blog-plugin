@@ -1,4 +1,4 @@
-<?php namespace Plugins\October\Blog\Models;
+<?php namespace Plugins\RainLab\Blog\Models;
 
 use Model;
 

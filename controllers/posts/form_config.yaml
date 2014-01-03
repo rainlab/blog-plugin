@@ -4,7 +4,7 @@
 
 name: Blog Post
 form: /plugins/october/blog/models/post/form_fields.yaml
-model-class: Plugins\October\Blog\Models\Post
+model-class: Plugins\RainLab\Blog\Models\Post
 default-redirect: october/blog/posts
 
 create:

@@ -6,7 +6,7 @@
 list: /plugins/october/blog/models/category/list_columns.yaml
 
 # Model Class name
-model-class: Plugins\October\Blog\Models\Category
+model-class: Plugins\RainLab\Blog\Models\Category
 
 # List Title
 title: Manage Blog Categories

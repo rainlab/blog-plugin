@@ -1,4 +1,4 @@
-<?php namespace Plugins\October\Blog\Components;
+<?php namespace Plugins\RainLab\Blog\Components;
 
 use Modules\Cms\Classes\ComponentBase;
 

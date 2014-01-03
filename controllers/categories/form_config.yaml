@@ -4,7 +4,7 @@
 
 name: Blog Category
 form: /plugins/october/blog/models/category/form_fields.yaml
-model-class: Plugins\October\Blog\Models\Category
+model-class: Plugins\RainLab\Blog\Models\Category
 default-redirect: october/blog/categories
 
 create:

@@ -1,4 +1,4 @@
-<?php namespace Plugins\October\Blog\Models;
+<?php namespace Plugins\RainLab\Blog\Models;
 
 use Model;
 
@@ -24,7 +24,7 @@ class Post extends Model
     ];
 
     public $belongsToMany = [
-        'categories' => ['Plugins\October\Blog\Models\Category', 'table' => 'october_blog_posts_categories']
+        'categories' => ['Plugins\RainLab\Blog\Models\Category', 'table' => 'october_blog_posts_categories']
     ];
 
     public $morphMany = [

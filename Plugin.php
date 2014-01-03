@@ -1,4 +1,4 @@
-<?php namespace Plugins\October\Blog;
+<?php namespace Plugins\RainLab\Blog;
 
 use Backend;
 use Modules\System\Classes\PluginBase;
@@ -19,7 +19,7 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'Plugins\October\Blog\Components\Post' => 'blogPost',
+            'Plugins\RainLab\Blog\Components\Post' => 'blogPost',
         ];
     }
 

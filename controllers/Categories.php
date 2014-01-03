@@ -1,4 +1,4 @@
-<?php namespace Plugins\October\Blog\Controllers;
+<?php namespace Plugins\RainLab\Blog\Controllers;
 
 use BackendMenu;
 use Modules\Backend\Classes\BackendController;
