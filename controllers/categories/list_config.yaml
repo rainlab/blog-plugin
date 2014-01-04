@@ -3,7 +3,7 @@
 # ===================================
 
 # Model List Column configuration
-list: /plugins/october/blog/models/category/list_columns.yaml
+list: /plugins/rainlab/blog/models/category/list_columns.yaml
 
 # Model Class name
 model-class: Plugins\RainLab\Blog\Models\Category
@@ -12,7 +12,7 @@ model-class: Plugins\RainLab\Blog\Models\Category
 title: Manage Blog Categories
 
 # Link URL for each record
-record-url: october/blog/categories/update/:id
+record-url: rainlab/blog/categories/update/:id
 
 # Message to display if the list is empty
 no-records-message: backend::lang.list.no_records

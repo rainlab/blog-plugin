@@ -3,14 +3,14 @@
 # ===================================
 
 name: Blog Category
-form: /plugins/october/blog/models/category/form_fields.yaml
+form: /plugins/rainlab/blog/models/category/form_fields.yaml
 model-class: Plugins\RainLab\Blog\Models\Category
-default-redirect: october/blog/categories
+default-redirect: rainlab/blog/categories
 
 create:
-    redirect: october/blog/categories/update/:id
-    redirect-close: october/blog/categories
+    redirect: rainlab/blog/categories/update/:id
+    redirect-close: rainlab/blog/categories
 
 update:
-    redirect: october/blog/categories
-    redirect-close: october/blog/categories
+    redirect: rainlab/blog/categories
+    redirect-close: rainlab/blog/categories

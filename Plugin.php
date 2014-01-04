@@ -28,7 +28,7 @@ class Plugin extends PluginBase
         return [
             'blog' => [
                 'label' => 'Blog',
-                'url' => Backend::url('october/blog/posts'),
+                'url' => Backend::url('rainlab/blog/posts'),
                 'icon' => 'icon-pencil',
                 'permissions' => ['blog:*'],
                 'order' => 500,
@@ -36,13 +36,13 @@ class Plugin extends PluginBase
                     'posts' => [
                         'label' => 'Posts',
                         'icon' => 'icon-copy',
-                        'url' => Backend::url('october/blog/posts'),
+                        'url' => Backend::url('rainlab/blog/posts'),
                         'permissions' => ['blog:access_posts'],
                     ],
                     'categories' => [
                         'label' => 'Categories',
                         'icon' => 'icon-copy',
-                        'url' => Backend::url('october/blog/categories'),
+                        'url' => Backend::url('rainlab/blog/categories'),
                         'permissions' => ['blog:access_categories'],
                     ],
                 ]

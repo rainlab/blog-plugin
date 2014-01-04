@@ -3,14 +3,14 @@
 # ===================================
 
 name: Blog Post
-form: /plugins/october/blog/models/post/form_fields.yaml
+form: /plugins/rainlab/blog/models/post/form_fields.yaml
 model-class: Plugins\RainLab\Blog\Models\Post
-default-redirect: october/blog/posts
+default-redirect: rainlab/blog/posts
 
 create:
-    redirect: october/blog/posts/update/:id
-    redirect-close: october/blog/posts
+    redirect: rainlab/blog/posts/update/:id
+    redirect-close: rainlab/blog/posts
 
 update:
-    redirect: october/blog/posts
-    redirect-close: october/blog/posts
+    redirect: rainlab/blog/posts
+    redirect-close: rainlab/blog/posts
