@@ -17,6 +17,6 @@ class Categories extends BackendController
     {
         parent::__construct();
 
-        BackendMenu::setContext('October.Blog', 'blog', 'categories');
+        BackendMenu::setContext('RainLab.Blog', 'blog', 'categories');
     }
 }

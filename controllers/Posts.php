@@ -19,6 +19,6 @@ class Posts extends BackendController
     {
         parent::__construct();
 
-        BackendMenu::setContext('October.Blog', 'blog', 'posts');
+        BackendMenu::setContext('RainLab.Blog', 'blog', 'posts');
     }
 }
