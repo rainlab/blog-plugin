@@ -4,7 +4,7 @@ use Model;
 
 class Post extends Model
 {
-    public $table = 'october_blog_posts';
+    public $table = 'rainlab_blog_posts';
 
     /*
      * Validation
@@ -24,7 +24,7 @@ class Post extends Model
     ];
 
     public $belongsToMany = [
-        'categories' => ['Plugins\RainLab\Blog\Models\Category', 'table' => 'october_blog_posts_categories']
+        'categories' => ['Plugins\RainLab\Blog\Models\Category', 'table' => 'rainlab_blog_posts_categories']
     ];
 
     public $morphMany = [

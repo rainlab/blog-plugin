@@ -8,7 +8,7 @@ class CreatePostsCategoriesTable extends Migration
 
     public function up()
     {
-        Schema::create('october_blog_posts_categories', function($table)
+        Schema::create('rainlab_blog_posts_categories', function($table)
         {
             $table->engine = 'InnoDB';
             $table->integer('post_id')->unsigned();
@@ -19,7 +19,7 @@ class CreatePostsCategoriesTable extends Migration
 
     public function down()
     {
-        Schema::drop('october_blog_posts_categories');
+        Schema::drop('rainlab_blog_posts_categories');
     }
 
 }

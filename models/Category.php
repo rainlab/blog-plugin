@@ -4,7 +4,7 @@ use Model;
 
 class Category extends Model
 {
-    public $table = 'october_blog_categories';
+    public $table = 'rainlab_blog_categories';
 
     /*
      * Validation

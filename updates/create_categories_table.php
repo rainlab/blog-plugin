@@ -8,7 +8,7 @@ class CreateCategoriesTable extends Migration
 
     public function up()
     {
-        Schema::create('october_blog_categories', function($table)
+        Schema::create('rainlab_blog_categories', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -22,7 +22,7 @@ class CreateCategoriesTable extends Migration
 
     public function down()
     {
-        Schema::drop('october_blog_categories');
+        Schema::drop('rainlab_blog_categories');
     }
 
 }
