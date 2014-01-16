@@ -1,6 +1,6 @@
-<?php namespace Plugins\RainLab\Blog\Components;
+<?php namespace RainLab\Blog\Components;
 
-use Modules\Cms\Classes\ComponentBase;
+use Cms\Classes\ComponentBase;
 
 class Post extends ComponentBase
 {

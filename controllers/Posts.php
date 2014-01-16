@@ -1,13 +1,13 @@
-<?php namespace Plugins\RainLab\Blog\Controllers;
+<?php namespace RainLab\Blog\Controllers;
 
 use BackendMenu;
-use Modules\Backend\Classes\BackendController;
+use Backend\Classes\BackendController;
 
 class Posts extends BackendController
 {
     public $implement = [
-        'Modules.Backend.Behaviors.FormController',
-        'Modules.Backend.Behaviors.ListController'
+        'Backend.Behaviors.FormController',
+        'Backend.Behaviors.ListController'
     ];
 
     public $formConfig = 'form_config.yaml';

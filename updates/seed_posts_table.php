@@ -1,6 +1,6 @@
-<?php namespace Plugins\RainLab\Blog\Updates;
+<?php namespace RainLab\Blog\Updates;
 
-use Modules\Backend\Models\User;
+use Backend\Models\User;
 use October\Rain\Database\Updates\Seeder;
 
 class SeedPostsTable extends Seeder

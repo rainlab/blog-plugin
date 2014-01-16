@@ -4,7 +4,7 @@
 
 name: Blog Category
 form: /plugins/rainlab/blog/models/category/form_fields.yaml
-model-class: Plugins\RainLab\Blog\Models\Category
+model-class: RainLab\Blog\Models\Category
 default-redirect: rainlab/blog/categories
 
 create:

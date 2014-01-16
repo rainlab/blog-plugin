@@ -1,4 +1,4 @@
-<?php namespace Plugins\RainLab\Blog\Models;
+<?php namespace RainLab\Blog\Models;
 
 use Model;
 

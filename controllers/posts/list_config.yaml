@@ -6,7 +6,7 @@
 list: /plugins/rainlab/blog/models/post/list_columns.yaml
 
 # Model Class name
-model-class: Plugins\RainLab\Blog\Models\Post
+model-class: RainLab\Blog\Models\Post
 
 # List Title
 title: Manage Blog Posts

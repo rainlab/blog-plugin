@@ -1,4 +1,4 @@
-<?php namespace Plugins\RainLab\Blog\Models;
+<?php namespace RainLab\Blog\Models;
 
 use Model;
 
@@ -20,15 +20,15 @@ class Post extends Model
      * Relations
      */
     public $belongsTo = [
-        'user' => ['Modules\Backend\Models\User', 'foreignKey' => 'user_id']
+        'user' => ['Backend\Models\User', 'foreignKey' => 'user_id']
     ];
 
     public $belongsToMany = [
-        'categories' => ['Plugins\RainLab\Blog\Models\Category', 'table' => 'rainlab_blog_posts_categories']
+        'categories' => ['RainLab\Blog\Models\Category', 'table' => 'rainlab_blog_posts_categories']
     ];
 
     public $morphMany = [
-        'featured_images' => ['Modules\System\Models\File', 'name' => 'attachment']
+        'featured_images' => ['System\Models\File', 'name' => 'attachment']
     ];
 
 }

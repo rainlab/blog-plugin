@@ -1,4 +1,4 @@
-<?php namespace Plugins\RainLab\Blog\Updates;
+<?php namespace RainLab\Blog\Updates;
 
 use Schema;
 use October\Rain\Database\Updates\Migration;
