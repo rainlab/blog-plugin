@@ -3,7 +3,7 @@
 # ===================================
 
 name: Blog Category
-form: /plugins/rainlab/blog/models/category/form_fields.yaml
+form: @/plugins/rainlab/blog/models/category/form_fields.yaml
 model-class: RainLab\Blog\Models\Category
 default-redirect: rainlab/blog/categories
 
