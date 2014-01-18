@@ -3,16 +3,16 @@
 # ===================================
 
 # Model List Column configuration
-list: @/plugins/rainlab/blog/models/category/list_columns.yaml
+list: @/plugins/rainlab/blog/models/post/columns.yaml
 
 # Model Class name
-model-class: RainLab\Blog\Models\Category
+model-class: RainLab\Blog\Models\Post
 
 # List Title
-title: Manage Blog Categories
+title: Manage Blog Posts
 
 # Link URL for each record
-record-url: rainlab/blog/categories/update/:id
+record-url: rainlab/blog/posts/update/:id
 
 # Message to display if the list is empty
 no-records-message: backend::lang.list.no_records
@@ -21,7 +21,7 @@ no-records-message: backend::lang.list.no_records
 records-per-page: 5
 
 # Display checkboxes next to each record
-show-checkboxes: no
+show-checkboxes: yes
 
 # Toolbar widget configuration
 toolbar:

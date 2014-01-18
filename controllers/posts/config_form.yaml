@@ -3,7 +3,7 @@
 # ===================================
 
 name: Blog Post
-form: @/plugins/rainlab/blog/models/post/form_fields.yaml
+form: @/plugins/rainlab/blog/models/post/fields.yaml
 model-class: RainLab\Blog\Models\Post
 default-redirect: rainlab/blog/posts
 
