@@ -27,8 +27,8 @@ class Post extends Model
         'categories' => ['RainLab\Blog\Models\Category', 'table' => 'rainlab_blog_posts_categories']
     ];
 
-    public $morphMany = [
-        'featured_images' => ['System\Models\File', 'name' => 'attachment']
+    public $attachMany = [
+        'featured_images' => ['System\Models\File']
     ];
 
 }
