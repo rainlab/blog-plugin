@@ -18,11 +18,20 @@ class CreateCategoriesTable extends Migration
             $table->text('description');
             $table->timestamps();
         });
+
+        Schema::create('rainlab_blog_posts_categories', function($table)
+        {
+            $table->engine = 'InnoDB';
+            $table->integer('post_id')->unsigned();
+            $table->integer('category_id')->unsigned();
+            $table->primary(['post_id', 'category_id']);
+        });
     }
 
     public function down()
     {
         Schema::drop('rainlab_blog_categories');
+        Schema::drop('rainlab_blog_posts_categories');
     }
 
 }
