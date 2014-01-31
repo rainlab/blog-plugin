@@ -1,5 +1,6 @@
 <?php namespace RainLab\Blog\Models;
 
+use Str;
 use Model;
 
 class Post extends Model
@@ -20,7 +21,7 @@ class Post extends Model
      * Relations
      */
     public $belongsTo = [
-        'user' => ['Backend\Models\User', 'foreignKey' => 'user_id']
+        'user' => ['Backend\Models\User']
     ];
 
     public $belongsToMany = [
@@ -30,5 +31,16 @@ class Post extends Model
     public $attachMany = [
         'featured_images' => ['System\Models\File']
     ];
+
+    //
+    // Events
+    //
+
+    public function beforeValidate()
+    {
+        // Generate a URL slug for this model
+        if (!$this->exists && !$this->slug)
+            $this->slug = Str::slug($this->name);
+    }
 
 }
