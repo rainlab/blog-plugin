@@ -1,13 +1,13 @@
-<?= Form::open(['class'=>'layout stretch']) ?>
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('rainlab/blog/posts') ?>">Blog Posts</a></li>
+        <li><?= e($this->pageTitle) ?></li>
+    </ul>
+<?php Block::endPut() ?>
+
+<?php if (!isset($fatalError)): ?>
 
     <?php Block::put('form-contents') ?>
-
-        <div class="control-breadcrumb">
-            <ul>
-                <li><a href="<?= Backend::url('rainlab/blog/posts') ?>">Blog Posts</a></li>
-                <li><?= e($this->pageTitle) ?></li>
-            </ul>
-        </div>
 
         <?= $this->formRenderOutsideFields() ?>
         <?= $this->formRenderPrimaryTabs() ?>
@@ -15,25 +15,27 @@
         <div class="form-buttons layout-item fix">
             <div class="loading-indicator-container">
                 <button 
-                    type="submit" 
-                    data-request="onSave" 
+                    type="submit"
+                    data-request="onSave"
                     data-hotkey="ctrl+s"
                     data-hotkey-mac="cmd+s"
-                    data-load-indicator="Creating Post..." 
+                    data-load-indicator="Creating Post..."
                     class="btn btn-primary">
                     Create
                 </button>
                 <button 
-                    type="button" 
-                    data-request="onSave" 
-                    data-request-data="close:true" 
+                    type="button"
+                    data-request="onSave"
+                    data-request-data="close:true"
                     data-hotkey="ctrl+enter"
                     data-hotkey-mac="cmd+enter"
-                    data-load-indicator="Creating Post..." 
+                    data-load-indicator="Creating Post..."
                     class="btn btn-default">
                     Create and Close
                 </button>
-                <span class="btn-text">or <a href="<?= Backend::url('blog/posts') ?>">Cancel</a></span>
+                <span class="btn-text">
+                    or <a href="<?= Backend::url('blog/posts') ?>">Cancel</a>
+                </span>
             </div>
         </div>
 
@@ -43,6 +45,20 @@
         <div class="hide-tabs"><?= $this->formRenderSecondaryTabs() ?></div>
     <?php Block::endPut() ?>
 
-    <?= $this->makeLayout('form-with-sidebar') ?>
+    <?php Block::put('body') ?>
+        <?= Form::open(['class'=>'layout stretch']) ?>
+            <?= $this->makeLayout('form-with-sidebar') ?>
+        <?= Form::close() ?>
+    <?php Block::endPut() ?>
 
-<?= Form::close() ?>
+<?php else: ?>
+    <div class="padded-container">
+        <div class="control-breadcrumb">
+            <?= Block::placeholder('breadcrumb') ?>
+        </div>
+        <div class="alert alert-danger">
+            <p><?= $fatalError ?></p>
+        </div>
+        <p><a href="<?= Backend::url('rainlab/blog/posts') ?>" class="btn btn-default">Return to posts list</a></p>
+    </div>
+<?php endif ?>

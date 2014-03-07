@@ -41,7 +41,7 @@ class Plugin extends PluginBase
                     ],
                     'categories' => [
                         'label' => 'Categories',
-                        'icon' => 'icon-copy',
+                        'icon' => 'icon-list-ul',
                         'url' => Backend::url('rainlab/blog/categories'),
                         'permissions' => ['blog:access_categories'],
                     ],

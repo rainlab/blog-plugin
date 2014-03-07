@@ -1,9 +1,17 @@
-<div class="control-breadcrumb">
+<?php Block::put('breadcrumb') ?>
     <ul>
         <li><a href="<?= Backend::url('rainlab/blog/posts') ?>">Blog Posts</a></li>
         <li><?= e($this->pageTitle) ?></li>
     </ul>
-</div>
+<?php Block::endPut() ?>
 
+<?php if (!isset($fatalError)): ?>
 
-<?= $this->formRenderPreview() ?>
+    <?= $this->formRenderPreview() ?>
+
+<?php else: ?>
+    <div class="alert alert-danger">
+        <p><?= $fatalError ?></p>
+    </div>
+    <p><a href="<?= Backend::url('rainlab/blog/posts') ?>" class="btn btn-default">Return to posts list</a></p>
+<?php endif ?>
