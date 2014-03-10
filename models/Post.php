@@ -25,7 +25,7 @@ class Post extends Model
     ];
 
     public $belongsToMany = [
-        'categories' => ['RainLab\Blog\Models\Category', 'table' => 'rainlab_blog_posts_categories']
+        'categories' => ['RainLab\Blog\Models\Category', 'table' => 'rainlab_blog_posts_categories', 'order' => 'name']
     ];
 
     public $attachMany = [

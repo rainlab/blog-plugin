@@ -35,23 +35,23 @@ secondary-tabs:
       type: relation
       placeholder: There are no categories, you should create one first!
 
-    visibility:
-      label: Visibility
-      tab: Publish
-      type: balloon-selector
-      options:
-        - Public
-        - Sticky
-        - Private
+    # visibility:
+    #   label: Visibility
+    #   tab: Publish
+    #   type: balloon-selector
+    #   options:
+    #     - Public
+    #     - Sticky
+    #     - Private
 
-    status:
-      label: Status
-      tab: Publish
-      type: balloon-selector
-      options:
-        - Draft
-        - Review
-        - Published
+    # status:
+    #   label: Status
+    #   tab: Publish
+    #   type: balloon-selector
+    #   options:
+    #     - Draft
+    #     - Review
+    #     - Published
 
     featured_images:
       tab: Publish

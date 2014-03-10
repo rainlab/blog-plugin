@@ -1,9 +1,9 @@
 <?php namespace RainLab\Blog\Updates;
 
-use Backend\Models\User;
+use RainLab\Blog\Models\Category;
 use October\Rain\Database\Updates\Seeder;
 
-class SeedPostsTable extends Seeder
+class SeedAllTables extends Seeder
 {
 
     public function run()
@@ -13,6 +13,10 @@ class SeedPostsTable extends Seeder
         //
         // Add a Welcome post or something
         //
+
+        Category::create([
+            'name' => 'Uncategorized'
+        ]);
     }
 
 }
