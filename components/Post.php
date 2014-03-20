@@ -16,7 +16,7 @@ class Post extends ComponentBase
     public function defineProperties()
     {
         return [
-            'param-id' => [
+            'paramId' => [
                 'description' => 'The URL route parameter used for looking up the post by its ID or slug.',
                 'title' => 'ID parameter',
                 'default' => ':post',
