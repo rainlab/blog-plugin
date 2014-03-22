@@ -1,9 +1,9 @@
 <?php namespace RainLab\Blog\Controllers;
 
 use BackendMenu;
-use Backend\Classes\BackendController;
+use Backend\Classes\Controller;
 
-class Posts extends BackendController
+class Posts extends Controller
 {
     public $implement = [
         'Backend.Behaviors.FormController',
