@@ -21,7 +21,7 @@ tabs:
       type: textarea
       size: small
 
-secondary-tabs:
+secondaryTabs:
   fields:
 
     published_at:
