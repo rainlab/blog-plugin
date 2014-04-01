@@ -5,7 +5,7 @@
     </ul>
 <?php Block::endPut() ?>
 
-<?php if (!isset($fatalError)): ?>
+<?php if (!$this->fatalError): ?>
 
     <?= Form::open(['class'=>'layout-item stretch layout-column']) ?>
 
@@ -25,7 +25,7 @@
                 <button
                     type="button"
                     data-request="onSave"
-                    data-request-data="close:true"
+                    data-request-data="close:1"
                     data-hotkey="ctrl+enter"
                     data-hotkey-mac="cmd+enter"
                     data-load-indicator="Creating Category..."
@@ -39,8 +39,6 @@
     <?= Form::close() ?>
 
 <?php else: ?>
-    <div class="alert alert-danger">
-        <p><?= $fatalError ?></p>
-    </div>
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
     <p><a href="<?= Backend::url('rainlab/blog/posts') ?>" class="btn btn-default">Return to the blog category list</a></p>
 <?php endif ?>

@@ -5,7 +5,7 @@
     </ul>
 <?php Block::endPut() ?>
 
-<?php if (!isset($fatalError)): ?>
+<?php if (!$this->fatalError): ?>
 
     <?php Block::put('form-contents') ?>
 
@@ -26,7 +26,7 @@
                 <button 
                     type="button"
                     data-request="onSave"
-                    data-request-data="close:true"
+                    data-request-data="close:1"
                     data-hotkey="ctrl+enter"
                     data-hotkey-mac="cmd+enter"
                     data-load-indicator="Creating Post..."
@@ -56,9 +56,7 @@
         <div class="control-breadcrumb">
             <?= Block::placeholder('breadcrumb') ?>
         </div>
-        <div class="alert alert-danger">
-            <p><?= $fatalError ?></p>
-        </div>
+        <p class="flash-message static error"><?= e($this->fatalError) ?></p>
         <p><a href="<?= Backend::url('rainlab/blog/posts') ?>" class="btn btn-default">Return to posts list</a></p>
     </div>
 <?php endif ?>
