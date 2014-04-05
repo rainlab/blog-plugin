@@ -13,10 +13,10 @@ class CreatePostsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->string('slug')->index();
             $table->text('excerpt')->nullable();
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->boolean('published')->default(false);
             $table->timestamps();
