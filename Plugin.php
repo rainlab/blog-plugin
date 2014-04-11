@@ -30,7 +30,7 @@ class Plugin extends PluginBase
                 'label'       => 'Blog',
                 'url'         => Backend::url('rainlab/blog/posts'),
                 'icon'        => 'icon-pencil',
-                'permissions' => ['blog:*'],
+                'permissions' => ['blog.*'],
                 'order'       => 500,
 
                 'sideMenu' => [
@@ -38,13 +38,13 @@ class Plugin extends PluginBase
                         'label'       => 'Posts',
                         'icon'        => 'icon-copy',
                         'url'         => Backend::url('rainlab/blog/posts'),
-                        'permissions' => ['blog:access_posts'],
+                        'permissions' => ['blog.access_posts'],
                     ],
                     'categories' => [
                         'label'       => 'Categories',
                         'icon'        => 'icon-list-ul',
                         'url'         => Backend::url('rainlab/blog/categories'),
-                        'permissions' => ['blog:access_categories'],
+                        'permissions' => ['blog.access_categories'],
                     ],
                 ]
 
