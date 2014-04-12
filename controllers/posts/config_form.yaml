@@ -4,13 +4,13 @@
 
 name: Blog Post
 form: @/plugins/rainlab/blog/models/post/fields.yaml
-model-class: RainLab\Blog\Models\Post
-default-redirect: rainlab/blog/posts
+modelClass: RainLab\Blog\Models\Post
+defaultRedirect: rainlab/blog/posts
 
 create:
     redirect: rainlab/blog/posts/update/:id
-    redirect-close: rainlab/blog/posts
+    redirectClose: rainlab/blog/posts
 
 update:
     redirect: rainlab/blog/posts
-    redirect-close: rainlab/blog/posts
+    redirectClose: rainlab/blog/posts

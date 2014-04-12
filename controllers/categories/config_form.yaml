@@ -4,13 +4,13 @@
 
 name: Blog Category
 form: @/plugins/rainlab/blog/models/category/fields.yaml
-model-class: RainLab\Blog\Models\Category
-default-redirect: rainlab/blog/categories
+modelClass: RainLab\Blog\Models\Category
+defaultRedirect: rainlab/blog/categories
 
 create:
     redirect: rainlab/blog/categories/update/:id
-    redirect-close: rainlab/blog/categories
+    redirectClose: rainlab/blog/categories
 
 update:
     redirect: rainlab/blog/categories
-    redirect-close: rainlab/blog/categories
+    redirectClose: rainlab/blog/categories
