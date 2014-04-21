@@ -20,6 +20,7 @@ class Plugin extends PluginBase
     {
         return [
             'RainLab\Blog\Components\Post' => 'blogPost',
+            'RainLab\Blog\Components\Posts' => 'blogPosts',
         ];
     }
 
@@ -52,4 +53,13 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerFormWidgets()
+    {
+        return [
+            'RainLab\Blog\FormWidgets\Preview' => [
+                'label' => 'Preview',
+                'alias' => 'preview'
+            ]
+        ];
+    }
 }

@@ -18,5 +18,13 @@ columns:
     select: @name
 
   created_at:
-    label: Date
-    type: datetime
+    label: Created
+    type: date
+
+  updated_at:
+    label: Updated
+    type: date
+
+  published_at:
+    label: Published
+    type: date

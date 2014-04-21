@@ -2,6 +2,8 @@
 
 use Str;
 use Model;
+use October\Rain\Support\Markdown;
+use October\Rain\Support\ValidationException;
 
 class Post extends Model
 {
@@ -12,10 +14,16 @@ class Post extends Model
      */
     public $rules = [
         'title' => 'required',
-        'excerpt' => 'required',
+        'slug' => ['required', 'regex:/^[a-z0-9\/\:_\-\*\[\]\+\?\|]*$/i'],
+        'excerpt' => ''
     ];
 
-    protected $guarded = [];
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['published_at'];
 
     /*
      * Relations
@@ -29,18 +37,45 @@ class Post extends Model
     ];
 
     public $attachMany = [
-        'featured_images' => ['System\Models\File']
+        'featured_images' => ['System\Models\File'],
+        'content_images' => ['System\Models\File']
     ];
 
-    //
-    // Events
-    //
+    public $preview = null;
 
-    public function beforeValidate()
+    public static function formatHtml($input, $preview = false)
     {
-        // Generate a URL slug for this model
-        if (!$this->exists && !$this->slug)
-            $this->slug = Str::slug($this->name);
+        $result = Markdown::parse(trim($input));
+
+        if ($preview) {
+            $result = str_replace('<pre>', '<pre class="prettyprint">', $result);
+            $result = preg_replace('|\<img alt="\<([0-9]+)\>" src="placeholder" \/>|m', 
+                '<span class="image-placeholder" data-index="$1">
+                    <span class="dropzone">
+                        <span class="label">Click or drop an image...</span>
+                        <span class="indicator"></span>
+                    </span>
+                    <input type="file" class="file" name="image[$1]"/>
+                    <input type="file" class="trigger"/>
+                </span>', 
+            $result);
+        }
+
+        return $result;
     }
 
+    public function afterValidate()
+    {
+        if ($this->published && !$this->published_at)
+            throw new ValidationException([
+               'published_at' => 'Please specify the published date'
+            ]);
+    }
+
+    public function scopeIsPublished($query)
+    {
+        return $query
+            ->whereNotNull('published')
+        ;
+    }
 }

@@ -6,38 +6,83 @@ fields:
 
   title:
     label: Title
+    span: left
+    placeholder: New post title
 
-  content:
-    label: Content
-    type: richeditor
-    size: huge
+  slug:
+    label: slug
+    span: right
+    placeholder: new-post-slug
+    attributes:
+      data-input-preset: 'input[name="Post[title]"]'
+      data-input-preset-type: slug
+      data-input-preset-closest-parent: form
 
-tabs:
+  toolbar:
+    type: partial
+    path: post_toolbar
+    cssClass: collapse-visible
+
+# tabs:
+#   fields:
+
+#     excerpt:
+#       tab: Details
+#       label: Excerpt
+#       type: textarea
+#       size: small
+
+secondaryTabs:
+  stretch: yes
   fields:
+    content:
+      tab: Edit
+      stretch: yes
+      type: codeeditor
+      span: left-full
+      options:
+        language: markdown
+        showGutter: false
+        wrapWords: true
+        fontSize: 13
+        margin: 15
+
+    preview:
+      type: RainLab\Blog\FormWidgets\Preview
+      tab: Edit
+      stretch: yes
+      span: right-full
+
+    categories:
+      tab: Categories
+      type: relation
+      commentAbove: Select categories the blog post belongs to
+      placeholder: There are no categories, you should create one first!
+
+    published:
+      tab: Manage
+      label: Published
+      span: left
+      type: checkbox
+
+    published_at:
+      tab: Manage
+      label: Published on
+      span: left
+      type: datepicker
+      cssClass: checkbox-align
+      options:
+        mode: date
 
     excerpt:
-      tab: Details
+      tab: Manage
       label: Excerpt
       type: textarea
       size: small
 
-secondaryTabs:
-  fields:
-
-    published_at:
-      tab: Publish
-      label: Published on
-      type: datepicker
-
-    categories:
-      tab: Publish
-      label: Categories
-      type: relation
-      placeholder: There are no categories, you should create one first!
-
     # visibility:
+    #   tab: Manage
     #   label: Visibility
-    #   tab: Publish
     #   type: balloon-selector
     #   options:
     #     - Public
@@ -45,8 +90,8 @@ secondaryTabs:
     #     - Private
 
     # status:
+    #   tab: Manage
     #   label: Status
-    #   tab: Publish
     #   type: balloon-selector
     #   options:
     #     - Draft
@@ -54,12 +99,10 @@ secondaryTabs:
     #     - Published
 
     featured_images:
-      tab: Publish
+      tab: Manage
       label: Featured Images
       type: fileupload
       options:
         mode: image
-        image-width: 127
-        image-height: 127
-
-
+        image-width: 200
+        image-height: 200

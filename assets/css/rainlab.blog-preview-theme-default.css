@@ -1,0 +1,70 @@
+.blog-post-preview-container .preview-content {
+  color: #515c5d;
+  font-family: "Helvetica", sans-serif;
+  line-height: 180%;
+}
+.blog-post-preview-container .preview-content h1,
+.blog-post-preview-container .preview-content h2,
+.blog-post-preview-container .preview-content h3,
+.blog-post-preview-container .preview-content h4,
+.blog-post-preview-container .preview-content h5,
+.blog-post-preview-container .preview-content h6 {
+  margin-top: 20px;
+  font-weight: bold;
+}
+.blog-post-preview-container .preview-content h1:first-child,
+.blog-post-preview-container .preview-content h2:first-child,
+.blog-post-preview-container .preview-content h3:first-child,
+.blog-post-preview-container .preview-content h4:first-child,
+.blog-post-preview-container .preview-content h5:first-child,
+.blog-post-preview-container .preview-content h6:first-child {
+  margin-top: 0;
+}
+.blog-post-preview-container .preview-content *:last-child {
+  margin-bottom: 0;
+}
+.blog-post-preview-container .preview-content h1 {
+  font-size: 30px;
+}
+.blog-post-preview-container .preview-content h2 {
+  font-size: 26px;
+}
+.blog-post-preview-container .preview-content h3 {
+  font-size: 24px;
+}
+.blog-post-preview-container .preview-content h4 {
+  font-size: 22px;
+}
+.blog-post-preview-container .preview-content h5 {
+  font-size: 20px;
+}
+.blog-post-preview-container .preview-content h6 {
+  font-size: 18px;
+}
+.blog-post-preview-container .preview-content p,
+.blog-post-preview-container .preview-content ol,
+.blog-post-preview-container .preview-content ul {
+  font-size: 14px;
+}
+.blog-post-preview-container .preview-content h1,
+.blog-post-preview-container .preview-content h2,
+.blog-post-preview-container .preview-content h3,
+.blog-post-preview-container .preview-content h4,
+.blog-post-preview-container .preview-content h5,
+.blog-post-preview-container .preview-content h6,
+.blog-post-preview-container .preview-content p,
+.blog-post-preview-container .preview-content ol,
+.blog-post-preview-container .preview-content ul {
+  margin-bottom: 15px;
+}
+.blog-post-preview-container .preview-content pre.prettyprint {
+  border-width: 0;
+  padding: 13px 16px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  line-height: 130%;
+}
+.blog-post-preview-container .preview-content img {
+  width: 100%;
+}
