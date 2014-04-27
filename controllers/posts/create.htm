@@ -14,6 +14,7 @@
         <?= Form::open([
             'class' => 'layout',
             'data-change-monitor' => 'true',
+            'data-window-close-confirm' => 'The post is not saved.',
             'id' => 'post-form'
         ]) ?>
             <?= $this->formRender() ?>
