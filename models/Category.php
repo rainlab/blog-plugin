@@ -2,6 +2,7 @@
 
 use Str;
 use Model;
+use RainLab\Blog\Models\Post;
 
 class Category extends Model
 {
@@ -23,5 +24,16 @@ class Category extends Model
         // Generate a URL slug for this model
         if (!$this->exists && !$this->slug)
             $this->slug = Str::slug($this->name);
+    }
+
+    public function posts()
+    {
+        // @todo: declare this relationship as the class field when the conditions option is implemented
+        return $this->belongsToMany('RainLab\Blog\Models\Post', 'rainlab_blog_posts_categories')->isPublished()->orderBy('published_at', 'desc');
+    }
+
+    public function postCount()
+    {
+        return $this->posts()->count();
     }
 }

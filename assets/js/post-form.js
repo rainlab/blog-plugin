@@ -112,7 +112,7 @@
                         $placeholder.replaceWith($img)
 
                         self.codeEditor.editor.replace('!['+data.result.file+']('+data.result.path+')', {
-                            needle: '![<'+placeholderIndex+'>](placeholder)'
+                            needle: '![<'+placeholderIndex+'>](image)'
                         })
                         self.resumeUpdates()
                     }
@@ -204,9 +204,25 @@
     PostForm.prototype.initLayout = function() {
         $('#Form-form-tabs-secondary .tab-pane.layout-cell:not(:first-child)').addClass('padded')
     }
+
+    PostForm.prototype.replacePlaceholder = function(placeholder, placeholderHtmlReplacement, mdCodePlaceholder, mdCodeReplacement) {
+        this.pauseUpdates()
+        placeholder.replaceWith(placeholderHtmlReplacement)
+
+        this.codeEditor.editor.replace(mdCodeReplacement, {
+            needle: mdCodePlaceholder
+        })
+        this.updateScroll()
+        this.resumeUpdates()
+    }
     
     $(document).ready(function(){
-        new PostForm()
+        var form = new PostForm()
+
+        if ($.oc === undefined)
+            $.oc = {}
+
+        $.oc.blogPostForm = form
     })
 
 }(window.jQuery);

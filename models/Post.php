@@ -4,6 +4,7 @@ use Str;
 use Model;
 use October\Rain\Support\Markdown;
 use October\Rain\Support\ValidationException;
+use RainLab\Blog\Classes\TagProcessor;
 
 class Post extends Model
 {
@@ -47,19 +48,10 @@ class Post extends Model
     {
         $result = Markdown::parse(trim($input));
 
-        if ($preview) {
+        if ($preview)
             $result = str_replace('<pre>', '<pre class="prettyprint">', $result);
-            $result = preg_replace('|\<img alt="\<([0-9]+)\>" src="placeholder" \/>|m', 
-                '<span class="image-placeholder" data-index="$1">
-                    <span class="dropzone">
-                        <span class="label">Click or drop an image...</span>
-                        <span class="indicator"></span>
-                    </span>
-                    <input type="file" class="file" name="image[$1]"/>
-                    <input type="file" class="trigger"/>
-                </span>', 
-            $result);
-        }
+
+        $result = TagProcessor::instance()->processTags($result, $preview);
 
         return $result;
     }
@@ -76,6 +68,12 @@ class Post extends Model
     {
         return $query
             ->whereNotNull('published')
+            ->where('published', '=', 1)
         ;
+    }
+
+    public function beforeSave()
+    {
+        $this->content_html = self::formatHtml($this->content);
     }
 }

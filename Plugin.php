@@ -1,7 +1,9 @@
 <?php namespace RainLab\Blog;
 
 use Backend;
+use Controller;
 use System\Classes\PluginBase;
+use RainLab\Blog\Classes\TagProcessor;
 
 class Plugin extends PluginBase
 {
@@ -21,6 +23,8 @@ class Plugin extends PluginBase
         return [
             'RainLab\Blog\Components\Post' => 'blogPost',
             'RainLab\Blog\Components\Posts' => 'blogPosts',
+            'RainLab\Blog\Components\Categories' => 'blogCategories',
+            'RainLab\Blog\Components\Category' => 'blogCategory'
         ];
     }
 
@@ -61,5 +65,31 @@ class Plugin extends PluginBase
                 'alias' => 'preview'
             ]
         ];
+    }
+
+    /**
+     * Register method, called when the plugin is first registered.
+     */
+    public function register() 
+    {
+        /*
+         * Register the image tag processing callback
+         */
+
+        TagProcessor::instance()->registerCallback(function($input, $preview){
+            if (!$preview)
+                return $input;
+
+            return preg_replace('|\<img alt="\<([0-9]+)\>" src="image" \/>|m', 
+                '<span class="image-placeholder" data-index="$1">
+                    <span class="dropzone">
+                        <span class="label">Click or drop an image...</span>
+                        <span class="indicator"></span>
+                    </span>
+                    <input type="file" class="file" name="image[$1]"/>
+                    <input type="file" class="trigger"/>
+                </span>', 
+            $input);
+        });
     }
 }

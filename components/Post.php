@@ -1,9 +1,11 @@
 <?php namespace RainLab\Blog\Components;
 
 use Cms\Classes\ComponentBase;
+use RainLab\Blog\Models\Post as BlogPost;
 
 class Post extends ComponentBase
 {
+    public $post;
 
     public function componentDetails()
     {
@@ -17,12 +19,22 @@ class Post extends ComponentBase
     {
         return [
             'paramId' => [
-                'description' => 'The URL route parameter used for looking up the post by its ID or slug.',
-                'title'       => 'ID parameter',
-                'default'     => ':post',
+                'description' => 'The URL route parameter used for looking up the post by its slug.',
+                'title'       => 'Slug param name',
+                'default'     => 'slug',
                 'type'        => 'string'
             ]
         ];
     }
 
+    public function onRun()
+    {
+        $this->post = $this->page['blogPost'] = $this->loadPost();
+    }
+
+    protected function loadPost()
+    {
+        $slug = $this->param($this->property('paramId'));
+        return BlogPost::isPublished()->where('slug', '=', $slug)->first();
+    }
 }

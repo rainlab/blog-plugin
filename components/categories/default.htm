@@ -1,0 +1,11 @@
+<ul class="category-list">
+    {% for category in blogCategories %}
+        {% set postCount = category.postCount %}
+        <li {% if category.slug == blogCurrentCategorySlug %}class="active"{% endif %}>
+            <a href="{{ blogCategoryPage|page({'slug': category.slug}) }}">{{ category.name }}</a> 
+            {% if postCount %}
+                <span class="badge">{{ postCount }}</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
