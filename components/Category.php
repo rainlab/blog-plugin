@@ -2,6 +2,7 @@
 
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Category as BlogCategory;
+use Cms\Classes\CmsPropertyHelper;
 use App;
 use Redirect;
 
@@ -29,13 +30,13 @@ class Category extends ComponentBase
                 'type'        => 'string'
             ],
             'postPage' => [
-                'title' => 'Post page name',
-                'description' => 'Name of the blog post page for the "Learn more" links. This property is used by the default component partial.',
-                'type'=>'string',
+                'title' => 'Post page',
+                'description' => 'Name of the blog post page file for the "Learn more" links. This property is used by the default component partial.',
+                'type'=>'dropdown',
                 'default' => 'blog/post'
             ],
             'postsPerPage' => [
-                'title' => 'Posts per page',
+                'title' => 'Posts per',
                 'default' => '10',
                 'type'=>'string',
                 'validationPattern'=>'^[0-9]+$',
@@ -48,6 +49,11 @@ class Category extends ComponentBase
                 'default' => 'No posts found'
             ]
         ];
+    }
+
+    public function getPostPageOptions()
+    {
+        return CmsPropertyHelper::listPages();;
     }
 
     public function onRun()

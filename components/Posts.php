@@ -1,6 +1,7 @@
 <?php namespace RainLab\Blog\Components;
 
 use Cms\Classes\ComponentBase;
+use Cms\Classes\CmsPropertyHelper;
 use RainLab\Blog\Models\Post as BlogPost;
 use Request;
 use Redirect;
@@ -32,15 +33,15 @@ class Posts extends ComponentBase
                 'validationMessage'=>'Invalid format of the posts per page value'
             ],
             'categoryPage' => [
-                'title' => 'Category page name',
-                'description' => 'Name of the category page for the "Posted into" category links. This property is used by the default component partial.',
-                'type'=>'string',
+                'title' => 'Category page',
+                'description' => 'Name of the category page file for the "Posted into" category links. This property is used by the default component partial.',
+                'type'=>'dropdown',
                 'default' => 'blog/category'
             ],
             'postPage' => [
-                'title' => 'Post page name',
-                'description' => 'Name of the blog post page for the "Learn more" links. This property is used by the default component partial.',
-                'type'=>'string',
+                'title' => 'Post page',
+                'description' => 'Name of the blog post page file for the "Learn more" links. This property is used by the default component partial.',
+                'type'=>'dropdown',
                 'default' => 'blog/post'
             ],
             'noPostsMessage' => [
@@ -50,6 +51,16 @@ class Posts extends ComponentBase
                 'default' => 'No posts found'
             ]
         ];
+    }
+
+    public function getCategoryPageOptions()
+    {
+        return CmsPropertyHelper::listPages();;
+    }
+
+    public function getPostPageOptions()
+    {
+        return CmsPropertyHelper::listPages();;
     }
 
     public function onRun()

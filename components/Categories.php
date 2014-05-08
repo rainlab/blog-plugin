@@ -2,6 +2,7 @@
 
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Category as BlogCategory;
+use Cms\Classes\CmsPropertyHelper;
 use Request;
 use App;
 use DB;
@@ -24,9 +25,9 @@ class Categories extends ComponentBase
     {
         return [
             'categoryPage' => [
-                'title' => 'Category page name',
-                'description' => 'Name of the category page for the category links. This property is used by the default component partial.',
-                'type'=>'string',
+                'title' => 'Category page',
+                'description' => 'Name of the category page file for the category links. This property is used by the default component partial.',
+                'type'=>'dropdown',
                 'default' => 'blog/category'
             ],
             'displayEmpty' => [
@@ -42,6 +43,11 @@ class Categories extends ComponentBase
                 'type'        => 'string'
             ],
         ];
+    }
+
+    public function getCategoryPageOptions()
+    {
+        return CmsPropertyHelper::listPages();;
     }
 
     public function onRun()
