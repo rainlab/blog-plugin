@@ -7,13 +7,13 @@ A simple, extensible blogging platform for October CMS.
 
 The plugin uses the markdown markup for the posts. You can use any Markdown syntax and some special tags for embedding images and videos (requires RainLab Blog Video plugin). To embed an image use the image placeholder:
 
-    ![<1>](image)
+    ![1](image)
 
 The number in the first part is the placeholder index. If you use multiple images in a post you should use an unique index for each image:
 
-    ![<1>](image)
+    ![1](image)
 
-    ![<2>](image)
+    ![2](image)
 
 ##Implementing front-end pages
 

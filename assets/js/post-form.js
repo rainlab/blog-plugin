@@ -112,7 +112,7 @@
                         $placeholder.replaceWith($img)
 
                         self.codeEditor.editor.replace('!['+data.result.file+']('+data.result.path+')', {
-                            needle: '![<'+placeholderIndex+'>](image)'
+                            needle: '!['+placeholderIndex+'](image)'
                         })
                         self.resumeUpdates()
                     }
