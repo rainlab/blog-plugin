@@ -33,11 +33,11 @@ fields:
 #       size: small
 
 secondaryTabs:
-  stretch: yes
+  stretch: true
   fields:
     content:
       tab: Edit
-      stretch: yes
+      stretch: true
       type: codeeditor
       span: left
       cssClass: no-padding
@@ -51,7 +51,7 @@ secondaryTabs:
     preview:
       type: RainLab\Blog\FormWidgets\Preview
       tab: Edit
-      stretch: yes
+      stretch: true
       span: right
       cssClass: no-padding
 
