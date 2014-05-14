@@ -39,7 +39,8 @@ secondaryTabs:
       tab: Edit
       stretch: yes
       type: codeeditor
-      span: left-full
+      span: left
+      cssClass: no-padding
       options:
         language: markdown
         showGutter: false
@@ -51,7 +52,8 @@ secondaryTabs:
       type: RainLab\Blog\FormWidgets\Preview
       tab: Edit
       stretch: yes
-      span: right-full
+      span: right
+      cssClass: no-padding
 
     categories:
       tab: Categories
