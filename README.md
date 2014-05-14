@@ -1,9 +1,8 @@
-blog-plugin
-===========
+# Blog Plugin
 
 A simple, extensible blogging platform for October CMS.
 
-##Editing posts
+## Editing posts
 
 The plugin uses the markdown markup for the posts. You can use any Markdown syntax and some special tags for embedding images and videos (requires RainLab Blog Video plugin). To embed an image use the image placeholder:
 
@@ -15,11 +14,11 @@ The number in the first part is the placeholder index. If you use multiple image
 
     ![2](image)
 
-##Implementing front-end pages
+## Implementing front-end pages
 
 The plugin provides several components for building the post list page (archive), category page, post details page and category list for the sidebar.
 
-###Post list page
+### Post list page
 
 Use the `blogPosts` component to display a list of latest blog posts on a page. The component has the following properties:
 
@@ -47,7 +46,7 @@ The component supports pagination and reads the current page index from the `:pa
 
 The post list and the pagination are coded in the default component partial `plugins/rainlab/blog/components/posts/default.htm`. If the default markup is not suitable for your website, feel free to copy it from the default partial and replace the `{% component %}` call in the example above with the partial contents.
 
-###Category page
+### Category page
 
 Use the `blogCategory` component to display a list of a category posts. The component has the following properties:
 
@@ -86,7 +85,7 @@ The component supports pagination and reads the current page index from the `:pa
 
 The category post list and the pagination are coded in the default component partial `plugins/rainlab/blog/components/category/default.htm`.
 
-###Post page
+### Post page
 
 Use the `blogPost` component to display a blog post on a page. The component has the following properties:
 
@@ -122,7 +121,7 @@ The next example shows the basic component usage on the blog page:
 
 The post details is coded in the default component partial `plugins/rainlab/blog/components/post/default.htm`.
 
-###Category list
+### Category list
 
 Use the `blogCategories` component to display a list of blog post categories with links. The component has the following properties:
 

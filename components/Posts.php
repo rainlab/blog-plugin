@@ -55,12 +55,12 @@ class Posts extends ComponentBase
 
     public function getCategoryPageOptions()
     {
-        return CmsPropertyHelper::listPages();;
+        return CmsPropertyHelper::listPages();
     }
 
     public function getPostPageOptions()
     {
-        return CmsPropertyHelper::listPages();;
+        return CmsPropertyHelper::listPages();
     }
 
     public function onRun()
