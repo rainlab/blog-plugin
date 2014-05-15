@@ -12,7 +12,7 @@ class CreatePostsTable extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->nullable()->index();
             $table->string('title')->nullable();
             $table->string('slug')->index();
             $table->text('excerpt')->nullable();
