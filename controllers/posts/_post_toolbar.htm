@@ -4,6 +4,7 @@
         class="btn btn-primary oc-icon-ok save"
         data-request="onSave"
         data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
+        data-request-before-update="$el.trigger('unchange.oc.changeMonitor')"
         data-hotkey="ctrl+s"
 
         <?php if (isset($formModel)): ?>
@@ -18,6 +19,7 @@
         <a
             href="javascript:;" 
             class="btn btn-primary oc-icon-ok save"
+            data-request-before-update="$el.trigger('unchange.oc.changeMonitor')"
             data-request="onSave"
             data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
         >
