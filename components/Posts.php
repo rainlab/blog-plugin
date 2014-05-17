@@ -65,7 +65,7 @@ class Posts extends ComponentBase
 
     public function onRun()
     {
-        $this->posts = $this->page['blogPosts'] = $this->loadPosts();
+        $this->posts = $this->page[$this->alias] = $this->loadPosts();
 
         $currentPage = $this->param('page');
         if ($currentPage > ($lastPage = $this->posts->getLastPage()) && $currentPage > 1)
