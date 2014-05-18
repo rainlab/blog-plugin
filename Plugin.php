@@ -70,7 +70,7 @@ class Plugin extends PluginBase
     /**
      * Register method, called when the plugin is first registered.
      */
-    public function register() 
+    public function register()
     {
         /*
          * Register the image tag processing callback

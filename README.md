@@ -29,10 +29,10 @@ Use the `blogPosts` component to display a list of latest blog posts on a page. 
 
 The blogPosts component injects the following variables to the page where it's used:
 
-* **blogPosts** - a list of blog posts loaded from the database.
-* **blogCategoryPage** - contains the value of the `categoryPage` component's property. 
-* **blogPostPage** - contains the value of the `postPage` component's property. 
-* **blogNoPostsMessage** - contains the value of the `noPostsMessage` component's property. 
+* **posts** - a list of blog posts loaded from the database.
+* **categoryPage** - contains the value of the `categoryPage` component's property. 
+* **postPage** - contains the value of the `postPage` component's property. 
+* **noPostsMessage** - contains the value of the `noPostsMessage` component's property. 
 
 The component supports pagination and reads the current page index from the `:page` URL parameter. The next example shows the basic component usage on the blog home page:
 
@@ -57,9 +57,9 @@ Use the `blogCategory` component to display a list of a category posts. The comp
 
 The blogPosts component injects the following variables to the page where it's used:
 
-* **blogCategory** - the blog category object loaded from the database. If the category is not found, the variable value is **null**.
-* **blogPostPage** - contains the value of the `postPage` component's property. 
-* **blogPosts** - a list of blog posts loaded from the database.
+* **category** - the blog category object loaded from the database. If the category is not found, the variable value is **null**.
+* **postPage** - contains the value of the `postPage` component's property. 
+* **posts** - a list of blog posts loaded from the database.
 
 The component supports pagination and reads the current page index from the `:page` URL parameter. The next example shows the basic component usage on the blog category page:
 
@@ -71,14 +71,14 @@ The component supports pagination and reads the current page index from the `:pa
     function onEnd()
     {
         // Optional - set the page title to the category name
-        if ($this['blogCategory'])
-            $this->page->title = $this['blogCategory']->name;
+        if ($this['category'])
+            $this->page->title = $this['category']->name;
     }
     ==
-    {% if not blogCategory %}
+    {% if not category %}
         <h2>Category not found</h2>
     {% else %}
-        <h2>{{ blogCategory.name }}</h2>
+        <h2>{{ category.name }}</h2>
 
         {% component 'category' %}
     {% endif %}
@@ -132,9 +132,9 @@ Use the `blogCategories` component to display a list of blog post categories wit
 
 The component injects the following variables to the page where it's used:
 
-* **blogCategoryPage** - contains the value of the `categoryPage` component's property. 
-* **blogCategories** - a list of blog categories loaded from the database.
-* **blogCurrentCategorySlug** - slug of the current category. This property is used for marking the current category in the category list.
+* **categoryPage** - contains the value of the `categoryPage` component's property. 
+* **categories** - a list of blog categories loaded from the database.
+* **currentCategorySlug** - slug of the current category. This property is used for marking the current category in the category list.
 
 The component can be used on any page. The next example shows the basic component usage on the blog home page:
 

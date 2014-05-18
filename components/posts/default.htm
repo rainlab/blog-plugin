@@ -1,13 +1,13 @@
 <ul class="post-list">
-    {% for post in blogPosts %}
+    {% for post in posts %}
         <li>
-            <h3><a href="{{ blogPostPage|page({'slug': post.slug}) }}">{{ post.title }}</a></h3>
+            <h3><a href="{{ postPage|page({'slug': post.slug}) }}">{{ post.title }}</a></h3>
 
             <p class="info">
                 Posted
                 {% if post.categories.count %} in {% endif %}
                 {% for category in post.categories %}
-                    <a href="{{ blogCategoryPage|page({'slug': category.slug}) }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
+                    <a href="{{ categoryPage|page({'slug': category.slug}) }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
                 {% endfor %}
                 on {{ post.publshed_at|date('M d, Y') }}
             </p>
@@ -19,24 +19,24 @@
             {% endif %}
         </li>
     {% else %}
-        <li class="no-data">{{ blogNoPostsMessage }}</li>
+        <li class="no-data">{{ noPostsMessage }}</li>
     {% endfor %}
 </ul>
 
-{% if blogPosts.getLastPage > 1 %}
+{% if posts.getLastPage > 1 %}
     <ul class="pagination">
-        {% if blogPosts.getCurrentPage > 1 %}
-            <li><a href="{{ this.page.baseFileName|page({ page: (blogPosts.getCurrentPage-1) }) }}">&larr; Prev</a></li>
+        {% if posts.getCurrentPage > 1 %}
+            <li><a href="{{ this.page.baseFileName|page({ page: (posts.getCurrentPage-1) }) }}">&larr; Prev</a></li>
         {% endif %}
 
-        {% for page in 1..blogPosts.getLastPage %}
-            <li class="{{ blogPosts.getCurrentPage == page ? 'active' : null }}">
+        {% for page in 1..posts.getLastPage %}
+            <li class="{{ posts.getCurrentPage == page ? 'active' : null }}">
                 <a href="{{ this.page.baseFileName|page({ page: page }) }}">{{ page }}</a>
             </li>
         {% endfor %}
 
-        {% if blogPosts.getLastPage > blogPosts.getCurrentPage %}
-            <li><a href="{{ this.page.baseFileName|page({ page: (blogPosts.getCurrentPage+1) }) }}">Next &rarr;</a></li>
+        {% if posts.getLastPage > posts.getCurrentPage %}
+            <li><a href="{{ this.page.baseFileName|page({ page: (posts.getCurrentPage+1) }) }}">Next &rarr;</a></li>
         {% endif %}
     </ul>
 {% endif %}

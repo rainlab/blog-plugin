@@ -65,15 +65,15 @@ class Posts extends ComponentBase
 
     public function onRun()
     {
-        $this->posts = $this->page['blogPosts'] = $this->loadPosts();
+        $this->posts = $this->page['posts'] = $this->loadPosts();
 
         $currentPage = $this->param('page');
         if ($currentPage > ($lastPage = $this->posts->getLastPage()) && $currentPage > 1)
             return Redirect::to($this->controller->currentPageUrl(['page'=>$lastPage]));
 
-        $this->categoryPage = $this->page['blogCategoryPage'] = $this->property('categoryPage');
-        $this->postPage = $this->page['blogPostPage'] = $this->property('postPage');
-        $this->noPostsMessage = $this->page['blogNoPostsMessage'] = $this->property('noPostsMessage');
+        $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
+        $this->postPage = $this->page['postPage'] = $this->property('postPage');
+        $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
     }
 
     protected function loadPosts()

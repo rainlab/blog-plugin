@@ -52,9 +52,9 @@ class Categories extends ComponentBase
 
     public function onRun()
     {
-        $this->categories = $this->page['blogCategories'] = $this->loadCategories();
-        $this->categoryPage = $this->page['blogCategoryPage'] = $this->property('categoryPage');
-        $this->currentCategorySlug = $this->page['blogCurrentCategorySlug'] = $this->param($this->property('paramId'));
+        $this->categories = $this->page['categories'] = $this->loadCategories();
+        $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
+        $this->currentCategorySlug = $this->page['currentCategorySlug'] = $this->param($this->property('paramId'));
     }
 
     protected function loadCategories()

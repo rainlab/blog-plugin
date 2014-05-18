@@ -58,11 +58,11 @@ class Category extends ComponentBase
 
     public function onRun()
     {
-        $this->category = $this->page['blogCategory'] = $this->loadCategory();
-        $this->postPage = $this->page['blogPostPage'] = $this->property('postPage');
+        $this->category = $this->page['category'] = $this->loadCategory();
+        $this->postPage = $this->page['postPage'] = $this->property('postPage');
 
         if ($this->category) {
-            $this->posts = $this->page['blogPosts'] = $this->loadPosts();
+            $this->posts = $this->page['posts'] = $this->loadPosts();
 
             $currentPage = $this->param('page');
             if ($currentPage > ($lastPage = $this->posts->getLastPage()) && $currentPage > 1)
