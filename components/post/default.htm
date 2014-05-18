@@ -6,5 +6,5 @@
     {% for category in blogPost.categories %}
         <a href="{{ blogCategoryPage|page({'slug': category.slug}) }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
     {% endfor %}
-    on {{ blogPost.publshed_at|date('M d, Y') }}
+    on {{ blogPost.published_at|date('M d, Y') }}
 </p>
