@@ -13,6 +13,10 @@ The number in the first part is the placeholder index. If you use multiple image
     ![1](image)
 
     ![2](image)
+    
+You can also add classes or ids to images by using the [markdown extra](http://michelf.ca/projects/php-markdown/extra/) syntax:
+
+    ![1](image){#id .class}
 
 ## Implementing front-end pages
 
@@ -150,3 +154,127 @@ The component can be used on any page. The next example shows the basic componen
     ...
 
 The category list is coded in the default component partial `plugins/rainlab/blog/components/categories/default.htm`.
+
+## Using markdown
+
+October supports [standard markdown syntax](http://daringfireball.net/projects/markdown/) as well as [extended markdown syntax](http://michelf.ca/projects/php-markdown/extra/)
+
+### Classes and IDs
+
+Classes and IDs can be added to images and other elements as shown below:
+
+```
+[link](url){#id .class}
+![1](image){#id .class}
+# October  {#id .class}
+```
+
+### Fenced code blogs
+
+Markdown extra makes it possible to use fenced code blocks. With fenced code blocks you do not need indentation on the areas you want to mark as code:
+
+
+    ```
+    Code goes here
+    ```
+    
+You can also use the `~` symbol:
+
+    ~~~
+    Code goes here
+    ~~~
+
+### Tables
+
+A *simple* table can be defined as follows:
+
+```
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell 
+Content Cell  | Content Cell 
+```
+
+If you want to you can also add a leading and tailing pipe:
+
+```
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+```
+
+To add alignment to the cells you simply need to add a `:` either at the start or end of a separator:
+
+```
+| First Header  | Second Header |
+| :------------ | ------------: |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+```
+
+To center align cell just add `:` on both sides:
+
+```
+| First Header  | Second Header |
+| ------------- | :-----------: |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+```
+
+### Definition lists
+
+Below is an example of a simple definition list:
+
+```
+Laravel
+:   A popular PHP framework
+
+October
+:   Awesome CMS built on Laravel
+```
+
+A term can also have multiple definitions:
+
+```
+Laravel
+:   A popular PHP framework
+
+October
+:   Awesome CMS built on Laravel
+:   Supports markdown extra
+```
+
+You can also associate more than 1 term to a definition:
+
+```
+Laravel
+October
+:   Built using PHP
+```
+
+### Footnotes
+
+With markdown extra it is possible to create reference style footnotes:
+
+```
+This is some text with a footnote.[^1]
+
+[^1]: And this is the footnote.
+```
+
+### Abbreviations
+
+With markdown extra you can add abbreviations to your markup. The use this functionality first create a definition list:
+
+```
+*[HTML]: Hyper Text Markup Language
+*[PHP]:  Hypertext Preprocessor
+```
+
+Now markdown extra will convert all occurrences of `HTML` and `PHP` as follows:
+
+```
+<abbr title="Hyper Text Markup Language">HTML</abbr>
+<abbr title="Hypertext Preprocessor">PHP</abbr>
+```
