@@ -9,7 +9,7 @@
                 {% for category in post.categories %}
                     <a href="{{ categoryPage|page({'slug': category.slug}) }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
                 {% endfor %}
-                on {{ post.publshed_at|date('M d, Y') }}
+                on {{ post.published_at|date('M d, Y') }}
             </p>
 
             {% if post.excerpt %}
