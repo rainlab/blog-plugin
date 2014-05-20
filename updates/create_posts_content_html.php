@@ -10,7 +10,7 @@ class CreatePostsContentHtml extends Migration
     {
         Schema::table('rainlab_blog_posts', function($table)
         {
-            $table->text('content_html');
+            $table->text('content_html')->nullable();
         });
     }
 
