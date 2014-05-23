@@ -19,8 +19,8 @@ class Post extends ComponentBase
     {
         return [
             'paramId' => [
-                'description' => 'The URL route parameter used for looking up the post by its slug.',
                 'title'       => 'Slug param name',
+                'description' => 'The URL route parameter used for looking up the post by its slug.',
                 'default'     => 'slug',
                 'type'        => 'string'
             ]

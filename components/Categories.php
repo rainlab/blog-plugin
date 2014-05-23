@@ -1,18 +1,18 @@
 <?php namespace RainLab\Blog\Components;
 
+use DB;
+use App;
+use Request;
+use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Category as BlogCategory;
-use Cms\Classes\CmsPropertyHelper;
-use Request;
-use App;
-use DB;
 
 class Categories extends ComponentBase
 {
     public $categories;
     public $categoryPage;
     public $currentCategorySlug;
-    
+
     public function componentDetails()
     {
         return [
@@ -25,16 +25,16 @@ class Categories extends ComponentBase
     {
         return [
             'categoryPage' => [
-                'title' => 'Category page',
+                'title'       => 'Category page',
                 'description' => 'Name of the category page file for the category links. This property is used by the default component partial.',
-                'type'=>'dropdown',
-                'default' => 'blog/category'
+                'type'        => 'dropdown',
+                'default'     => 'blog/category'
             ],
             'displayEmpty' => [
-                'title' => 'Display empty categories',
+                'title'       => 'Display empty categories',
                 'description' => 'Show categories that do not have any posts.',
-                'type'=>'checkbox',
-                'default' => 0
+                'type'        => 'checkbox',
+                'default'     => 0
             ],
             'paramId' => [
                 'description' => 'The URL route parameter used for looking up the current category by its slug. This property is used by the default component partial for marking the currently active category.',
@@ -47,7 +47,7 @@ class Categories extends ComponentBase
 
     public function getCategoryPageOptions()
     {
-        return CmsPropertyHelper::listPages();;
+        return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
     public function onRun()
