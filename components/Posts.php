@@ -78,9 +78,10 @@ class Posts extends ComponentBase
 
     protected function loadPosts()
     {
-        $currentPage = $this->param('page');
-        App::make('paginator')->setCurrentPage($currentPage);
-
-        return BlogPost::isPublished()->orderBy('published_at', 'desc')->paginate($this->property('postsPerPage'));
+        return BlogPost::make()->listFrontEnd([
+            'page' => $this->param('page'),
+            'sort' => ['published_at', 'updated_at'],
+            'perPage' => $this->property('postsPerPage'),
+        ]);
     }
 }

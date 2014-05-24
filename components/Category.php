@@ -5,6 +5,7 @@ use Redirect;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Category as BlogCategory;
+use RainLab\Blog\Models\Post as BlogPost;
 
 class Category extends ComponentBase
 {
@@ -78,9 +79,11 @@ class Category extends ComponentBase
 
     protected function loadPosts()
     {
-        $currentPage = $this->param('page');
-        App::make('paginator')->setCurrentPage($currentPage);
-
-        return $this->category->posts()->paginate($this->property('postsPerPage'));
+        return BlogPost::make()->listFrontEnd([
+            'page' => $this->param('page'),
+            'sort' => ['published_at', 'updated_at'],
+            'perPage' => $this->property('postsPerPage'),
+            'categories' => $this->category->id
+        ]);
     }
 }
