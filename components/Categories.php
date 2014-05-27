@@ -24,6 +24,12 @@ class Categories extends ComponentBase
     public function defineProperties()
     {
         return [
+            'paramId' => [
+                'title'       => 'Slug param name',
+                'description' => 'The URL route parameter used for looking up the current category by its slug. This property is used by the default component partial for marking the currently active category.',
+                'default'     => 'slug',
+                'type'        => 'string'
+            ],
             'categoryPage' => [
                 'title'       => 'Category page',
                 'description' => 'Name of the category page file for the category links. This property is used by the default component partial.',
@@ -35,12 +41,6 @@ class Categories extends ComponentBase
                 'description' => 'Show categories that do not have any posts.',
                 'type'        => 'checkbox',
                 'default'     => 0
-            ],
-            'paramId' => [
-                'description' => 'The URL route parameter used for looking up the current category by its slug. This property is used by the default component partial for marking the currently active category.',
-                'title'       => 'Slug param name',
-                'default'     => 'slug',
-                'type'        => 'string'
             ],
         ];
     }
