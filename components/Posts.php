@@ -11,10 +11,11 @@ use RainLab\Blog\Models\Category as BlogCategory;
 class Posts extends ComponentBase
 {
     public $posts;
-    public $categoryFilter;
     public $categoryPage;
     public $postPage;
     public $noPostsMessage;
+
+    private $categoryFilter;
 
     public function componentDetails()
     {
@@ -35,10 +36,10 @@ class Posts extends ComponentBase
                 'validationMessage' => 'Invalid format of the posts per page value'
             ],
             'categoryFilter' => [
-                'title' => 'Category filter',
+                'title'       => 'Category filter',
                 'description' => 'Name of the category to filter by.',
-                'type' => 'dropdown',
-                'default' => null
+                'type'        => 'dropdown',
+                'default'     => ''
             ],
             'categoryPage' => [
                 'title'       => 'Category page',
@@ -71,29 +72,13 @@ class Posts extends ComponentBase
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
-    protected function getCategoryFilterData()
-    {
-        return array_merge([[-1, 'N/A', false]],
-            array_map(function($val) {
-                    return [$val['id'], $val['name'], true];
-                }, BlogCategory::select('id', 'name')
-                    ->get()
-                    ->toArray()
-            ));
-    }
-
     public function getCategoryFilterOptions()
     {
-        return array_map(function($val) {
-            return $val[1];
-        }, $this->getCategoryFilterData());
+        return [''=>'- none -'] + BlogCategory::orderBy('name')->lists('name', 'id');
     }
 
     public function onRun()
     {
-        $this->categoryFilter = $this->page['categoryFilter'] = $this->getCategoryFilterData()[$this->property('categoryFilter')];
-        $this->categoryFilter = $this->categoryFilter[2] ? [ $this->categoryFilter[0] ] : null;
-
         $this->posts = $this->page['posts'] = $this->loadPosts();
 
         $currentPage = $this->param('page');
@@ -107,11 +92,27 @@ class Posts extends ComponentBase
 
     protected function loadPosts()
     {
+        $categories = ($category = $this->getCategoryFilter()) ? $category->id : null;
+
         return BlogPost::make()->listFrontEnd([
-            'page' => $this->param('page'),
-            'sort' => ['published_at', 'updated_at'],
-            'perPage' => $this->property('postsPerPage'),
-            'categories' => $this->categoryFilter
+            'page'       => $this->param('page'),
+            'sort'       => ['published_at', 'updated_at'],
+            'perPage'    => $this->property('postsPerPage'),
+            'categories' => $categories
         ]);
+    }
+
+    public function getCategoryFilter()
+    {
+        if ($this->categoryFilter !== null)
+            return $this->categoryFilter;
+
+        if (!$categoryId = $this->property('categoryFilter'))
+            return null;
+
+        if (!$category = BlogCategory::find($categoryId))
+            return null;
+
+        return $this->categoryFilter = $category;
     }
 }
