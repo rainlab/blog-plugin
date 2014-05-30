@@ -11,11 +11,11 @@ use RainLab\Blog\Models\Category as BlogCategory;
 class Posts extends ComponentBase
 {
     public $posts;
-    public $categoryPage;
     public $postPage;
+    public $category;
+    public $categoryPage;
     public $noPostsMessage;
 
-    private $categoryFilter;
 
     public function componentDetails()
     {
@@ -37,8 +37,8 @@ class Posts extends ComponentBase
             ],
             'categoryFilter' => [
                 'title'       => 'Category filter',
-                'description' => 'Name of the category to filter by.',
-                'type'        => 'dropdown',
+                'description' => 'Enter a category slug or URL parameter to filter the posts by. Leave empty to show all posts.',
+                'type'        => 'string',
                 'default'     => ''
             ],
             'categoryPage' => [
@@ -72,13 +72,9 @@ class Posts extends ComponentBase
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
-    public function getCategoryFilterOptions()
-    {
-        return [''=>'- none -'] + BlogCategory::orderBy('name')->lists('name', 'id');
-    }
-
     public function onRun()
     {
+        $this->category = $this->page['category'] = $this->loadCategory();
         $this->posts = $this->page['posts'] = $this->loadPosts();
 
         $currentPage = $this->param('page');
@@ -92,7 +88,7 @@ class Posts extends ComponentBase
 
     protected function loadPosts()
     {
-        $categories = ($category = $this->getCategoryFilter()) ? $category->id : null;
+        $categories = $this->category ? $this->category->id : null;
 
         return BlogPost::make()->listFrontEnd([
             'page'       => $this->param('page'),
@@ -102,17 +98,14 @@ class Posts extends ComponentBase
         ]);
     }
 
-    public function getCategoryFilter()
+    public function loadCategory()
     {
-        if ($this->categoryFilter !== null)
-            return $this->categoryFilter;
-
-        if (!$categoryId = $this->property('categoryFilter'))
+        if (!$categoryId = $this->propertyOrParam('categoryFilter'))
             return null;
 
-        if (!$category = BlogCategory::find($categoryId))
+        if (!$category = BlogCategory::whereSlug($categoryId)->first())
             return null;
 
-        return $this->categoryFilter = $category;
+        return $category;
     }
 }
