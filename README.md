@@ -26,6 +26,7 @@ The plugin provides several components for building the post list page (archive)
 
 Use the `blogPosts` component to display a list of latest blog posts on a page. The component has the following properties:
 
+* **categoryFilter** - a category slug or URL parameter (:slug) to filter the posts by. If left blank, all posts are displayed.
 * **postsPerPage** - how many posts to display on a single page (the pagination is supported automatically). The default value is 10.
 * **categoryPage** - path to the category page. The default value is **blog/category** - it matches the pages/blog/category.htm file in the theme directory. This property is used in the default component partial for creating links to the blog categories.
 * **postPage** - path to the post details page. The default value is **blog/post** - it matches the pages/blog/post.htm file in the theme directory. This property is used in the default component partial for creating links to the blog posts.
@@ -34,8 +35,9 @@ Use the `blogPosts` component to display a list of latest blog posts on a page. 
 The blogPosts component injects the following variables to the page where it's used:
 
 * **posts** - a list of blog posts loaded from the database.
-* **categoryPage** - contains the value of the `categoryPage` component's property. 
 * **postPage** - contains the value of the `postPage` component's property. 
+* **category** - the blog category object loaded from the database. If the category is not found, the variable value is **null**.
+* **categoryPage** - contains the value of the `categoryPage` component's property. 
 * **noPostsMessage** - contains the value of the `noPostsMessage` component's property. 
 
 The component supports pagination and reads the current page index from the `:page` URL parameter. The next example shows the basic component usage on the blog home page:
@@ -48,29 +50,13 @@ The component supports pagination and reads the current page index from the `:pa
     ==
     {% component 'blogPosts' %}
 
-The post list and the pagination are coded in the default component partial `plugins/rainlab/blog/components/posts/default.htm`. If the default markup is not suitable for your website, feel free to copy it from the default partial and replace the `{% component %}` call in the example above with the partial contents.
-
-### Category page
-
-Use the `blogCategory` component to display a list of a category posts. The component has the following properties:
-
-* **postsPerPage** - how many posts to display on a single page (the pagination is supported automatically). The default value is 10.
-* **postPage** - path to the post details page. The default value is **blog/post** - it matches the pages/blog/post.htm file in the theme directory. This property is used in the default component partial for creating links to the blog posts.
-* **noPostsMessage** - message to display in the empty post list.
-* **paramId** - the URL route parameter used for looking up the category by its slug. The default  value is **slug**.
-
-The blogPosts component injects the following variables to the page where it's used:
-
-* **category** - the blog category object loaded from the database. If the category is not found, the variable value is **null**.
-* **postPage** - contains the value of the `postPage` component's property. 
-* **posts** - a list of blog posts loaded from the database.
-
-The component supports pagination and reads the current page index from the `:page` URL parameter. The next example shows the basic component usage on the blog category page:
+The next example shows the basic component usage with the category filter:
 
     title = "Blog Category"
     url = "/blog/category/:slug/:page?"
 
-    [blogCategory category]
+    [blogPosts]
+    categoryFilter = ":slug"
     ==
     function onEnd()
     {
@@ -84,10 +70,10 @@ The component supports pagination and reads the current page index from the `:pa
     {% else %}
         <h2>{{ category.name }}</h2>
 
-        {% component 'category' %}
+        {% component 'blogPosts' %}
     {% endif %}
 
-The category post list and the pagination are coded in the default component partial `plugins/rainlab/blog/components/category/default.htm`.
+The post list and the pagination are coded in the default component partial `plugins/rainlab/blog/components/posts/default.htm`. If the default markup is not suitable for your website, feel free to copy it from the default partial and replace the `{% component %}` call in the example above with the partial contents.
 
 ### Post page
 
