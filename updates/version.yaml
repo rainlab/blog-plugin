@@ -7,3 +7,4 @@
     - Added the processed HTML content column to the posts table
     - create_posts_content_html.php
 1.0.3: Category component has been merged with Posts component
+1.0.4: Improvements to the Posts list management UI

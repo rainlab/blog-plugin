@@ -1,5 +1,6 @@
 <?php namespace RainLab\Blog\Controllers;
 
+use Flash;
 use BackendMenu;
 use Backend\Classes\Controller;
 use RainLab\Blog\Models\Post;
@@ -29,6 +30,38 @@ class Posts extends Controller
 
         $this->addJs('/plugins/rainlab/blog/assets/js/post-form.js');
         $this->addJs('/plugins/rainlab/blog/assets/vendor/prettify/prettify.js');
+    }
+
+    public function index()
+    {
+        $this->vars['postsTotal'] = Post::count();
+        $this->vars['postsPublished'] = Post::isPublished()->count();
+        $this->vars['postsDrafts'] = $this->vars['postsTotal'] - $this->vars['postsPublished'];
+
+        $this->getClassExtension('Backend.Behaviors.ListController')->index();
+    }
+
+    public function index_onDelete()
+    {
+        if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
+
+            foreach ($checkedIds as $postId) {
+                if (!$post = Post::find($postId))
+                    continue;
+
+                $post->delete();
+            }
+
+            Flash::success('Successfully deleted those posts.');
+        }
+
+        return $this->listRefresh();
+    }
+
+    public function listInjectRowClass($record, $definition = null)
+    {
+        if (!$record->published)
+            return 'safe disabled';
     }
 
     public function onRefreshPreview()
