@@ -18,10 +18,10 @@ class Post extends ComponentBase
     public function defineProperties()
     {
         return [
-            'paramId' => [
+            'idParam' => [
                 'title'       => 'Slug param name',
                 'description' => 'The URL route parameter used for looking up the post by its slug.',
-                'default'     => 'slug',
+                'default'     => ':slug',
                 'type'        => 'string'
             ],
         ];
@@ -34,7 +34,7 @@ class Post extends ComponentBase
 
     protected function loadPost()
     {
-        $slug = $this->param($this->property('paramId'));
+        $slug = $this->propertyOrParam('idParam');
         return BlogPost::isPublished()->where('slug', '=', $slug)->first();
     }
 }

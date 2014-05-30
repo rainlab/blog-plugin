@@ -35,10 +35,10 @@ Use the `blogPosts` component to display a list of latest blog posts on a page. 
 The blogPosts component injects the following variables to the page where it's used:
 
 * **posts** - a list of blog posts loaded from the database.
-* **postPage** - contains the value of the `postPage` component's property. 
+* **postPage** - contains the value of the `postPage` component's property.
 * **category** - the blog category object loaded from the database. If the category is not found, the variable value is **null**.
-* **categoryPage** - contains the value of the `categoryPage` component's property. 
-* **noPostsMessage** - contains the value of the `noPostsMessage` component's property. 
+* **categoryPage** - contains the value of the `categoryPage` component's property.
+* **noPostsMessage** - contains the value of the `noPostsMessage` component's property.
 
 The component supports pagination and reads the current page index from the `:page` URL parameter. The next example shows the basic component usage on the blog home page:
 
@@ -79,7 +79,7 @@ The post list and the pagination are coded in the default component partial `plu
 
 Use the `blogPost` component to display a blog post on a page. The component has the following properties:
 
-* **paramId** - the URL route parameter used for looking up the post by its slug. The default value is **slug**.
+* **idParam** - the URL route parameter used for looking up the post by its slug. The default value is **:slug**.
 
 The component injects the following variables to the page where it's used:
 
@@ -116,8 +116,7 @@ The post details is coded in the default component partial `plugins/rainlab/blog
 Use the `blogCategories` component to display a list of blog post categories with links. The component has the following properties:
 
 * **categoryPage** - path to the category page. The default value is **blog/category** - it matches the pages/blog/category.htm file in the theme directory. This property is used in the default component partial for creating links to the blog categories.
-* **paramId** - the URL route parameter used for looking up the current category by its slug. The default  value is 
-**slug**
+* **idParam** - the URL route parameter used for looking up the current category by its slug. The default  value is **:slug**
 * **displayEmpty** - determines if empty categories should be displayed. The default value is false.
 
 The component injects the following variables to the page where it's used:

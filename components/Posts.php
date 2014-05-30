@@ -12,10 +12,12 @@ class Posts extends ComponentBase
 {
     public $posts;
     public $postPage;
+    public $pageParam;
     public $category;
     public $categoryPage;
     public $noPostsMessage;
-
+    public $postPageIdParam;
+    public $categoryPageIdParam;
 
     public function componentDetails()
     {
@@ -30,10 +32,16 @@ class Posts extends ComponentBase
         return [
             'postsPerPage' => [
                 'title'             => 'Posts per page',
-                'default'           => '10',
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'Invalid format of the posts per page value'
+                'validationMessage' => 'Invalid format of the posts per page value',
+                'default'           => '10',
+            ],
+            'pageParam' => [
+                'title'       => 'Pagination parameter name',
+                'description' => 'The expected parameter name used by the pagination pages.',
+                'type'        => 'string',
+                'default'     => ':page',
             ],
             'categoryFilter' => [
                 'title'       => 'Category filter',
@@ -47,18 +55,30 @@ class Posts extends ComponentBase
                 'type'        => 'dropdown',
                 'default'     => 'blog/category'
             ],
+            'categoryPageIdParam' => [
+                'title'       => 'Category page param name',
+                'description' => 'The expected parameter name used when creating links to the category page.',
+                'type'        => 'string',
+                'default'     => ':slug',
+            ],
             'postPage' => [
                 'title'       => 'Post page',
                 'description' => 'Name of the blog post page file for the "Learn more" links. This property is used by the default component partial.',
                 'type'        => 'dropdown',
                 'default'     => 'blog/post'
             ],
+            'postPageIdParam' => [
+                'title'       => 'Post page param name',
+                'description' => 'The expected parameter name used when creating links to the post page.',
+                'type'        => 'string',
+                'default'     => ':slug',
+            ],
             'noPostsMessage' => [
                 'title'        => 'No posts message',
                 'description'  => 'Message to display in the blog post list in case if there are no posts. This property is used by the default component partial.',
                 'type'         => 'string',
                 'default'      => 'No posts found'
-            ]
+            ],
         ];
     }
 
@@ -75,23 +95,35 @@ class Posts extends ComponentBase
     public function onRun()
     {
         $this->category = $this->page['category'] = $this->loadCategory();
-        $this->posts = $this->page['posts'] = $this->loadPosts();
+        $this->posts = $this->page['posts'] = $this->listPosts();
 
-        $currentPage = $this->param('page');
+        $currentPage = $this->propertyOrParam('pageParam');
         if ($currentPage > ($lastPage = $this->posts->getLastPage()) && $currentPage > 1)
-            return Redirect::to($this->controller->currentPageUrl(['page'=>$lastPage]));
+            return Redirect::to($this->controller->currentPageUrl([$this->property('pageParam') => $lastPage]));
 
-        $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
-        $this->postPage = $this->page['postPage'] = $this->property('postPage');
-        $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
+        $this->prepareVars();
     }
 
-    protected function loadPosts()
+    protected function prepareVars()
+    {
+        $this->pageParam = $this->page['pageParam'] = $this->property('pageParam');
+        $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
+
+        /*
+         * Page links
+         */
+        $this->postPage = $this->page['postPage'] = $this->property('postPage');
+        $this->postPageIdParam = $this->page['postPageIdParam'] = $this->property('postPageIdParam');
+        $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
+        $this->categoryPageIdParam = $this->page['categoryPageIdParam'] = $this->property('categoryPageIdParam');
+    }
+
+    protected function listPosts()
     {
         $categories = $this->category ? $this->category->id : null;
 
         return BlogPost::make()->listFrontEnd([
-            'page'       => $this->param('page'),
+            'page'       => $this->propertyOrParam('pageParam'),
             'sort'       => ['published_at', 'updated_at'],
             'perPage'    => $this->property('postsPerPage'),
             'categories' => $categories

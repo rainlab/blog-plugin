@@ -1,13 +1,13 @@
 <ul class="post-list">
     {% for post in posts %}
         <li>
-            <h3><a href="{{ postPage|page({'slug': post.slug}) }}">{{ post.title }}</a></h3>
+            <h3><a href="{{ postPage|page({ (postPageIdParam): post.slug}) }}">{{ post.title }}</a></h3>
 
             <p class="info">
                 Posted
                 {% if post.categories.count %} in {% endif %}
                 {% for category in post.categories %}
-                    <a href="{{ categoryPage|page({'slug': category.slug}) }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
+                    <a href="{{ categoryPage|page({ (categoryPageIdParam): category.slug}) }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
                 {% endfor %}
                 on {{ post.published_at|date('M d, Y') }}
             </p>
@@ -26,17 +26,17 @@
 {% if posts.getLastPage > 1 %}
     <ul class="pagination">
         {% if posts.getCurrentPage > 1 %}
-            <li><a href="{{ this.page.baseFileName|page({ page: (posts.getCurrentPage-1) }) }}">&larr; Prev</a></li>
+            <li><a href="{{ this.page.baseFileName|page({ (pageParam): (posts.getCurrentPage-1) }) }}">&larr; Prev</a></li>
         {% endif %}
 
         {% for page in 1..posts.getLastPage %}
             <li class="{{ posts.getCurrentPage == page ? 'active' : null }}">
-                <a href="{{ this.page.baseFileName|page({ page: page }) }}">{{ page }}</a>
+                <a href="{{ this.page.baseFileName|page({ (pageParam): page }) }}">{{ page }}</a>
             </li>
         {% endfor %}
 
         {% if posts.getLastPage > posts.getCurrentPage %}
-            <li><a href="{{ this.page.baseFileName|page({ page: (posts.getCurrentPage+1) }) }}">Next &rarr;</a></li>
+            <li><a href="{{ this.page.baseFileName|page({ (pageParam): (posts.getCurrentPage+1) }) }}">Next &rarr;</a></li>
         {% endif %}
     </ul>
 {% endif %}

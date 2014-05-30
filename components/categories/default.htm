@@ -2,7 +2,7 @@
     {% for category in categories %}
         {% set postCount = category.postCount %}
         <li {% if category.slug == currentCategorySlug %}class="active"{% endif %}>
-            <a href="{{ categoryPage|page({'slug': category.slug}) }}">{{ category.name }}</a> 
+            <a href="{{ categoryPage|page({ (categoryPageIdParam): category.slug}) }}">{{ category.name }}</a> 
             {% if postCount %}
                 <span class="badge">{{ postCount }}</span>
             {% endif %}
