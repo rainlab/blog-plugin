@@ -58,6 +58,9 @@ class Posts extends Controller
         return $this->listRefresh();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function listInjectRowClass($record, $definition = null)
     {
         if (!$record->published)

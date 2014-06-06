@@ -65,7 +65,7 @@ class Preview extends FormWidgetBase
 
             $file = new File();
             $file->data = $uploadedFile;
-            $file->public = true;
+            $file->is_public = true;
             $file->save();
 
             $fileRelation->add($file, $this->sessionKey);
