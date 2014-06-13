@@ -8,11 +8,11 @@ columns:
     label: Title
     searchable: true
 
-  author:
-    label: Author
-    relation: user
-    select: @login
-    searchable: true
+  # author:
+  #   label: Author
+  #   relation: user
+  #   select: @login
+  #   searchable: true
 
   categories:
     label: Categories
