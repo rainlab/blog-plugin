@@ -1,35 +1,35 @@
+<?php
+    $isCreate = $this->formGetContext() == 'create';
+    $pageUrl = isset($pageUrl) ? $pageUrl : null;
+?>
 <div class="form-buttons loading-indicator-container">
+
+    <!-- Save -->
     <a
-        href="javascript:;" 
+        href="javascript:;"
         class="btn btn-primary oc-icon-ok save"
         data-request="onSave"
         data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
         data-request-before-update="$el.trigger('unchange.oc.changeMonitor')"
+        <?php if (!$isCreate): ?>data-request-data="redirect:0"<?php endif ?>
         data-hotkey="ctrl+s"
-
-        <?php if (isset($formModel)): ?>
-            data-request-data="redirect:0"
-        <?php endif ?>
-
         data-hotkey-mac="cmd+s">
             <?= e(trans('backend::lang.form.save')) ?>
     </a>
 
-    <?php if (isset($formModel)): ?>
+    <?php if (!$isCreate): ?>
+        <!-- Save and Close -->
         <a
-            href="javascript:;" 
+            href="javascript:;"
             class="btn btn-primary oc-icon-ok save"
             data-request-before-update="$el.trigger('unchange.oc.changeMonitor')"
             data-request="onSave"
-            data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
-        >
+            data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>">
                 <?= e(trans('backend::lang.form.save_and_close')) ?>
         </a>
     <?php endif ?>
 
-    <?php
-        $pageUrl = isset($pageUrl) ? $pageUrl : null;
-    ?>
+    <!-- Preview -->
     <a
         href="<?= URL::to($pageUrl) ?>"
         target="_blank"
@@ -38,7 +38,8 @@
         Preview
     </a>
 
-    <?php if (isset($formModel)): ?>
+    <?php if (!$isCreate): ?>
+        <!-- Delete -->
         <button
             type="button"
             class="btn btn-default empty oc-icon-trash-o"

@@ -1,13 +1,3 @@
-<?php /*
-
-<?php Block::put('breadcrumb') ?>
-    <ul>
-        <li><a href="<?= Backend::url('rainlab/blog/posts') ?>">Blog Posts</a></li>
-        <li><?= e($this->pageTitle) ?></li>
-    </ul>
-<?php Block::endPut() ?>
-    */ ?>
-
 <?php if (!$this->fatalError): ?>
 
     <div class="layout fancy-layout">
@@ -21,54 +11,6 @@
 
         <?= Form::close() ?>
     </div>
-
-    <?php /*
-
-    <?php Block::put('form-contents') ?>
-
-        <?= $this->formRenderOutsideFields() ?>
-        <?= $this->formRenderPrimaryTabs() ?>
-
-        <div class="form-buttons layout-item fix">
-            <div class="loading-indicator-container">
-                <button 
-                    type="submit"
-                    data-request="onSave"
-                    data-hotkey="ctrl+s"
-                    data-hotkey-mac="cmd+s"
-                    data-load-indicator="Creating Post..."
-                    class="btn btn-primary">
-                    Create
-                </button>
-                <button 
-                    type="button"
-                    data-request="onSave"
-                    data-request-data="close:1"
-                    data-hotkey="ctrl+enter"
-                    data-hotkey-mac="cmd+enter"
-                    data-load-indicator="Creating Post..."
-                    class="btn btn-default">
-                    Create and Close
-                </button>
-                <span class="btn-text">
-                    or <a href="<?= Backend::url('blog/posts') ?>">Cancel</a>
-                </span>
-            </div>
-        </div>
-
-    <?php Block::endPut() ?>
-
-    <?php Block::put('form-sidebar') ?>
-        <div class="hide-tabs"><?= $this->formRenderSecondaryTabs() ?></div>
-    <?php Block::endPut() ?>
-
-    <?php Block::put('body') ?>
-        <?= Form::open(['class'=>'layout stretch']) ?>
-            <?= $this->makeLayout('form-with-sidebar') ?>
-        <?= Form::close() ?>
-    <?php Block::endPut() ?>
-
-    */ ?>
 
 <?php else: ?>
     <div class="padded-container">
