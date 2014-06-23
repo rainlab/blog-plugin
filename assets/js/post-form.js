@@ -142,7 +142,7 @@
         $(document).bind('dragover', function (e) {
             var dropZone = $('span.image-placeholder .dropzone'),
                 foundDropzone,
-                timeout = window.dropZoneTimeout;
+                timeout = window.dropZoneTimeout
 
             if (!timeout)
                 dropZone.addClass('in');
@@ -150,7 +150,7 @@
                 clearTimeout(timeout);
 
             var found = false,
-            node = e.target;
+                node = e.target
 
             do{
                 if ($(node).hasClass('dropzone')) {
@@ -171,7 +171,7 @@
             window.dropZoneTimeout = setTimeout(function () {
                 window.dropZoneTimeout = null;
                 dropZone.removeClass('in hover');
-            }, 100);
+            }, 100)
         });
 
         $(document).on('click', '#blog-post-preview span.dropzone', function() {
@@ -182,9 +182,9 @@
             $('input[type=file].file', $(this).closest('.image-placeholder')).fileupload('add', {
                 files: e.target.files || [{name: this.value}],
                 fileInput: $(this)
-            });
+            })
 
-            $(this).val("") 
+            $(this).val('')
         })
     }
 
@@ -196,13 +196,14 @@
         })
 
         $('#Datepicker-formPublishedAt-input-published_at').triggerOn({
-            triggerCondition: 'checked', 
-            trigger: '#Form-form-field-Post-published', 
-            triggerType: 'enable'})
+            triggerCondition: 'checked',
+            trigger: '#Form-field-Post-published',
+            triggerType: 'enable'
+        })
     }
 
     PostForm.prototype.initLayout = function() {
-        $('#Form-form-tabs-secondary .tab-pane.layout-cell:not(:first-child)').addClass('padded-pane')
+        $('#Form-tabs-secondary .tab-pane.layout-cell:not(:first-child)').addClass('padded-pane')
     }
 
     PostForm.prototype.replacePlaceholder = function(placeholder, placeholderHtmlReplacement, mdCodePlaceholder, mdCodeReplacement) {

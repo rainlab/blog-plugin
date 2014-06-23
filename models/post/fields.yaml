@@ -38,15 +38,14 @@ secondaryTabs:
     content:
       tab: Edit
       stretch: true
-      type: codeeditor
       span: left
       cssClass: no-padding
-      options:
-        language: markdown
-        showGutter: false
-        wrapWords: true
-        fontSize: 13
-        margin: 15
+      type: codeeditor
+      language: markdown
+      showGutter: false
+      wrapWords: true
+      fontSize: 13
+      margin: 15
 
     preview:
       type: RainLab\Blog\FormWidgets\Preview
@@ -71,10 +70,9 @@ secondaryTabs:
       tab: Manage
       label: Published on
       span: left
-      type: datepicker
       cssClass: checkbox-align
-      options:
-        mode: date
+      type: datepicker
+      mode: date
 
     excerpt:
       tab: Manage
@@ -104,7 +102,6 @@ secondaryTabs:
       tab: Manage
       label: Featured Images
       type: fileupload
-      options:
-        mode: image
-        image-width: 200
-        image-height: 200
+      mode: image
+      imageWidth: 200
+      imageHeight: 200
