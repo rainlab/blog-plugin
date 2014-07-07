@@ -2,6 +2,9 @@
 
 A simple, extensible blogging platform for October CMS.
 
+A video demonstration of this plugin can be seen here:
+https://vimeo.com/97088926
+
 ## Editing posts
 
 The plugin uses the markdown markup for the posts. You can use any Markdown syntax and some special tags for embedding images and videos (requires RainLab Blog Video plugin). To embed an image use the image placeholder:
