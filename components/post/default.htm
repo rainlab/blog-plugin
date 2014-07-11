@@ -1,5 +1,11 @@
 <div class="content">{{ post.content_html|raw }}</div>
 
+<div class="row">
+	{% for image in post.featured_images %}
+		<p class="text-center"> <img data-src="{{ image.filename}}" src="{{ image.path}}" alt="{{ image.description}}" width="600"/> </p>
+	{% endfor%}
+</div>
+
 <p class="info">
     Posted
     {% if post.categories.count %} in {% endif %}
