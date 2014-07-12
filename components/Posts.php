@@ -30,13 +30,6 @@ class Posts extends ComponentBase
     public function defineProperties()
     {
         return [
-            'postsPerPage' => [
-                'title'             => 'Posts per page',
-                'type'              => 'string',
-                'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'Invalid format of the posts per page value',
-                'default'           => '10',
-            ],
             'pageParam' => [
                 'title'       => 'Pagination parameter name',
                 'description' => 'The expected parameter name used by the pagination pages.',
@@ -49,35 +42,46 @@ class Posts extends ComponentBase
                 'type'        => 'string',
                 'default'     => ''
             ],
-            'categoryPage' => [
-                'title'       => 'Category page',
-                'description' => 'Name of the category page file for the "Posted into" category links. This property is used by the default component partial.',
-                'type'        => 'dropdown',
-                'default'     => 'blog/category'
-            ],
-            'categoryPageIdParam' => [
-                'title'       => 'Category page param name',
-                'description' => 'The expected parameter name used when creating links to the category page.',
-                'type'        => 'string',
-                'default'     => ':slug',
-            ],
-            'postPage' => [
-                'title'       => 'Post page',
-                'description' => 'Name of the blog post page file for the "Learn more" links. This property is used by the default component partial.',
-                'type'        => 'dropdown',
-                'default'     => 'blog/post'
-            ],
-            'postPageIdParam' => [
-                'title'       => 'Post page param name',
-                'description' => 'The expected parameter name used when creating links to the post page.',
-                'type'        => 'string',
-                'default'     => ':slug',
+            'postsPerPage' => [
+                'title'             => 'Posts per page',
+                'type'              => 'string',
+                'validationPattern' => '^[0-9]+$',
+                'validationMessage' => 'Invalid format of the posts per page value',
+                'default'           => '10',
             ],
             'noPostsMessage' => [
                 'title'        => 'No posts message',
                 'description'  => 'Message to display in the blog post list in case if there are no posts. This property is used by the default component partial.',
                 'type'         => 'string',
                 'default'      => 'No posts found'
+            ],
+            'categoryPage' => [
+                'title'       => 'Category page',
+                'description' => 'Name of the category page file for the "Posted into" category links. This property is used by the default component partial.',
+                'type'        => 'dropdown',
+                'default'     => 'blog/category',
+                'group'       => 'Links',
+            ],
+            'categoryPageIdParam' => [
+                'title'       => 'Category page param name',
+                'description' => 'The expected parameter name used when creating links to the category page.',
+                'type'        => 'string',
+                'default'     => ':slug',
+                'group'       => 'Links',
+            ],
+            'postPage' => [
+                'title'       => 'Post page',
+                'description' => 'Name of the blog post page file for the "Learn more" links. This property is used by the default component partial.',
+                'type'        => 'dropdown',
+                'default'     => 'blog/post',
+                'group'       => 'Links',
+            ],
+            'postPageIdParam' => [
+                'title'       => 'Post page param name',
+                'description' => 'The expected parameter name used when creating links to the post page.',
+                'type'        => 'string',
+                'default'     => ':slug',
+                'group'       => 'Links',
             ],
         ];
     }

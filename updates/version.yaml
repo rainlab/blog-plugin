@@ -9,3 +9,4 @@
 1.0.3: Category component has been merged with Posts component
 1.0.4: Improvements to the Posts list management UI
 1.0.5: Removes the Author column from blog post list
+1.0.6: Featured images now appear in the Post component
