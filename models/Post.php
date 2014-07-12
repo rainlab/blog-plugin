@@ -9,6 +9,8 @@ use RainLab\Blog\Classes\TagProcessor;
 
 class Post extends Model
 {
+    use \October\Rain\Database\Traits\Validation;
+
     public $table = 'rainlab_blog_posts';
 
     /*

@@ -6,6 +6,8 @@ use RainLab\Blog\Models\Post;
 
 class Category extends Model
 {
+    use \October\Rain\Database\Traits\Validation;
+
     public $table = 'rainlab_blog_categories';
 
     /*
