@@ -11,8 +11,8 @@ class Categories extends ComponentBase
 {
     public $categories;
     public $categoryPage;
-    public $currentCategorySlug;
     public $categoryPageIdParam;
+    public $currentCategorySlug;
 
     public function componentDetails()
     {
@@ -31,23 +31,25 @@ class Categories extends ComponentBase
                 'default'     => ':slug',
                 'type'        => 'string'
             ],
+            'displayEmpty' => [
+                'title'       => 'Display empty categories',
+                'description' => 'Show categories that do not have any posts.',
+                'type'        => 'checkbox',
+                'default'     => 0
+            ],
             'categoryPage' => [
                 'title'       => 'Category page',
                 'description' => 'Name of the category page file for the category links. This property is used by the default component partial.',
                 'type'        => 'dropdown',
-                'default'     => 'blog/category'
+                'default'     => 'blog/category',
+                'group'       => 'Links',
             ],
             'categoryPageIdParam' => [
                 'title'       => 'Category page param name',
                 'description' => 'The expected parameter name used when creating links to the category page.',
                 'type'        => 'string',
                 'default'     => ':slug',
-            ],
-            'displayEmpty' => [
-                'title'       => 'Display empty categories',
-                'description' => 'Show categories that do not have any posts.',
-                'type'        => 'checkbox',
-                'default'     => 0
+                'group'       => 'Links',
             ],
         ];
     }
