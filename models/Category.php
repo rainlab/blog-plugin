@@ -21,17 +21,15 @@ class Category extends Model
 
     protected $guarded = [];
 
+    public $belongsToMany = [
+        'posts' => ['RainLab\Blog\Models\Post', 'table' => 'rainlab_blog_posts_categories', 'order' => 'published_at desc', 'scope' => 'isPublished']
+    ];
+
     public function beforeValidate()
     {
         // Generate a URL slug for this model
         if (!$this->exists && !$this->slug)
             $this->slug = Str::slug($this->name);
-    }
-
-    public function posts()
-    {
-        // @todo: declare this relationship as the class field when the conditions option is implemented
-        return $this->belongsToMany('RainLab\Blog\Models\Post', 'rainlab_blog_posts_categories')->isPublished()->orderBy('published_at', 'desc');
     }
 
     public function postCount()

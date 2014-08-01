@@ -13,10 +13,10 @@
     </div>
 
 <?php else: ?>
+    <div class="control-breadcrumb">
+        <?= Block::placeholder('breadcrumb') ?>
+    </div>
     <div class="padded-container">
-        <div class="control-breadcrumb">
-            <?= Block::placeholder('breadcrumb') ?>
-        </div>
         <p class="flash-message static error"><?= e($this->fatalError) ?></p>
         <p><a href="<?= Backend::url('rainlab/blog/posts') ?>" class="btn btn-default">Return to posts list</a></p>
     </div>
