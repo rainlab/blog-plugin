@@ -7,7 +7,7 @@
     <!-- Save -->
     <a
         href="javascript:;"
-        class="btn btn-primary oc-icon-ok save"
+        class="btn btn-primary oc-icon-check save"
         data-request="onSave"
         data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
         data-request-before-update="$el.trigger('unchange.oc.changeMonitor')"
@@ -21,7 +21,7 @@
         <!-- Save and Close -->
         <a
             href="javascript:;"
-            class="btn btn-primary oc-icon-ok save"
+            class="btn btn-primary oc-icon-check save"
             data-request-before-update="$el.trigger('unchange.oc.changeMonitor')"
             data-request="onSave"
             data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>">
@@ -33,7 +33,7 @@
     <a
         href="<?= URL::to($pageUrl) ?>"
         target="_blank"
-        class="btn btn-primary oc-icon-screenshot <?php if (!false): ?>hide<?php endif ?>"
+        class="btn btn-primary oc-icon-crosshairs <?php if (!false): ?>hide<?php endif ?>"
         data-control="preview-button">
         Preview
     </a>
