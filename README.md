@@ -99,15 +99,15 @@ The next example shows the basic component usage on the blog page:
     function onEnd()
     {
         // Optional - set the page title to the post title
-        if (isset($this['blogPost']))
-            $this->page->title = $this['blogPost']->title;
+        if (isset($this['post']))
+            $this->page->title = $this['post']->title;
     }
     ?>
     ==
-    {% if not blogPost %}
+    {% if not post %}
         <h2>Post not found</h2>
     {% else %}
-        <h2>{{ blogPost.title }}</h2>
+        <h2>{{ post.title }}</h2>
 
         {% component 'post' %}
     {% endif %}
