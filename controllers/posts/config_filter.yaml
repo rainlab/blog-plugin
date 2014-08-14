@@ -1,0 +1,26 @@
+scopes:
+
+    category:
+
+        # Filter name
+        label: Category
+
+        # Model Class nameQ
+        modelClass: RainLab\Blog\Models\Category
+
+        # Model attribute to display for the name
+        nameColumn: name
+
+        # SQL Conditions
+        conditions: category_id in (:filtered)
+
+    published:
+
+        # Filter name
+        label: Hide published
+
+        # Filter type
+        type: checkbox
+
+        # SQL Conditions
+        conditions: published <> 1
