@@ -38,7 +38,7 @@ class Posts extends Controller
         $this->vars['postsPublished'] = Post::isPublished()->count();
         $this->vars['postsDrafts'] = $this->vars['postsTotal'] - $this->vars['postsPublished'];
 
-        $this->getClassExtension('Backend.Behaviors.ListController')->index();
+        $this->asExtension('ListController')->index();
     }
 
     public function index_onDelete()
