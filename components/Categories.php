@@ -9,9 +9,19 @@ use RainLab\Blog\Models\Category as BlogCategory;
 
 class Categories extends ComponentBase
 {
+    /**
+     * @var Collection A collection of categories to display
+     */
     public $categories;
+
+    /**
+     * @var string Reference to the page name for linking to categories.
+     */
     public $categoryPage;
-    public $categoryPageIdParam;
+
+    /**
+     * @var string Reference to the current category slug.
+     */
     public $currentCategorySlug;
 
     public function componentDetails()
@@ -44,13 +54,6 @@ class Categories extends ComponentBase
                 'default'     => 'blog/category',
                 'group'       => 'Links',
             ],
-            'categoryPageIdParam' => [
-                'title'       => 'Category page param name',
-                'description' => 'The expected parameter name used when creating links to the category page.',
-                'type'        => 'string',
-                'default'     => ':slug',
-                'group'       => 'Links',
-            ],
         ];
     }
 
@@ -61,10 +64,9 @@ class Categories extends ComponentBase
 
     public function onRun()
     {
-        $this->categories = $this->page['categories'] = $this->loadCategories();
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
-        $this->categoryPageIdParam = $this->page['categoryPageIdParam'] = $this->property('categoryPageIdParam');
         $this->currentCategorySlug = $this->page['currentCategorySlug'] = $this->propertyOrParam('idParam');
+        $this->categories = $this->page['categories'] = $this->loadCategories();
     }
 
     protected function loadCategories()
@@ -81,6 +83,15 @@ class Categories extends ComponentBase
             });
         }
 
-        return $categories->get();
+        $categories = $categories->get();
+
+        /*
+         * Add a "url" helper attribute for linking to each category
+         */
+        $categories->each(function($category){
+            $category->setUrl($this->categoryPage, $this->controller);
+        });
+
+        return $categories;
     }
 }

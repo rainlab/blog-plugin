@@ -23,10 +23,12 @@ columns:
   created_at:
     label: Created
     type: date
+    invisible: true
 
   updated_at:
     label: Updated
     type: date
+    invisible: true
 
   published_at:
     label: Published

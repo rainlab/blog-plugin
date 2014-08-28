@@ -20,6 +20,17 @@ noRecordsMessage: backend::lang.list.no_records
 # Records to display per page
 recordsPerPage: 25
 
+# Displays the list column set up button
+showSetup: true
+
+# Displays the sorting link on each column
+showSorting: true
+
+# Default sorting column
+defaultSort:
+    column: published_at
+    direction: desc
+
 # Display checkboxes next to each record
 showCheckboxes: true
 

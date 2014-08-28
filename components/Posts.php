@@ -10,14 +10,36 @@ use RainLab\Blog\Models\Category as BlogCategory;
 
 class Posts extends ComponentBase
 {
+    /**
+     * @var Collection A collection of posts to display
+     */
     public $posts;
-    public $postPage;
+
+    /**
+     * @var string Parameter to use for the page number
+     */
     public $pageParam;
+
+    /**
+     * @var Model If the post list should be filtered by a category, the model to use.
+     */
     public $category;
-    public $categoryPage;
+
+    /**
+     * @var string Message to display when there are no messages.
+     */
     public $noPostsMessage;
-    public $postPageIdParam;
-    public $categoryPageIdParam;
+
+    /**
+     * @var string Reference to the page name for linking to posts.
+     */
+    public $postPage;
+
+    /**
+     * @var string Reference to the page name for linking to categories.
+     */
+    public $categoryPage;
+
 
     public function componentDetails()
     {
@@ -62,25 +84,11 @@ class Posts extends ComponentBase
                 'default'     => 'blog/category',
                 'group'       => 'Links',
             ],
-            'categoryPageIdParam' => [
-                'title'       => 'Category page param name',
-                'description' => 'The expected parameter name used when creating links to the category page.',
-                'type'        => 'string',
-                'default'     => ':slug',
-                'group'       => 'Links',
-            ],
             'postPage' => [
                 'title'       => 'Post page',
                 'description' => 'Name of the blog post page file for the "Learn more" links. This property is used by the default component partial.',
                 'type'        => 'dropdown',
                 'default'     => 'blog/post',
-                'group'       => 'Links',
-            ],
-            'postPageIdParam' => [
-                'title'       => 'Post page param name',
-                'description' => 'The expected parameter name used when creating links to the post page.',
-                'type'        => 'string',
-                'default'     => ':slug',
                 'group'       => 'Links',
             ],
         ];
@@ -98,40 +106,54 @@ class Posts extends ComponentBase
 
     public function onRun()
     {
+        $this->prepareVars();
+
         $this->category = $this->page['category'] = $this->loadCategory();
         $this->posts = $this->page['posts'] = $this->listPosts();
 
         $currentPage = $this->propertyOrParam('pageParam');
         if ($currentPage > ($lastPage = $this->posts->getLastPage()) && $currentPage > 1)
             return Redirect::to($this->controller->currentPageUrl([$this->property('pageParam') => $lastPage]));
-
-        $this->prepareVars();
     }
 
     protected function prepareVars()
     {
-        $this->pageParam = $this->page['pageParam'] = $this->property('pageParam');
+        $this->pageParam = $this->page['pageParam'] = $this->property('pageParam', 'page');
         $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
 
         /*
          * Page links
          */
         $this->postPage = $this->page['postPage'] = $this->property('postPage');
-        $this->postPageIdParam = $this->page['postPageIdParam'] = $this->property('postPageIdParam');
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
-        $this->categoryPageIdParam = $this->page['categoryPageIdParam'] = $this->property('categoryPageIdParam');
     }
 
     protected function listPosts()
     {
         $categories = $this->category ? $this->category->id : null;
 
-        return BlogPost::make()->listFrontEnd([
+        /*
+         * List all the posts, eager load their categories
+         */
+        $posts = BlogPost::with('categories')->listFrontEnd([
             'page'       => $this->propertyOrParam('pageParam'),
             'sort'       => ['published_at', 'updated_at'],
             'perPage'    => $this->property('postsPerPage'),
             'categories' => $categories
         ]);
+
+        /*
+         * Add a "url" helper attribute for linking to each post and category
+         */
+        $posts->each(function($post){
+            $post->setUrl($this->postPage, $this->controller);
+
+            $post->categories->each(function($category){
+                $category->setUrl($this->categoryPage, $this->controller);
+            });
+        });
+
+        return $posts;
     }
 
     public function loadCategory()

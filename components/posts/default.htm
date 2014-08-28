@@ -1,13 +1,13 @@
 <ul class="post-list">
     {% for post in posts %}
         <li>
-            <h3><a href="{{ postPage|page({ (postPageIdParam): post.slug}) }}">{{ post.title }}</a></h3>
+            <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
 
             <p class="info">
                 Posted
                 {% if post.categories.count %} in {% endif %}
                 {% for category in post.categories %}
-                    <a href="{{ categoryPage|page({ (categoryPageIdParam): category.slug}) }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
+                    <a href="{{ category.url }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
                 {% endfor %}
                 on {{ post.published_at|date('M d, Y') }}
             </p>

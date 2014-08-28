@@ -45,6 +45,11 @@ class Post extends Model
         'content_images' => ['System\Models\File']
     ];
 
+    /**
+     * @var array The accessors to append to the model's array form.
+     */
+    protected $appends = ['summary', 'has_summary'];
+
     public $preview = null;
 
     /**
@@ -52,28 +57,27 @@ class Post extends Model
      * @param  array $options Display options
      * @return self
      */
-    public function listFrontEnd($options)
+    public function scopeListFrontEnd($query, $options)
     {
         /*
          * Default options
          */
         extract(array_merge([
-            'page' => 1,
-            'perPage' => 30,
-            'sort' => 'created_at',
+            'page'       => 1,
+            'perPage'    => 30,
+            'sort'       => 'created_at',
             'categories' => null,
-            'search' => '',
-            'published' => true
+            'search'     => '',
+            'published'  => true
         ], $options));
-        
+
         $allowedSortingOptions = ['created_at', 'updated_at', 'published_at'];
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
 
         App::make('paginator')->setCurrentPage($page);
-        $obj = $this->newQuery();
 
         if ($published)
-            $obj->isPublished();
+            $query->isPublished();
 
         /*
          * Sorting
@@ -86,7 +90,7 @@ class Post extends Model
             list($sortField, $sortDirection) = $parts;
 
             if (in_array($sortField, $allowedSortingOptions))
-                $obj->orderBy($_sort, 'desc');
+                $query->orderBy($_sort, 'desc');
         }
 
         /*
@@ -94,7 +98,7 @@ class Post extends Model
          */
         $search = trim($search);
         if (strlen($search)) {
-            $obj->searchWhere($search, $searchableFields);
+            $query->searchWhere($search, $searchableFields);
         }
 
         /*
@@ -102,12 +106,12 @@ class Post extends Model
          */
         if ($categories !== null) {
             if (!is_array($categories)) $categories = [$categories];
-            $obj->whereHas('categories', function($q) use ($categories) {
+            $query->whereHas('categories', function($q) use ($categories) {
                 $q->whereIn('id', $categories);
             });
         }
 
-        return $obj->paginate($perPage);
+        return $query->paginate($perPage);
     }
 
     public static function formatHtml($input, $preview = false)
@@ -141,5 +145,44 @@ class Post extends Model
     public function beforeSave()
     {
         $this->content_html = self::formatHtml($this->content);
+    }
+
+    /**
+     * Used by "has_summary", returns true if this post uses a summary (more tag)
+     * @return boolean
+     */
+    public function getHasSummaryAttribute()
+    {
+        return strlen($this->getSummaryAttribute()) < strlen($this->content_html);
+    }
+
+    /**
+     * Used by "summary", returns the HTML content before the <!-- more --> tag
+     * @return string
+     */
+    public function getSummaryAttribute()
+    {
+        $more = '<!-- more -->';
+        $parts = explode($more, $this->content_html);
+        return array_get($parts, 0);
+    }
+
+    /**
+     * Sets the "url" attribute with a URL to this object
+     * @param string $pageName
+     * @param Cms\Classes\Controller $controller
+     */
+    public function setUrl($pageName, $controller)
+    {
+        $params = [
+            'id' => $this->id,
+            'slug' => $this->slug,
+        ];
+
+        if (array_key_exists('categories', $this->getRelations())) {
+            $params['category'] = $this->categories->count() ? $this->categories->first()->slug : null;
+        }
+
+        return $this->url = $controller->pageUrl($pageName, $params);
     }
 }

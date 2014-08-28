@@ -5,9 +5,15 @@ use RainLab\Blog\Models\Post as BlogPost;
 
 class Post extends ComponentBase
 {
+    /**
+     * @var RainLab\Blog\Models\Post The post model used for display.
+     */
     public $post;
+
+    /**
+     * @var string Reference to the page name for linking to categories.
+     */
     public $categoryPage;
-    public $categoryPageIdParam;
 
     public function componentDetails()
     {
@@ -33,26 +39,29 @@ class Post extends ComponentBase
                 'default'     => 'blog/category',
                 'group'       => 'Links',
             ],
-            'categoryPageIdParam' => [
-                'title'       => 'Category page param name',
-                'description' => 'The expected parameter name used when creating links to the category page.',
-                'type'        => 'string',
-                'default'     => ':slug',
-                'group'       => 'Links',
-            ],
         ];
     }
 
     public function onRun()
     {
-        $this->post = $this->page['post'] = $this->loadPost();
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
-        $this->categoryPageIdParam = $this->page['categoryPageIdParam'] = $this->property('categoryPageIdParam');
+        $this->post = $this->page['post'] = $this->loadPost();
     }
 
     protected function loadPost()
     {
         $slug = $this->propertyOrParam('idParam');
-        return BlogPost::isPublished()->where('slug', '=', $slug)->first();
+        $post = BlogPost::isPublished()->where('slug', '=', $slug)->first();
+
+        /*
+         * Add a "url" helper attribute for linking to each category
+         */
+        if ($post && $post->categories->count()) {
+            $post->categories->each(function($category){
+                $category->setUrl($this->categoryPage, $this->controller);
+            });
+        }
+
+        return $post;
     }
 }
