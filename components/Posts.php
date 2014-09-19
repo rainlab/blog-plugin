@@ -11,35 +11,40 @@ use RainLab\Blog\Models\Category as BlogCategory;
 class Posts extends ComponentBase
 {
     /**
-     * @var Collection A collection of posts to display
+     * A collection of posts to display
+     * @var Collection
      */
     public $posts;
 
     /**
-     * @var string Parameter to use for the page number
+     * Parameter to use for the page number
+     * @var string
      */
     public $pageParam;
 
     /**
-     * @var Model If the post list should be filtered by a category, the model to use.
+     * If the post list should be filtered by a category, the model to use.
+     * @var Model
      */
     public $category;
 
     /**
-     * @var string Message to display when there are no messages.
+     * Message to display when there are no messages.
+     * @var string
      */
     public $noPostsMessage;
 
     /**
-     * @var string Reference to the page name for linking to posts.
+     * Reference to the page name for linking to posts.
+     * @var string
      */
     public $postPage;
 
     /**
-     * @var string Reference to the page name for linking to categories.
+     * Reference to the page name for linking to categories.
+     * @var string
      */
     public $categoryPage;
-
 
     public function componentDetails()
     {
@@ -156,7 +161,7 @@ class Posts extends ComponentBase
         return $posts;
     }
 
-    public function loadCategory()
+    protected function loadCategory()
     {
         if (!$categoryId = $this->propertyOrParam('categoryFilter'))
             return null;

@@ -12,7 +12,7 @@ scopes:
         modelClass: RainLab\Blog\Models\Category
 
         # Model attribute to display for the name
-        nameColumn: name
+        nameFrom: name
 
         # SQL Conditions
         conditions: category_id in (:filtered)
