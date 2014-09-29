@@ -12,8 +12,7 @@
         data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
         data-request-before-update="$el.trigger('unchange.oc.changeMonitor')"
         <?php if (!$isCreate): ?>data-request-data="redirect:0"<?php endif ?>
-        data-hotkey="ctrl+s"
-        data-hotkey-mac="cmd+s">
+        data-hotkey="ctrl+s, cmd+s">
             <?= e(trans('backend::lang.form.save')) ?>
     </a>
 
