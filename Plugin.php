@@ -4,6 +4,8 @@ use Backend;
 use Controller;
 use System\Classes\PluginBase;
 use RainLab\Blog\Classes\TagProcessor;
+use RainLab\Blog\Models\Category;
+use Event;
 
 class Plugin extends PluginBase
 {
@@ -89,6 +91,26 @@ class Plugin extends PluginBase
                     <input type="file" class="trigger"/>
                 </span>', 
             $input);
+        });
+    }
+
+    public function boot()
+    {
+        Event::listen('pages.menuitem.listTypes', function() {
+            return [
+                'blog-category'=>'Blog category',
+                'all-blog-categories'=>'All blog categories',
+            ];
+        });
+
+        Event::listen('pages.menuitem.getTypeInfo', function($type) {
+            if ($type == 'blog-category' || $type == 'all-blog-categories')
+                return Category::getMenuTypeInfo($type);
+        });
+
+        Event::listen('pages.menuitem.resolveItem', function($type, $item, $url, $theme) {
+            if ($type == 'blog-category' || $type == 'all-blog-categories')
+                return Category::resolveMenuItem($item, $url, $theme);
         });
     }
 }
