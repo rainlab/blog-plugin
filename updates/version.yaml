@@ -11,3 +11,4 @@
 1.0.5: Removes the Author column from blog post list
 1.0.6: Featured images now appear in the Post component
 1.0.7: Added support for the Static Pages menus
+1.0.8: Added total posts to category list

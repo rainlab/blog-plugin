@@ -8,6 +8,5 @@ columns:
         label: Name
         searchable: true
 
-    column_count:
+    post_count:
         label: Posts
-        select: (SELECT COUNT(*) FROM rainlab_blog_posts_categories WHERE category_id = rainlab_blog_categories.id)

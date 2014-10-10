@@ -36,7 +36,7 @@ class Category extends Model
             $this->slug = Str::slug($this->name);
     }
 
-    public function postCount()
+    public function getPostCountAttribute()
     {
         return $this->posts()->count();
     }
@@ -78,14 +78,16 @@ class Category extends Model
         $result = [];
 
         if ($type == 'blog-category') {
-            $categories = self::orderBy('name')->get();
+
             $references = [];
-            foreach ($categories as $category)
+            $categories = self::orderBy('name')->get();
+            foreach ($categories as $category) {
                 $references[$category->id] = $category->name;
+            }
 
             $result = [
-                'references' => $references,
-                'nesting' => false,
+                'references'   => $references,
+                'nesting'      => false,
                 'dynamicItems' => false
             ];
         }
@@ -156,7 +158,8 @@ class Category extends Model
             $result = [];
             $result['url'] = $pageUrl;
             $result['isActive'] = $pageUrl == $url;
-        } else if ($item->type == 'all-blog-categories') {
+        }
+        else if ($item->type == 'all-blog-categories') {
             $result = [
                 'items' => []
             ];
@@ -165,7 +168,7 @@ class Category extends Model
             foreach ($categories as $category) {
                 $categoryItem = [
                     'title' => $category->name,
-                    'url' => URL::to(self::getCategoryPageUrl($item->cmsPage, $category, $theme))
+                    'url'   => URL::to(self::getCategoryPageUrl($item->cmsPage, $category, $theme))
                 ];
 
                 $categoryItem['isActive'] = $categoryItem['url'] == $url;
