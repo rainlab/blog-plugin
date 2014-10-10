@@ -11,14 +11,15 @@ columns:
   # author:
   #   label: Author
   #   relation: user
-  #   select: @login
+  #   select: login
   #   searchable: true
 
   categories:
     label: Categories
     relation: categories
-    select: @name
+    select: name
     searchable: true
+    sortable: false
 
   created_at:
     label: Created
