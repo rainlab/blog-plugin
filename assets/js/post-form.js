@@ -195,7 +195,7 @@
             }
         })
 
-        $('#Datepicker-formPublishedAt-input-published_at').triggerOn({
+        $('#DatePicker-formPublishedAt-input-published_at').triggerOn({
             triggerCondition: 'checked',
             trigger: '#Form-field-Post-published',
             triggerType: 'enable'
