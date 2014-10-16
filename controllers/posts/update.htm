@@ -18,7 +18,7 @@
         <?= Block::placeholder('breadcrumb') ?>
     </div>
     <div class="padded-container">
-        <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+        <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
         <p><a href="<?= Backend::url('rainlab/blog/posts') ?>" class="btn btn-default">Return to posts list</a></p>
     </div>
 

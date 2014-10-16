@@ -1,7 +1,7 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
         <li><a href="<?= Backend::url('rainlab/blog/posts') ?>">Blog Posts</a></li>
-        <li><?= e($this->pageTitle) ?></li>
+        <li><?= e(trans($this->pageTitle)) ?></li>
     </ul>
 <?php Block::endPut() ?>
 
@@ -45,6 +45,6 @@
     <?= Form::close() ?>
 
 <?php else: ?>
-    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
     <p><a href="<?= Backend::url('rainlab/blog/posts') ?>" class="btn btn-default">Return to the blog category list</a></p>
 <?php endif ?>
