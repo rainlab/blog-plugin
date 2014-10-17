@@ -29,6 +29,21 @@ class Post extends Model
      */
     protected $dates = ['published_at'];
 
+    /**
+     * The attributes on which the post list can be ordered
+     * @var array
+     */
+    public static $allowedSortingOptions = array(
+        'title asc' => 'Title asc',
+        'title desc' => 'Title desc',
+        'created_at asc' => 'Created asc',
+        'created_at desc' => 'Created desc',
+        'updated_at asc' => 'Updated asc',
+        'updated_at desc' => 'Updated desc',
+        'published_at asc' => 'Published asc',
+        'published_at desc' => 'Published desc',
+    );
+
     /*
      * Relations
      */
@@ -71,7 +86,6 @@ class Post extends Model
             'published'  => true
         ], $options));
 
-        $allowedSortingOptions = ['created_at', 'updated_at', 'published_at'];
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
 
         App::make('paginator')->setCurrentPage($page);
@@ -85,12 +99,13 @@ class Post extends Model
         if (!is_array($sort)) $sort = [$sort];
         foreach ($sort as $_sort) {
 
-            $parts = explode(' ', $_sort);
-            if (count($parts) < 2) array_push($parts, 'desc');
-            list($sortField, $sortDirection) = $parts;
+            if (in_array($_sort, array_keys(self::$allowedSortingOptions))) {
+                $parts = explode(' ', $_sort);
+                if (count($parts) < 2) array_push($parts, 'desc');
+                list($sortField, $sortDirection) = $parts;
 
-            if (in_array($sortField, $allowedSortingOptions))
-                $query->orderBy($_sort, 'desc');
+                $query->orderBy($sortField, $sortDirection);
+            }
         }
 
         /*
