@@ -63,7 +63,7 @@ class Plugin extends PluginBase
         return [
             'RainLab\Blog\FormWidgets\Preview' => [
                 'label' => 'Preview',
-                'alias' => 'preview'
+                'code'  => 'preview'
             ]
         ];
     }
