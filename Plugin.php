@@ -29,6 +29,14 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerPermissions()
+    {
+        return [
+            'rainlab.blog.access_posts'       => ['label' => 'Manage the blog posts'],
+            'rainlab.blog.access_categories'  => ['label' => 'Manage the blog categories']
+        ];
+    }
+
     public function registerNavigation()
     {
         return [
@@ -36,7 +44,7 @@ class Plugin extends PluginBase
                 'label'       => 'Blog',
                 'url'         => Backend::url('rainlab/blog/posts'),
                 'icon'        => 'icon-pencil',
-                'permissions' => ['blog.*'],
+                'permissions' => ['rainlab.blog.*'],
                 'order'       => 500,
 
                 'sideMenu' => [
@@ -44,13 +52,13 @@ class Plugin extends PluginBase
                         'label'       => 'Posts',
                         'icon'        => 'icon-copy',
                         'url'         => Backend::url('rainlab/blog/posts'),
-                        'permissions' => ['blog.access_posts'],
+                        'permissions' => ['rainlab.blog.access_posts'],
                     ],
                     'categories' => [
                         'label'       => 'Categories',
                         'icon'        => 'icon-list-ul',
                         'url'         => Backend::url('rainlab/blog/categories'),
-                        'permissions' => ['blog.access_categories'],
+                        'permissions' => ['rainlab.blog.access_categories'],
                     ],
                 ]
 
