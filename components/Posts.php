@@ -46,12 +46,6 @@ class Posts extends ComponentBase
      */
     public $categoryPage;
 
-    /**
-     * If the post list should be ordered by another attribute.
-     * @var string
-     */
-    public $postOrderAttr;
-
     public function componentDetails()
     {
         return [
@@ -88,12 +82,6 @@ class Posts extends ComponentBase
                 'type'         => 'string',
                 'default'      => 'No posts found'
             ],
-            'postOrderAttr' => [
-                'title'       => 'Post order',
-                'description' => 'Attribute on which the posts should be ordered',
-                'type'        => 'dropdown',
-                'default'     => 'published_at asc'
-            ],
             'categoryPage' => [
                 'title'       => 'Category page',
                 'description' => 'Name of the category page file for the "Posted into" category links. This property is used by the default component partial.',
@@ -121,15 +109,13 @@ class Posts extends ComponentBase
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
-    public function getPostOrderAttrOptions()
-    {
-        return BlogPost::$allowedSortingOptions;
-    }
-
     public function onRun()
     {
         $this->prepareVars();
+    }
 
+    public function onRender()
+    {
         $this->category = $this->page['category'] = $this->loadCategory();
         $this->posts = $this->page['posts'] = $this->listPosts();
 
@@ -159,7 +145,7 @@ class Posts extends ComponentBase
          */
         $posts = BlogPost::with('categories')->listFrontEnd([
             'page'       => $this->propertyOrParam('pageParam'),
-            'sort'       => $this->property('postOrderAttr'),
+            'sort'       => ['published_at', 'updated_at'],
             'perPage'    => $this->property('postsPerPage'),
             'categories' => $categories
         ]);
