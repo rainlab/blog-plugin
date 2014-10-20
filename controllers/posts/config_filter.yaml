@@ -8,14 +8,14 @@ scopes:
         # Filter name
         label: Category
 
-        # Model Class nameQ
+        # Model Class name
         modelClass: RainLab\Blog\Models\Category
 
         # Model attribute to display for the name
         nameFrom: name
 
-        # SQL Conditions
-        conditions: category_id in (:filtered)
+        # Apply query scope
+        scope: FilterCategories
 
     published:
 
