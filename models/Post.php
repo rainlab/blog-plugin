@@ -129,6 +129,19 @@ class Post extends Model
         return $query->paginate($perPage);
     }
 
+    /**
+     * Allows filtering for specifc categories
+     * @param  Illuminate\Query\Builder  $query      QueryBuilder
+     * @param  array                     $categories List of category ids
+     * @return Illuminate\Query\Builder              QueryBuilder
+     */
+    public function scopeFilterCategories($query, $categories)
+    {
+        return $query->whereHas('categories', function($q) use ($categories) {
+            $q->whereIn('id', $categories);
+        });
+    }
+
     public static function formatHtml($input, $preview = false)
     {
         $result = Markdown::parse(trim($input));
