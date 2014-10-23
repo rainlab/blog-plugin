@@ -24,7 +24,7 @@ class Preview extends FormWidgetBase
      */
     public function render()
     {
-        $this->vars['preview_html'] = Post::formatHtml($this->model->content, true);;
+        $this->vars['preview_html'] = Post::formatHtml($this->model->content, true);
 
         return $this->makePartial('preview');
     }

@@ -85,47 +85,47 @@
 
     PostForm.prototype.initImageUploaders = function() {
         var self = this
-        $('span.image-placeholder .dropzone', this.$preview).each(function(){
-            var 
+        $('span.image-placeholder .upload-dropzone', this.$preview).each(function(){
+            var
                 $placeholder = $(this).parent(),
-                $input = $('input[type=file].file', $placeholder),
+                $link = $('span.label', $placeholder),
                 placeholderIndex = $placeholder.data('index')
 
-            $input.fileupload({
-                'dropZone': $(this),
-                'url': self.formAction,
-                'paramName': 'file',
-                'formData': {
-                    'X_BLOG_IMAGE_UPLOAD': 1,
-                    '_session_key': self.sessionKey
-                },
-                done: function(e, data) {
-                    if (data.result.error)
-                        alert(data.result.error)
-                    else {
-                        self.pauseUpdates()
-                        var $img = $('<img src="'+data.result.path+'">')
-                        $img.load(function(){
-                            self.updateScroll()
-                        })
+            var dropzone = new Dropzone($(this).get(0), {
+                url: self.formAction,
+                clickable: [$(this).get(0), $link.get(0)],
+                previewsContainer: $('<div />').get(0),
+                paramName: 'file'
+            })
 
-                        $placeholder.replaceWith($img)
+            dropzone.on('error', function(file, error) {
+                alert('Error uploading file: ' + error)
+            })
+            dropzone.on('success', function(file, data){
+                if (data.error)
+                    alert(data.error)
+                else {
+                    self.pauseUpdates()
+                    var $img = $('<img src="'+data.path+'">')
+                    $img.load(function(){
+                        self.updateScroll()
+                    })
 
-                        self.codeEditor.editor.replace('!['+data.result.file+']('+data.result.path+')', {
-                            needle: '!['+placeholderIndex+'](image)'
-                        })
-                        self.resumeUpdates()
-                    }
-                },
-                fail: function(e, data) {
-                    alert('Error uploading file.')
-                },
-                start: function(e, data) {
-                    $placeholder.addClass('loading')
-                },
-                stop: function(e, data) {
-                    $placeholder.removeClass('loading')
+                    $placeholder.replaceWith($img)
+
+                    self.codeEditor.editor.replace('!['+data.file+']('+data.path+')', {
+                        needle: '!['+placeholderIndex+'](image)'
+                    })
+                    self.resumeUpdates()
                 }
+            })
+            dropzone.on('complete', function(){
+                $placeholder.removeClass('loading')
+            })
+            dropzone.on('sending', function(file, xhr, formData) {
+                formData.append('X_BLOG_IMAGE_UPLOAD', 1)
+                formData.append('_session_key', self.sessionKey)
+                $placeholder.addClass('loading')
             })
         })
     }
@@ -140,7 +140,7 @@
 
     PostForm.prototype.initDropzones = function() {
         $(document).bind('dragover', function (e) {
-            var dropZone = $('span.image-placeholder .dropzone'),
+            var dropZone = $('span.image-placeholder .upload-dropzone'),
                 foundDropzone,
                 timeout = window.dropZoneTimeout
 
@@ -152,39 +152,26 @@
             var found = false,
                 node = e.target
 
-            do{
+            do {
                 if ($(node).hasClass('dropzone')) {
-                    found = true;
-                    foundDropzone = $(node);
-                    break;
+                    found = true
+                    foundDropzone = $(node)
+                    break
                 }
 
                 node = node.parentNode;
 
             } while (node != null);
 
-            dropZone.removeClass('in hover');
+            dropZone.removeClass('in hover')
 
             if (found)
-                foundDropzone.addClass('hover');
+                foundDropzone.addClass('hover')
 
             window.dropZoneTimeout = setTimeout(function () {
-                window.dropZoneTimeout = null;
-                dropZone.removeClass('in hover');
+                window.dropZoneTimeout = null
+                dropZone.removeClass('in hover')
             }, 100)
-        });
-
-        $(document).on('click', '#blog-post-preview span.dropzone', function() {
-            $('input[type=file].trigger', $(this).parent()).click()
-        })
-
-        $(document).on('change', '#blog-post-preview input[type=file].trigger', function(e) {
-            $('input[type=file].file', $(this).closest('.image-placeholder')).fileupload('add', {
-                files: e.target.files || [{name: this.value}],
-                fileInput: $(this)
-            })
-
-            $(this).val('')
         })
     }
 

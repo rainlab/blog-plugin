@@ -84,20 +84,17 @@ class Plugin extends PluginBase
         /*
          * Register the image tag processing callback
          */
-
         TagProcessor::instance()->registerCallback(function($input, $preview){
             if (!$preview)
                 return $input;
 
             return preg_replace('|\<img alt="([0-9]+)" src="image"([^>]*)\/>|m',
                 '<span class="image-placeholder" data-index="$1">
-                    <span class="dropzone">
+                    <span class="upload-dropzone">
                         <span class="label">Click or drop an image...</span>
                         <span class="indicator"></span>
                     </span>
-                    <input type="file" class="file" name="image[$1]"/>
-                    <input type="file" class="trigger"/>
-                </span>', 
+                </span>',
             $input);
         });
     }
@@ -106,8 +103,8 @@ class Plugin extends PluginBase
     {
         Event::listen('pages.menuitem.listTypes', function() {
             return [
-                'blog-category'=>'Blog category',
-                'all-blog-categories'=>'All blog categories',
+                'blog-category' => 'Blog category',
+                'all-blog-categories' => 'All blog categories',
             ];
         });
 
