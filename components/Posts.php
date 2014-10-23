@@ -92,7 +92,7 @@ class Posts extends ComponentBase
                 'title'       => 'Post order',
                 'description' => 'Attribute on which the posts should be ordered',
                 'type'        => 'dropdown',
-                'default'     => 'published_at asc'
+                'default'     => 'published_at desc'
             ],
             'categoryPage' => [
                 'title'       => 'Category page',
