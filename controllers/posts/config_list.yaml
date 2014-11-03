@@ -9,7 +9,7 @@ list: @/plugins/rainlab/blog/models/post/columns.yaml
 modelClass: RainLab\Blog\Models\Post
 
 # List Title
-title: Manage Blog Posts
+title: rainlab.blog::lang.posts.list_title
 
 # Link URL for each record
 recordUrl: rainlab/blog/posts/update/:id

@@ -13,8 +13,8 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'Blog',
-            'description' => 'A robust blogging platform.',
+            'name'        => 'rainlab.blog::lang.plugin.name',
+            'description' => 'rainlab.blog::lang.plugin.description',
             'author'      => 'Alexey Bobkov, Samuel Georges',
             'icon'        => 'icon-pencil'
         ];
@@ -32,8 +32,8 @@ class Plugin extends PluginBase
     public function registerPermissions()
     {
         return [
-            'rainlab.blog.access_posts'       => ['label' => 'Manage the blog posts'],
-            'rainlab.blog.access_categories'  => ['label' => 'Manage the blog categories']
+            'rainlab.blog.access_posts'       => ['label' => 'rainlab.blog::lang.blog.access_posts'],
+            'rainlab.blog.access_categories'  => ['label' => 'rainlab.blog::lang.blog.access_categories']
         ];
     }
 
@@ -41,7 +41,7 @@ class Plugin extends PluginBase
     {
         return [
             'blog' => [
-                'label'       => 'Blog',
+                'label'       => 'rainlab.blog::lang.blog.menu_label',
                 'url'         => Backend::url('rainlab/blog/posts'),
                 'icon'        => 'icon-pencil',
                 'permissions' => ['rainlab.blog.*'],
@@ -49,13 +49,13 @@ class Plugin extends PluginBase
 
                 'sideMenu' => [
                     'posts' => [
-                        'label'       => 'Posts',
+                        'label'       => 'rainlab.blog::lang.blog.posts',
                         'icon'        => 'icon-copy',
                         'url'         => Backend::url('rainlab/blog/posts'),
                         'permissions' => ['rainlab.blog.access_posts'],
                     ],
                     'categories' => [
-                        'label'       => 'Categories',
+                        'label'       => 'rainlab.blog::lang.blog.categories',
                         'icon'        => 'icon-list-ul',
                         'url'         => Backend::url('rainlab/blog/categories'),
                         'permissions' => ['rainlab.blog.access_categories'],

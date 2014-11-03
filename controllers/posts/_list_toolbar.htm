@@ -2,7 +2,7 @@
     <a
         href="<?= Backend::url('rainlab/blog/posts/create') ?>"
         class="btn btn-primary oc-icon-plus">
-        New Post
+        <?= e(trans('rainlab.blog::lang.posts.new_post')) ?>
     </a>
     <button
         class="btn btn-default oc-icon-trash-o"
@@ -11,11 +11,11 @@
             checked: $('.control-list').listWidget('getChecked')
         })"
         data-request="onDelete"
-        data-request-confirm="Are you sure?"
+        data-request-confirm="<?= e(trans('rainlab.blog::lang.blog.delete_confirm')) ?>"
         data-trigger-type="enable"
         data-trigger=".control-list input[type=checkbox]"
         data-trigger-condition="checked"
         data-stripe-load-indicator>
-        Delete
+        <?= e(trans('backend::lang.form.delete')) ?>
     </button>
 </div>

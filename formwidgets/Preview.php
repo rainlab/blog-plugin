@@ -59,7 +59,7 @@ class Preview extends FormWidgetBase
                 throw new ValidationException($validation);
 
             if (!$uploadedFile->isValid())
-                throw new SystemException('File is not valid');
+                throw new SystemException(Lang::get('cms::lang.asset.file_not_valid'));
 
             $fileRelation = $this->model->content_images();
 
@@ -79,10 +79,12 @@ class Preview extends FormWidgetBase
 
             die();
         } catch (Exception $ex) {
-            $message = $uploadedFileName ? 'Error uploading file "%s". %s' : 'Error uploading file. %s';
+            $message = $uploadedFileName
+                ? Lang::get('cms::lang.asset.error_uploading_file', ['name' => $uploadedFileName, 'error' => $ex->getMessage()])
+                : $ex->getMessage();
 
             $result = [
-                'error' => sprintf($message, $uploadedFileName, $ex->getMessage()),
+                'error' => $message,
                 'file' => $uploadedFileName
             ];
 

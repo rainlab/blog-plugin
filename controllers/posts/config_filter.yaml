@@ -6,7 +6,7 @@ scopes:
     category:
 
         # Filter name
-        label: Category
+        label: rainlab.blog::lang.posts.category
 
         # Model Class name
         modelClass: RainLab\Blog\Models\Category
@@ -20,7 +20,7 @@ scopes:
     published:
 
         # Filter name
-        label: Hide published
+        label: rainlab.blog::lang.posts.hide_published
 
         # Filter type
         type: checkbox

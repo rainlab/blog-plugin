@@ -5,11 +5,13 @@
 fields:
 
   name:
-    label: Name
+    label: rainlab.blog::lang.category.name
+    placeholder: rainlab.blog::lang.category.name_placeholder
     span: left
 
   slug:
-    label: Slug
+    label: rainlab.blog::lang.category.slug
     span: right
+    placeholder: rainlab.blog::lang.category.slug_placeholder
     attributes:
         data-input-preset: 'input[name="Category[name]"]'
