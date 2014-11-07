@@ -5,14 +5,14 @@
 fields:
 
   title:
-    label: Title
+    label: rainlab.blog::lang.post.title
     span: left
-    placeholder: New post title
+    placeholder: rainlab.blog::lang.post.title_placeholder
 
   slug:
-    label: slug
+    label: rainlab.blog::lang.post.slug
     span: right
-    placeholder: new-post-slug
+    placeholder: rainlab.blog::lang.post.slug_placeholder
     attributes:
       data-input-preset: 'input[name="Post[title]"]'
       data-input-preset-type: slug
@@ -36,7 +36,7 @@ secondaryTabs:
   stretch: true
   fields:
     content:
-      tab: Edit
+      tab: rainlab.blog::lang.post.tab_edit
       stretch: true
       span: left
       cssClass: no-padding
@@ -49,34 +49,34 @@ secondaryTabs:
 
     preview:
       type: RainLab\Blog\FormWidgets\Preview
-      tab: Edit
+      tab: rainlab.blog::lang.post.tab_edit
       stretch: true
       span: right
       cssClass: no-padding
 
     categories:
-      tab: Categories
+      tab: rainlab.blog::lang.post.tab_categories
       type: relation
-      commentAbove: Select categories the blog post belongs to
-      placeholder: There are no categories, you should create one first!
+      commentAbove: rainlab.blog::lang.post.categories_comment
+      placeholder: rainlab.blog::lang.post.categories_placeholder
 
     published:
-      tab: Manage
-      label: Published
+      tab: rainlab.blog::lang.post.tab_manage
+      label: rainlab.blog::lang.post.published
       span: left
       type: checkbox
 
     published_at:
-      tab: Manage
-      label: Published on
+      tab: rainlab.blog::lang.post.tab_manage
+      label: rainlab.blog::lang.post.published_on
       span: left
       cssClass: checkbox-align
       type: datepicker
       mode: date
 
     excerpt:
-      tab: Manage
-      label: Excerpt
+      tab: rainlab.blog::lang.post.tab_manage
+      label: rainlab.blog::lang.post.excerpt
       type: textarea
       size: small
 
@@ -99,8 +99,8 @@ secondaryTabs:
     #     - Published
 
     featured_images:
-      tab: Manage
-      label: Featured Images
+      tab: rainlab.blog::lang.post.tab_manage
+      label: rainlab.blog::lang.post.featured_images
       type: fileupload
       mode: image
       imageWidth: 200

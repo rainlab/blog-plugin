@@ -34,7 +34,7 @@
         target="_blank"
         class="btn btn-primary oc-icon-crosshairs <?php if (!false): ?>hide<?php endif ?>"
         data-control="preview-button">
-        Preview
+            <?= e(trans('backend::lang.form.preview_title')) ?>
     </a>
 
     <?php if (!$isCreate): ?>
@@ -43,7 +43,7 @@
             type="button"
             class="btn btn-default empty oc-icon-trash-o"
             data-request="onDelete"
-            data-request-confirm="Do you really want to delete this post?"
+            data-request-confirm="<?= e(trans('rainlab.blog::lang.post.delete_confirm')) ?>"
             data-request-success=""
             data-control="delete-button"></button>
     <?php endif ?>

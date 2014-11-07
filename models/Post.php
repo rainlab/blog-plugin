@@ -6,6 +6,7 @@ use Model;
 use October\Rain\Support\Markdown;
 use October\Rain\Support\ValidationException;
 use RainLab\Blog\Classes\TagProcessor;
+use lang;
 
 class Post extends Model
 {
@@ -158,7 +159,7 @@ class Post extends Model
     {
         if ($this->published && !$this->published_at)
             throw new ValidationException([
-               'published_at' => 'Please specify the published date'
+               'published_at' => Lang::get('rainlab.blog::lang.post.published_validation')
             ]);
     }
 
