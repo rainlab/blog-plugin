@@ -10,4 +10,4 @@ columns:
 
     post_count:
         label: rainlab.blog::lang.category.posts
-        searchable: true
+        sortable: false
