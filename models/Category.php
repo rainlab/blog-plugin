@@ -159,7 +159,7 @@ class Category extends Model
             $result['url'] = $pageUrl;
             $result['isActive'] = $pageUrl == $url;
         }
-        else if ($item->type == 'all-blog-categories') {
+        elseif ($item->type == 'all-blog-categories') {
             $result = [
                 'items' => []
             ];

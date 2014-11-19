@@ -4,24 +4,24 @@
 
 fields:
 
-  title:
-    label: rainlab.blog::lang.post.title
-    span: left
-    placeholder: rainlab.blog::lang.post.title_placeholder
+    title:
+        label: rainlab.blog::lang.post.title
+        span: left
+        placeholder: rainlab.blog::lang.post.title_placeholder
 
-  slug:
-    label: rainlab.blog::lang.post.slug
-    span: right
-    placeholder: rainlab.blog::lang.post.slug_placeholder
-    attributes:
-      data-input-preset: 'input[name="Post[title]"]'
-      data-input-preset-type: slug
-      data-input-preset-closest-parent: form
+    slug:
+        label: rainlab.blog::lang.post.slug
+        span: right
+        placeholder: rainlab.blog::lang.post.slug_placeholder
+        attributes:
+            data-input-preset: 'input[name="Post[title]"]'
+            data-input-preset-type: slug
+            data-input-preset-closest-parent: form
 
-  toolbar:
-    type: partial
-    path: post_toolbar
-    cssClass: collapse-visible
+    toolbar:
+        type: partial
+        path: post_toolbar
+        cssClass: collapse-visible
 
 # tabs:
 #   fields:
@@ -33,75 +33,75 @@ fields:
 #       size: small
 
 secondaryTabs:
-  stretch: true
-  fields:
-    content:
-      tab: rainlab.blog::lang.post.tab_edit
-      stretch: true
-      span: left
-      cssClass: no-padding
-      type: codeeditor
-      language: markdown
-      showGutter: false
-      wrapWords: true
-      fontSize: 13
-      margin: 15
+    stretch: true
+    fields:
+        content:
+            tab: rainlab.blog::lang.post.tab_edit
+            stretch: true
+            span: left
+            cssClass: field-slim
+            type: codeeditor
+            language: markdown
+            showGutter: false
+            wrapWords: true
+            fontSize: 13
+            margin: 15
 
-    preview:
-      type: RainLab\Blog\FormWidgets\Preview
-      tab: rainlab.blog::lang.post.tab_edit
-      stretch: true
-      span: right
-      cssClass: no-padding
+        preview:
+            type: RainLab\Blog\FormWidgets\Preview
+            tab: rainlab.blog::lang.post.tab_edit
+            stretch: true
+            span: right
+            cssClass: field-slim
 
-    categories:
-      tab: rainlab.blog::lang.post.tab_categories
-      type: relation
-      commentAbove: rainlab.blog::lang.post.categories_comment
-      placeholder: rainlab.blog::lang.post.categories_placeholder
+        categories:
+            tab: rainlab.blog::lang.post.tab_categories
+            type: relation
+            commentAbove: rainlab.blog::lang.post.categories_comment
+            placeholder: rainlab.blog::lang.post.categories_placeholder
 
-    published:
-      tab: rainlab.blog::lang.post.tab_manage
-      label: rainlab.blog::lang.post.published
-      span: left
-      type: checkbox
+        published:
+            tab: rainlab.blog::lang.post.tab_manage
+            label: rainlab.blog::lang.post.published
+            span: left
+            type: checkbox
 
-    published_at:
-      tab: rainlab.blog::lang.post.tab_manage
-      label: rainlab.blog::lang.post.published_on
-      span: left
-      cssClass: checkbox-align
-      type: datepicker
-      mode: date
+        published_at:
+            tab: rainlab.blog::lang.post.tab_manage
+            label: rainlab.blog::lang.post.published_on
+            span: left
+            cssClass: checkbox-align
+            type: datepicker
+            mode: date
 
-    excerpt:
-      tab: rainlab.blog::lang.post.tab_manage
-      label: rainlab.blog::lang.post.excerpt
-      type: textarea
-      size: small
+        excerpt:
+            tab: rainlab.blog::lang.post.tab_manage
+            label: rainlab.blog::lang.post.excerpt
+            type: textarea
+            size: small
 
-    # visibility:
-    #   tab: Manage
-    #   label: Visibility
-    #   type: balloon-selector
-    #   options:
-    #     - Public
-    #     - Sticky
-    #     - Private
+        # visibility:
+        #   tab: Manage
+        #   label: Visibility
+        #   type: balloon-selector
+        #   options:
+        #     - Public
+        #     - Sticky
+        #     - Private
 
-    # status:
-    #   tab: Manage
-    #   label: Status
-    #   type: balloon-selector
-    #   options:
-    #     - Draft
-    #     - Review
-    #     - Published
+        # status:
+        #   tab: Manage
+        #   label: Status
+        #   type: balloon-selector
+        #   options:
+        #     - Draft
+        #     - Review
+        #     - Published
 
-    featured_images:
-      tab: rainlab.blog::lang.post.tab_manage
-      label: rainlab.blog::lang.post.featured_images
-      type: fileupload
-      mode: image
-      imageWidth: 200
-      imageHeight: 200
+        featured_images:
+            tab: rainlab.blog::lang.post.tab_manage
+            label: rainlab.blog::lang.post.featured_images
+            type: fileupload
+            mode: image
+            imageWidth: 200
+            imageHeight: 200
