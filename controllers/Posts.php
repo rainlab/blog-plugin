@@ -44,13 +44,7 @@ class Posts extends Controller
     public function index_onDelete()
     {
         if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
-
-            foreach ($checkedIds as $postId) {
-                if (!$post = Post::find($postId))
-                    continue;
-
-                $post->delete();
-            }
+            Post::whereIn('id', $checkedIds)->delete();
 
             Flash::success('Successfully deleted those posts.');
         }
