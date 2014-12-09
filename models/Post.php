@@ -1,6 +1,7 @@
 <?php namespace RainLab\Blog\Models;
 
 use App;
+use Backend\Models\User;
 use Str;
 use Model;
 use October\Rain\Support\Markdown;
@@ -213,5 +214,15 @@ class Post extends Model
         }
 
         return $this->url = $controller->pageUrl($pageName, $params);
+    }
+
+    /**
+     * Used to test if a certain user has permission to edit post, return True if the user is the owner or has other posts access
+     * @param User $user
+     * @return bool
+     */
+    public function userCanEdit(User $user)
+    {
+        return ($this->user->id == $user->id) || $user->hasAnyAccess(['rainlab.blog.access_other_posts']);
     }
 }
