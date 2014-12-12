@@ -2,8 +2,6 @@
 
 use Flash;
 use Redirect;
-use Backend;
-use BackendAuth;
 use BackendMenu;
 use Backend\Classes\Controller;
 use System\Classes\ApplicationException;
