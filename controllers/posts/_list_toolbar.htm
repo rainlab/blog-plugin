@@ -15,6 +15,7 @@
         data-trigger-type="enable"
         data-trigger=".control-list input[type=checkbox]"
         data-trigger-condition="checked"
+        data-request-success="$el.attr('disabled', 'disabled');"
         data-stripe-load-indicator>
         <?= e(trans('backend::lang.form.delete')) ?>
     </button>

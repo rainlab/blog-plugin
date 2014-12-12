@@ -14,6 +14,7 @@ return [
         'create_category' => 'blog category',
         'access_posts' => 'Manage the blog posts',
         'access_categories' => 'Manage the blog categories',
+        'access_other_posts' => 'Manage other users blog posts',
         'delete_confirm' => 'Are you sure?',
         'chart_published' => 'Published',
         'chart_drafts' => 'Drafts',

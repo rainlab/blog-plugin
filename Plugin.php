@@ -33,7 +33,8 @@ class Plugin extends PluginBase
     {
         return [
             'rainlab.blog.access_posts'       => ['label' => 'rainlab.blog::lang.blog.access_posts'],
-            'rainlab.blog.access_categories'  => ['label' => 'rainlab.blog::lang.blog.access_categories']
+            'rainlab.blog.access_categories'  => ['label' => 'rainlab.blog::lang.blog.access_categories'],
+            'rainlab.blog.access_other_posts' => ['label' => 'rainlab.blog::lang.blog.access_other_posts']
         ];
     }
 
