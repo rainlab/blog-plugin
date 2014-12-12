@@ -32,9 +32,9 @@ class Plugin extends PluginBase
     public function registerPermissions()
     {
         return [
-            'rainlab.blog.access_posts'       => ['label' => 'rainlab.blog::lang.blog.access_posts'],
-            'rainlab.blog.access_categories'  => ['label' => 'rainlab.blog::lang.blog.access_categories'],
-            'rainlab.blog.access_other_posts' => ['label' => 'rainlab.blog::lang.blog.access_other_posts']
+            'rainlab.blog.access_posts'       => ['tab' => 'Blog', 'label' => 'rainlab.blog::lang.blog.access_posts'],
+            'rainlab.blog.access_categories'  => ['tab' => 'Blog', 'label' => 'rainlab.blog::lang.blog.access_categories'],
+            'rainlab.blog.access_other_posts' => ['tab' => 'Blog', 'label' => 'rainlab.blog::lang.blog.access_other_posts']
         ];
     }
 

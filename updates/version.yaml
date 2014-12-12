@@ -13,3 +13,4 @@
 1.0.7: Added support for the Static Pages menus.
 1.0.8: Added total posts to category list.
 1.0.9: Added support for the Sitemap plugin.
+1.0.10: Added permission to prevent users from seeing posts they did not create.

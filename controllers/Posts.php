@@ -1,12 +1,13 @@
 <?php namespace RainLab\Blog\Controllers;
 
-use Backend\Facades\Backend;
-use Backend\Facades\BackendAuth;
 use Flash;
+use Redirect;
+use Backend;
+use BackendAuth;
 use BackendMenu;
 use Backend\Classes\Controller;
-use RainLab\Blog\Models\Post;
 use System\Classes\ApplicationException;
+use RainLab\Blog\Models\Post;
 
 class Posts extends Controller
 {
@@ -46,70 +47,35 @@ class Posts extends Controller
         $this->asExtension('ListController')->index();
     }
 
-    public function update($recordId, $context = null)
+    public function listExtendQuery($query)
     {
-        $user = BackendAuth::getUser();
-        $post = Post::find($recordId);
-
-        if (!$post->userCanEdit($user)) {
-            return \Redirect::to(Backend::url('rainlab/blog/posts'));
+        if (!$this->user->hasAnyAccess(['rainlab.blog.access_other_posts'])) {
+            $query->where('user_id', $this->user->id);
         }
-
-        return $this->asExtension('FormController')->update($recordId, $context);
-
     }
 
-    public function listExtendQueryBefore($query)
+    public function formExtendQuery($query)
     {
-        $user = BackendAuth::getUser();
-
-        if( !$user->hasAnyAccess(['rainlab.blog.access_other_posts']) ) {
-            $query->where('user_id', '=', $user->id);
+        if (!$this->user->hasAnyAccess(['rainlab.blog.access_other_posts'])) {
+            $query->where('user_id', $this->user->id);
         }
     }
 
     public function index_onDelete()
     {
         if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
-            $user = BackendAuth::getUser();
 
             foreach ($checkedIds as $postId) {
-                if (!$post = Post::find($postId))
+                if ((!$post = Post::find($postId)) || !$post->canEdit($this->user))
                     continue;
 
-                if($post->userCanEdit($user)) {
-                    $post->delete();
-                }
+                $post->delete();
             }
 
             Flash::success('Successfully deleted those posts.');
         }
 
         return $this->listRefresh();
-    }
-
-    public function update_onDelete($postId)
-    {
-        $user = BackendAuth::getUser();
-        $post = Post::find($postId);
-
-        if($post->userCanEdit($user)) {
-            return $this->asExtension('FormController')->update_onDelete($postId);
-        }
-
-        return \Redirect::to(Backend::url('rainlab/blog/posts'));
-    }
-
-    public function update_onSave($postId)
-    {
-        $user = BackendAuth::getUser();
-        $post = Post::find($postId);
-
-        if($post->userCanEdit($user)) {
-            return $this->asExtension('FormController')->update_onSave($postId);
-        }
-
-        return \Redirect::to(Backend::url('rainlab/blog/posts'));
     }
 
     /**
@@ -123,7 +89,7 @@ class Posts extends Controller
 
     public function formBeforeCreate($model)
     {
-        $model->user_id = BackendAuth::getUser()->id;
+        $model->user_id = $this->user->id;
     }
 
     public function onRefreshPreview()
@@ -136,4 +102,5 @@ class Posts extends Controller
             'preview' => $previewHtml
         ];
     }
+
 }

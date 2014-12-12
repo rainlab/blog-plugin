@@ -1,13 +1,13 @@
 <?php namespace RainLab\Blog\Models;
 
 use App;
-use Backend\Models\User;
 use Str;
+use Lang;
 use Model;
 use October\Rain\Support\Markdown;
 use October\Rain\Support\ValidationException;
 use RainLab\Blog\Classes\TagProcessor;
-use lang;
+use Backend\Models\User;
 
 class Post extends Model
 {
@@ -158,10 +158,11 @@ class Post extends Model
 
     public function afterValidate()
     {
-        if ($this->published && !$this->published_at)
+        if ($this->published && !$this->published_at) {
             throw new ValidationException([
                'published_at' => Lang::get('rainlab.blog::lang.post.published_validation')
             ]);
+        }
     }
 
     public function scopeIsPublished($query)
@@ -217,12 +218,13 @@ class Post extends Model
     }
 
     /**
-     * Used to test if a certain user has permission to edit post, return True if the user is the owner or has other posts access
+     * Used to test if a certain user has permission to edit post,
+     * returns TRUE if the user is the owner or has other posts access.
      * @param User $user
      * @return bool
      */
-    public function userCanEdit(User $user)
+    public function canEdit(User $user)
     {
-        return ($this->user->id == $user->id) || $user->hasAnyAccess(['rainlab.blog.access_other_posts']);
+        return ($this->user_id == $user->id) || $user->hasAnyAccess(['rainlab.blog.access_other_posts']);
     }
 }
