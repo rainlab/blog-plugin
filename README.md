@@ -29,7 +29,8 @@ The plugin provides several components for building the post list page (archive)
 
 Use the `blogPosts` component to display a list of latest blog posts on a page. The component has the following properties:
 
-* **categoryFilter** - a category slug or URL parameter (:slug) to filter the posts by. If left blank, all posts are displayed.
+* **pageNumber** - this value is used to determine what page the user is on, it should be a routing parameter for the default markup. The default value is **{{ :page }}** to obtain the value from the route parameter `:page`.
+* **categoryFilter** - a category slug to filter the posts by. If left blank, all posts are displayed.
 * **postsPerPage** - how many posts to display on a single page (the pagination is supported automatically). The default value is 10.
 * **categoryPage** - path to the category page. The default value is **blog/category** - it matches the pages/blog/category.htm file in the theme directory. This property is used in the default component partial for creating links to the blog categories.
 * **postPage** - path to the post details page. The default value is **blog/post** - it matches the pages/blog/post.htm file in the theme directory. This property is used in the default component partial for creating links to the blog posts.

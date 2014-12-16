@@ -36,14 +36,14 @@ class Post extends Model
      * @var array
      */
     public static $allowedSortingOptions = array(
-        'title asc' => 'Title asc',
-        'title desc' => 'Title desc',
-        'created_at asc' => 'Created asc',
-        'created_at desc' => 'Created desc',
-        'updated_at asc' => 'Updated asc',
-        'updated_at desc' => 'Updated desc',
-        'published_at asc' => 'Published asc',
-        'published_at desc' => 'Published desc',
+        'title asc' => 'Title (ascending)',
+        'title desc' => 'Title (descending)',
+        'created_at asc' => 'Created (ascending)',
+        'created_at desc' => 'Created (descending)',
+        'updated_at asc' => 'Updated (ascending)',
+        'updated_at desc' => 'Updated (descending)',
+        'published_at asc' => 'Published (ascending)',
+        'published_at desc' => 'Published (descending)',
     );
 
     /*

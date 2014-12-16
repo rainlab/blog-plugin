@@ -63,11 +63,11 @@ class Posts extends ComponentBase
     public function defineProperties()
     {
         return [
-            'pageParam' => [
+            'pageNumber' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_pagination',
                 'description' => 'rainlab.blog::lang.settings.posts_pagination_description',
                 'type'        => 'string',
-                'default'     => ':page',
+                'default'     => '{{ :page }}',
             ],
             'categoryFilter' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_filter',
@@ -133,14 +133,27 @@ class Posts extends ComponentBase
         $this->category = $this->page['category'] = $this->loadCategory();
         $this->posts = $this->page['posts'] = $this->listPosts();
 
-        $currentPage = $this->propertyOrParam('pageParam');
-        if ($currentPage > ($lastPage = $this->posts->getLastPage()) && $currentPage > 1)
-            return Redirect::to($this->controller->currentPageUrl([$this->property('pageParam') => $lastPage]));
+        /*
+         * If the page number is not valid, redirect
+         */
+        if ($pageNumberParam = $this->paramName('pageNumber')) {
+
+            // @deprecated remove if year >= 2015
+            $deprecatedPageNumber = $this->propertyOrParam('pageParam');
+
+            $currentPage = $this->property('pageNumber', $deprecatedPageNumber);
+
+            if ($currentPage > ($lastPage = $this->posts->getLastPage()) && $currentPage > 1)
+                return Redirect::to($this->currentPageUrl([$pageNumberParam => $lastPage]));
+        }
     }
 
     protected function prepareVars()
     {
-        $this->pageParam = $this->page['pageParam'] = $this->property('pageParam', 'page');
+        // @deprecated remove if year >= 2015 (note default value 'page')
+        $deprecatedPageParam = $this->property('pageParam', 'page');
+
+        $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber', $deprecatedPageParam);
         $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
 
         /*
@@ -154,11 +167,14 @@ class Posts extends ComponentBase
     {
         $categories = $this->category ? $this->category->id : null;
 
+        // @deprecated remove if year >= 2015
+        $deprecatedPage = $this->propertyOrParam('pageParam');
+
         /*
          * List all the posts, eager load their categories
          */
         $posts = BlogPost::with('categories')->listFrontEnd([
-            'page'       => $this->propertyOrParam('pageParam'),
+            'page'       => $this->property('pageNumber', $deprecatedPage),
             'sort'       => $this->property('postOrderAttr'),
             'perPage'    => $this->property('postsPerPage'),
             'categories' => $categories
@@ -180,7 +196,7 @@ class Posts extends ComponentBase
 
     protected function loadCategory()
     {
-        if (!$categoryId = $this->propertyOrParam('categoryFilter'))
+        if (!$categoryId = $this->property('categoryFilter'))
             return null;
 
         if (!$category = BlogCategory::whereSlug($categoryId)->first())

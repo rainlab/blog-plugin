@@ -55,7 +55,7 @@ class Post extends ComponentBase
 
     protected function loadPost()
     {
-        // @deprecated
+        // @deprecated remove if year >= 2015
         $deprecatedSlug = $this->propertyOrParam('idParam');
 
         $slug = $this->property('slug', $deprecatedSlug);
