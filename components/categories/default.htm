@@ -1,3 +1,6 @@
+{% set categories = __SELF__.categories %}
+{% set currentCategorySlug = __SELF__.currentCategorySlug %}
+
 <ul class="category-list">
     {% for category in categories %}
         {% set postCount = category.post_count %}

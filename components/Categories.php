@@ -35,10 +35,10 @@ class Categories extends ComponentBase
     public function defineProperties()
     {
         return [
-            'idParam' => [
+            'slug' => [
                 'title'       => 'rainlab.blog::lang.settings.category_slug',
                 'description' => 'rainlab.blog::lang.settings.category_slug_description',
-                'default'     => ':slug',
+                'default'     => '{{ :slug }}',
                 'type'        => 'string'
             ],
             'displayEmpty' => [
@@ -64,8 +64,11 @@ class Categories extends ComponentBase
 
     public function onRun()
     {
+        // @deprecated remove if year >= 2015
+        $deprecatedSlug = $this->propertyOrParam('idParam');
+
+        $this->currentCategorySlug = $this->page['currentCategorySlug'] = $this->property('slug', $deprecatedSlug);
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
-        $this->currentCategorySlug = $this->page['currentCategorySlug'] = $this->propertyOrParam('idParam');
         $this->categories = $this->page['categories'] = $this->loadCategories();
     }
 

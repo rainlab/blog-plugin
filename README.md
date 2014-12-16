@@ -121,9 +121,9 @@ The post details is coded in the default component partial `plugins/rainlab/blog
 
 Use the `blogCategories` component to display a list of blog post categories with links. The component has the following properties:
 
-* **categoryPage** - path to the category page. The default value is **blog/category** - it matches the pages/blog/category.htm file in the theme directory. This property is used in the default component partial for creating links to the blog categories.
-* **idParam** - the URL route parameter used for looking up the current category by its slug. The default  value is **:slug**
+* **slug** - the value used for looking up the current category by its slug. The default value is **{{ :slug }}** to obtain the value from the route parameter `:slug`.
 * **displayEmpty** - determines if empty categories should be displayed. The default value is false.
+* **categoryPage** - path to the category page. The default value is **blog/category** - it matches the pages/blog/category.htm file in the theme directory. This property is used in the default component partial for creating links to the blog categories.
 
 The component injects the following variables to the page where it's used:
 

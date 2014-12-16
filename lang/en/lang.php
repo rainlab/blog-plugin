@@ -64,8 +64,8 @@ return [
     'settings' => [
         'category_title' => 'Category List',
         'category_description' => 'Displays a list of blog categories on the page.',
-        'category_slug' => 'Slug param name',
-        'category_slug_description' => 'The URL route parameter used for looking up the current category by its slug. This property is used by the default component partial for marking the currently active category.',
+        'category_slug' => 'Category slug',
+        'category_slug_description' => "Look up the blog category using the supplied slug value. This property is used by the default component partial for marking the currently active category.",
         'category_display_empty' => 'Display empty categories',
         'category_display_empty_description' => 'Show categories that do not have any posts.',
         'category_page' => 'Category page',
