@@ -82,34 +82,34 @@ The post list and the pagination are coded in the default component partial `plu
 
 Use the `blogPost` component to display a blog post on a page. The component has the following properties:
 
-* **idParam** - the URL route parameter used for looking up the post by its slug. The default value is **:slug**.
+* **slug** - the value used for looking up the post by its slug. The default value is **{{ :slug }}** to obtain the value from the route parameter `:slug`.
 
 The component injects the following variables to the page where it's used:
 
-* **blogPost** - the blog post object loaded from the database. If the post is not found, the variable value is **null**.
+* **post** - the blog post object loaded from the database. If the post is not found, the variable value is **null**.
 
 The next example shows the basic component usage on the blog page:
 
     title = "Blog Post"
     url = "/blog/post/:slug"
 
-    [blogPost post]
+    [blogPost]
     ==
     <?php
     function onEnd()
     {
         // Optional - set the page title to the post title
-        if (isset($this['post']))
-            $this->page->title = $this['post']->title;
+        if (isset($this->post))
+            $this->page->title = $this->post->title;
     }
     ?>
     ==
-    {% if not post %}
-        <h2>Post not found</h2>
-    {% else %}
+    {% if post %}
         <h2>{{ post.title }}</h2>
 
-        {% component 'post' %}
+        {% component 'blogPost' %}
+    {% else %}
+        <h2>Post not found</h2>
     {% endif %}
 
 The post details is coded in the default component partial `plugins/rainlab/blog/components/post/default.htm`.

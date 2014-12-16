@@ -1,5 +1,6 @@
 <?php namespace RainLab\Blog\Components;
 
+use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
 
@@ -26,10 +27,10 @@ class Post extends ComponentBase
     public function defineProperties()
     {
         return [
-            'idParam' => [
+            'slug' => [
                 'title'       => 'rainlab.blog::lang.settings.post_slug',
                 'description' => 'rainlab.blog::lang.settings.post_slug_description',
-                'default'     => ':slug',
+                'default'     => '{{ :slug }}',
                 'type'        => 'string'
             ],
             'categoryPage' => [
@@ -37,9 +38,13 @@ class Post extends ComponentBase
                 'description' => 'rainlab.blog::lang.settings.post_category_description',
                 'type'        => 'dropdown',
                 'default'     => 'blog/category',
-                'group'       => 'Links',
             ],
         ];
+    }
+
+    public function getCategoryPageOptions()
+    {
+        return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
     public function onRun()
@@ -50,7 +55,10 @@ class Post extends ComponentBase
 
     protected function loadPost()
     {
-        $slug = $this->propertyOrParam('idParam');
+        // @deprecated
+        $deprecatedSlug = $this->propertyOrParam('idParam');
+
+        $slug = $this->property('slug', $deprecatedSlug);
         $post = BlogPost::isPublished()->where('slug', '=', $slug)->first();
 
         /*
