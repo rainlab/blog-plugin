@@ -50,7 +50,7 @@ class Posts extends ComponentBase
      * If the post list should be ordered by another attribute.
      * @var string
      */
-    public $postOrderAttr;
+    public $sortOrder;
 
     public function componentDetails()
     {
@@ -88,7 +88,7 @@ class Posts extends ComponentBase
                 'type'         => 'string',
                 'default'      => 'No posts found'
             ],
-            'postOrderAttr' => [
+            'sortOrder' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_order',
                 'description' => 'rainlab.blog::lang.settings.posts_order_description',
                 'type'        => 'dropdown',
@@ -169,13 +169,14 @@ class Posts extends ComponentBase
 
         // @deprecated remove if year >= 2015
         $deprecatedPage = $this->propertyOrParam('pageParam');
+        $deprecatedSortOrder = $this->property('postOrderAttr');
 
         /*
          * List all the posts, eager load their categories
          */
         $posts = BlogPost::with('categories')->listFrontEnd([
             'page'       => $this->property('pageNumber', $deprecatedPage),
-            'sort'       => $this->property('postOrderAttr'),
+            'sort'       => $this->property('sortOrder', $deprecatedSortOrder),
             'perPage'    => $this->property('postsPerPage'),
             'categories' => $categories
         ]);
