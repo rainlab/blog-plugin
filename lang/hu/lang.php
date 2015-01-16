@@ -14,6 +14,7 @@ return [
         'create_category' => 'blogkategória',
         'access_posts' => 'A blogbejegyzések kezelése',
         'access_categories' => 'A blogkategóriák kezelése',
+        'access_other_posts' => 'Más felhasználók blogbejegyzéseinek kezelése',
         'delete_confirm' => 'Biztos benne?',
         'chart_published' => 'Közzétéve',
         'chart_drafts' => 'Piszkozatok',
@@ -50,6 +51,7 @@ return [
     'categories' => [
         'list_title' => 'A blogkategóriák kezelése',
         'new_category' => 'Új kategória',
+        'uncategorized' => 'Besorolatlan',
     ],
     'category' => [
         'name' => 'Név',
