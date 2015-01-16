@@ -15,7 +15,8 @@ class SeedAllTables extends Seeder
         //
 
         Category::create([
-            'name' => 'Uncategorized'
+            'name' => trans('rainlab.blog::lang.categories.uncategorized'),
+            'slug' => 'uncategorized',
         ]);
     }
 
