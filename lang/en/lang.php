@@ -3,7 +3,7 @@
 return [
     'plugin' => [
         'name' => 'Blog',
-        'description' => 'A robust blogging platform.'
+        'description' => 'A robust blogging platform.',
     ],
     'blog' => [
         'menu_label' => 'Blog',
@@ -46,11 +46,12 @@ return [
         'featured_images' => 'Featured Images',
         'delete_confirm' => 'Do you really want to delete this post?',
         'close_confirm' => 'The post is not saved.',
-        'return_to_posts' => 'Return to posts list'
+        'return_to_posts' => 'Return to posts list',
     ],
     'categories' => [
         'list_title' => 'Manage the blog categories',
         'new_category' => 'New category',
+        'uncategorized' => 'Uncategorized',
     ],
     'category' => [
         'name' => 'Name',
