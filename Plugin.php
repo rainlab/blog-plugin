@@ -89,13 +89,16 @@ class Plugin extends PluginBase
             if (!$preview)
                 return $input;
 
-            return preg_replace('|\<img alt="([0-9]+)" src="image"([^>]*)\/>|m',
+            // No indentation in the replacement pattern to prevent
+            // ParseDown from parsing the code as a blockquote.
+
+            return preg_replace('|\!\[([0-9]+)\]\(image\)|m',
                 '<span class="image-placeholder" data-index="$1">
-                    <span class="upload-dropzone">
-                        <span class="label">Click or drop an image...</span>
-                        <span class="indicator"></span>
-                    </span>
-                </span>',
+<span class="upload-dropzone">
+<span class="label">Click or drop an image...</span>
+<span class="indicator"></span>
+</span>
+</span>',
             $input);
         });
     }
