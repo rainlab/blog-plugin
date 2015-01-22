@@ -121,7 +121,7 @@ class Posts extends ComponentBase
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
-    public function getPostOrderAttrOptions()
+    public function getSortOrderOptions()
     {
         return BlogPost::$allowedSortingOptions;
     }
