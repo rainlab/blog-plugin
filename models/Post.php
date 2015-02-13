@@ -4,8 +4,8 @@ use App;
 use Str;
 use Lang;
 use Model;
-use October\Rain\Support\Markdown;
-use October\Rain\Support\ValidationException;
+use Markdown;
+use ValidationException;
 use RainLab\Blog\Classes\TagProcessor;
 use Backend\Models\User;
 
@@ -90,8 +90,6 @@ class Post extends Model
 
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
 
-        App::make('paginator')->setCurrentPage($page);
-
         if ($published)
             $query->isPublished();
 
@@ -128,7 +126,7 @@ class Post extends Model
             });
         }
 
-        return $query->paginate($perPage);
+        return $query->paginate($perPage, $page);
     }
 
     /**

@@ -2,8 +2,8 @@
 
 use Backend\Classes\FormWidgetBase;
 use System\Models\File;
-use System\Classes\SystemException;
-use October\Rain\Support\ValidationException;
+use SystemException;
+use ValidationException;
 use RainLab\Blog\Models\Post;
 use Validator;
 use Input;
