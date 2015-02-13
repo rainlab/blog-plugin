@@ -15,3 +15,4 @@
 1.0.9: Added support for the Sitemap plugin.
 1.0.10: Added permission to prevent users from seeing posts they did not create.
 1.0.11: Deprecate "idParam" component property in favour of "slug" property.
+1.0.12: Fixes issue where images cannot be uploaded caused by latest Markdown library.

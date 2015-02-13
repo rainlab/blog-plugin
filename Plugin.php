@@ -86,8 +86,7 @@ class Plugin extends PluginBase
          * Register the image tag processing callback
          */
         TagProcessor::instance()->registerCallback(function($input, $preview){
-            if (!$preview)
-                return $input;
+            if (!$preview) return $input;
 
             /*
              * Ensure there is no indentation in the replacement pattern
