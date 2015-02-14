@@ -88,19 +88,14 @@ class Plugin extends PluginBase
         TagProcessor::instance()->registerCallback(function($input, $preview){
             if (!$preview) return $input;
 
-            /*
-             * Ensure there is no indentation in the replacement pattern
-             * to prevent ParseDown from parsing the code as a blockquote.
-             */
-            $replacement = [];
-            $replacement[] = '<span class="image-placeholder" data-index="$1">';
-            $replacement[] = '<span class="upload-dropzone">';
-            $replacement[] = '<span class="label">Click or drop an image...</span>';
-            $replacement[] = '<span class="indicator"></span>';
-            $replacement[] = '</span>';
-            $replacement[] = '</span>';
-
-            return preg_replace('|\!\[([0-9]+)\]\(image\)|m', implode(PHP_EOL, $replacement), $input);
+            return preg_replace('|\<img src="image" alt="([0-9]+)"([^>]*)\/>|m',
+                '<span class="image-placeholder" data-index="$1">
+                    <span class="upload-dropzone">
+                        <span class="label">Click or drop an image...</span>
+                        <span class="indicator"></span>
+                    </span>
+                </span>',
+            $input);
         });
     }
 

@@ -144,14 +144,12 @@ class Post extends Model
 
     public static function formatHtml($input, $preview = false)
     {
-        $result = trim($input);
-
-        $result = TagProcessor::instance()->processTags($result, $preview);
-
-        $result = Markdown::parse($result);
+        $result = Markdown::parse(trim($input));
 
         if ($preview)
             $result = str_replace('<pre>', '<pre class="prettyprint">', $result);
+
+        $result = TagProcessor::instance()->processTags($result, $preview);
 
         return $result;
     }
