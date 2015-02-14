@@ -143,7 +143,7 @@ class Posts extends ComponentBase
 
             $currentPage = $this->property('pageNumber', $deprecatedPageNumber);
 
-            if ($currentPage > ($lastPage = $this->posts->getLastPage()) && $currentPage > 1)
+            if ($currentPage > ($lastPage = $this->posts->lastPage()) && $currentPage > 1)
                 return Redirect::to($this->currentPageUrl([$pageNumberParam => $lastPage]));
         }
     }
