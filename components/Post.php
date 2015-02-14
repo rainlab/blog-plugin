@@ -55,11 +55,8 @@ class Post extends ComponentBase
 
     protected function loadPost()
     {
-        // @deprecated remove if year >= 2015
-        $deprecatedSlug = $this->propertyOrParam('idParam');
-
-        $slug = $this->property('slug', $deprecatedSlug);
-        $post = BlogPost::isPublished()->where('slug', '=', $slug)->first();
+        $slug = $this->property('slug');
+        $post = BlogPost::isPublished()->where('slug', $slug)->first();
 
         /*
          * Add a "url" helper attribute for linking to each category

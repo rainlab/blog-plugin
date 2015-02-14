@@ -137,11 +137,7 @@ class Posts extends ComponentBase
          * If the page number is not valid, redirect
          */
         if ($pageNumberParam = $this->paramName('pageNumber')) {
-
-            // @deprecated remove if year >= 2015
-            $deprecatedPageNumber = $this->propertyOrParam('pageParam');
-
-            $currentPage = $this->property('pageNumber', $deprecatedPageNumber);
+            $currentPage = $this->property('pageNumber');
 
             if ($currentPage > ($lastPage = $this->posts->lastPage()) && $currentPage > 1)
                 return Redirect::to($this->currentPageUrl([$pageNumberParam => $lastPage]));
@@ -150,10 +146,7 @@ class Posts extends ComponentBase
 
     protected function prepareVars()
     {
-        // @deprecated remove if year >= 2015 (note default value 'page')
-        $deprecatedPageParam = $this->property('pageParam', 'page');
-
-        $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber', $deprecatedPageParam);
+        $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber');
         $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
 
         /*
@@ -167,16 +160,12 @@ class Posts extends ComponentBase
     {
         $categories = $this->category ? $this->category->id : null;
 
-        // @deprecated remove if year >= 2015
-        $deprecatedPage = $this->propertyOrParam('pageParam');
-        $deprecatedSortOrder = $this->property('postOrderAttr');
-
         /*
          * List all the posts, eager load their categories
          */
         $posts = BlogPost::with('categories')->listFrontEnd([
-            'page'       => $this->property('pageNumber', $deprecatedPage),
-            'sort'       => $this->property('sortOrder', $deprecatedSortOrder),
+            'page'       => $this->property('pageNumber'),
+            'sort'       => $this->property('sortOrder'),
             'perPage'    => $this->property('postsPerPage'),
             'categories' => $categories
         ]);

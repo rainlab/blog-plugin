@@ -64,10 +64,7 @@ class Categories extends ComponentBase
 
     public function onRun()
     {
-        // @deprecated remove if year >= 2015
-        $deprecatedSlug = $this->propertyOrParam('idParam');
-
-        $this->currentCategorySlug = $this->page['currentCategorySlug'] = $this->property('slug', $deprecatedSlug);
+        $this->currentCategorySlug = $this->page['currentCategorySlug'] = $this->property('slug');
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
         $this->categories = $this->page['categories'] = $this->loadCategories();
     }
