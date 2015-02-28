@@ -180,7 +180,7 @@ class Posts extends ComponentBase
                 $category->setUrl($this->categoryPage, $this->controller);
             });
 
-            $post->author = BackendAuth::findUserById($post->user_id)->attributes['login'];
+            $post->author = BackendAuth::findUserById($post->user_id)->attributes['first_name'];
         });
 
         return $posts;
