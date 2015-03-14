@@ -167,7 +167,7 @@ class Post extends Model
     {
         return $query
             ->whereNotNull('published')
-            ->where('published', '=', 1)
+            ->where('published', true)
         ;
     }
 

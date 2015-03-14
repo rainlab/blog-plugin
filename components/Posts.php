@@ -1,7 +1,5 @@
 <?php namespace RainLab\Blog\Components;
 
-use App;
-use Request;
 use Redirect;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
@@ -86,7 +84,8 @@ class Posts extends ComponentBase
                 'title'        => 'rainlab.blog::lang.settings.posts_no_posts',
                 'description'  => 'rainlab.blog::lang.settings.posts_no_posts_description',
                 'type'         => 'string',
-                'default'      => 'No posts found'
+                'default'      => 'No posts found',
+                'showExternalParam' => false
             ],
             'sortOrder' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_order',
