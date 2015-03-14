@@ -107,8 +107,12 @@ class Category extends Model
                 if (!$page->hasComponent('blogPosts'))
                     continue;
 
+                /*
+                 * Component must use a category filter with a routing parameter
+                 * eg: categoryFilter = "{{ :somevalue }}"
+                 */
                 $properties = $page->getComponentProperties('blogPosts');
-                if (!isset($properties['categoryFilter']) || substr($properties['categoryFilter'], 0, 1) !== ':')
+                if (!isset($properties['categoryFilter']) || !preg_match('/{{\s*:/', $properties['categoryFilter']))
                     continue;
 
                 $cmsPages[] = $page;
@@ -169,7 +173,7 @@ class Category extends Model
             foreach ($categories as $category) {
                 $categoryItem = [
                     'title' => $category->name,
-                    'url'   => URL::to(self::getCategoryPageUrl($item->cmsPage, $category, $theme)),
+                    'url'   => self::getCategoryPageUrl($item->cmsPage, $category, $theme),
                     'mtime' => $category->updated_at,
                 ];
 
@@ -188,16 +192,24 @@ class Category extends Model
     protected static function getCategoryPageUrl($pageCode, $category, $theme)
     {
         $page = CmsPage::loadCached($theme, $pageCode);
-        if (!$page)
-            return;
+        if (!$page) return;
 
         $properties = $page->getComponentProperties('blogPosts');
-        if (!isset($properties['categoryFilter']))
+        if (!isset($properties['categoryFilter'])) {
             return;
+        }
 
-        $filter = substr($properties['categoryFilter'], 1);
-        $url = CmsPage::url($page->getBaseFileName(), [$filter => $category->slug], false);
+        /*
+         * Extract the routing parameter name from the category filter
+         * eg: {{ :someRouteParam }}
+         */
+        if (!preg_match('/^\{\{([^\}]+)\}\}$/', $properties['categoryFilter'], $matches)) {
+            return;
+        }
 
-        return Str::lower(RouterHelper::normalizeUrl($url));
+        $paramName = substr(trim($matches[1]), 1);
+        $url = CmsPage::url($page->getBaseFileName(), [$paramName => $category->slug]);
+
+        return $url;
     }
 }
