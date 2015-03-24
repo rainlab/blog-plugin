@@ -61,7 +61,7 @@ The next example shows the basic component usage with the category filter:
     url = "/blog/category/:slug/:page?"
 
     [blogPosts]
-    categoryFilter = ":slug"
+    categoryFilter = "{{ :slug }}"
     ==
     function onEnd()
     {
