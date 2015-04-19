@@ -168,6 +168,7 @@ class Post extends Model
         return $query
             ->whereNotNull('published')
             ->where('published', true)
+            ->groupBy('published_at')
         ;
     }
 
