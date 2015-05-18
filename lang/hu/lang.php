@@ -12,10 +12,11 @@ return [
         'create_post' => 'blogbejegyzés',
         'categories' => 'Kategóriák',
         'create_category' => 'blog kategória',
+        'tab' => 'Blog',
         'access_posts' => 'Blog bejegyzések kezelése',
         'access_categories' => 'Blog kategóriák kezelése',
         'access_other_posts' => 'Más felhasználók bejegyzéseinek kezelése',
-        'delete_confirm' => 'Biztos benne?',
+        'delete_confirm' => 'Valóban törölni akarja a kijelölt bejegyzéseket?',
         'chart_published' => 'Közzétéve',
         'chart_drafts' => 'Piszkozatok',
         'chart_total' => 'Összesen'
@@ -46,11 +47,12 @@ return [
         'featured_images' => 'Kiemelt képek',
         'delete_confirm' => 'Valóban törölni akarja ezt a bejegyzést?',
         'close_confirm' => 'A bejegyzés nem került mentésre.',
-        'return_to_posts' => 'Vissza a bejegyzéslistához'
+        'return_to_posts' => 'Vissza a bejegyzés listához'
     ],
     'categories' => [
         'list_title' => 'A blog kategóriák kezelése',
-        'new_category' => 'Új kategória'
+        'new_category' => 'Új kategória',
+        'uncategorized' => 'Nincs kategorizálva'
     ],
     'category' => [
         'name' => 'Név',
@@ -69,7 +71,7 @@ return [
         'category_display_empty' => 'Üres kategóriák kijelzése',
         'category_display_empty_description' => 'Azon kategóriák megjelenítése, melyekben nincs egy bejegyzés sem.',
         'category_page' => 'Kategórialap',
-        'category_page_description' => 'A kategóriahivatkozások kategórialap-fájljának neve. Az alapértelmezett komponensrész használja ezt a tulajdonságot.',
+        'category_page_description' => 'A kategória hivatkozások kategórialap fájljának neve. Az alapértelmezett komponensrész használja ezt a tulajdonságot.',
         'post_title' => 'Blogbejegyzés',
         'post_description' => 'Egy blogbejegyzést jelez ki a lapon.',
         'post_slug' => 'Keresőbarát cím paraméter neve',

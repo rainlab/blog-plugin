@@ -3,7 +3,7 @@
 return [
     'plugin' => [
         'name' => 'Blog',
-        'description' => 'A robust blogging platform.',
+        'description' => 'A robust blogging platform.'
     ],
     'blog' => [
         'menu_label' => 'Blog',
@@ -12,19 +12,20 @@ return [
         'create_post' => 'blog post',
         'categories' => 'Categories',
         'create_category' => 'blog category',
+        'tab' => 'Blog',
         'access_posts' => 'Manage the blog posts',
         'access_categories' => 'Manage the blog categories',
         'access_other_posts' => 'Manage other users blog posts',
         'delete_confirm' => 'Are you sure?',
         'chart_published' => 'Published',
         'chart_drafts' => 'Drafts',
-        'chart_total' => 'Total',
+        'chart_total' => 'Total'
     ],
     'posts' => [
         'list_title' => 'Manage the blog posts',
         'category' => 'Category',
         'hide_published' => 'Hide published',
-        'new_post' => 'New post',
+        'new_post' => 'New post'
     ],
     'post' => [
         'title' => 'Title',
@@ -46,12 +47,12 @@ return [
         'featured_images' => 'Featured Images',
         'delete_confirm' => 'Do you really want to delete this post?',
         'close_confirm' => 'The post is not saved.',
-        'return_to_posts' => 'Return to posts list',
+        'return_to_posts' => 'Return to posts list'
     ],
     'categories' => [
         'list_title' => 'Manage the blog categories',
         'new_category' => 'New category',
-        'uncategorized' => 'Uncategorized',
+        'uncategorized' => 'Uncategorized'
     ],
     'category' => [
         'name' => 'Name',
@@ -60,7 +61,7 @@ return [
         'slug_placeholder' => 'new-category-slug',
         'posts' => 'Posts',
         'delete_confirm' => 'Do you really want to delete this category?',
-        'return_to_categories' => 'Return to the blog category list',
+        'return_to_categories' => 'Return to the blog category list'
     ],
     'settings' => [
         'category_title' => 'Category List',
@@ -92,6 +93,6 @@ return [
         'posts_category' => 'Category page',
         'posts_category_description' => 'Name of the category page file for the "Posted into" category links. This property is used by the default component partial.',
         'posts_post' => 'Post page',
-        'posts_post_description' => 'Name of the blog post page file for the "Learn more" links. This property is used by the default component partial.',
-    ],
+        'posts_post_description' => 'Name of the blog post page file for the "Learn more" links. This property is used by the default component partial.'
+    ]
 ];
