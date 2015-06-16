@@ -14,6 +14,7 @@ return [
         'create_category' => 'категории',
         'access_posts' => 'Управление записями блога',
         'access_categories' => 'Управление категориями блога',
+        'access_other_posts' => 'Управление записями других пользователей',
         'delete_confirm' => 'Вы уверены, что хотите сделать это?',
         'chart_published' => 'Опубликовано',
         'chart_drafts' => 'Черновики',
