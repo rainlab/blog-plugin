@@ -51,6 +51,7 @@ return [
     'categories' => [
         'list_title' => 'Управление категориями блога',
         'new_category' => 'Новая категория',
+        'uncategorized' => 'Без категории',
     ],
     'category' => [
         'name' => 'Название',
