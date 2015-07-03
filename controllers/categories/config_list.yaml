@@ -3,7 +3,7 @@
 # ===================================
 
 # Model List Column configuration
-list: @/plugins/rainlab/blog/models/category/columns.yaml
+list: ~/plugins/rainlab/blog/models/category/columns.yaml
 
 # Model Class name
 modelClass: RainLab\Blog\Models\Category

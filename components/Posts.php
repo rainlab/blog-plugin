@@ -1,7 +1,5 @@
 <?php namespace RainLab\Blog\Components;
 
-use App;
-use Request;
 use Redirect;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
@@ -86,7 +84,8 @@ class Posts extends ComponentBase
                 'title'        => 'rainlab.blog::lang.settings.posts_no_posts',
                 'description'  => 'rainlab.blog::lang.settings.posts_no_posts_description',
                 'type'         => 'string',
-                'default'      => 'No posts found'
+                'default'      => 'No posts found',
+                'showExternalParam' => false
             ],
             'sortOrder' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_order',
@@ -121,7 +120,7 @@ class Posts extends ComponentBase
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
-    public function getPostOrderAttrOptions()
+    public function getSortOrderOptions()
     {
         return BlogPost::$allowedSortingOptions;
     }
@@ -137,23 +136,16 @@ class Posts extends ComponentBase
          * If the page number is not valid, redirect
          */
         if ($pageNumberParam = $this->paramName('pageNumber')) {
+            $currentPage = $this->property('pageNumber');
 
-            // @deprecated remove if year >= 2015
-            $deprecatedPageNumber = $this->propertyOrParam('pageParam');
-
-            $currentPage = $this->property('pageNumber', $deprecatedPageNumber);
-
-            if ($currentPage > ($lastPage = $this->posts->getLastPage()) && $currentPage > 1)
+            if ($currentPage > ($lastPage = $this->posts->lastPage()) && $currentPage > 1)
                 return Redirect::to($this->currentPageUrl([$pageNumberParam => $lastPage]));
         }
     }
 
     protected function prepareVars()
     {
-        // @deprecated remove if year >= 2015 (note default value 'page')
-        $deprecatedPageParam = $this->property('pageParam', 'page');
-
-        $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber', $deprecatedPageParam);
+        $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber');
         $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
 
         /*
@@ -167,16 +159,12 @@ class Posts extends ComponentBase
     {
         $categories = $this->category ? $this->category->id : null;
 
-        // @deprecated remove if year >= 2015
-        $deprecatedPage = $this->propertyOrParam('pageParam');
-        $deprecatedSortOrder = $this->property('postOrderAttr');
-
         /*
          * List all the posts, eager load their categories
          */
         $posts = BlogPost::with('categories')->listFrontEnd([
-            'page'       => $this->property('pageNumber', $deprecatedPage),
-            'sort'       => $this->property('sortOrder', $deprecatedSortOrder),
+            'page'       => $this->property('pageNumber'),
+            'sort'       => $this->property('sortOrder'),
             'perPage'    => $this->property('postsPerPage'),
             'categories' => $categories
         ]);

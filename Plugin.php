@@ -9,14 +9,14 @@ use Event;
 
 class Plugin extends PluginBase
 {
-
     public function pluginDetails()
     {
         return [
             'name'        => 'rainlab.blog::lang.plugin.name',
             'description' => 'rainlab.blog::lang.plugin.description',
             'author'      => 'Alexey Bobkov, Samuel Georges',
-            'icon'        => 'icon-pencil'
+            'icon'        => 'icon-pencil',
+            'homepage'    => 'https://github.com/rainlab/blog-plugin'
         ];
     }
 
@@ -25,7 +25,7 @@ class Plugin extends PluginBase
         return [
             'RainLab\Blog\Components\Post'       => 'blogPost',
             'RainLab\Blog\Components\Posts'      => 'blogPosts',
-            'RainLab\Blog\Components\Categories' => 'blogCategories',
+            'RainLab\Blog\Components\Categories' => 'blogCategories'
         ];
     }
 
@@ -53,16 +53,15 @@ class Plugin extends PluginBase
                         'label'       => 'rainlab.blog::lang.blog.posts',
                         'icon'        => 'icon-copy',
                         'url'         => Backend::url('rainlab/blog/posts'),
-                        'permissions' => ['rainlab.blog.access_posts'],
+                        'permissions' => ['rainlab.blog.access_posts']
                     ],
                     'categories' => [
                         'label'       => 'rainlab.blog::lang.blog.categories',
                         'icon'        => 'icon-list-ul',
                         'url'         => Backend::url('rainlab/blog/categories'),
-                        'permissions' => ['rainlab.blog.access_categories'],
+                        'permissions' => ['rainlab.blog.access_categories']
                     ],
                 ]
-
             ]
         ];
     }
@@ -86,10 +85,9 @@ class Plugin extends PluginBase
          * Register the image tag processing callback
          */
         TagProcessor::instance()->registerCallback(function($input, $preview){
-            if (!$preview)
-                return $input;
+            if (!$preview) return $input;
 
-            return preg_replace('|\<img alt="([0-9]+)" src="image"([^>]*)\/>|m',
+            return preg_replace('|\<img src="image" alt="([0-9]+)"([^>]*)\/>|m',
                 '<span class="image-placeholder" data-index="$1">
                     <span class="upload-dropzone">
                         <span class="label">Click or drop an image...</span>
@@ -102,10 +100,13 @@ class Plugin extends PluginBase
 
     public function boot()
     {
+        /*
+         * Register menu items for the RainLab.Pages plugin
+         */
         Event::listen('pages.menuitem.listTypes', function() {
             return [
                 'blog-category' => 'Blog category',
-                'all-blog-categories' => 'All blog categories',
+                'all-blog-categories' => 'All blog categories'
             ];
         });
 

@@ -4,7 +4,7 @@ use Flash;
 use Redirect;
 use BackendMenu;
 use Backend\Classes\Controller;
-use System\Classes\ApplicationException;
+use ApplicationException;
 use RainLab\Blog\Models\Post;
 
 class Posts extends Controller

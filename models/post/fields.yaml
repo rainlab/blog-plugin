@@ -13,10 +13,9 @@ fields:
         label: rainlab.blog::lang.post.slug
         span: right
         placeholder: rainlab.blog::lang.post.slug_placeholder
-        attributes:
-            data-input-preset: 'input[name="Post[title]"]'
-            data-input-preset-type: slug
-            data-input-preset-closest-parent: form
+        preset:
+            field: title
+            type: slug
 
     toolbar:
         type: partial

@@ -1,6 +1,6 @@
 <?php namespace RainLab\Blog\Components;
 
-use DB;
+use Db;
 use App;
 use Request;
 use Cms\Classes\Page;
@@ -64,10 +64,7 @@ class Categories extends ComponentBase
 
     public function onRun()
     {
-        // @deprecated remove if year >= 2015
-        $deprecatedSlug = $this->propertyOrParam('idParam');
-
-        $this->currentCategorySlug = $this->page['currentCategorySlug'] = $this->property('slug', $deprecatedSlug);
+        $this->currentCategorySlug = $this->page['currentCategorySlug'] = $this->property('slug');
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
         $this->categories = $this->page['categories'] = $this->loadCategories();
     }
@@ -77,7 +74,7 @@ class Categories extends ComponentBase
         $categories = BlogCategory::orderBy('name');
         if (!$this->property('displayEmpty')) {
             $categories->whereExists(function($query) {
-                $query->select(DB::raw(1))
+                $query->select(Db::raw(1))
                 ->from('rainlab_blog_posts_categories')
                 ->join('rainlab_blog_posts', 'rainlab_blog_posts.id', '=', 'rainlab_blog_posts_categories.post_id')
                 ->whereNotNull('rainlab_blog_posts.published')
