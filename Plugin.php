@@ -32,9 +32,9 @@ class Plugin extends PluginBase
     public function registerPermissions()
     {
         return [
-            'rainlab.blog.access_posts'       => ['tab' => 'Blog', 'label' => 'rainlab.blog::lang.blog.access_posts'],
-            'rainlab.blog.access_categories'  => ['tab' => 'Blog', 'label' => 'rainlab.blog::lang.blog.access_categories'],
-            'rainlab.blog.access_other_posts' => ['tab' => 'Blog', 'label' => 'rainlab.blog::lang.blog.access_other_posts']
+            'rainlab.blog.access_posts'       => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_posts'],
+            'rainlab.blog.access_categories'  => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_categories'],
+            'rainlab.blog.access_other_posts' => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_other_posts']
         ];
     }
 
@@ -60,7 +60,7 @@ class Plugin extends PluginBase
                         'icon'        => 'icon-list-ul',
                         'url'         => Backend::url('rainlab/blog/categories'),
                         'permissions' => ['rainlab.blog.access_categories']
-                    ],
+                    ]
                 ]
             ]
         ];

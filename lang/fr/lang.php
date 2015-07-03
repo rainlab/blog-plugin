@@ -3,7 +3,7 @@
 return [
     'plugin' => [
         'name' => 'Blog',
-        'description' => 'Une plateforme de blog robuste.',
+        'description' => 'Une plateforme de blog robuste.'
     ],
     'blog' => [
         'menu_label' => 'Blog',
@@ -12,19 +12,20 @@ return [
         'create_post' => 'article de blog',
         'categories' => 'Catégories',
         'create_category' => 'catégorie d\'articles',
+        'tab' => 'Blog',
         'access_posts' => 'Gérer les articles',
         'access_categories' => 'Gérer les catégories',
         'access_other_posts' => 'Gérer les articles d\'autres utilisateurs',
         'delete_confirm' => 'Êtes-vous certain(e) de vouloir supprimer ?',
         'chart_published' => 'Publié',
         'chart_drafts' => 'Brouillons',
-        'chart_total' => 'Total',
+        'chart_total' => 'Total'
     ],
     'posts' => [
         'list_title' => 'Gérer les articles du blog',
         'category' => 'Catégorie',
         'hide_published' => 'Masquer la publication',
-        'new_post' => 'Nouvel article',
+        'new_post' => 'Nouvel article'
     ],
     'post' => [
         'title' => 'Titre',
@@ -46,12 +47,12 @@ return [
         'featured_images' => 'Image de sélection',
         'delete_confirm' => 'Souhaitez-vous vraiment supprimer cet article?',
         'close_confirm' => 'L\'article n\'est pas enregistré.',
-        'return_to_posts' => 'Retour à la liste des articles',
+        'return_to_posts' => 'Retour à la liste des articles'
     ],
     'categories' => [
         'list_title' => 'Gérer les catégories',
         'new_category' => 'Nouvelle catégorie',
-        'uncategorized' => 'Sans catégorie',
+        'uncategorized' => 'Sans catégorie'
     ],
     'category' => [
         'name' => 'Nom',
@@ -60,7 +61,7 @@ return [
         'slug_placeholder' => 'adresse-de-la-nouvelle-catégorie',
         'posts' => 'Articles',
         'delete_confirm' => 'Souhaitez-vous vraiment supprimer cette catégorie ?',
-        'return_to_categories' => 'Retour à la liste des catégories',
+        'return_to_categories' => 'Retour à la liste des catégories'
     ],
     'settings' => [
         'category_title' => 'Liste des catégories',
@@ -91,6 +92,6 @@ return [
         'posts_category' => 'Page des catégorie',
         'posts_category_description' => 'Nom de la page des catégorie pour les liens de catégories "Publié dans". Cette propriété est utilisée par le composant partiel par défaut.',
         'posts_post' => 'Page d\'article',
-        'posts_post_description' => 'Nom de la page d\'articles pour les liens "En savoir plus". Cette propriété est utilisée par le composant partiel par défaut.',
-    ],
+        'posts_post_description' => 'Nom de la page d\'articles pour les liens "En savoir plus". Cette propriété est utilisée par le composant partiel par défaut.'
+    ]
 ];
