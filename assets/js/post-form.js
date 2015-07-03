@@ -91,12 +91,23 @@
                 $link = $('span.label', $placeholder),
                 placeholderIndex = $placeholder.data('index')
 
-            var dropzone = new Dropzone($(this).get(0), {
+            var uploaderOptions = {
                 url: self.formAction,
                 clickable: [$(this).get(0), $link.get(0)],
                 previewsContainer: $('<div />').get(0),
-                paramName: 'file'
-            })
+                paramName: 'file',
+                headers: {}
+            }
+
+            /*
+             * Add CSRF token to headers
+             */
+            var token = $('meta[name="csrf-token"]').attr('content')
+            if (token) {
+                uploaderOptions.headers['X-CSRF-TOKEN'] = token
+            }
+
+            var dropzone = new Dropzone($(this).get(0), uploaderOptions)
 
             dropzone.on('error', function(file, error) {
                 alert('Error uploading file: ' + error)

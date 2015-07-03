@@ -17,3 +17,4 @@
 1.0.11: Deprecate "idParam" component property in favour of "slug" property.
 1.0.12: Fixes issue where images cannot be uploaded caused by latest Markdown library.
 1.0.13: Fixes problem with providing pages to Sitemap and Pages plugins.
+1.0.14: Add support for CSRF protection feature added to core.

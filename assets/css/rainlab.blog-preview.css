@@ -80,7 +80,7 @@ html.cssanimations .blog-post-preview span.image-placeholder.loading .upload-dro
   position: absolute;
   left: 35px;
   top: 35px;
-  background-image: url(../../../../../modules/backend/assets/images/loading-indicator-transparent.svg);
+  background-image: url('../../../../../modules/system/assets/ui/images/loader-transparent.svg');
   background-size: 50px 50px;
   background-position: 50% 50%;
   -webkit-animation: spin 1s linear infinite;
