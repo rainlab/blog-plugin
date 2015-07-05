@@ -79,19 +79,27 @@ class Post extends Model
         /*
          * Default options
          */
+        /**
+         * @var bool $atPast
+         */
         extract(array_merge([
             'page'       => 1,
             'perPage'    => 30,
             'sort'       => 'created_at',
             'categories' => null,
             'search'     => '',
-            'published'  => true
+            'published'  => true,
+            'atPast'  => true
         ], $options));
 
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
 
         if ($published)
             $query->isPublished();
+
+        if ($atPast){
+            $query->AtPast();
+        }
 
         /*
          * Sorting
@@ -169,6 +177,19 @@ class Post extends Model
             ->whereNotNull('published')
             ->where('published', true)
         ;
+    }
+
+    /**
+     * For public page. Allow deferred publication
+     * @param $query
+     * @return mixed
+     */
+    public function scopeAtPast($query)
+    {
+        return $query
+            ->whereNotNull('published_at')
+            ->whereRaw('published_at < NOW()')
+            ;
     }
 
     public function beforeSave()
