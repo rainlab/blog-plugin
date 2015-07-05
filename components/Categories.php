@@ -79,6 +79,8 @@ class Categories extends ComponentBase
                 ->join('rainlab_blog_posts', 'rainlab_blog_posts.id', '=', 'rainlab_blog_posts_categories.post_id')
                 ->whereNotNull('rainlab_blog_posts.published')
                 ->where('rainlab_blog_posts.published', '=', 1)
+                ->whereNotNull('rainlab_blog_posts.published_at')
+                ->whereRaw('rainlab_blog_posts.published_at < NOW()')
                 ->whereRaw('rainlab_blog_categories.id = rainlab_blog_posts_categories.category_id');
             });
         }

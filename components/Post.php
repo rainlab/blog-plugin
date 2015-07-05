@@ -56,7 +56,7 @@ class Post extends ComponentBase
     protected function loadPost()
     {
         $slug = $this->property('slug');
-        $post = BlogPost::isPublished()->where('slug', $slug)->first();
+        $post = BlogPost::isPublished()->atPast()->where('slug', $slug)->first();
 
         /*
          * Add a "url" helper attribute for linking to each category
