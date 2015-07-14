@@ -1,5 +1,6 @@
 <?php namespace RainLab\Blog\Components;
 
+use Input;
 use Redirect;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
@@ -19,6 +20,18 @@ class Posts extends ComponentBase
      * @var string
      */
     public $pageParam;
+
+    /**
+     * Parameter to use for the search
+     * @var string
+     */
+    public $searchParam;
+
+    /**
+     * Defines whether the current page is used to display search results or not
+     * @var string
+     */
+    public $isSearch;
 
     /**
      * If the post list should be filtered by a category, the model to use.
@@ -72,6 +85,11 @@ class Posts extends ComponentBase
                 'description' => 'rainlab.blog::lang.settings.posts_filter_description',
                 'type'        => 'string',
                 'default'     => ''
+            ],
+            'isSearch' => [
+                'title'       => 'rainlab.blog::lang.settings.is_search_page',
+                'description' => 'rainlab.blog::lang.settings.is_search_page_description',
+                'type'        => 'checkbox'
             ],
             'postsPerPage' => [
                 'title'             => 'rainlab.blog::lang.settings.posts_per_page',
@@ -147,6 +165,17 @@ class Posts extends ComponentBase
     {
         $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber');
         $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
+        $this->isSearch = $this->page['isSearch'] = $this->property('isSearch');
+
+        // only available via post request
+        if ($this->isSearch) {
+            if (!\Request::isMethod('post')) {
+                $this->setStatusCode(404);
+                return $this->controller->run('404');
+            }
+
+            $this->searchParam = $this->page[ 'searchParam' ] = Input::get('search');
+        }
 
         /*
          * Page links
@@ -162,7 +191,15 @@ class Posts extends ComponentBase
         /*
          * List all the posts, eager load their categories
          */
-        $posts = BlogPost::with('categories')->listFrontEnd([
+        $posts = BlogPost::with('categories');
+
+        // search title and content for search term
+        if (!is_null($this->searchParam)) {
+            $posts->where('title', 'LIKE', "%{$this->searchParam}%")
+                ->orWhere('content', 'LIKE', "%{$this->searchParam}%");
+        }
+
+        $posts = $posts->listFrontEnd([
             'page'       => $this->property('pageNumber'),
             'sort'       => $this->property('sortOrder'),
             'perPage'    => $this->property('postsPerPage'),

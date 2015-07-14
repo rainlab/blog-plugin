@@ -64,6 +64,12 @@ return [
         'return_to_categories' => 'Return to the blog category list'
     ],
     'settings' => [
+        'is_search_page' => 'Displays Search Results',
+        'is_search_page_description' => 'Is the page used to display search results or not?',
+        'search_form' => 'Search Form',
+        'search_form_description' => 'Displays a search form on the page.',
+        'search_results_page' => 'Search Result page',
+        'search_results_page_description' => 'Name of the page file where the search results are displayed',
         'category_title' => 'Category List',
         'category_description' => 'Displays a list of blog categories on the page.',
         'category_slug' => 'Category slug',
