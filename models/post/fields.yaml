@@ -51,10 +51,14 @@ secondaryTabs:
             cssClass: checkbox-align
             type: datepicker
             mode: date
+            trigger:
+                action: enable
+                field: published
+                condition: checked
 
         excerpt:
             tab: rainlab.blog::lang.post.tab_manage
-            label: rainlab.blog::lang.post.excerpt
+            label: rainlab.blog::lang.post.summary
             type: textarea
             size: small
 

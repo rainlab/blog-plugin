@@ -151,12 +151,6 @@
                 $(this).trigger('unchange.oc.changeMonitor')
             }
         })
-
-        $('#DatePicker-formPublishedAt-input-published_at').triggerOn({
-            triggerAction: 'enable',
-            trigger: '#Form-field-Post-published',
-            triggerCondition: 'checked'
-        })
     }
 
     PostForm.prototype.initLayout = function() {
