@@ -1,37 +1,50 @@
 <?php namespace RainLab\Blog\FormWidgets;
 
-use Backend\Classes\FormWidgetBase;
-use System\Models\File;
-use SystemException;
-use ValidationException;
-use RainLab\Blog\Models\Post;
-use Validator;
+use Lang;
 use Input;
 use Response;
+use Validator;
+use RainLab\Blog\Models\Post as PostModel;
+use Backend\Classes\FormWidgetBase;
+use Backend\FormWidgets\MarkdownEditor;
+use System\Models\File;
+use ValidationException;
+use SystemException;
 use Exception;
-use Lang;
 
 /**
- * Preview area for the Create/Edit Post form.
+ * Special markdown editor for the Create/Edit Post form.
  *
  * @package rainlab\blog
  * @author Alexey Bobkov, Samuel Georges
  */
-class Preview extends FormWidgetBase
+class BlogMarkdown extends MarkdownEditor
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function render()
-    {
-        $this->vars['preview_html'] = Post::formatHtml($this->model->content, true);
-
-        return $this->makePartial('preview');
-    }
 
     public function init()
     {
+        $this->viewPath = base_path().'/modules/backend/formwidgets/markdowneditor/partials';
+
         $this->checkUploadPostback();
+
+        parent::init();
+    }
+
+    protected function loadAssets()
+    {
+        $this->assetPath = '/modules/backend/formwidgets/markdowneditor/assets';
+        parent::loadAssets();
+    }
+
+    public function onRefresh()
+    {
+        $content = post($this->formField->getName());
+
+        $previewHtml = PostModel::formatHtml($content, true);
+
+        return [
+            'preview' => $previewHtml
+        ];
     }
 
     protected function checkUploadPostback()
@@ -78,7 +91,8 @@ class Preview extends FormWidgetBase
             $response->send();
 
             die();
-        } catch (Exception $ex) {
+        }
+        catch (Exception $ex) {
             $message = $uploadedFileName
                 ? Lang::get('cms::lang.asset.error_uploading_file', ['name' => $uploadedFileName, 'error' => $ex->getMessage()])
                 : $ex->getMessage();

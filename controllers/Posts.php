@@ -27,13 +27,8 @@ class Posts extends Controller
 
         BackendMenu::setContext('RainLab.Blog', 'blog', 'posts');
         $this->addCss('/plugins/rainlab/blog/assets/css/rainlab.blog-preview.css');
-        $this->addCss('/plugins/rainlab/blog/assets/css/rainlab.blog-preview-theme-default.css');
-
-        $this->addCss('/plugins/rainlab/blog/assets/vendor/prettify/prettify.css');
-        $this->addCss('/plugins/rainlab/blog/assets/vendor/prettify/theme-desert.css');
 
         $this->addJs('/plugins/rainlab/blog/assets/js/post-form.js');
-        $this->addJs('/plugins/rainlab/blog/assets/vendor/prettify/prettify.js');
     }
 
     public function index()

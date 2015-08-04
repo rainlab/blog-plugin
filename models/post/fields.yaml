@@ -22,36 +22,15 @@ fields:
         path: post_toolbar
         cssClass: collapse-visible
 
-# tabs:
-#   fields:
-
-#     excerpt:
-#       tab: Details
-#       label: Excerpt
-#       type: textarea
-#       size: small
-
 secondaryTabs:
     stretch: true
     fields:
         content:
             tab: rainlab.blog::lang.post.tab_edit
+            type: RainLab\Blog\FormWidgets\BlogMarkdown
+            cssClass: field-slim blog-post-preview
             stretch: true
-            span: left
-            cssClass: field-slim
-            type: codeeditor
-            language: markdown
-            showGutter: false
-            wrapWords: true
-            fontSize: 13
-            margin: 15
-
-        preview:
-            type: RainLab\Blog\FormWidgets\Preview
-            tab: rainlab.blog::lang.post.tab_edit
-            stretch: true
-            span: right
-            cssClass: field-slim
+            mode: split
 
         categories:
             tab: rainlab.blog::lang.post.tab_categories
@@ -78,24 +57,6 @@ secondaryTabs:
             label: rainlab.blog::lang.post.excerpt
             type: textarea
             size: small
-
-        # visibility:
-        #   tab: Manage
-        #   label: Visibility
-        #   type: balloon-selector
-        #   options:
-        #     - Public
-        #     - Sticky
-        #     - Private
-
-        # status:
-        #   tab: Manage
-        #   label: Status
-        #   type: balloon-selector
-        #   options:
-        #     - Draft
-        #     - Review
-        #     - Published
 
         featured_images:
             tab: rainlab.blog::lang.post.tab_manage

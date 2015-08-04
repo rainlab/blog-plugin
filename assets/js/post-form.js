@@ -1,86 +1,45 @@
 +function ($) { "use strict";
     var PostForm = function () {
-        this.$preview = $('#blog-post-preview')
-        this.$form = this.$preview.closest('form')
+        this.$form = $('#post-form')
+        this.$markdownEditor = $('[data-field-name=content] [data-control=markdowneditor]:first', this.$form)
+        this.$preview = $('.editor-preview', this.$markdownEditor)
+
         this.formAction = this.$form.attr('action')
         this.sessionKey = $('input[name=_session_key]', this.$form).val()
-        this.$textarea = $('[name="Post[content]"]', this.$form)
-        this.$previewContent = $('.preview-content', this.$preview)
-        this.codeEditor = $('textarea[name="Post[content]"]', this.$form).closest('.field-codeeditor').data('oc.codeEditor')
-        this.createIndicator()
+        this.codeEditor = this.$markdownEditor.markdownEditor('getEditorObject')
 
-        this.$textarea.on('oc.codeEditorChange', $.proxy(this.handleChange, this))
+        this.$markdownEditor.on('oc.markdownEditorInitPreview', $.proxy(this.initPreview, this))
 
-        this.loading = false
-        this.updatesPaused = false
-        this.initPreview()
         this.initDropzones()
         this.initFormEvents()
         this.initLayout()
+        this.addToolbarButton()
     }
 
-    PostForm.prototype.handleChange = function() {
-        if (this.updatesPaused)
-            return
+    PostForm.prototype.addToolbarButton = function() {
+        this.buttonClickCount = 1
 
-        var self = this
+        var self = this,
+            $button = this.$markdownEditor.markdownEditor('findToolbarButton', 'image')
 
-        if (this.loading) {
-            if (this.dataTrackInputTimer === undefined) {
-                this.dataTrackInputTimer = window.setInterval(function(){
-                    self.handleChange()
-                }, 100)
-            }
+        if (!$button.length) return
 
-            return
-        }
+        $button.data('button-action', 'insertLine')
+        $button.data('button-template', '\n\n![1](image)\n')
 
-        window.clearTimeout(this.dataTrackInputTimer)
-        this.dataTrackInputTimer = undefined
-
-        var self = this;
-        self.update();
-    }
-
-    PostForm.prototype.createIndicator = function() {
-        var $previewContainer = $('#blog-post-preview').closest('.loading-indicator-container')
-        this.$indicator = $('<div class="loading-indicator transparent"><div></div><span></span></div>')
-        $previewContainer.prepend(this.$indicator)
-    }
-
-    PostForm.prototype.update = function() {
-        var self = this
-
-        this.loading = true
-        this.showIndicator()
-
-        this.$form.request('onRefreshPreview', {
-            success: function(data) {
-                self.$previewContent.html(data.preview)
-                self.initPreview()
-                self.updateScroll()
-            }
-        }).done(function(){
-            self.hideIndicator()
-            self.loading = false
+        $button.on('click', function() {
+            $button.data('button-template', '\n\n!['+self.buttonClickCount+'](image)\n')
+            self.buttonClickCount++
         })
     }
 
-    PostForm.prototype.showIndicator = function() {
-        this.$indicator.css('display', 'block')
-    }
-
-    PostForm.prototype.hideIndicator = function() {
-        this.$indicator.css('display', 'none')
-    }
-
     PostForm.prototype.initPreview = function() {
-        prettyPrint()
         this.initImageUploaders()
     }
 
     PostForm.prototype.updateScroll = function() {
-        this.$preview.data('oc.scrollbar').update()
+        // Reserved in case MarkdownEditor uses scrollbar plugin
+        // this.$preview.data('oc.scrollbar').update()
     }
 
     PostForm.prototype.initImageUploaders = function() {
@@ -124,7 +83,7 @@
 
                     $placeholder.replaceWith($img)
 
-                    self.codeEditor.editor.replace('!['+data.file+']('+data.path+')', {
+                    self.codeEditor.replace('!['+data.file+']('+data.path+')', {
                         needle: '!['+placeholderIndex+'](image)'
                     })
                     self.resumeUpdates()
@@ -142,11 +101,11 @@
     }
 
     PostForm.prototype.pauseUpdates = function() {
-        this.updatesPaused = true
+        this.$markdownEditor.markdownEditor('pauseUpdates')
     }
 
     PostForm.prototype.resumeUpdates = function() {
-        this.updatesPaused = false
+        this.$markdownEditor.markdownEditor('resumeUpdates')
     }
 
     PostForm.prototype.initDropzones = function() {
@@ -208,13 +167,13 @@
         this.pauseUpdates()
         placeholder.replaceWith(placeholderHtmlReplacement)
 
-        this.codeEditor.editor.replace(mdCodeReplacement, {
+        this.codeEditor.replace(mdCodeReplacement, {
             needle: mdCodePlaceholder
         })
         this.updateScroll()
         this.resumeUpdates()
     }
-    
+
     $(document).ready(function(){
         var form = new PostForm()
 
