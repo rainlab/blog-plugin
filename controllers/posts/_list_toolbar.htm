@@ -19,4 +19,19 @@
         data-stripe-load-indicator>
         <?= e(trans('backend::lang.list.delete_selected')) ?>
     </button>
+
+    <?php if ($this->user->hasAnyAccess(['rainlab.blog.access_import_export'])): ?>
+        <div class="btn-group">
+            <a
+                href="<?= Backend::url('rainlab/blog/posts/export') ?>"
+                class="btn btn-default oc-icon-download">
+                Export posts
+            </a>
+            <a
+                href="<?= Backend::url('rainlab/blog/posts/import') ?>"
+                class="btn btn-default oc-icon-upload">
+                Import posts
+            </a>
+        </div>
+    <?php endif ?>
 </div>

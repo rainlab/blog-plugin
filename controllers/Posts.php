@@ -11,13 +11,13 @@ class Posts extends Controller
 {
     public $implement = [
         'Backend.Behaviors.FormController',
-        'Backend.Behaviors.ListController'
+        'Backend.Behaviors.ListController',
+        'Backend.Behaviors.ImportExportController'
     ];
 
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
-
-    public $bodyClass = 'compact-container';
+    public $importExportConfig = 'config_import_export.yaml';
 
     public $requiredPermissions = ['rainlab.blog.access_other_posts', 'rainlab.blog.access_posts'];
 
@@ -38,6 +38,18 @@ class Posts extends Controller
         $this->vars['postsDrafts'] = $this->vars['postsTotal'] - $this->vars['postsPublished'];
 
         $this->asExtension('ListController')->index();
+    }
+
+    public function create()
+    {
+        $this->bodyClass = 'compact-container';
+        return $this->asExtension('FormController')->create();
+    }
+
+    public function update($recordId = null)
+    {
+        $this->bodyClass = 'compact-container';
+        return $this->asExtension('FormController')->update($recordId);
     }
 
     public function listExtendQuery($query)

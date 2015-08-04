@@ -2,6 +2,7 @@
 
 use App;
 use Str;
+use Html;
 use Lang;
 use Model;
 use Markdown;
@@ -142,18 +143,6 @@ class Post extends Model
         });
     }
 
-    public static function formatHtml($input, $preview = false)
-    {
-        $result = Markdown::parse(trim($input));
-
-        if ($preview)
-            $result = str_replace('<pre>', '<pre class="prettyprint">', $result);
-
-        $result = TagProcessor::instance()->processTags($result, $preview);
-
-        return $result;
-    }
-
     public function afterValidate()
     {
         if ($this->published && !$this->published_at) {
@@ -163,37 +152,9 @@ class Post extends Model
         }
     }
 
-    public function scopeIsPublished($query)
-    {
-        return $query
-            ->whereNotNull('published')
-            ->where('published', true)
-        ;
-    }
-
     public function beforeSave()
     {
         $this->content_html = self::formatHtml($this->content);
-    }
-
-    /**
-     * Used by "has_summary", returns true if this post uses a summary (more tag)
-     * @return boolean
-     */
-    public function getHasSummaryAttribute()
-    {
-        return strlen($this->getSummaryAttribute()) < strlen($this->content_html);
-    }
-
-    /**
-     * Used by "summary", returns the HTML content before the <!-- more --> tag
-     * @return string
-     */
-    public function getSummaryAttribute()
-    {
-        $more = '<!-- more -->';
-        $parts = explode($more, $this->content_html);
-        return array_get($parts, 0);
     }
 
     /**
@@ -224,5 +185,65 @@ class Post extends Model
     public function canEdit(User $user)
     {
         return ($this->user_id == $user->id) || $user->hasAnyAccess(['rainlab.blog.access_other_posts']);
+    }
+
+    public static function formatHtml($input, $preview = false)
+    {
+        $result = Markdown::parse(trim($input));
+
+        if ($preview)
+            $result = str_replace('<pre>', '<pre class="prettyprint">', $result);
+
+        $result = TagProcessor::instance()->processTags($result, $preview);
+
+        return $result;
+    }
+
+    //
+    // Scopes
+    //
+
+    public function scopeIsPublished($query)
+    {
+        return $query
+            ->whereNotNull('published')
+            ->where('published', true)
+        ;
+    }
+
+    //
+    // Summary / Excerpt
+    //
+
+    /**
+     * Used by "has_summary", returns true if this post uses a summary (more tag)
+     * @return boolean
+     */
+    public function getHasSummaryAttribute()
+    {
+        return strlen($this->getSummaryAttribute()) < strlen($this->content_html);
+    }
+
+    /**
+     * Used by "summary", if no excerpt is provided, generate one from the content.
+     * Returns the HTML content before the <!-- more --> tag or a limited 600
+     * character version.
+     *
+     * @return string
+     */
+    public function getSummaryAttribute()
+    {
+        $excerpt = array_get($this->attributes, 'excerpt');
+        if (strlen(trim($excerpt))) {
+            return $excerpt;
+        }
+
+        $more = '<!-- more -->';
+        if (strpos($this->content_html, $more) !== false) {
+            $parts = explode($more, $this->content_html);
+            return array_get($parts, 0);
+        }
+
+        return Str::limit(Html::strip($this->content_html), 600);
     }
 }

@@ -1,0 +1,26 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+
+    auto_create_categories:
+        label: Create categories specified in the import file
+        comment: You should match the Categories column to use this feature, otherwise select the default categories to use from the items below.
+        type: checkbox
+        default: true
+
+    post_categories:
+        label: Categories
+        commentAbove: Select the categories that imported posts will belong to (optional).
+        type: checkboxlist
+        cssClass: field-indent
+        trigger:
+            action: hide
+            field: auto_create_categories
+            condition: checked
+
+    skip_duplicates:
+        label: Ignore duplicate posts
+        comment: Check this box to ignore imported posts that have exactly the same title and/or slug.
+        type: checkbox
