@@ -2,6 +2,8 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
+use RainLab\Blog\Models\Category;
+use Flash;
 
 class Categories extends Controller
 {
@@ -20,5 +22,23 @@ class Categories extends Controller
         parent::__construct();
 
         BackendMenu::setContext('RainLab.Blog', 'blog', 'categories');
+    }
+
+    public function index_onDelete()
+    {
+        if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
+
+            foreach ($checkedIds as $categoryId) {
+                if ((!$category = Category::find($categoryId)))
+                    continue;
+
+                $category->posts()->detach();
+                $category->delete();
+            }
+
+            Flash::success('Successfully deleted those categories.');
+        }
+
+        return $this->listRefresh();
     }
 }
