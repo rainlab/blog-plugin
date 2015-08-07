@@ -1,6 +1,7 @@
 <?php namespace RainLab\Blog\Models;
 
 use Backend\Models\ImportModel;
+use Backend\Models\User as AuthorModel;
 use ApplicationException;
 
 /**
@@ -18,7 +19,14 @@ class PostImport extends ImportModel
         'content' => 'required',
     ];
 
+    protected $authorEmailCache = [];
+
     protected $categoryNameCache = [];
+
+    public function getDefaultAuthorOptions()
+    {
+        return AuthorModel::all()->lists('full_name', 'email');
+    }
 
     public function getPostCategoriesOptions()
     {
@@ -42,16 +50,33 @@ class PostImport extends ImportModel
         foreach ($results as $row => $data) {
             try {
 
-                if (!$slug = array_get($data, 'slug')) {
-                    $this->logSkipped($row, 'Missing slug address');
+                if (!$title = array_get($data, 'title')) {
+                    $this->logSkipped($row, 'Missing post title');
                     continue;
                 }
 
-                $post = Post::firstOrNew(['slug' => $slug]);
+                /*
+                 * Find or create
+                 */
+                $post = Post::make();
+
+                if ($this->update_existing) {
+                    $post = $this->findDuplicatePost($data) ?: $post;
+                }
+
                 $postExists = $post->exists;
 
-                foreach ($data as $attribute => $value) {
-                    $post->{$attribute} = $value;
+                /*
+                 * Set attributes
+                 */
+                $except = ['id', 'categories', 'author_email'];
+
+                foreach (array_except($data, $except) as $attribute => $value) {
+                    $post->{$attribute} = $value ?: null;
+                }
+
+                if ($author = $this->findAuthorFromEmail($data)) {
+                    $post->user_id = $author->id;
                 }
 
                 $post->forceSave();
@@ -60,6 +85,9 @@ class PostImport extends ImportModel
                     $post->categories()->sync($categoryIds, false);
                 }
 
+                /*
+                 * Log results
+                 */
                 if ($postExists) {
                     $this->logUpdated();
                 }
@@ -71,7 +99,36 @@ class PostImport extends ImportModel
                 $this->logError($row, $ex->getMessage());
             }
         }
+    }
 
+    protected function findAuthorFromEmail($data)
+    {
+        if (!$email = array_get($data, 'email', $this->default_author)) {
+            return null;
+        }
+
+        if (isset($this->authorEmailCache[$email])) {
+            return $this->authorEmailCache[$email];
+        }
+
+        $author = AuthorModel::where('email', $email)->first();
+        return $this->authorEmailCache[$email] = $author;
+    }
+
+    protected function findDuplicatePost($data)
+    {
+        if ($id = array_get($data, 'id')) {
+            return Post::find($id);
+        }
+
+        $title = array_get($data, 'title');
+        $post = Post::where('title', $title);
+
+        if ($slug = array_get($data, 'slug')) {
+            $post->orWhere('slug', $slug);
+        }
+
+        return $post->first();
     }
 
     protected function getCategoryIdsForPost($data)

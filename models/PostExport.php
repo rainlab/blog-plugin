@@ -10,11 +10,20 @@ class PostExport extends ExportModel
 {
     public $table = 'rainlab_blog_posts';
 
+    /**
+     * @var array Relations
+     */
+    public $belongsTo = [
+        'post_user' => [
+            'Backend\Models\User',
+            'key' => 'user_id'
+        ]
+    ];
+
     public $belongsToMany = [
         'post_categories' => [
             'RainLab\Blog\Models\Category',
             'table' => 'rainlab_blog_posts_categories',
-            'order' => 'name',
             'key' => 'post_id',
             'otherKey' => 'category_id'
         ]
@@ -24,18 +33,34 @@ class PostExport extends ExportModel
      * The accessors to append to the model's array form.
      * @var array
      */
-    protected $appends = ['categories'];
+    protected $appends = [
+        'author_email',
+        'categories'
+    ];
 
     public function exportData($columns, $sessionKey = null)
     {
-        $result = self::with('post_categories')->get()->toArray();
+        $result = self::make()
+            ->with([
+                'post_user',
+                'post_categories'
+            ])
+            ->get()
+            ->toArray()
+        ;
 
         return $result;
     }
 
+    public function getAuthorEmailAttribute()
+    {
+        if (!$this->post_user) return '';
+        return $this->post_user->email;
+    }
+
     public function getCategoriesAttribute()
     {
-        $categories = $this->post_categories->lists('name');
-        return $this->encodeArrayValue($categories);
+        if (!$this->post_categories) return '';
+        return $this->encodeArrayValue($this->post_categories->lists('name'));
     }
 }

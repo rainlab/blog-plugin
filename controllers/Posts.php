@@ -26,9 +26,6 @@ class Posts extends Controller
         parent::__construct();
 
         BackendMenu::setContext('RainLab.Blog', 'blog', 'posts');
-        $this->addCss('/plugins/rainlab/blog/assets/css/rainlab.blog-preview.css');
-
-        $this->addJs('/plugins/rainlab/blog/assets/js/post-form.js');
     }
 
     public function index()
@@ -43,12 +40,18 @@ class Posts extends Controller
     public function create()
     {
         $this->bodyClass = 'compact-container';
+        $this->addCss('/plugins/rainlab/blog/assets/css/rainlab.blog-preview.css');
+        $this->addJs('/plugins/rainlab/blog/assets/js/post-form.js');
+
         return $this->asExtension('FormController')->create();
     }
 
     public function update($recordId = null)
     {
         $this->bodyClass = 'compact-container';
+        $this->addCss('/plugins/rainlab/blog/assets/css/rainlab.blog-preview.css');
+        $this->addJs('/plugins/rainlab/blog/assets/js/post-form.js');
+
         return $this->asExtension('FormController')->update($recordId);
     }
 

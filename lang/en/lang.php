@@ -36,6 +36,7 @@ return [
         'slug' => 'Slug',
         'slug_placeholder' => 'new-post-slug',
         'categories' => 'Categories',
+        'author_email' => 'Author Email',
         'created' => 'Created',
         'created_date' => 'Created date',
         'updated' => 'Updated',
