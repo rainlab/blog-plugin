@@ -31,6 +31,7 @@ Use the `blogPosts` component to display a list of latest blog posts on a page. 
 
 * **pageNumber** - this value is used to determine what page the user is on, it should be a routing parameter for the default markup. The default value is **{{ :page }}** to obtain the value from the route parameter `:page`.
 * **categoryFilter** - a category slug to filter the posts by. If left blank, all posts are displayed.
+* **isSearch** - defines if the page is used to display search results. If activated all GET requests throw 404 errors, and all POST request display the search results.
 * **postsPerPage** - how many posts to display on a single page (the pagination is supported automatically). The default value is 10.
 * **noPostsMessage** - message to display in the empty post list.
 * **sortOrder** - the column name and direction used for the sort order of the posts. The default value is **published_at desc**.
@@ -44,6 +45,8 @@ The blogPosts component injects the following variables to the page where it's u
 * **category** - the blog category object loaded from the database. If the category is not found, the variable value is **null**.
 * **categoryPage** - contains the value of the `categoryPage` component's property.
 * **noPostsMessage** - contains the value of the `noPostsMessage` component's property.
+* **isSearch** - contains the value of the `isSearch` component's property.
+* **searchParam** - the search term from the POST request.
 
 The component supports pagination and reads the current page index from the `:page` URL parameter. The next example shows the basic component usage on the blog home page:
 
@@ -146,6 +149,33 @@ The component can be used on any page. The next example shows the basic componen
 
 The category list is coded in the default component partial `plugins/rainlab/blog/components/categories/default.htm`.
 
+### Search Form
+
+Use the `blogSearchForm` component to display a simple search form. The component has the following properties:
+
+* **resultPage** - path to the search results page. The default value is **blog/search**
+
+The component injects the following variables to the page where it's used:
+
+* **resultPage** - contains the value of the `resultPage` component's property. 
+
+The component can be used on any page. The next example shows the basic component usage on the blog home page:
+
+    title = "Blog"
+    url = "/blog/:page?"
+
+    [blogPosts]
+    
+    [blogSearchForm]
+    resultPage = "blog-search"
+    ==
+    ...
+    <div class="sidebar">
+        {% component 'blogSearchForm' %}
+    </div>
+    ...
+
+The search form is coded in the default component partial `plugins/rainlab/blog/components/searchform/default.htm`.
 ## Using markdown
 
 October supports [standard markdown syntax](http://daringfireball.net/projects/markdown/) as well as [extended markdown syntax](http://michelf.ca/projects/php-markdown/extra/)

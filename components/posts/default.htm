@@ -1,5 +1,9 @@
 {% set posts = __SELF__.posts %}
 
+{% if __SELF__.isSearch %}
+    <h2>Search Results for: {{ __SELF__.searchParam }}</h2>
+{% endif %}
+
 <ul class="post-list">
     {% for post in posts %}
         <li>
