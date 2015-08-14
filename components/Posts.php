@@ -1,10 +1,12 @@
 <?php namespace RainLab\Blog\Components;
 
+use App;
 use Redirect;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
 use RainLab\Blog\Models\Category as BlogCategory;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Posts extends ComponentBase
 {
@@ -128,8 +130,11 @@ class Posts extends ComponentBase
     public function onRun()
     {
         $this->prepareVars();
-
-        $this->category = $this->page['category'] = $this->loadCategory();
+        try{
+            $this->category = $this->page['category'] = $this->loadCategory();
+        } catch (ModelNotFoundException $e){
+            return App::make('Cms\Classes\Controller')->setStatusCode(404)->run('/404');
+        }
         $this->posts = $this->page['posts'] = $this->listPosts();
 
         /*
@@ -188,8 +193,7 @@ class Posts extends ComponentBase
         if (!$categoryId = $this->property('categoryFilter'))
             return null;
 
-        if (!$category = BlogCategory::whereSlug($categoryId)->first())
-            return null;
+        $category = BlogCategory::whereSlug($categoryId)->firstOrFail();
 
         return $category;
     }

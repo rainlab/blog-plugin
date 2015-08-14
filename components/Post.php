@@ -1,7 +1,9 @@
 <?php namespace RainLab\Blog\Components;
 
+use App;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use RainLab\Blog\Models\Post as BlogPost;
 
 class Post extends ComponentBase
@@ -50,18 +52,21 @@ class Post extends ComponentBase
     public function onRun()
     {
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
-        $this->post = $this->page['post'] = $this->loadPost();
+        try{
+            $this->post = $this->page['post'] = $this->loadPost();
+        } catch (ModelNotFoundException $e){
+            return App::make('Cms\Classes\Controller')->setStatusCode(404)->run('/404');
+        }
     }
 
     protected function loadPost()
     {
         $slug = $this->property('slug');
-        $post = BlogPost::isPublished()->where('slug', $slug)->first();
-
+        $post = BlogPost::isPublished()->where('slug', $slug)->firstOrFail();
         /*
          * Add a "url" helper attribute for linking to each category
          */
-        if ($post && $post->categories->count()) {
+        if ($post->categories->count()) {
             $post->categories->each(function($category){
                 $category->setUrl($this->categoryPage, $this->controller);
             });
