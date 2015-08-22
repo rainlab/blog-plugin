@@ -21,7 +21,7 @@ noRecordsMessage: backend::lang.list.no_records
 recordsPerPage: 5
 
 # Display checkboxes next to each record
-# showCheckboxes: true
+showCheckboxes: true
 
 # Toolbar widget configuration
 toolbar:
