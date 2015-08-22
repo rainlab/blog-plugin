@@ -20,3 +20,4 @@
 1.0.14: Add support for CSRF protection feature added to core.
 1.1.0: Replaced the Post editor with the new core Markdown editor.
 1.1.1: Posts can now be imported and exported.
+1.1.2: Posts are no longer visible if the published date has not passed.

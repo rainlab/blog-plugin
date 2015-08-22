@@ -9,6 +9,7 @@ use Markdown;
 use ValidationException;
 use RainLab\Blog\Classes\TagProcessor;
 use Backend\Models\User;
+use Carbon\Carbon;
 
 class Post extends Model
 {
@@ -45,7 +46,7 @@ class Post extends Model
         'updated_at desc' => 'Updated (descending)',
         'published_at asc' => 'Published (ascending)',
         'published_at desc' => 'Published (descending)',
-	    'random' => 'Random'
+        'random' => 'Random'
     );
 
     /*
@@ -92,20 +93,28 @@ class Post extends Model
 
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
 
-        if ($published)
+        if ($published) {
             $query->isPublished();
+        }
 
         /*
          * Sorting
          */
-        if (!is_array($sort)) $sort = [$sort];
+        if (!is_array($sort)) {
+            $sort = [$sort];
+        }
+
         foreach ($sort as $_sort) {
 
             if (in_array($_sort, array_keys(self::$allowedSortingOptions))) {
                 $parts = explode(' ', $_sort);
-                if (count($parts) < 2) array_push($parts, 'desc');
+                if (count($parts) < 2) {
+                    array_push($parts, 'desc');
+                }
                 list($sortField, $sortDirection) = $parts;
-	            if ($sortField == "random") $sortField = DB::raw('RAND()');
+                if ($sortField == 'random') {
+                    $sortField = DB::raw('RAND()');
+                }
                 $query->orderBy($sortField, $sortDirection);
             }
         }
@@ -192,8 +201,9 @@ class Post extends Model
     {
         $result = Markdown::parse(trim($input));
 
-        if ($preview)
+        if ($preview) {
             $result = str_replace('<pre>', '<pre class="prettyprint">', $result);
+        }
 
         $result = TagProcessor::instance()->processTags($result, $preview);
 
@@ -209,6 +219,8 @@ class Post extends Model
         return $query
             ->whereNotNull('published')
             ->where('published', true)
+            ->whereNotNull('published_at')
+            ->where('published_at', '<', Carbon::now())
         ;
     }
 
