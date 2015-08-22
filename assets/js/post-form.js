@@ -6,7 +6,8 @@
 
         this.formAction = this.$form.attr('action')
         this.sessionKey = $('input[name=_session_key]', this.$form).val()
-        if ( null != this.$markdownEditor.markdownEditor ) {
+
+        if (this.$markdownEditor.length > 0) {
             this.codeEditor = this.$markdownEditor.markdownEditor('getEditorObject')
 
             this.$markdownEditor.on('oc.markdownEditorInitPreview', $.proxy(this.initPreview, this))
