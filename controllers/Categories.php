@@ -32,7 +32,6 @@ class Categories extends Controller
                 if ((!$category = Category::find($categoryId)))
                     continue;
 
-                $category->posts()->detach();
                 $category->delete();
             }
 

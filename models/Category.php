@@ -36,6 +36,11 @@ class Category extends Model
             $this->slug = Str::slug($this->name);
     }
 
+    public function afterDelete()
+    {
+        $this->posts()->detach();
+    }
+
     public function getPostCountAttribute()
     {
         return $this->posts()->count();
