@@ -45,6 +45,7 @@ class Post extends Model
         'updated_at desc' => 'Updated (descending)',
         'published_at asc' => 'Published (ascending)',
         'published_at desc' => 'Published (descending)',
+	    'random' => 'Random'
     );
 
     /*
@@ -104,7 +105,7 @@ class Post extends Model
                 $parts = explode(' ', $_sort);
                 if (count($parts) < 2) array_push($parts, 'desc');
                 list($sortField, $sortDirection) = $parts;
-
+	            if ($sortField == "random") $sortField = DB::raw('RAND()');
                 $query->orderBy($sortField, $sortDirection);
             }
         }
