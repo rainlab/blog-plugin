@@ -58,7 +58,7 @@ secondaryTabs:
 
         excerpt:
             tab: rainlab.blog::lang.post.tab_manage
-            label: rainlab.blog::lang.post.summary
+            label: rainlab.blog::lang.post.excerpt
             type: textarea
             size: small
 
