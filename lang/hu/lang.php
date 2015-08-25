@@ -51,7 +51,6 @@ return [
         'tab_manage' => 'Kezelés',
         'published_on' => 'Közzététel dátuma',
         'excerpt' => 'Kivonat',
-        'summary' => 'Összegzés',
         'featured_images' => 'Kiemelt képek',
         'delete_confirm' => 'Valóban törölni akarja ezt a bejegyzést?',
         'close_confirm' => 'A bejegyzés nem került mentésre.',

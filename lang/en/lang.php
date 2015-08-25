@@ -51,7 +51,6 @@ return [
         'tab_manage' => 'Manage',
         'published_on' => 'Published on',
         'excerpt' => 'Excerpt',
-        'summary' => 'Summary',
         'featured_images' => 'Featured Images',
         'delete_confirm' => 'Do you really want to delete this post?',
         'close_confirm' => 'The post is not saved.',
