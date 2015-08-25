@@ -12,8 +12,8 @@ class CreateCategoriesTable extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('name');
-            $table->string('slug')->index();
+            $table->string('name')->nullable();
+            $table->string('slug')->nullable()->index();
             $table->string('code')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
