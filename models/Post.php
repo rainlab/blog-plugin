@@ -10,6 +10,7 @@ use ValidationException;
 use RainLab\Blog\Classes\TagProcessor;
 use Backend\Models\User;
 use Carbon\Carbon;
+use DB;
 
 class Post extends Model
 {
