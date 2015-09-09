@@ -1,0 +1,7 @@
+{% set archiveMonths = __SELF__.archiveMonths %}
+
+<ul>
+{% for archiveMonth in archiveMonths %}
+    <li><a href="{{archiveMonth.url}}">{{archiveMonth.month}}</a></li>
+{% endfor %}
+</ul>
