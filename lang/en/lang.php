@@ -119,6 +119,17 @@ return [
         'rssfeed_blog' => 'Blog page',
         'rssfeed_blog_description' => 'Name of the main blog page file for generating links. This property is used by the default component partial.',
         'rssfeed_title' => 'RSS Feed',
-        'rssfeed_description' => 'Generates an RSS feed containing posts from the blog.'
+        'rssfeed_description' => 'Generates an RSS feed containing posts from the blog.',
+	'archive_list_name' => 'Archive List',
+        'archive_list_description' => 'Displays a list of the past n months on the page',
+        'archive_list_months_to_show' => 'Number of past months to show',
+        'archive_list_months_to_show_validation' => 'Invalid format of the months to show value. Needs to be a number.',
+        'archive_list_show_post_count' => 'Show post count?',
+        'archive_list_slug' => 'Archive list slug',
+        'archive_list_slug_description' => "Look up the blog posts using a slug containing the month and year",
+        'archive_list_page' => 'Archive page',
+        'archive_list_page_description' => 'Name of the CMS page used for displaying archive posts',
+        'archive_posts_title' => 'Archive posts',
+        'archive_posts_description' => 'Displays a list of posts filtered by month and year'
     ]
 ];
