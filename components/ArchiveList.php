@@ -81,6 +81,7 @@ class ArchiveList extends ComponentBase
         foreach ($archiveMonths as $m)
         {
             $m->url = $this->controller->pageUrl($this->property('archivePage'), ['slug' => urlencode($m->month)]);
+            $m->count = count(DB::select("SELECT DATE_FORMAT(published_at, '%M %Y') AS month FROM `rainlab_blog_posts` WHERE published=1 AND DATE_FORMAT(published_at, '%M %Y') = '$m->month'"));
         }
 
         return collect($archiveMonths);
