@@ -1,5 +1,6 @@
 <?php namespace RainLab\Blog\Components;
 
+use DB;
 use Redirect;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
@@ -71,20 +72,17 @@ class ArchiveList extends ComponentBase
 
     protected function loadMonths($monthsToShow)
     {
-        /*
-         * Make a collection of the past x months
-         */
-        $archiveMonths = collect([]);
-        
-        for ($m=1; $m<=$monthsToShow; $m++)
+        if (($monthsToShow > 0) ? $limit_string = "LIMIT 0, $monthsToShow" : $limit_string = "");
+
+        $monthsArray = DB::select("SELECT DATE_FORMAT(published_at, '%M %Y') AS month FROM `rainlab_blog_posts` WHERE published=1 GROUP BY DATE_FORMAT(published_at, '%M %Y') ORDER BY published_at ASC $limit_string");
+
+        $archiveMonths = collect($monthsArray);
+
+        foreach ($archiveMonths as $m)
         {
-            $monthTime = strtotime('-'.$m.' months');
-            $archiveMonths->push(collect([
-                'month' => date('F Y', $monthTime),
-                'url'   => $this->controller->pageUrl($this->property('archivePage'), ['slug' => urlencode(date('F Y', $monthTime))])
-            ]));
+            $m->url = $this->controller->pageUrl($this->property('archivePage'), ['slug' => urlencode($m->month)]);
         }
 
-        return $archiveMonths;
+        return collect($archiveMonths);
     }
 }
