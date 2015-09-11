@@ -125,6 +125,7 @@ return [
         'archive_list_description' => 'Displays a list of the past n months on the page',
         'archive_list_months_to_show' => 'Number of past months to show',
         'archive_list_months_to_show_validation' => 'Invalid format of the months to show value. Needs to be a number.',
+        'archive_list_show_post_count' => 'Show post count?',
         'archive_list_slug' => 'Archive list slug',
         'archive_list_slug_description' => "Look up the blog posts using a slug containing the month and year",
         'archive_list_page' => 'Archive page',

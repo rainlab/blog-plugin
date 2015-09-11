@@ -2,6 +2,6 @@
 
 <ul>
 {% for archiveMonth in archiveMonths %}
-    <li><a href="{{archiveMonth.url}}">{{archiveMonth.month}} ({{ archiveMonth.count }})</a></li>
+    <li><a href="{{archiveMonth.url}}">{{archiveMonth.month}} {% if archiveMonth.count %}({{ archiveMonth.count }}){% endif %}</a></li>
 {% endfor %}
 </ul>
