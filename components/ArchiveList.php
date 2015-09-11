@@ -1,7 +1,6 @@
 <?php namespace RainLab\Blog\Components;
 
 use DB;
-use Redirect;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
@@ -42,6 +41,11 @@ class ArchiveList extends ComponentBase
                 'validationMessage' => 'rainlab.blog::lang.settings.archive_list_months_to_show_validation',
                 'default'           => '5',
             ],
+            'showPostCount' => [
+                'title'             => 'rainlab.blog::lang.settings.archive_list_show_post_count',
+                'type'              => 'checkbox',
+                'default'           => 'false'
+            ],
             'slug' => [
                 'title'             => 'rainlab.blog::lang.settings.archive_list_slug',
                 'description'       => 'rainlab.blog::lang.settings.archive_list_slug_description',
@@ -78,10 +82,17 @@ class ArchiveList extends ComponentBase
 
         $archiveMonths = collect($monthsArray);
 
-        foreach ($archiveMonths as $m)
+        foreach ($archiveMonths as $archiveMonth)
         {
-            $m->url = $this->controller->pageUrl($this->property('archivePage'), ['slug' => urlencode($m->month)]);
-            $m->count = count(DB::select("SELECT DATE_FORMAT(published_at, '%M %Y') AS month FROM `rainlab_blog_posts` WHERE published=1 AND DATE_FORMAT(published_at, '%M %Y') = '$m->month'"));
+            $archiveMonth->url = $this->controller->pageUrl($this->property('archivePage'), ['slug' => urlencode($archiveMonth->month)]);
+            if ($this->property('showPostCount'))
+            {
+                $archiveMonth->count = count(DB::select("SELECT DATE_FORMAT(published_at, '%M %Y') AS month FROM `rainlab_blog_posts` WHERE published=1 AND DATE_FORMAT(published_at, '%M %Y') = '$archiveMonth->month'"));
+            }
+            else
+            {
+                $archiveMonth->count = FALSE;
+            }
         }
 
         return collect($archiveMonths);
