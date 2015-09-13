@@ -72,10 +72,10 @@ class Posts extends Controller
     public function index_onDelete()
     {
         if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
-
             foreach ($checkedIds as $postId) {
-                if ((!$post = Post::find($postId)) || !$post->canEdit($this->user))
+                if ((!$post = Post::find($postId)) || !$post->canEdit($this->user)) {
                     continue;
+                }
 
                 $post->delete();
             }
@@ -91,8 +91,9 @@ class Posts extends Controller
      */
     public function listInjectRowClass($record, $definition = null)
     {
-        if (!$record->published)
+        if (!$record->published) {
             return 'safe disabled';
+        }
     }
 
     public function formBeforeCreate($model)
@@ -110,5 +111,4 @@ class Posts extends Controller
             'preview' => $previewHtml
         ];
     }
-
 }

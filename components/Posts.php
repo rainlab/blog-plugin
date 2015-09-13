@@ -65,7 +65,7 @@ class Posts extends ComponentBase
                 'title'       => 'rainlab.blog::lang.settings.posts_pagination',
                 'description' => 'rainlab.blog::lang.settings.posts_pagination_description',
                 'type'        => 'string',
-                'default'     => '{{ :page }}',
+                'default'     => '{{ :page }}'
             ],
             'categoryFilter' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_filter',
@@ -78,7 +78,7 @@ class Posts extends ComponentBase
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$',
                 'validationMessage' => 'rainlab.blog::lang.settings.posts_per_page_validation',
-                'default'           => '10',
+                'default'           => '10'
             ],
             'noPostsMessage' => [
                 'title'        => 'rainlab.blog::lang.settings.posts_no_posts',
@@ -98,15 +98,15 @@ class Posts extends ComponentBase
                 'description' => 'rainlab.blog::lang.settings.posts_category_description',
                 'type'        => 'dropdown',
                 'default'     => 'blog/category',
-                'group'       => 'Links',
+                'group'       => 'Links'
             ],
             'postPage' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_post',
                 'description' => 'rainlab.blog::lang.settings.posts_post_description',
                 'type'        => 'dropdown',
                 'default'     => 'blog/post',
-                'group'       => 'Links',
-            ],
+                'group'       => 'Links'
+            ]
         ];
     }
 
@@ -138,8 +138,9 @@ class Posts extends ComponentBase
         if ($pageNumberParam = $this->paramName('pageNumber')) {
             $currentPage = $this->property('pageNumber');
 
-            if ($currentPage > ($lastPage = $this->posts->lastPage()) && $currentPage > 1)
+            if ($currentPage > ($lastPage = $this->posts->lastPage()) && $currentPage > 1) {
                 return Redirect::to($this->currentPageUrl([$pageNumberParam => $lastPage]));
+            }
         }
     }
 
@@ -185,11 +186,13 @@ class Posts extends ComponentBase
 
     protected function loadCategory()
     {
-        if (!$categoryId = $this->property('categoryFilter'))
+        if (!$categoryId = $this->property('categoryFilter')) {
             return null;
+        }
 
-        if (!$category = BlogCategory::whereSlug($categoryId)->first())
+        if (!$category = BlogCategory::whereSlug($categoryId)->first()) {
             return null;
+        }
 
         return $category;
     }
