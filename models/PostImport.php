@@ -15,7 +15,7 @@ class PostImport extends ImportModel
      * Validation rules
      */
     public $rules = [
-        'title' => 'required',
+        'title'   => 'required',
         'content' => 'required',
     ];
 
@@ -49,7 +49,6 @@ class PostImport extends ImportModel
          */
         foreach ($results as $row => $data) {
             try {
-
                 if (!$title = array_get($data, 'title')) {
                     $this->logSkipped($row, 'Missing post title');
                     continue;
@@ -112,6 +111,7 @@ class PostImport extends ImportModel
         }
 
         $author = AuthorModel::where('email', $email)->first();
+
         return $this->authorEmailCache[$email] = $author;
     }
 
@@ -139,7 +139,9 @@ class PostImport extends ImportModel
             $categoryNames = $this->decodeArrayValue(array_get($data, 'categories'));
 
             foreach ($categoryNames as $name) {
-                if (!$name = trim($name)) continue;
+                if (!$name = trim($name)) {
+                    continue;
+                }
 
                 if (isset($this->categoryNameCache[$name])) {
                     $ids[] = $this->categoryNameCache[$name];
@@ -156,5 +158,4 @@ class PostImport extends ImportModel
 
         return $ids;
     }
-
 }

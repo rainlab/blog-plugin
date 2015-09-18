@@ -27,10 +27,10 @@ class Categories extends Controller
     public function index_onDelete()
     {
         if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
-
             foreach ($checkedIds as $categoryId) {
-                if ((!$category = Category::find($categoryId)))
+                if ((!$category = Category::find($categoryId))) {
                     continue;
+                }
 
                 $category->delete();
             }

@@ -32,8 +32,9 @@ class Category extends Model
     public function beforeValidate()
     {
         // Generate a URL slug for this model
-        if (!$this->exists && !$this->slug)
+        if (!$this->exists && !$this->slug) {
             $this->slug = Str::slug($this->name);
+        }
     }
 
     public function afterDelete()
@@ -54,7 +55,7 @@ class Category extends Model
     public function setUrl($pageName, $controller)
     {
         $params = [
-            'id' => $this->id,
+            'id'   => $this->id,
             'slug' => $this->slug,
         ];
 
@@ -83,9 +84,9 @@ class Category extends Model
         $result = [];
 
         if ($type == 'blog-category') {
-
             $references = [];
             $categories = self::orderBy('name')->get();
+
             foreach ($categories as $category) {
                 $references[$category->id] = $category->name;
             }
@@ -105,20 +106,22 @@ class Category extends Model
 
         if ($result) {
             $theme = Theme::getActiveTheme();
-
             $pages = CmsPage::listInTheme($theme, true);
             $cmsPages = [];
+
             foreach ($pages as $page) {
-                if (!$page->hasComponent('blogPosts'))
+                if (!$page->hasComponent('blogPosts')) {
                     continue;
+                }
 
                 /*
                  * Component must use a category filter with a routing parameter
                  * eg: categoryFilter = "{{ :somevalue }}"
                  */
                 $properties = $page->getComponentProperties('blogPosts');
-                if (!isset($properties['categoryFilter']) || !preg_match('/{{\s*:/', $properties['categoryFilter']))
+                if (!isset($properties['categoryFilter']) || !preg_match('/{{\s*:/', $properties['categoryFilter'])) {
                     continue;
+                }
 
                 $cmsPages[] = $page;
             }
@@ -151,16 +154,19 @@ class Category extends Model
         $result = null;
 
         if ($item->type == 'blog-category') {
-            if (!$item->reference || !$item->cmsPage)
+            if (!$item->reference || !$item->cmsPage) {
                 return;
+            }
 
             $category = self::find($item->reference);
-            if (!$category)
+            if (!$category) {
                 return;
+            }
 
             $pageUrl = self::getCategoryPageUrl($item->cmsPage, $category, $theme);
-            if (!$pageUrl)
+            if (!$pageUrl) {
                 return;
+            }
 
             $pageUrl = URL::to($pageUrl);
 
@@ -197,7 +203,9 @@ class Category extends Model
     protected static function getCategoryPageUrl($pageCode, $category, $theme)
     {
         $page = CmsPage::loadCached($theme, $pageCode);
-        if (!$page) return;
+        if (!$page) {
+            return;
+        }
 
         $properties = $page->getComponentProperties('blogPosts');
         if (!isset($properties['categoryFilter'])) {
