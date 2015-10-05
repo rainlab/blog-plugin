@@ -17,6 +17,8 @@ return [
         'access_categories' => 'Manage the blog categories',
         'access_other_posts' => 'Manage other users blog posts',
         'access_import_export' => 'Allowed to import and export posts',
+        // A new permission for restricting access to publishing
+        'access_publish' => 'Can publish posts?',
         'delete_confirm' => 'Are you sure?',
         'chart_published' => 'Published',
         'chart_drafts' => 'Drafts',

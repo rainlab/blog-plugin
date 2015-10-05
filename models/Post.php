@@ -260,4 +260,26 @@ class Post extends Model
 
         return Str::limit(Html::strip($this->content_html), 600);
     }
+    
+    /** 
+     * A new function to limit visibility of the published-button
+     * @return boolean
+    */
+    public function filterFields($fields, $context = null)
+    {
+        // Get the current logged on user to see if author or not.
+        $user = BackendAuth::getUser();
+        if(!$user->hasAnyAccess(["rainlab.blog.access_publish"]))
+        {
+            $fields->published->hidden = true;
+            $fields->published_at->hidden = true;
+            return false;
+        }
+        else
+        {
+            $fields->published->hidden = false;
+            $fields->published_at->hidden = false;
+            return true;
+        }
+    }
 }
