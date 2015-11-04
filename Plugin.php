@@ -50,6 +50,12 @@ class Plugin extends PluginBase
                 'order'       => 500,
 
                 'sideMenu' => [
+                    'new_post' => [
+                        'label'       => 'rainlab.blog::lang.posts.new_post',
+                        'icon'        => 'icon-plus',
+                        'url'         => Backend::url('rainlab/blog/posts/create'),
+                        'permissions' => ['rainlab.blog.access_posts']
+                    ],
                     'posts' => [
                         'label'       => 'rainlab.blog::lang.blog.posts',
                         'icon'        => 'icon-copy',

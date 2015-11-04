@@ -39,6 +39,8 @@ class Posts extends Controller
 
     public function create()
     {
+        BackendMenu::setContextSideMenu('new_post');
+
         $this->bodyClass = 'compact-container';
         $this->addCss('/plugins/rainlab/blog/assets/css/rainlab.blog-preview.css');
         $this->addJs('/plugins/rainlab/blog/assets/js/post-form.js');
