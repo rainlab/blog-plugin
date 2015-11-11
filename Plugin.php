@@ -32,10 +32,22 @@ class Plugin extends PluginBase
     public function registerPermissions()
     {
         return [
-            'rainlab.blog.access_posts'         => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_posts'],
-            'rainlab.blog.access_categories'    => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_categories'],
-            'rainlab.blog.access_other_posts'   => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_other_posts'],
-            'rainlab.blog.access_import_export' => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_import_export']
+            'rainlab.blog.access_posts' => [
+                'tab'   => 'rainlab.blog::lang.blog.tab',
+                'label' => 'rainlab.blog::lang.blog.access_posts'
+            ],
+            'rainlab.blog.access_categories' => [
+                'tab'   => 'rainlab.blog::lang.blog.tab',
+                'label' => 'rainlab.blog::lang.blog.access_categories'
+            ],
+            'rainlab.blog.access_other_posts' => [
+                'tab'   => 'rainlab.blog::lang.blog.tab',
+                'label' => 'rainlab.blog::lang.blog.access_other_posts'
+            ],
+            'rainlab.blog.access_import_export' => [
+                'tab'   => 'rainlab.blog::lang.blog.tab',
+                'label' => 'rainlab.blog::lang.blog.access_import_export'
+            ]
         ];
     }
 
@@ -91,8 +103,10 @@ class Plugin extends PluginBase
         /*
          * Register the image tag processing callback
          */
-        TagProcessor::instance()->registerCallback(function($input, $preview){
-            if (!$preview) return $input;
+        TagProcessor::instance()->registerCallback(function($input, $preview) {
+            if (!$preview) {
+                return $input;
+            }
 
             return preg_replace('|\<img src="image" alt="([0-9]+)"([^>]*)\/>|m',
                 '<span class="image-placeholder" data-index="$1">
@@ -112,19 +126,21 @@ class Plugin extends PluginBase
          */
         Event::listen('pages.menuitem.listTypes', function() {
             return [
-                'blog-category' => 'Blog category',
+                'blog-category'       => 'Blog category',
                 'all-blog-categories' => 'All blog categories'
             ];
         });
 
         Event::listen('pages.menuitem.getTypeInfo', function($type) {
-            if ($type == 'blog-category' || $type == 'all-blog-categories')
+            if ($type == 'blog-category' || $type == 'all-blog-categories') {
                 return Category::getMenuTypeInfo($type);
+            }
         });
 
         Event::listen('pages.menuitem.resolveItem', function($type, $item, $url, $theme) {
-            if ($type == 'blog-category' || $type == 'all-blog-categories')
+            if ($type == 'blog-category' || $type == 'all-blog-categories') {
                 return Category::resolveMenuItem($item, $url, $theme);
+            }
         });
     }
 }

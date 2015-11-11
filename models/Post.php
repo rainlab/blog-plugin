@@ -22,8 +22,8 @@ class Post extends Model
      * Validation
      */
     public $rules = [
-        'title' => 'required',
-        'slug' => ['required', 'regex:/^[a-z0-9\/\:_\-\*\[\]\+\?\|]*$/i'],
+        'title'   => 'required',
+        'slug'    => ['required', 'regex:/^[a-z0-9\/\:_\-\*\[\]\+\?\|]*$/i'],
         'content' => 'required',
         'excerpt' => ''
     ];
@@ -39,13 +39,13 @@ class Post extends Model
      * @var array
      */
     public static $allowedSortingOptions = array(
-        'title asc' => 'Title (ascending)',
+        'title asc'  => 'Title (ascending)',
         'title desc' => 'Title (descending)',
-        'created_at asc' => 'Created (ascending)',
+        'created_at asc'  => 'Created (ascending)',
         'created_at desc' => 'Created (descending)',
-        'updated_at asc' => 'Updated (ascending)',
+        'updated_at asc'  => 'Updated (ascending)',
         'updated_at desc' => 'Updated (descending)',
-        'published_at asc' => 'Published (ascending)',
+        'published_at asc'  => 'Published (ascending)',
         'published_at desc' => 'Published (descending)',
         'random' => 'Random'
     );
@@ -63,7 +63,7 @@ class Post extends Model
 
     public $attachMany = [
         'featured_images' => ['System\Models\File', 'order' => 'sort_order'],
-        'content_images' => ['System\Models\File']
+        'content_images'  => ['System\Models\File']
     ];
 
     /**
@@ -132,7 +132,9 @@ class Post extends Model
          * Categories
          */
         if ($categories !== null) {
-            if (!is_array($categories)) $categories = [$categories];
+            if (!is_array($categories)) {
+                $categories = [$categories];
+            }
             $query->whereHas('categories', function($q) use ($categories) {
                 $q->whereIn('id', $categories);
             });
@@ -176,7 +178,7 @@ class Post extends Model
     public function setUrl($pageName, $controller)
     {
         $params = [
-            'id' => $this->id,
+            'id'   => $this->id,
             'slug' => $this->slug,
         ];
 

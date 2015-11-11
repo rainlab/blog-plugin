@@ -37,8 +37,8 @@ class Post extends ComponentBase
                 'title'       => 'rainlab.blog::lang.settings.post_category',
                 'description' => 'rainlab.blog::lang.settings.post_category_description',
                 'type'        => 'dropdown',
-                'default'     => 'blog/category',
-            ],
+                'default'     => 'blog/category'
+            ]
         ];
     }
 
@@ -62,7 +62,7 @@ class Post extends ComponentBase
          * Add a "url" helper attribute for linking to each category
          */
         if ($post && $post->categories->count()) {
-            $post->categories->each(function($category){
+            $post->categories->each(function($category) {
                 $category->setUrl($this->categoryPage, $this->controller);
             });
         }

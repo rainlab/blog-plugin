@@ -52,8 +52,8 @@ class Categories extends ComponentBase
                 'description' => 'rainlab.blog::lang.settings.category_page_description',
                 'type'        => 'dropdown',
                 'default'     => 'blog/category',
-                'group'       => 'Links',
-            ],
+                'group'       => 'Links'
+            ]
         ];
     }
 
@@ -88,7 +88,7 @@ class Categories extends ComponentBase
         /*
          * Add a "url" helper attribute for linking to each category
          */
-        $categories->each(function($category){
+        $categories->each(function($category) {
             $category->setUrl($this->categoryPage, $this->controller);
         });
 
