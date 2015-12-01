@@ -1,0 +1,10 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Model Form Field configuration
+
+form: ~/plugins/rainlab/blog/models/setting/fields.yaml
+defaultRedirect: rainlab/blog/settings
+redirectClose: rainlab/blog/posts
+modelClass: RainLab\Blog\Models\Setting

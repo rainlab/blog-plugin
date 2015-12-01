@@ -17,10 +17,12 @@ return [
         'access_categories' => 'Manage the blog categories',
         'access_other_posts' => 'Manage other users blog posts',
         'access_import_export' => 'Allowed to import and export posts',
+        'access_settings' => 'Access blog settings',
         'delete_confirm' => 'Are you sure?',
         'chart_published' => 'Published',
         'chart_drafts' => 'Drafts',
-        'chart_total' => 'Total'
+        'chart_total' => 'Total',
+        'settings' => 'Settings'
     ],
     'posts' => [
         'list_title' => 'Manage the blog posts',
@@ -102,5 +104,8 @@ return [
         'posts_category_description' => 'Name of the category page file for the "Posted into" category links. This property is used by the default component partial.',
         'posts_post' => 'Post page',
         'posts_post_description' => 'Name of the blog post page file for the "Learn more" links. This property is used by the default component partial.'
+    ],
+    'setting' => [
+        'title' => 'Manage Blog Settings'
     ]
 ];

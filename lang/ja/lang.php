@@ -16,10 +16,12 @@ return [
         'access_posts' => '投稿の管理',
         'access_categories' => 'カテゴリの管理',
         'access_other_posts' => '他ユーザーの投稿の管理',
+        'access_settings' => 'アクセスブログの設定',
         'delete_confirm' => '削除していいですか？',
         'chart_published' => '公開済み',
         'chart_drafts' => '下書き',
-        'chart_total' => '合計'
+        'chart_total' => '合計',
+        'settings' => '設定'
     ],
     'posts' => [
         'list_title' => '投稿の管理',

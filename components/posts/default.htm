@@ -1,20 +1,21 @@
 {% set posts = __SELF__.posts %}
+{% set settings = __SELF__.settings %}
 
-<ul class="post-list">
+<ul class="post-list{% if settings.ulroot.default %} {{ settings.ulroot.default }}{% endif %}">
     {% for post in posts %}
-        <li>
-            <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+        <li{% if settings.liitem.default %} class="{{ settings.liitem.default }}"{% endif %}>
+            <h3{% if settings.h3title.default %} class="{{ settings.h3title.default }}"{% endif %}><a href="{{ post.url }}"{% if settings.h3atitle.default %} class="{{ settings.h3atitle.default }}"{% endif %}>{{ post.title }}</a></h3>
 
-            <p class="info">
+            <p class="info{% if settings.pinfo.default %} {{ settings.pinfo.default }}{% endif %}">
                 Posted
                 {% if post.categories.count %} in {% endif %}
                 {% for category in post.categories %}
-                    <a href="{{ category.url }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
+                    <a href="{{ category.url }}"{% if settings.pinfoa.default %} class="{{ settings.pinfoa.default }}"{% endif %}>{{ category.name }}</a>{% if not loop.last %}, {% endif %}
                 {% endfor %}
                 on {{ post.published_at|date('M d, Y') }}
             </p>
 
-            <p class="excerpt">{{ post.summary }}</p>
+            <p class="excerpt{% if settings.pexcerpt.default %} {{ settings.pexcerpt.default }}{% endif %}">{{ post.summary }}</p>
         </li>
     {% else %}
         <li class="no-data">{{ noPostsMessage }}</li>

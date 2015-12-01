@@ -16,10 +16,12 @@ return [
         'access_posts' => 'Blog Artikel verwalten',
         'access_categories' => 'Blog Kategorien verwalten',
         'access_other_posts' => 'Blog Artikel anderer Benutzer verwalten',
+        'access_settings' => 'Zugang Blog-Einstellungen',
         'delete_confirm' => 'Bist du sicher?',
         'chart_published' => 'Veröffentlicht',
         'chart_drafts' => 'Entwurf',
-        'chart_total' => 'Gesamt'
+        'chart_total' => 'Gesamt',
+        'settings' => 'Einstellungen'
     ],
     'posts' => [
         'list_title' => 'Blog Artikel verwalten',

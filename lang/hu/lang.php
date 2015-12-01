@@ -17,10 +17,12 @@ return [
         'access_categories' => 'Blog kategóriák kezelése',
         'access_other_posts' => 'Más felhasználók bejegyzéseinek kezelése',
         'access_import_export' => 'Bejegyzések importálása és exportálása',
+        'access_settings' => 'Hozzáférés blogbeállítások',
         'delete_confirm' => 'Valóban törölni akarja a kijelölt bejegyzéseket?',
         'chart_published' => 'Közzétéve',
         'chart_drafts' => 'Piszkozatok',
-        'chart_total' => 'Összesen'
+        'chart_total' => 'Összesen',
+        'settings' => 'Beállításokat'
     ],
     'posts' => [
         'list_title' => 'Blog bejegyzések kezelése',

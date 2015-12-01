@@ -16,11 +16,13 @@ return [
         'access_posts' => 'Управление записями блога',
         'access_categories' => 'Управление категориями блога',
         'access_other_posts' => 'Управление записями других пользователей',
+        'access_settings' => 'Настройки доступа в блоге',
         'delete_confirm' => 'Вы уверены, что хотите сделать это?',
         'chart_published' => 'Опубликовано',
         'chart_drafts' => 'Черновики',
         'chart_total' => 'Всего',
-        'new_category' => 'Новая категория'
+        'new_category' => 'Новая категория',
+        'settings' => 'Настройки'
     ],
     'posts' => [
         'list_title' => 'Управление записями блога',

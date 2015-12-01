@@ -5,6 +5,7 @@ use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
 use RainLab\Blog\Models\Category as BlogCategory;
+use RainLab\Blog\Models\Setting as BlogSetting;
 
 class Posts extends ComponentBase
 {
@@ -13,6 +14,12 @@ class Posts extends ComponentBase
      * @var Collection
      */
     public $posts;
+    
+    /**
+     * A collection of settings to display
+     * @var Collection
+     */
+    public $settings;
 
     /**
      * Parameter to use for the page number
@@ -131,6 +138,7 @@ class Posts extends ComponentBase
 
         $this->category = $this->page['category'] = $this->loadCategory();
         $this->posts = $this->page['posts'] = $this->listPosts();
+        $this->settings = $this->page['settings'] = BlogSetting::getFields();
 
         /*
          * If the page number is not valid, redirect
@@ -192,5 +200,10 @@ class Posts extends ComponentBase
             return null;
 
         return $category;
+    }
+    
+    protected function loadSettings()
+    {
+        return BlogSetting::getFields();
     }
 }

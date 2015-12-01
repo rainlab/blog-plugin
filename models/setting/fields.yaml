@@ -1,0 +1,10 @@
+# ===================================
+#  Field Definitions
+# ===================================
+
+fields:
+
+    content:
+        type: partial
+        path: ~/plugins/rainlab/blog/controllers/settings/_codeblock.htm
+        span: right
