@@ -16,10 +16,12 @@ return [
         'access_posts' => 'управление на публикациите',
         'access_categories' => 'управление на категории',
         'access_other_posts' => 'управление на други потребители публикации в блога',
+        'access_settings' => 'Конфигуриране на настройките на блога',
         'delete_confirm' => 'Сигурни ли сте?',
         'chart_published' => 'Публикувано',
         'chart_drafts' => 'Чернови',
-        'chart_total' => 'Общо'
+        'chart_total' => 'Общо',
+        'settings' => 'Настройки',
     ],
     'posts' => [
         'list_title' => 'Управление публикациите в блога',

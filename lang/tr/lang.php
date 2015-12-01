@@ -16,10 +16,12 @@ return [
         'access_posts' => 'Gönderileri yönet',
         'access_categories' => 'Blog kategorilerini yönet',
         'access_other_posts' => 'Diğer kullanıcıların gönderilerini yönet',
+        'access_settings' => 'Erişim günlüğü ayarları',
         'delete_confirm' => 'Emin misiniz?',
         'chart_published' => 'Yayınlandı',
         'chart_drafts' => 'Taslaklar',
-        'chart_total' => 'Toplam'
+        'chart_total' => 'Toplam',
+        'settings' => 'Ayarlar'
     ],
     'posts' => [
         'list_title' => 'Blog gönderilerini yönet',

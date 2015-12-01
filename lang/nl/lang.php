@@ -17,10 +17,12 @@ return [
         'access_categories' => 'Blog categorieën beheren',
         'access_other_posts' => 'Beheren van blog artikelen van gebruikers',
         'access_import_export' => 'Toegang tot importeren en exporteren van artikelen',
+        'access_settings' => 'Toegang blog instellingen',
         'delete_confirm' => 'Weet je het zeker?',
         'chart_published' => 'Gepubliceerd',
         'chart_drafts' => 'Concepten',
-        'chart_total' => 'Totaal'
+        'chart_total' => 'Totaal',
+        'settings' => 'Instellingen'
     ],
     'posts' => [
         'list_title' => 'Beheren van blog artikelen',

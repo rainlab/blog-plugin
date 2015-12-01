@@ -16,10 +16,12 @@ return [
         'access_posts' => 'Zarządzaj blogowymi postami',
         'access_categories' => 'Zarządzaj blogowymi kategoriami',
         'access_other_posts' => 'Zarządzaj blogowymi postami innych użytkowników',
+        'access_settings' => 'Ustawienia dostępu bloga',
         'delete_confirm' => 'Czy aby na pewno jesteś pewien?',
         'chart_published' => 'Opublikowane',
         'chart_drafts' => 'Szkice',
-        'chart_total' => 'Łącznie'
+        'chart_total' => 'Łącznie',
+        'settings' => 'Ustawienia'
     ],
     'posts' => [
         'list_title' => 'Zarządzaj blogowymi postami',

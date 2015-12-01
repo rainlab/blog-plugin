@@ -16,10 +16,12 @@ return [
         'access_posts' => 'Gérer les articles',
         'access_categories' => 'Gérer les catégories',
         'access_other_posts' => 'Gérer les articles d\'autres utilisateurs',
+        'access_settings' => 'Paramètres du blog d\'accès',
         'delete_confirm' => 'Êtes-vous certain(e) de vouloir supprimer ?',
         'chart_published' => 'Publié',
         'chart_drafts' => 'Brouillons',
-        'chart_total' => 'Total'
+        'chart_total' => 'Total',
+        'settings' => 'Paramètres'
     ],
     'posts' => [
         'list_title' => 'Gérer les articles du blog',

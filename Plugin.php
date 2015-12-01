@@ -35,7 +35,8 @@ class Plugin extends PluginBase
             'rainlab.blog.access_posts'         => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_posts'],
             'rainlab.blog.access_categories'    => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_categories'],
             'rainlab.blog.access_other_posts'   => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_other_posts'],
-            'rainlab.blog.access_import_export' => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_import_export']
+            'rainlab.blog.access_import_export' => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_import_export'],            
+            'rainlab.blog.access_settings' => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_settings']
         ];
     }
 
@@ -50,12 +51,6 @@ class Plugin extends PluginBase
                 'order'       => 500,
 
                 'sideMenu' => [
-                    'new_post' => [
-                        'label'       => 'rainlab.blog::lang.posts.new_post',
-                        'icon'        => 'icon-plus',
-                        'url'         => Backend::url('rainlab/blog/posts/create'),
-                        'permissions' => ['rainlab.blog.access_posts']
-                    ],
                     'posts' => [
                         'label'       => 'rainlab.blog::lang.blog.posts',
                         'icon'        => 'icon-copy',
@@ -67,6 +62,12 @@ class Plugin extends PluginBase
                         'icon'        => 'icon-list-ul',
                         'url'         => Backend::url('rainlab/blog/categories'),
                         'permissions' => ['rainlab.blog.access_categories']
+                    ],
+                    'settings' => [
+                        'label'       => 'rainlab.blog::lang.blog.settings',
+                        'icon'        => 'icon-cog',
+                        'url'         => Backend::url('rainlab/blog/settings'),
+                        'permissions' => ['rainlab.blog.access_settings']
                     ]
                 ]
             ]
@@ -126,5 +127,6 @@ class Plugin extends PluginBase
             if ($type == 'blog-category' || $type == 'all-blog-categories')
                 return Category::resolveMenuItem($item, $url, $theme);
         });
+        
     }
 }

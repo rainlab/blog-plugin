@@ -15,10 +15,12 @@ return [
         'access_posts' => 'Administrer blogginnleggene',
         'access_categories' => 'Administrer bloggkategorier',
         'access_other_posts' => 'Administrere andre brukere sine blogginnlegg',
+        'access_settings' => 'Tilgang blogginnstillingene',
         'delete_confirm' => 'Er du sikker?',
         'chart_published' => 'Publisert',
         'chart_drafts' => 'Utkast',
         'chart_total' => 'Totalt',
+        'settings' => 'Inställningar'
     ],
     'posts' => [
         'list_title' => 'Administrer blogginnlegg',
