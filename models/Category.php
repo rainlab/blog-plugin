@@ -11,6 +11,7 @@ use Cms\Classes\Theme;
 class Category extends Model
 {
     use \October\Rain\Database\Traits\Validation;
+    use \October\Rain\Database\Traits\NestedTree;
 
     public $table = 'rainlab_blog_categories';
 
