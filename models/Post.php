@@ -140,7 +140,7 @@ class Post extends Model
 
             $categories = $categories->getAllChildrenAndSelf()->lists('id');
             $query->whereHas('categories', function($q) use ($categories) {
-                $q->whereIn('category_id', $categories);
+                $q->whereIn('id', $categories);
             });
         }
 
