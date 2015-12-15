@@ -139,7 +139,9 @@ class Post extends Model
             $categories = Category::find($categories);
 
             $categories = $categories->getAllChildrenAndSelf()->lists('id');
-            $query->whereIn('category_id', $categories);
+            $query->whereHas('categories', function($q) use ($categories) {
+                $q->whereIn('category_id', $categories);
+            });
         }
 
         return $query->paginate($perPage, $page);
