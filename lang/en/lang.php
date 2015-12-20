@@ -101,6 +101,8 @@ return [
         'posts_category' => 'Category page',
         'posts_category_description' => 'Name of the category page file for the "Posted into" category links. This property is used by the default component partial.',
         'posts_post' => 'Post page',
-        'posts_post_description' => 'Name of the blog post page file for the "Learn more" links. This property is used by the default component partial.'
+        'posts_post_description' => 'Name of the blog post page file for the "Learn more" links. This property is used by the default component partial.',
+        'show_feat_image' => 'Show Featured Image',
+        'show_feat_image_description' => 'Check this box to show the first featured image of the post on each entry of your post list page.'
     ]
 ];

@@ -14,6 +14,20 @@
                 on {{ post.published_at|date('M d, Y') }}
             </p>
 
+            {% if showFeaturedImage %}
+                {% if post.featured_images.count %}
+                    <div class="featured-images text-center">
+                        <p>
+                            <img
+                                data-src="{{ post.featured_images[0].filename }}"
+                                src="{{ post.featured_images[0].path }}"
+                                alt="{{ post.featured_images[0].description }}"
+                                style="max-width: 100%" />
+                        </p>
+                    </div>
+                {% endif %}
+            {% endif %}
+
             <p class="excerpt">{{ post.summary }}</p>
         </li>
     {% else %}
