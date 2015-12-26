@@ -112,8 +112,8 @@ class Plugin extends PluginBase
          */
         Event::listen('pages.menuitem.listTypes', function() {
             return [
-                'blog-category' => 'Blog category',
-                'all-blog-categories' => 'All blog categories'
+                'blog-category' => 'Blog Category',
+                'all-blog-categories' => 'All Blog Categories'
             ];
         });
 
