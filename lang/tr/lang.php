@@ -89,7 +89,7 @@ return [
         'posts_no_posts' => 'Gönderi mesajı yok',
         'posts_no_posts_description' => 'Eğer bir gönderi yoksa gönderi listesinde görüntülenecek mesaj. Bu özellik varsayılan kısmi bileşeni tarafından kullanılır.',
         'posts_order' => 'Gönderi Sırası',
-        'posts_order_decription' => 'Attribute on which the posts should be ordered',
+        'posts_order_description' => 'Attribute on which the posts should be ordered',
         'posts_category' => 'Kategori sayfası',
         'posts_category_description' => 'Name of the category page file for the "Posted into" category links. Bu özellik varsayılan kısmi bileşeni tarafından kullanılır.',
         'posts_post' => 'Gönderi sayfası',

@@ -89,7 +89,7 @@ return [
         'posts_no_posts' => 'Komunikat o braku postów',
         'posts_no_posts_description' => 'Wiadomość, która ukaże się kiedy komponent nie odnajdzie postów. Ten parametr jest domyślnie używany przez komponent.',
         'posts_order' => 'Kolejność postów',
-        'posts_order_decription' => 'Parametr przez który mają być sortowane posty',
+        'posts_order_description' => 'Parametr przez który mają być sortowane posty',
         'posts_category' => 'Strona kategorii',
         'posts_category_description' => 'Nazwa strony kategorii w wyświetlaniu linków "Posted into" [Opublikowano w]. Ten parametr jest domyślnie używany przez komponent.',
         'posts_post' => 'Strona postu',

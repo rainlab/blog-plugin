@@ -97,7 +97,7 @@ return [
         'posts_no_posts' => 'Geen artikelen melding',
         'posts_no_posts_description' => 'Deze tekst wordt getoond als er geen artikelen zijn. Deze waarde wordt standaard gebruikt door de partial.',
         'posts_order' => 'Volgorde artikelen',
-        'posts_order_decription' => 'Kolom waar de artikelen op gesorteerd moeten worden',
+        'posts_order_description' => 'Kolom waar de artikelen op gesorteerd moeten worden',
         'posts_category' => 'Categorie pagina',
         'posts_category_description' => 'Naam van categorie pagina bestand voor gekoppeld artikel overzichts pagina. Deze waarde wordt standaard gebruikt door de partial.',
         'posts_post' => 'Artikel pagina',

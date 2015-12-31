@@ -97,7 +97,7 @@ return [
         'posts_no_posts' => 'Nincsenek bejegyzések üzenet ',
         'posts_no_posts_description' => 'A blog bejegyzés listában kijelezendő üzenet abban az esetben, ha nincsenek bejegyzések. Az alapértelmezett komponensrész használja ezt a tulajdonságot.',
         'posts_order' => 'Bejegyzések sorrendje',
-        'posts_order_decription' => 'Attribútum, mely alapján rendezni kell a bejegyzéseket',
+        'posts_order_description' => 'Attribútum, mely alapján rendezni kell a bejegyzéseket',
         'posts_category' => 'Kategórialap',
         'posts_category_description' => 'A "Kategória" kategória hivatkozások kategórialap fájljának neve. Az alapértelmezett komponensrész használja ezt a tulajdonságot.',
         'posts_post' => 'Bejegyzéslap',
