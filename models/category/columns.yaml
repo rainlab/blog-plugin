@@ -11,3 +11,7 @@ columns:
     post_count:
         label: rainlab.blog::lang.category.posts
         sortable: false
+
+    color:
+        label: rainlab.blog::lang.category.color
+        sortable: false
