@@ -67,6 +67,7 @@ return [
         'name_placeholder' => 'New category name',
         'slug' => 'Slug',
         'slug_placeholder' => 'new-category-slug',
+        'color' => 'Color',
         'posts' => 'Posts',
         'delete_confirm' => 'Do you really want to delete this category?',
         'return_to_categories' => 'Return to the blog category list'

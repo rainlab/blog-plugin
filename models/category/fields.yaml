@@ -14,3 +14,8 @@ fields:
         span: right
         placeholder: rainlab.blog::lang.category.slug_placeholder
         preset: name
+
+    color:
+        label: rainlab.blog::lang.category.color
+        span: left
+        type: colorpicker
