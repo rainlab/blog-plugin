@@ -2,6 +2,7 @@
 
 use Backend;
 use Controller;
+use RainLab\Blog\Models\Post;
 use System\Classes\PluginBase;
 use RainLab\Blog\Classes\TagProcessor;
 use RainLab\Blog\Models\Category;
@@ -112,19 +113,27 @@ class Plugin extends PluginBase
          */
         Event::listen('pages.menuitem.listTypes', function() {
             return [
-                'blog-category' => 'Blog Category',
-                'all-blog-categories' => 'All Blog Categories'
+                'blog-category' => 'Blog category',
+                'all-blog-categories' => 'All blog categories',
+                'blog-post' => 'Blog post',
+                'all-blog-posts' => 'All blog posts',
             ];
         });
 
         Event::listen('pages.menuitem.getTypeInfo', function($type) {
-            if ($type == 'blog-category' || $type == 'all-blog-categories')
+            if ($type == 'blog-category' || $type == 'all-blog-categories') {
                 return Category::getMenuTypeInfo($type);
+            } elseif ($type == 'blog-post' || $type == 'all-blog-posts') {
+                return Post::getMenuTypeInfo($type);
+            }
         });
 
         Event::listen('pages.menuitem.resolveItem', function($type, $item, $url, $theme) {
-            if ($type == 'blog-category' || $type == 'all-blog-categories')
+            if ($type == 'blog-category' || $type == 'all-blog-categories') {
                 return Category::resolveMenuItem($item, $url, $theme);
+            } elseif ($type == 'blog-post' || $type == 'all-blog-posts') {
+                return Post::resolveMenuItem($item, $url, $theme);
+            }
         });
     }
 }
