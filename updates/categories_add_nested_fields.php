@@ -9,6 +9,10 @@ class CategoriesAddNestedFields extends Migration
 
     public function up()
     {
+        if (Schema::hasColumn('rainlab_blog_categories', 'parent_id')) {
+            return;
+        }
+
         Schema::table('rainlab_blog_categories', function($table)
         {
             $table->integer('parent_id')->unsigned()->index()->nullable();
@@ -25,13 +29,6 @@ class CategoriesAddNestedFields extends Migration
 
     public function down()
     {
-        Schema::table('rainlab_blog_categories', function($table)
-        {
-            $table->dropColumn('parent_id');
-            $table->dropColumn('nest_left');
-            $table->dropColumn('nest_right');
-            $table->dropColumn('nest_depth');
-        });
     }
 
 }

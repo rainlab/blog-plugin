@@ -16,6 +16,10 @@ class CreateCategoriesTable extends Migration
             $table->string('slug')->nullable()->index();
             $table->string('code')->nullable();
             $table->text('description')->nullable();
+            $table->integer('parent_id')->unsigned()->index()->nullable();
+            $table->integer('nest_left')->nullable();
+            $table->integer('nest_right')->nullable();
+            $table->integer('nest_depth')->nullable();
             $table->timestamps();
         });
 
