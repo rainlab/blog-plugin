@@ -2,6 +2,7 @@
 
 use Schema;
 use October\Rain\Database\Updates\Migration;
+use RainLab\Blog\Models\Category as CategoryModel;
 
 class CategoriesAddNestedFields extends Migration
 {
@@ -15,6 +16,11 @@ class CategoriesAddNestedFields extends Migration
             $table->integer('nest_right')->nullable();
             $table->integer('nest_depth')->nullable();
         });
+
+        foreach (CategoryModel::all() as $category) {
+            $category->setDefaultLeftAndRight();
+            $category->save();
+        }
     }
 
     public function down()
