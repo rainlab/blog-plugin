@@ -21,5 +21,6 @@
 1.1.2: Posts are no longer visible if the published date has not passed.
 1.1.3: Added a New Post shortcut button to the blog menu.
 1.2.0:
-    - Nested categories
+    - Categories now support nesting.
     - categories_add_nested_fields.php
+1.2.1: Post slugs now must be unique.
