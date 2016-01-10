@@ -77,6 +77,77 @@ class Post extends Model
 
     public $preview = null;
 
+    public function afterValidate()
+    {
+        if ($this->published && !$this->published_at) {
+            throw new ValidationException([
+               'published_at' => Lang::get('rainlab.blog::lang.post.published_validation')
+            ]);
+        }
+    }
+
+    public function beforeSave()
+    {
+        $this->content_html = self::formatHtml($this->content);
+    }
+
+    /**
+     * Sets the "url" attribute with a URL to this object
+     * @param string $pageName
+     * @param Cms\Classes\Controller $controller
+     */
+    public function setUrl($pageName, $controller)
+    {
+        $params = [
+            'id' => $this->id,
+            'slug' => $this->slug,
+        ];
+
+        if (array_key_exists('categories', $this->getRelations())) {
+            $params['category'] = $this->categories->count() ? $this->categories->first()->slug : null;
+        }
+
+        return $this->url = $controller->pageUrl($pageName, $params);
+    }
+
+    /**
+     * Used to test if a certain user has permission to edit post,
+     * returns TRUE if the user is the owner or has other posts access.
+     * @param User $user
+     * @return bool
+     */
+    public function canEdit(User $user)
+    {
+        return ($this->user_id == $user->id) || $user->hasAnyAccess(['rainlab.blog.access_other_posts']);
+    }
+
+    public static function formatHtml($input, $preview = false)
+    {
+        $result = Markdown::parse(trim($input));
+
+        if ($preview) {
+            $result = str_replace('<pre>', '<pre class="prettyprint">', $result);
+        }
+
+        $result = TagProcessor::instance()->processTags($result, $preview);
+
+        return $result;
+    }
+
+    //
+    // Scopes
+    //
+
+    public function scopeIsPublished($query)
+    {
+        return $query
+            ->whereNotNull('published')
+            ->where('published', true)
+            ->whereNotNull('published_at')
+            ->where('published_at', '<', Carbon::now())
+        ;
+    }
+
     /**
      * Lists posts for the front end
      * @param  array $options Display options
@@ -169,77 +240,6 @@ class Post extends Model
         return $query->whereHas('categories', function($q) use ($categories) {
             $q->whereIn('id', $categories);
         });
-    }
-
-    public function afterValidate()
-    {
-        if ($this->published && !$this->published_at) {
-            throw new ValidationException([
-               'published_at' => Lang::get('rainlab.blog::lang.post.published_validation')
-            ]);
-        }
-    }
-
-    public function beforeSave()
-    {
-        $this->content_html = self::formatHtml($this->content);
-    }
-
-    /**
-     * Sets the "url" attribute with a URL to this object
-     * @param string $pageName
-     * @param Cms\Classes\Controller $controller
-     */
-    public function setUrl($pageName, $controller)
-    {
-        $params = [
-            'id' => $this->id,
-            'slug' => $this->slug,
-        ];
-
-        if (array_key_exists('categories', $this->getRelations())) {
-            $params['category'] = $this->categories->count() ? $this->categories->first()->slug : null;
-        }
-
-        return $this->url = $controller->pageUrl($pageName, $params);
-    }
-
-    /**
-     * Used to test if a certain user has permission to edit post,
-     * returns TRUE if the user is the owner or has other posts access.
-     * @param User $user
-     * @return bool
-     */
-    public function canEdit(User $user)
-    {
-        return ($this->user_id == $user->id) || $user->hasAnyAccess(['rainlab.blog.access_other_posts']);
-    }
-
-    public static function formatHtml($input, $preview = false)
-    {
-        $result = Markdown::parse(trim($input));
-
-        if ($preview) {
-            $result = str_replace('<pre>', '<pre class="prettyprint">', $result);
-        }
-
-        $result = TagProcessor::instance()->processTags($result, $preview);
-
-        return $result;
-    }
-
-    //
-    // Scopes
-    //
-
-    public function scopeIsPublished($query)
-    {
-        return $query
-            ->whereNotNull('published')
-            ->where('published', true)
-            ->whereNotNull('published_at')
-            ->where('published_at', '<', Carbon::now())
-        ;
     }
 
     //
