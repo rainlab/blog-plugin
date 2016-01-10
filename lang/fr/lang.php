@@ -88,7 +88,7 @@ return [
         'posts_no_posts' => 'Message en l\'absence d\'articles',
         'posts_no_posts_description' => 'Message a afficher dans la liste d\'articles lorsqu\'il n\'y a aucun article. Cette propriété est utilisée par le composant partiel par défaut.',
         'posts_order' => 'Ordre des articles',
-        'posts_order_decription' => 'Attribut selon lequel les articles seront ordonnés',
+        'posts_order_description' => 'Attribut selon lequel les articles seront ordonnés',
         'posts_category' => 'Page des catégorie',
         'posts_category_description' => 'Nom de la page des catégorie pour les liens de catégories "Publié dans". Cette propriété est utilisée par le composant partiel par défaut.',
         'posts_post' => 'Page d\'article',

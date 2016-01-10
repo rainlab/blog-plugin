@@ -89,7 +89,7 @@ return [
         'posts_no_posts' => 'Keine Artikel Nachricht',
         'posts_no_posts_description' => 'Nachricht welche dargestellt wird wenn keine Artikel vorhanden sind. Dieser Wert wird von der Standard-Komponente verwendet.',
         'posts_order' => 'Artikel Sortierung',
-        'posts_order_decription' => 'Attribute nach welchem Artikel sortiert werden.',
+        'posts_order_description' => 'Attribute nach welchem Artikel sortiert werden.',
         'posts_category' => 'Kategorien-Seite',
         'posts_category_description' => 'Name der Kategorien-Seiten-Datei für "Veröffentlicht in" Kategorien-Links. Dieser Wert von der Standard-Komponente verwendet.',
         'posts_post' => 'Artikel Seite',
