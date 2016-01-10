@@ -91,6 +91,7 @@ class Post extends Model
             'page'       => 1,
             'perPage'    => 30,
             'sort'       => 'created_at',
+            'categories' => null,
             'category'   => null,
             'search'     => '',
             'published'  => true
@@ -133,7 +134,17 @@ class Post extends Model
         }
 
         /*
-         * Category
+         * Categories
+         */
+        if ($categories !== null) {
+            if (!is_array($categories)) $categories = [$categories];
+            $query->whereHas('categories', function($q) use ($categories) {
+                $q->whereIn('id', $categories);
+            });
+        }
+
+        /*
+         * Category, including children
          */
         if ($category !== null) {
             $category = Category::find($category);
