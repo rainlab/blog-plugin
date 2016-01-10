@@ -83,7 +83,7 @@ class Categories extends ComponentBase
             });
         }
 
-        $categories = $categories->get();
+        $categories = $categories->getNested();
 
         /*
          * Add a "url" helper attribute for linking to each category
