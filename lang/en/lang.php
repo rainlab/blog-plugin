@@ -69,7 +69,8 @@ return [
         'slug_placeholder' => 'new-category-slug',
         'posts' => 'Posts',
         'delete_confirm' => 'Do you really want to delete this category?',
-        'return_to_categories' => 'Return to the blog category list'
+        'return_to_categories' => 'Return to the blog category list',
+        'reorder' => 'Reorder Categories'
     ],
     'settings' => [
         'category_title' => 'Category List',

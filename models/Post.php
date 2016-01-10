@@ -58,7 +58,11 @@ class Post extends Model
     ];
 
     public $belongsToMany = [
-        'categories' => ['RainLab\Blog\Models\Category', 'table' => 'rainlab_blog_posts_categories', 'order' => 'name']
+        'categories' => [
+            'RainLab\Blog\Models\Category',
+            'table' => 'rainlab_blog_posts_categories',
+            'order' => 'name'
+        ]
     ];
 
     public $attachMany = [
@@ -87,7 +91,7 @@ class Post extends Model
             'page'       => 1,
             'perPage'    => 30,
             'sort'       => 'created_at',
-            'categories' => null,
+            'category'   => null,
             'search'     => '',
             'published'  => true
         ], $options));
@@ -129,10 +133,12 @@ class Post extends Model
         }
 
         /*
-         * Categories
+         * Category
          */
-        if ($categories !== null) {
-            if (!is_array($categories)) $categories = [$categories];
+        if ($category !== null) {
+            $category = Category::find($category);
+
+            $categories = $category->getAllChildrenAndSelf()->lists('id');
             $query->whereHas('categories', function($q) use ($categories) {
                 $q->whereIn('id', $categories);
             });
