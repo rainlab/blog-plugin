@@ -3,7 +3,7 @@
 return [
     'plugin' => [
         'name' => 'Blog',
-        'description' => 'A robust blogging platform.'
+        'description' => 'A robust blogging platform.',
     ],
     'blog' => [
         'menu_label' => 'Blog',
@@ -20,13 +20,15 @@ return [
         'delete_confirm' => 'Are you sure?',
         'chart_published' => 'Published',
         'chart_drafts' => 'Drafts',
-        'chart_total' => 'Total'
+        'chart_total' => 'Total',
+        'blog_category' => 'Blog Category',
+        'all_blog_categories' => 'All Blog Categories'
     ],
     'posts' => [
         'list_title' => 'Manage the blog posts',
         'category' => 'Category',
         'hide_published' => 'Hide published',
-        'new_post' => 'New post'
+        'new_post' => 'New post',
     ],
     'post' => [
         'title' => 'Title',
@@ -55,12 +57,12 @@ return [
         'featured_images' => 'Featured Images',
         'delete_confirm' => 'Do you really want to delete this post?',
         'close_confirm' => 'The post is not saved.',
-        'return_to_posts' => 'Return to posts list'
+        'return_to_posts' => 'Return to posts list',
     ],
     'categories' => [
         'list_title' => 'Manage the blog categories',
         'new_category' => 'New category',
-        'uncategorized' => 'Uncategorized'
+        'uncategorized' => 'Uncategorized',
     ],
     'category' => [
         'name' => 'Name',
@@ -70,13 +72,13 @@ return [
         'posts' => 'Posts',
         'delete_confirm' => 'Do you really want to delete this category?',
         'return_to_categories' => 'Return to the blog category list',
-        'reorder' => 'Reorder Categories'
+        'reorder' => 'Reorder Categories',
     ],
     'settings' => [
         'category_title' => 'Category List',
         'category_description' => 'Displays a list of blog categories on the page.',
         'category_slug' => 'Category slug',
-        'category_slug_description' => "Look up the blog category using the supplied slug value. This property is used by the default component partial for marking the currently active category.",
+        'category_slug_description' => 'Look up the blog category using the supplied slug value. This property is used by the default component partial for marking the currently active category.',
         'category_display_empty' => 'Display empty categories',
         'category_display_empty_description' => 'Show categories that do not have any posts.',
         'category_page' => 'Category page',
@@ -84,7 +86,7 @@ return [
         'post_title' => 'Post',
         'post_description' => 'Displays a blog post on the page.',
         'post_slug' => 'Post slug',
-        'post_slug_description' => "Look up the blog post using the supplied slug value.",
+        'post_slug_description' => 'Look up the blog post using the supplied slug value.',
         'post_category' => 'Category page',
         'post_category_description' => 'Name of the category page file for the category links. This property is used by the default component partial.',
         'posts_title' => 'Post List',
@@ -102,6 +104,6 @@ return [
         'posts_category' => 'Category page',
         'posts_category_description' => 'Name of the category page file for the "Posted into" category links. This property is used by the default component partial.',
         'posts_post' => 'Post page',
-        'posts_post_description' => 'Name of the blog post page file for the "Learn more" links. This property is used by the default component partial.'
-    ]
+        'posts_post_description' => 'Name of the blog post page file for the "Learn more" links. This property is used by the default component partial.',
+    ],
 ];

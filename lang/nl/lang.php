@@ -3,7 +3,7 @@
 return [
     'plugin' => [
         'name' => 'Blog',
-        'description' => 'A robust blogging platform.'
+        'description' => 'Een robuust blogging platform.',
     ],
     'blog' => [
         'menu_label' => 'Blog',
@@ -17,16 +17,18 @@ return [
         'access_categories' => 'Blog categorieën beheren',
         'access_other_posts' => 'Beheren van blog artikelen van gebruikers',
         'access_import_export' => 'Toegang tot importeren en exporteren van artikelen',
-        'delete_confirm' => 'Weet je het zeker?',
+        'delete_confirm' => 'Weet u het zeker?',
         'chart_published' => 'Gepubliceerd',
         'chart_drafts' => 'Concepten',
-        'chart_total' => 'Totaal'
+        'chart_total' => 'Totaal',
+        'blog_category' => 'Blog categorie',
+        'all_blog_categories' => 'Alle blog categorieën',
     ],
     'posts' => [
         'list_title' => 'Beheren van blog artikelen',
         'category' => 'Categorie',
         'hide_published' => 'Verberg gepubliceerd',
-        'new_post' => 'Nieuw artikel'
+        'new_post' => 'Nieuw artikel',
     ],
     'post' => [
         'title' => 'Titel',
@@ -53,14 +55,14 @@ return [
         'excerpt' => 'Samenvatting',
         'summary' => 'Samenvatting',
         'featured_images' => 'Uitgelichte afbeelding',
-        'delete_confirm' => 'Weet je zeker dat je dit artikel wilt verwijderen?',
+        'delete_confirm' => 'Weet u zeker dat u dit artikel wilt verwijderen?',
         'close_confirm' => 'Artikel is nog niet opgeslagen.',
-        'return_to_posts' => 'Terug naar artikel overzicht'
+        'return_to_posts' => 'Terug naar artikel overzicht',
     ],
     'categories' => [
         'list_title' => 'Beheer blog categorieën',
         'new_category' => 'Nieuwe categorie',
-        'uncategorized' => 'Ongecategoriseerd'
+        'uncategorized' => 'Ongecategoriseerd',
     ],
     'category' => [
         'name' => 'Naam',
@@ -68,8 +70,9 @@ return [
         'slug' => 'Slug',
         'slug_placeholder' => 'nieuw-categorie-slug',
         'posts' => 'Artikelen',
-        'delete_confirm' => 'Weet je zeker dat je deze categorie wilt verwijderen?',
-        'return_to_categories' => 'Terug naar categorie overzicht'
+        'delete_confirm' => 'Weet u zeker dat u deze categorie wilt verwijderen?',
+        'return_to_categories' => 'Terug naar categorie overzicht',
+        'reorder' => 'Reorder Categories',
     ],
     'settings' => [
         'category_title' => 'Categorie overzicht',
@@ -101,6 +104,6 @@ return [
         'posts_category' => 'Categorie pagina',
         'posts_category_description' => 'Naam van categorie pagina bestand voor gekoppeld artikel overzichts pagina. Deze waarde wordt standaard gebruikt door de partial.',
         'posts_post' => 'Artikel pagina',
-        'posts_post_description' => 'Naam van blog pagina bestand voor de "Lees meer" links. Deze waarde wordt standaard gebruikt door de partial.'
-    ]
+        'posts_post_description' => 'Naam van blog pagina bestand voor de "Lees meer" links. Deze waarde wordt standaard gebruikt door de partial.',
+    ],
 ];
