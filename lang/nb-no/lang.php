@@ -88,7 +88,7 @@ return [
         'posts_no_posts' => 'No posts message',
         'posts_no_posts_description' => 'Message to display in the blog post list in case if there are no posts. This property is used by the default component partial.',
         'posts_order' => 'Post order',
-        'posts_order_decription' => 'Attribute on which the posts should be ordered',
+        'posts_order_description' => 'Attribute on which the posts should be ordered',
         'posts_category' => 'Category page',
         'posts_category_description' => 'Name of the category page file for the "Posted into" category links. This property is used by the default component partial.',
         'posts_post' => 'Post page',

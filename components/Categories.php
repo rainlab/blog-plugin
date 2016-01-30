@@ -83,15 +83,22 @@ class Categories extends ComponentBase
             });
         }
 
-        $categories = $categories->get();
+        $categories = $categories->getNested();
 
         /*
          * Add a "url" helper attribute for linking to each category
          */
-        $categories->each(function($category){
-            $category->setUrl($this->categoryPage, $this->controller);
-        });
+        return $this->linkCategories($categories);
+    }
 
-        return $categories;
+    protected function linkCategories($categories)
+    {
+        return $categories->each(function($category) {
+            $category->setUrl($this->categoryPage, $this->controller);
+
+            if ($category->children) {
+                $this->linkCategories($category->children);
+            }
+        });
     }
 }

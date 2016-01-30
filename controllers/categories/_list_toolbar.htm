@@ -1,5 +1,7 @@
 <div data-control="toolbar">
-    <a href="<?= Backend::url('rainlab/blog/categories/create') ?>" class="btn btn-primary oc-icon-plus"><?= e(trans('rainlab.blog::lang.categories.new_category')) ?></a>
+    <a href="<?= Backend::url('rainlab/blog/categories/create') ?>" class="btn btn-primary oc-icon-plus">
+        <?= e(trans('rainlab.blog::lang.categories.new_category')) ?>
+    </a>
     <button
         class="btn btn-default oc-icon-trash-o"
         disabled="disabled"
@@ -15,4 +17,7 @@
         data-stripe-load-indicator>
         <?= e(trans('backend::lang.list.delete_selected')) ?>
     </button>
+    <a href="<?= Backend::url('rainlab/blog/categories/reorder') ?>" class="btn btn-default oc-icon-sitemap">
+        <?= e(trans('rainlab.blog::lang.category.reorder')) ?>
+    </a>
 </div>

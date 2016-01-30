@@ -157,7 +157,7 @@ class Posts extends ComponentBase
 
     protected function listPosts()
     {
-        $categories = $this->category ? $this->category->id : null;
+        $category = $this->category ? $this->category->id : null;
 
         /*
          * List all the posts, eager load their categories
@@ -166,16 +166,16 @@ class Posts extends ComponentBase
             'page'       => $this->property('pageNumber'),
             'sort'       => $this->property('sortOrder'),
             'perPage'    => $this->property('postsPerPage'),
-            'categories' => $categories
+            'category'   => $category
         ]);
 
         /*
          * Add a "url" helper attribute for linking to each post and category
          */
-        $posts->each(function($post){
+        $posts->each(function($post) {
             $post->setUrl($this->postPage, $this->controller);
 
-            $post->categories->each(function($category){
+            $post->categories->each(function($category) {
                 $category->setUrl($this->categoryPage, $this->controller);
             });
         });

@@ -26,4 +26,4 @@ scopes:
         type: checkbox
 
         # SQL Conditions
-        conditions: published <> 1
+        conditions: published <> '1'

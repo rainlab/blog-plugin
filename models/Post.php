@@ -26,7 +26,7 @@ class Post extends Model
      */
     public $rules = [
         'title' => 'required',
-        'slug' => ['required', 'regex:/^[a-z0-9\/\:_\-\*\[\]\+\?\|]*$/i'],
+        'slug' => ['required', 'regex:/^[a-z0-9\/\:_\-\*\[\]\+\?\|]*$/i', 'unique:rainlab_blog_posts'],
         'content' => 'required',
         'excerpt' => ''
     ];
@@ -61,7 +61,11 @@ class Post extends Model
     ];
 
     public $belongsToMany = [
-        'categories' => ['RainLab\Blog\Models\Category', 'table' => 'rainlab_blog_posts_categories', 'order' => 'name']
+        'categories' => [
+            'RainLab\Blog\Models\Category',
+            'table' => 'rainlab_blog_posts_categories',
+            'order' => 'name'
+        ]
     ];
 
     public $attachMany = [
@@ -75,87 +79,6 @@ class Post extends Model
     protected $appends = ['summary', 'has_summary'];
 
     public $preview = null;
-
-    /**
-     * Lists posts for the front end
-     * @param  array $options Display options
-     * @return self
-     */
-    public function scopeListFrontEnd($query, $options)
-    {
-        /*
-         * Default options
-         */
-        extract(array_merge([
-            'page'       => 1,
-            'perPage'    => 30,
-            'sort'       => 'created_at',
-            'categories' => null,
-            'search'     => '',
-            'published'  => true
-        ], $options));
-
-        $searchableFields = ['title', 'slug', 'excerpt', 'content'];
-
-        if ($published) {
-            $query->isPublished();
-        }
-
-        /*
-         * Sorting
-         */
-        if (!is_array($sort)) {
-            $sort = [$sort];
-        }
-
-        foreach ($sort as $_sort) {
-
-            if (in_array($_sort, array_keys(self::$allowedSortingOptions))) {
-                $parts = explode(' ', $_sort);
-                if (count($parts) < 2) {
-                    array_push($parts, 'desc');
-                }
-                list($sortField, $sortDirection) = $parts;
-                if ($sortField == 'random') {
-                    $sortField = DB::raw('RAND()');
-                }
-                $query->orderBy($sortField, $sortDirection);
-            }
-        }
-
-        /*
-         * Search
-         */
-        $search = trim($search);
-        if (strlen($search)) {
-            $query->searchWhere($search, $searchableFields);
-        }
-
-        /*
-         * Categories
-         */
-        if ($categories !== null) {
-            if (!is_array($categories)) $categories = [$categories];
-            $query->whereHas('categories', function($q) use ($categories) {
-                $q->whereIn('id', $categories);
-            });
-        }
-
-        return $query->paginate($perPage, $page);
-    }
-
-    /**
-     * Allows filtering for specifc categories
-     * @param  Illuminate\Query\Builder  $query      QueryBuilder
-     * @param  array                     $categories List of category ids
-     * @return Illuminate\Query\Builder              QueryBuilder
-     */
-    public function scopeFilterCategories($query, $categories)
-    {
-        return $query->whereHas('categories', function($q) use ($categories) {
-            $q->whereIn('id', $categories);
-        });
-    }
 
     public function afterValidate()
     {
@@ -226,6 +149,100 @@ class Post extends Model
             ->whereNotNull('published_at')
             ->where('published_at', '<', Carbon::now())
         ;
+    }
+
+    /**
+     * Lists posts for the front end
+     * @param  array $options Display options
+     * @return self
+     */
+    public function scopeListFrontEnd($query, $options)
+    {
+        /*
+         * Default options
+         */
+        extract(array_merge([
+            'page'       => 1,
+            'perPage'    => 30,
+            'sort'       => 'created_at',
+            'categories' => null,
+            'category'   => null,
+            'search'     => '',
+            'published'  => true
+        ], $options));
+
+        $searchableFields = ['title', 'slug', 'excerpt', 'content'];
+
+        if ($published) {
+            $query->isPublished();
+        }
+
+        /*
+         * Sorting
+         */
+        if (!is_array($sort)) {
+            $sort = [$sort];
+        }
+
+        foreach ($sort as $_sort) {
+
+            if (in_array($_sort, array_keys(self::$allowedSortingOptions))) {
+                $parts = explode(' ', $_sort);
+                if (count($parts) < 2) {
+                    array_push($parts, 'desc');
+                }
+                list($sortField, $sortDirection) = $parts;
+                if ($sortField == 'random') {
+                    $sortField = DB::raw('RAND()');
+                }
+                $query->orderBy($sortField, $sortDirection);
+            }
+        }
+
+        /*
+         * Search
+         */
+        $search = trim($search);
+        if (strlen($search)) {
+            $query->searchWhere($search, $searchableFields);
+        }
+
+        /*
+         * Categories
+         */
+        if ($categories !== null) {
+            if (!is_array($categories)) $categories = [$categories];
+            $query->whereHas('categories', function($q) use ($categories) {
+                $q->whereIn('id', $categories);
+            });
+        }
+
+        /*
+         * Category, including children
+         */
+        if ($category !== null) {
+            $category = Category::find($category);
+
+            $categories = $category->getAllChildrenAndSelf()->lists('id');
+            $query->whereHas('categories', function($q) use ($categories) {
+                $q->whereIn('id', $categories);
+            });
+        }
+
+        return $query->paginate($perPage, $page);
+    }
+
+    /**
+     * Allows filtering for specifc categories
+     * @param  Illuminate\Query\Builder  $query      QueryBuilder
+     * @param  array                     $categories List of category ids
+     * @return Illuminate\Query\Builder              QueryBuilder
+     */
+    public function scopeFilterCategories($query, $categories)
+    {
+        return $query->whereHas('categories', function($q) use ($categories) {
+            $q->whereIn('id', $categories);
+        });
     }
 
     //

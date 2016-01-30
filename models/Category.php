@@ -11,6 +11,7 @@ use Cms\Classes\Theme;
 class Category extends Model
 {
     use \October\Rain\Database\Traits\Validation;
+    use \October\Rain\Database\Traits\NestedTree;
 
     public $table = 'rainlab_blog_categories';
 
@@ -26,7 +27,11 @@ class Category extends Model
     protected $guarded = [];
 
     public $belongsToMany = [
-        'posts' => ['RainLab\Blog\Models\Post', 'table' => 'rainlab_blog_posts_categories', 'order' => 'published_at desc', 'scope' => 'isPublished']
+        'posts' => ['RainLab\Blog\Models\Post',
+            'table' => 'rainlab_blog_posts_categories',
+            'order' => 'published_at desc',
+            'scope' => 'isPublished'
+        ]
     ];
 
     public function beforeValidate()
@@ -83,17 +88,10 @@ class Category extends Model
         $result = [];
 
         if ($type == 'blog-category') {
-
-            $references = [];
-            $categories = self::orderBy('name')->get();
-            foreach ($categories as $category) {
-                $references[$category->id] = $category->name;
-            }
-
             $result = [
-                'references'   => $references,
-                'nesting'      => false,
-                'dynamicItems' => false
+                'references'   => self::listSubCategoryOptions(),
+                'nesting'      => true,
+                'dynamicItems' => true
             ];
         }
 
@@ -109,16 +107,18 @@ class Category extends Model
             $pages = CmsPage::listInTheme($theme, true);
             $cmsPages = [];
             foreach ($pages as $page) {
-                if (!$page->hasComponent('blogPosts'))
+                if (!$page->hasComponent('blogPosts')) {
                     continue;
+                }
 
                 /*
                  * Component must use a category filter with a routing parameter
                  * eg: categoryFilter = "{{ :somevalue }}"
                  */
                 $properties = $page->getComponentProperties('blogPosts');
-                if (!isset($properties['categoryFilter']) || !preg_match('/{{\s*:/', $properties['categoryFilter']))
+                if (!isset($properties['categoryFilter']) || !preg_match('/{{\s*:/', $properties['categoryFilter'])) {
                     continue;
+                }
 
                 $cmsPages[] = $page;
             }
@@ -127,6 +127,31 @@ class Category extends Model
         }
 
         return $result;
+    }
+
+    protected static function listSubCategoryOptions()
+    {
+        $category = self::make()->getAllRoot();
+
+        $iterator = function($categories) use (&$iterator) {
+            $result = [];
+
+            foreach ($categories as $category) {
+                if (!$category->children) {
+                    $result[$category->id] = $category->name;
+                }
+                else {
+                    $result[$category->id] = [
+                        'title' => $category->name,
+                        'items' => $iterator($category->children)
+                    ];
+                }
+            }
+
+            return $result;
+        };
+
+        return $iterator($category);
     }
 
     /**
@@ -168,6 +193,32 @@ class Category extends Model
             $result['url'] = $pageUrl;
             $result['isActive'] = $pageUrl == $url;
             $result['mtime'] = $category->updated_at;
+
+            if ($item->nesting) {
+                $categories = $category->getAllRoot();
+                $iterator = function($categories) use (&$iterator, &$item, &$theme, $url) {
+                    $branch = [];
+
+                    foreach ($categories as $category) {
+
+                        $branchItem = [];
+                        $branchItem['url'] = self::getCategoryPageUrl($item->cmsPage, $category, $theme);
+                        $branchItem['isActive'] = $branchItem['url'] == $url;
+                        $branchItem['title'] = $category->name;
+                        $branchItem['mtime'] = $category->updated_at;
+
+                        if ($category->children) {
+                            $branchItem['items'] = $iterator($category->children);
+                        }
+
+                        $branch[] = $branchItem;
+                    }
+
+                    return $branch;
+                };
+
+                $result['items'] = $iterator($categories);
+            }
         }
         elseif ($item->type == 'all-blog-categories') {
             $result = [
