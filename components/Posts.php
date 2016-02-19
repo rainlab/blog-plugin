@@ -166,6 +166,7 @@ class Posts extends ComponentBase
             'page'       => $this->property('pageNumber'),
             'sort'       => $this->property('sortOrder'),
             'perPage'    => $this->property('postsPerPage'),
+            'search'     => trim(input('search')),
             'category'   => $category
         ]);
 
