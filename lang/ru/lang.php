@@ -31,12 +31,18 @@ return [
     'post' => [
         'title' => 'Заголовок',
         'title_placeholder' => 'Новый заголовок записи',
+        'content' => 'Контент',
+        'content_html' => 'HTML Контент',
         'slug' => 'URL записи',
         'slug_placeholder' => 'new-post-slug',
         'categories' => 'Категории',
-        'created' => 'Дата создания',
-        'updated' => 'Дата обновления',
+        'author_email' => 'Email автора',
+        'created' => 'Создано',
+        'created_date' => 'Дата создания',
+        'updated' => 'Обновлено',
+        'updated_date' => 'Дата обновления',
         'published' => 'Опубликовано',
+        'published_date' => 'Дата публикации',
         'published_validation' => 'Пожалуйста, укажите дату публикации.',
         'tab_edit' => 'Редактор',
         'tab_categories' => 'Категории',
@@ -45,6 +51,7 @@ return [
         'tab_manage' => 'Управление',
         'published_on' => 'Опубликовано',
         'excerpt' => 'Отрывок',
+        'summary' => 'Резюме',
         'featured_images' => 'Тематические изображения',
         'delete_confirm' => 'Вы действительно хотите удалить эту запись?',
         'close_confirm' => 'Запись не была сохранена.',
@@ -62,7 +69,8 @@ return [
         'slug_placeholder' => 'new-category-slug',
         'posts' => 'Записи',
         'delete_confirm' => 'Вы действительно хотите удалить эту категорию?',
-        'return_to_categories' => 'Вернуться к списку категорий'
+        'return_to_categories' => 'Вернуться к списку категорий',
+        'reorder' => 'Порядок категорий'
     ],
     'settings' => [
         'category_title' => 'Список категорий блога',
