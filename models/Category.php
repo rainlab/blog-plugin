@@ -131,7 +131,7 @@ class Category extends Model
 
     protected static function listSubCategoryOptions()
     {
-        $category = self::make()->getAllRoot();
+        $category = self::getNested();
 
         $iterator = function($categories) use (&$iterator) {
             $result = [];
@@ -195,7 +195,7 @@ class Category extends Model
             $result['mtime'] = $category->updated_at;
 
             if ($item->nesting) {
-                $categories = $category->getAllRoot();
+                $categories = $category->getNested();
                 $iterator = function($categories) use (&$iterator, &$item, &$theme, $url) {
                     $branch = [];
 
