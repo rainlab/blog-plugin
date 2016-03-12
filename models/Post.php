@@ -277,4 +277,17 @@ class Post extends Model
 
         return Str::limit(Html::strip($this->content_html), 600);
     }
+
+    //
+    // Images
+    //
+
+    public function getFirstFeaturedImage()
+    {
+        if (isset($this->featured_images[0])) {
+            return $this->featured_images[0];
+        }
+
+        return null;
+    }
 }
