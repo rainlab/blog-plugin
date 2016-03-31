@@ -275,6 +275,6 @@ class Post extends Model
             return array_get($parts, 0);
         }
 
-        return Str::limit(Html::strip($this->content_html), 600);
+        return $this->content_html;
     }
 }
