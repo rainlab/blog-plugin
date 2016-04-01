@@ -48,7 +48,7 @@ class Plugin extends PluginBase
                 'icon'        => 'icon-pencil',
                 'iconSvg'     => 'plugins/rainlab/blog/assets/images/blog-icon.svg',
                 'permissions' => ['rainlab.blog.*'],
-                'order'       => 500,
+                'order'       => 30,
 
                 'sideMenu' => [
                     'new_post' => [
