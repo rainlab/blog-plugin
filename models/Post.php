@@ -91,6 +91,17 @@ class Post extends Model
         $this->content_html = self::formatHtml($this->content);
     }
 
+
+    public function afterDelete()
+    {
+        $this->featured_images->each(function($model) {
+            $model->delete();
+        });
+        $this->content_images->each(function($model) {
+            $model->delete();
+        });
+    }
+
     /**
      * Sets the "url" attribute with a URL to this object
      * @param string $pageName
