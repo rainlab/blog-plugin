@@ -93,6 +93,8 @@ return [
         'posts_category' => 'Kategori sayfası',
         'posts_category_description' => 'Name of the category page file for the "Posted into" category links. Bu özellik varsayılan kısmi bileşeni tarafından kullanılır.',
         'posts_post' => 'Gönderi sayfası',
-        'posts_post_description' => '"Daha fazla bilgi edinin" bağlantıları için gönderi sayfası dosyasının adı. Bu özellik varsayılan kısmi bileşeni tarafından kullanılır.'
+        'posts_post_description' => '"Daha fazla bilgi edinin" bağlantıları için gönderi sayfası dosyasının adı. Bu özellik varsayılan kısmi bileşeni tarafından kullanılır.',
+        'posts_except_post' => 'Except post',
+        'posts_except_post_description' => 'Enter ID/URL or variable with post ID/URL you want to except',
     ]
 ];

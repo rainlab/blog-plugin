@@ -69,7 +69,8 @@ return [
         'slug_placeholder' => 'zadejte-url-kategorie',
         'posts' => 'Počet příspěvků',
         'delete_confirm' => 'Opravdu chcete smazat tuto kategorii?',
-        'return_to_categories' => 'Zpět na seznam blogových kategorií'
+        'return_to_categories' => 'Zpět na seznam blogových kategorií',
+        'reorder' => 'Přeskupit kategorie'
     ],
     'settings' => [
         'category_title' => 'Seznam kategorií',
@@ -101,6 +102,8 @@ return [
         'posts_category' => 'Stránka kategorií',
         'posts_category_description' => 'Vyberte stránku která slouží k zobrazení všech kategorií (nebo detailu kategorie).',
         'posts_post' => 'Stránka příspěvků',
-        'posts_post_description' => 'Vyberte stránku která slouží k zobrazení článků (nebo detailu článku).'
+        'posts_post_description' => 'Vyberte stránku která slouží k zobrazení článků (nebo detailu článku).',
+        'posts_except_post' => 'Vyloučit příspěvěk',
+        'posts_except_post_description' => 'Zadejte ID nebo URL příspěvku který chcete vyloučit',
     ]
 ];

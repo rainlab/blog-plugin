@@ -92,6 +92,8 @@ return [
         'posts_category' => 'Page des catégorie',
         'posts_category_description' => 'Nom de la page des catégorie pour les liens de catégories "Publié dans". Cette propriété est utilisée par le composant partiel par défaut.',
         'posts_post' => 'Page d\'article',
-        'posts_post_description' => 'Nom de la page d\'articles pour les liens "En savoir plus". Cette propriété est utilisée par le composant partiel par défaut.'
+        'posts_post_description' => 'Nom de la page d\'articles pour les liens "En savoir plus". Cette propriété est utilisée par le composant partiel par défaut.',
+        'posts_except_post' => 'Except post',
+        'posts_except_post_description' => 'Enter ID/URL or variable with post ID/URL you want to except',
     ]
 ];
