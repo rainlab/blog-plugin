@@ -79,7 +79,7 @@ class Post extends Model
 
     public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
 
-    public $translatable = ['title', 'content'];
+    public $translatable = ['title', 'content', 'content_html'];
 
     public function afterValidate()
     {
