@@ -77,6 +77,10 @@ class Post extends Model
 
     public $preview = null;
 
+    public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
+
+    public $translatable = ['title', 'content'];
+
     public function afterValidate()
     {
         if ($this->published && !$this->published_at) {
