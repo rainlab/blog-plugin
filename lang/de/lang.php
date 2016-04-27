@@ -23,8 +23,8 @@ return [
     ],
     'posts' => [
         'list_title' => 'Blog Artikel verwalten',
-        'category' => 'Kategorie',
-        'hide_published' => 'Veröffentlichte ausblenden',
+        'filter_category' => 'Kategorie',
+        'filter_published' => 'Veröffentlichte ausblenden',
         'new_post' => 'Neuer Artikel'
     ],
     'post' => [

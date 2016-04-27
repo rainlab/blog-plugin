@@ -23,8 +23,8 @@ return [
     ],
     'posts' => [
         'list_title' => 'Gérer les articles du blog',
-        'category' => 'Catégorie',
-        'hide_published' => 'Masquer la publication',
+        'filter_category' => 'Catégorie',
+        'filter_published' => 'Masquer la publication',
         'new_post' => 'Nouvel article'
     ],
     'post' => [

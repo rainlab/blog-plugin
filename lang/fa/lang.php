@@ -24,8 +24,8 @@ return [
     ],
     'posts' => [
         'list_title' => 'مدیریت پست های ارسالی',
-        'category' => 'دسته بندی',
-        'hide_published' => 'مخفی کردن منتشر شده ها',
+        'filter_category' => 'دسته بندی',
+        'filter_published' => 'مخفی کردن منتشر شده ها',
         'new_post' => 'پست جدید'
     ],
     'post' => [
