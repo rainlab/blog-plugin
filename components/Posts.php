@@ -50,6 +50,12 @@ class Posts extends ComponentBase
      */
     public $sortOrder;
 
+    /**
+     * If the post list should display the first featured image.
+     * @var string
+     */
+    public $showFeaturedImage;
+
     public function componentDetails()
     {
         return [
@@ -92,6 +98,12 @@ class Posts extends ComponentBase
                 'description' => 'rainlab.blog::lang.settings.posts_order_description',
                 'type'        => 'dropdown',
                 'default'     => 'published_at desc'
+            ],
+            'showFeaturedImage' => [
+                'title'       => 'rainlab.blog::lang.settings.show_feat_image',
+                'description' => 'rainlab.blog::lang.settings.show_feat_image_description',
+                'type'        => 'checkbox',
+                'showExternalParam' => false
             ],
             'categoryPage' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_category',
@@ -147,6 +159,7 @@ class Posts extends ComponentBase
     {
         $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber');
         $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
+        $this->showFeaturedImage = $this->page['showFeaturedImage'] = $this->property('showFeaturedImage');
 
         /*
          * Page links
