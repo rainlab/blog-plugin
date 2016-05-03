@@ -46,9 +46,8 @@ class Plugin extends PluginBase
                 'label'       => 'rainlab.blog::lang.blog.menu_label',
                 'url'         => Backend::url('rainlab/blog/posts'),
                 'icon'        => 'icon-pencil',
-                'iconSvg'     => 'plugins/rainlab/blog/assets/images/blog-icon.svg',
                 'permissions' => ['rainlab.blog.*'],
-                'order'       => 30,
+                'order'       => 500,
 
                 'sideMenu' => [
                     'new_post' => [

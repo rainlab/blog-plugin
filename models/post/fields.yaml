@@ -50,7 +50,7 @@ secondaryTabs:
             span: left
             cssClass: checkbox-align
             type: datepicker
-            mode: date
+            mode: datetime
             trigger:
                 action: enable
                 field: published

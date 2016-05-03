@@ -23,8 +23,8 @@ return [
     ],
     'posts' => [
         'list_title' => 'Zarządzaj blogowymi postami',
-        'filter_category' => 'Kategoria',
-        'filter_published' => 'Ukryj opublikowane',
+        'category' => 'Kategoria',
+        'hide_published' => 'Ukryj opublikowane',
         'new_post' => 'Nowy post'
     ],
     'post' => [
