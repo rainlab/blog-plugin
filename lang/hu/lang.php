@@ -24,8 +24,8 @@ return [
     ],
     'posts' => [
         'list_title' => 'Blog bejegyzések kezelése',
-        'filter_category' => 'Kategória',
-        'filter_published' => 'Közzétettek elrejtése',
+        'category' => 'Kategória',
+        'hide_published' => 'Közzétettek elrejtése',
         'new_post' => 'Új bejegyzés'
     ],
     'post' => [
