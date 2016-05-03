@@ -6,7 +6,7 @@ scopes:
     category:
 
         # Filter name
-        label: rainlab.blog::lang.posts.category
+        label: rainlab.blog::lang.posts.filter_category
 
         # Model Class name
         modelClass: RainLab\Blog\Models\Category
@@ -20,10 +20,12 @@ scopes:
     published:
 
         # Filter name
-        label: rainlab.blog::lang.posts.hide_published
+        label: rainlab.blog::lang.posts.filter_published
 
         # Filter type
-        type: checkbox
+        type: switch
 
         # SQL Conditions
-        conditions: published <> '1'
+        conditions:
+            - published <> '1'
+            - published = '1'

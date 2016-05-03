@@ -25,3 +25,7 @@
     - categories_add_nested_fields.php
 1.2.1: Post slugs now must be unique.
 1.2.2: Fixes issue on new installs.
+1.2.3: Minor user interface update.
+1.2.4:
+    - Database maintenance. Updated all timestamp columns to be nullable.
+    - update_timestamp_nullable.php

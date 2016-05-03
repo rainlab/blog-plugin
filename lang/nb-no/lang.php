@@ -22,8 +22,8 @@ return [
     ],
     'posts' => [
         'list_title' => 'Administrer blogginnlegg',
-        'category' => 'Kategori',
-        'hide_published' => 'Skjul publiserte',
+        'filter_category' => 'Kategori',
+        'filter_published' => 'Skjul publiserte',
         'new_post' => 'Nytt innlegg',
     ],
     'post' => [

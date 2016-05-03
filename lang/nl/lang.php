@@ -24,8 +24,8 @@ return [
     ],
     'posts' => [
         'list_title' => 'Beheren van blog artikelen',
-        'category' => 'Categorie',
-        'hide_published' => 'Verberg gepubliceerd',
+        'filter_category' => 'Categorie',
+        'filter_published' => 'Verberg gepubliceerd',
         'new_post' => 'Nieuw artikel'
     ],
     'post' => [

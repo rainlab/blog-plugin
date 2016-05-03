@@ -24,8 +24,8 @@ return [
     ],
     'posts' => [
         'list_title' => 'Manage the blog posts',
-        'category' => 'Category',
-        'hide_published' => 'Hide published',
+        'filter_category' => 'Category',
+        'filter_published' => 'Published',
         'new_post' => 'New post'
     ],
     'post' => [

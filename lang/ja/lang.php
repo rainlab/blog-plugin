@@ -23,8 +23,8 @@ return [
     ],
     'posts' => [
         'list_title' => '投稿の管理',
-        'category' => 'カテゴリ',
-        'hide_published' => '下書きのみ',
+        'filter_category' => 'カテゴリ',
+        'filter_published' => '下書きのみ',
         'new_post' => '投稿を追加'
     ],
     'post' => [

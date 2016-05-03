@@ -24,8 +24,8 @@ return [
     ],
     'posts' => [
         'list_title' => 'Správa blogových příspěvků',
-        'category' => 'Kategorie',
-        'hide_published' => 'Schovat publikované',
+        'filter_category' => 'Kategorie',
+        'filter_published' => 'Schovat publikované',
         'new_post' => 'Nový příspěvek'
     ],
     'post' => [
