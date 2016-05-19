@@ -29,3 +29,8 @@ scopes:
         conditions:
             - published <> '1'
             - published = '1'
+
+    published_date:
+        label: Date
+        type: daterange
+        conditions: created_at >= ':after' AND created_at <= ':before'
