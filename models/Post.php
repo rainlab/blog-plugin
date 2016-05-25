@@ -17,6 +17,7 @@ class Post extends Model
     use \October\Rain\Database\Traits\Validation;
 
     public $table = 'rainlab_blog_posts';
+    public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
 
     /*
      * Validation
@@ -26,6 +27,15 @@ class Post extends Model
         'slug' => ['required', 'regex:/^[a-z0-9\/\:_\-\*\[\]\+\?\|]*$/i', 'unique:rainlab_blog_posts'],
         'content' => 'required',
         'excerpt' => ''
+    ];
+
+    /**
+     * @var array Attributes that support translation, if available.
+     */
+    public $translatable = [
+        'title',
+        'content',
+        'excerpt'
     ];
 
     /**

@@ -29,3 +29,4 @@
 1.2.4:
     - Database maintenance. Updated all timestamp columns to be nullable.
     - update_timestamp_nullable.php
+1.2.5: Added translation support for blog posts.
