@@ -58,6 +58,32 @@ class MLBlogMarkdown extends BlogMarkdown
     }
 
     /**
+     * Returns an array of translated values for this field
+     * @return array
+     */
+    public function getSaveValue($value)
+    {
+        $localeData = $this->getLocaleSaveData();
+
+        /*
+         * Set the translated values to the model
+         */
+        if ($this->model->methodExists('setTranslateAttribute')) {
+            foreach ($localeData as $locale => $value) {
+                $this->model->setTranslateAttribute('content', $value, $locale);
+
+                $this->model->setTranslateAttribute(
+                    'content_html',
+                    Post::formatHtml($value),
+                    $locale
+                );
+            }
+        }
+
+        return array_get($localeData, $this->defaultLocale->code, $value);
+    }
+
+    /**
      * {@inheritDoc}
      */
     protected function loadAssets()
