@@ -5,6 +5,7 @@ use Redirect;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
+use RainLab\Blog\Models\Category as BlogCategory;
 
 class RssFeed extends ComponentBase
 {
