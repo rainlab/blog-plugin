@@ -33,3 +33,4 @@
 1.2.6: The published field can now supply a time with the date.
 1.2.7: Introduced a new RSS feed component.
 1.2.8: Fixes issue with translated `content_html` attribute on blog posts.
+1.2.9: Added translation support for blog categories.
