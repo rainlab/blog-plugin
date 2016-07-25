@@ -271,7 +271,13 @@ class Post extends Model
      */
     public function getHasSummaryAttribute()
     {
-        return strlen($this->getSummaryAttribute()) < strlen($this->content_html);
+        $more = '<!-- more -->';
+
+        return (
+            !!strlen(trim($this->excerpt)) ||
+            strpos($this->content_html, $more) !== false ||
+            strlen(Html::strip($this->content_html)) > 600
+        );
     }
 
     /**
@@ -303,19 +309,15 @@ class Post extends Model
     */
     public function filterFields($fields, $context = null)
     {
-        // Get the current logged on user to see if author or not.
         $user = BackendAuth::getUser();
-        if(!$user->hasAnyAccess(["rainlab.blog.access_publish"]))
-        {
+
+        if (!$user->hasAnyAccess(["rainlab.blog.access_publish"])) {
             $fields->published->hidden = true;
             $fields->published_at->hidden = true;
-            return false;
         }
-        else
-        {
+        else {
             $fields->published->hidden = false;
             $fields->published_at->hidden = false;
-            return true;
         }
     }
 }
