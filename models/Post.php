@@ -88,6 +88,10 @@ class Post extends Model
 
     public $preview = null;
 
+    public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
+
+    public $translatable = ['title', 'content', 'content_html'];
+
     public function afterValidate()
     {
         if ($this->published && !$this->published_at) {
@@ -100,6 +104,17 @@ class Post extends Model
     public function beforeSave()
     {
         $this->content_html = self::formatHtml($this->content);
+    }
+
+
+    public function afterDelete()
+    {
+        $this->featured_images->each(function($model) {
+            $model->delete();
+        });
+        $this->content_images->each(function($model) {
+            $model->delete();
+        });
     }
 
     /**

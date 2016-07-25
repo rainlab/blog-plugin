@@ -42,6 +42,10 @@ class Category extends Model
         ]
     ];
 
+    public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
+
+    public $translatable = ['name'];
+
     public function beforeValidate()
     {
         // Generate a URL slug for this model
