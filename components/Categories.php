@@ -71,6 +71,7 @@ class Categories extends ComponentBase
 
     protected function loadCategories()
     {
+        $prefix = Db::getTablePrefix();
         $categories = BlogCategory::orderBy('name');
         if (!$this->property('displayEmpty')) {
             $categories->whereExists(function($query) {
@@ -79,7 +80,7 @@ class Categories extends ComponentBase
                 ->join('rainlab_blog_posts', 'rainlab_blog_posts.id', '=', 'rainlab_blog_posts_categories.post_id')
                 ->whereNotNull('rainlab_blog_posts.published')
                 ->where('rainlab_blog_posts.published', '=', 1)
-                ->whereRaw('rainlab_blog_categories.id = rainlab_blog_posts_categories.category_id');
+                ->whereRaw($prefix.'rainlab_blog_categories.id = '.$prefix.'rainlab_blog_posts_categories.category_id');
             });
         }
 
