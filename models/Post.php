@@ -6,6 +6,7 @@ use Html;
 use Lang;
 use Model;
 use Markdown;
+use BackendAuth;
 use ValidationException;
 use RainLab\Blog\Classes\TagProcessor;
 use Backend\Models\User;
