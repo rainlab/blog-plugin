@@ -36,7 +36,9 @@ class Plugin extends PluginBase
             'rainlab.blog.access_posts'         => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_posts'],
             'rainlab.blog.access_categories'    => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_categories'],
             'rainlab.blog.access_other_posts'   => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_other_posts'],
-            'rainlab.blog.access_import_export' => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_import_export']
+            'rainlab.blog.access_import_export' => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_import_export'],
+            // A new permission for restricting access  to publish posts
+            'rainlab.blog.access_publish'       => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab_blog::lang.blog.access_publish']
         ];
     }
 
