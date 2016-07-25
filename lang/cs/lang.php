@@ -69,7 +69,8 @@ return [
         'slug_placeholder' => 'zadejte-url-kategorie',
         'posts' => 'Počet příspěvků',
         'delete_confirm' => 'Opravdu chcete smazat tuto kategorii?',
-        'return_to_categories' => 'Zpět na seznam blogových kategorií'
+        'return_to_categories' => 'Zpět na seznam blogových kategorií',
+        'reorder' => 'Změnit pořadí'
     ],
     'settings' => [
         'category_title' => 'Seznam kategorií',
