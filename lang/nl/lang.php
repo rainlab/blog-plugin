@@ -80,6 +80,8 @@ return [
         'category_display_empty_description' => 'Geef categorieën weer die geen artikelen hebben.',
         'category_page' => 'Categorie pagina',
         'category_page_description' => 'Naam van categorie pagina bestand voor de categorie links. Deze waarde wordt standaard gebruikt door de partial.',
+        'category_hide_post_count' => 'Verberg aantal posts',
+        'category_hide_post_count_description' => 'Verberg het aantal posts in een categorie naast de naam van de categorie.',
         'post_title' => 'Artikel',
         'post_description' => 'Geef een artikel weer op de pagina.',
         'post_slug' => 'Artikel slug',
