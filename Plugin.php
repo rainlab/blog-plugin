@@ -49,7 +49,6 @@ class Plugin extends PluginBase
                 'tab'   => 'rainlab.blog::lang.blog.tab',
                 'label' => 'rainlab.blog::lang.blog.access_import_export'
             ],
-            // A new permission for restricting access  to publish posts
             'rainlab.blog.access_publish' => [
                 'tab'   => 'rainlab.blog::lang.blog.tab',
                 'label' => 'rainlab.blog::lang.blog.access_publish'
@@ -110,8 +109,7 @@ class Plugin extends PluginBase
         /*
          * Register the image tag processing callback
          */
-        TagProcessor::instance()->registerCallback(function($input, $preview)
-        {
+        TagProcessor::instance()->registerCallback(function($input, $preview) {
             if (!$preview) {
                 return $input;
             }
@@ -132,23 +130,20 @@ class Plugin extends PluginBase
         /*
          * Register menu items for the RainLab.Pages plugin
          */
-        Event::listen('pages.menuitem.listTypes', function()
-        {
+        Event::listen('pages.menuitem.listTypes', function() {
             return [
                 'blog-category'       => 'Blog Category',
                 'all-blog-categories' => 'All Blog Categories'
             ];
         });
 
-        Event::listen('pages.menuitem.getTypeInfo', function($type)
-        {
+        Event::listen('pages.menuitem.getTypeInfo', function($type) {
             if ($type == 'blog-category' || $type == 'all-blog-categories') {
                 return Category::getMenuTypeInfo($type);
             }
         });
 
-        Event::listen('pages.menuitem.resolveItem', function($type, $item, $url, $theme)
-        {
+        Event::listen('pages.menuitem.resolveItem', function($type, $item, $url, $theme) {
             if ($type == 'blog-category' || $type == 'all-blog-categories') {
                 return Category::resolveMenuItem($item, $url, $theme);
             }
