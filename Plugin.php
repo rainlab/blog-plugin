@@ -26,19 +26,34 @@ class Plugin extends PluginBase
             'RainLab\Blog\Components\Post'       => 'blogPost',
             'RainLab\Blog\Components\Posts'      => 'blogPosts',
             'RainLab\Blog\Components\Categories' => 'blogCategories',
-            'RainLab\Blog\Components\RssFeed'    => 'blogRssFeed',
+            'RainLab\Blog\Components\RssFeed'    => 'blogRssFeed'
         ];
     }
 
     public function registerPermissions()
     {
         return [
-            'rainlab.blog.access_posts'         => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_posts'],
-            'rainlab.blog.access_categories'    => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_categories'],
-            'rainlab.blog.access_other_posts'   => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_other_posts'],
-            'rainlab.blog.access_import_export' => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab.blog::lang.blog.access_import_export'],
+            'rainlab.blog.access_posts' => [
+                'tab'   => 'rainlab.blog::lang.blog.tab',
+                'label' => 'rainlab.blog::lang.blog.access_posts'
+            ],
+            'rainlab.blog.access_categories' => [
+                'tab'   => 'rainlab.blog::lang.blog.tab',
+                'label' => 'rainlab.blog::lang.blog.access_categories'
+            ],
+            'rainlab.blog.access_other_posts' => [
+                'tab'   => 'rainlab.blog::lang.blog.tab',
+                'label' => 'rainlab.blog::lang.blog.access_other_posts'
+            ],
+            'rainlab.blog.access_import_export' => [
+                'tab'   => 'rainlab.blog::lang.blog.tab',
+                'label' => 'rainlab.blog::lang.blog.access_import_export'
+            ],
             // A new permission for restricting access  to publish posts
-            'rainlab.blog.access_publish'       => ['tab' => 'rainlab.blog::lang.blog.tab', 'label' => 'rainlab_blog::lang.blog.access_publish']
+            'rainlab.blog.access_publish' => [
+                'tab'   => 'rainlab.blog::lang.blog.tab',
+                'label' => 'rainlab.blog::lang.blog.access_publish'
+            ]
         ];
     }
 
@@ -95,8 +110,11 @@ class Plugin extends PluginBase
         /*
          * Register the image tag processing callback
          */
-        TagProcessor::instance()->registerCallback(function($input, $preview){
-            if (!$preview) return $input;
+        TagProcessor::instance()->registerCallback(function($input, $preview)
+        {
+            if (!$preview) {
+                return $input;
+            }
 
             return preg_replace('|\<img src="image" alt="([0-9]+)"([^>]*)\/>|m',
                 '<span class="image-placeholder" data-index="$1">
@@ -114,21 +132,26 @@ class Plugin extends PluginBase
         /*
          * Register menu items for the RainLab.Pages plugin
          */
-        Event::listen('pages.menuitem.listTypes', function() {
+        Event::listen('pages.menuitem.listTypes', function()
+        {
             return [
-                'blog-category' => 'Blog Category',
+                'blog-category'       => 'Blog Category',
                 'all-blog-categories' => 'All Blog Categories'
             ];
         });
 
-        Event::listen('pages.menuitem.getTypeInfo', function($type) {
-            if ($type == 'blog-category' || $type == 'all-blog-categories')
+        Event::listen('pages.menuitem.getTypeInfo', function($type)
+        {
+            if ($type == 'blog-category' || $type == 'all-blog-categories') {
                 return Category::getMenuTypeInfo($type);
+            }
         });
 
-        Event::listen('pages.menuitem.resolveItem', function($type, $item, $url, $theme) {
-            if ($type == 'blog-category' || $type == 'all-blog-categories')
+        Event::listen('pages.menuitem.resolveItem', function($type, $item, $url, $theme)
+        {
+            if ($type == 'blog-category' || $type == 'all-blog-categories') {
                 return Category::resolveMenuItem($item, $url, $theme);
+            }
         });
     }
 }
