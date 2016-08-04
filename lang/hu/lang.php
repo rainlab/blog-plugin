@@ -17,16 +17,19 @@ return [
         'access_categories' => 'Blog kategóriák kezelése',
         'access_other_posts' => 'Más felhasználók bejegyzéseinek kezelése',
         'access_import_export' => 'Bejegyzések importálása és exportálása',
+        'access_publish' => 'Blog bejegyzések közzététele',
         'delete_confirm' => 'Valóban törölni akarja a kijelölt bejegyzéseket?',
         'chart_published' => 'Közzétéve',
         'chart_drafts' => 'Piszkozatok',
         'chart_total' => 'Összesen'
     ],
     'posts' => [
-        'list_title' => 'Blog bejegyzések kezelése',
+        'list_title' => 'Blog bejegyzések',
         'filter_category' => 'Kategória',
         'filter_published' => 'Közzétettek elrejtése',
-        'new_post' => 'Új bejegyzés'
+        'new_post' => 'Új bejegyzés',
+        'export_post' => 'Exportálás',
+        'import_post' => 'Importálás'
     ],
     'post' => [
         'title' => 'Cím',
@@ -58,7 +61,7 @@ return [
         'return_to_posts' => 'Vissza a bejegyzésekhez'
     ],
     'categories' => [
-        'list_title' => 'A blog kategóriák kezelése',
+        'list_title' => 'Blog kategóriák',
         'new_category' => 'Új kategória',
         'uncategorized' => 'Nincs kategorizálva'
     ],
@@ -69,7 +72,12 @@ return [
         'slug_placeholder' => 'uj-kategoria-keresobarat-neve',
         'posts' => 'Bejegyzések',
         'delete_confirm' => 'Valóban törölni akarja ezt a kategóriát?',
-        'return_to_categories' => 'Vissza a kategóriákhoz'
+        'return_to_categories' => 'Vissza a kategóriákhoz',
+        'reorder' => 'Kategóriák sorrendje'
+    ],
+    'menuitem' => [
+        'blog_category' => 'Blog kategória',
+        'all_blog_categories' => 'Összes blog kategória'
     ],
     'settings' => [
         'category_title' => 'Blog kategória lista',
@@ -101,6 +109,10 @@ return [
         'posts_category' => 'Kategórialap',
         'posts_category_description' => 'A "Kategória" kategória hivatkozások kategórialap fájljának neve. Az alapértelmezett komponensrész használja ezt a tulajdonságot.',
         'posts_post' => 'Bejegyzéslap',
-        'posts_post_description' => 'A "Tovább olvasom" hivatkozások blog bejegyzéslap fájljának neve. Az alapértelmezett komponensrész használja ezt a tulajdonságot.'
+        'posts_post_description' => 'A "Tovább olvasom" hivatkozások blog bejegyzéslap fájljának neve. Az alapértelmezett komponensrész használja ezt a tulajdonságot.',
+        'rssfeed_blog' => 'Blog oldal',
+        'rssfeed_blog_description' => 'Annak a lapnak a neve, ahol listázódnak a blog bejegyzések. Ezt a beállítást használja alapértelmezetten a blog komponens is.',
+        'rssfeed_title' => 'RSS hírfolyam',
+        'rssfeed_description' => 'A bloghoz tartozó RSS hírfolyam generálása.'
     ]
 ];
