@@ -32,6 +32,12 @@ scopes:
             - published = '1'
 
     published_date:
-        label: rainlab.blog::lang.post.published
+
+        # Filter name
+        label: rainlab.blog::lang.posts.filter_date
+
+        # Filter type
         type: daterange
+
+        # SQL Conditions
         conditions: created_at >= ':after' AND created_at <= ':before'

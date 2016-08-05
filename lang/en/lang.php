@@ -27,6 +27,7 @@ return [
         'list_title' => 'Manage the blog posts',
         'filter_category' => 'Category',
         'filter_published' => 'Published',
+        'filter_date' => 'Date',
         'new_post' => 'New post',
         'export_post' => 'Export posts',
         'import_post' => 'Import posts'
