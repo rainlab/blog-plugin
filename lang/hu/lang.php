@@ -26,7 +26,7 @@ return [
     'posts' => [
         'list_title' => 'Blog bejegyzések',
         'filter_category' => 'Kategória',
-        'filter_published' => 'Közzétettek elrejtése',
+        'filter_published' => 'Közzétéve',
         'filter_date' => 'Létrehozva',
         'new_post' => 'Új bejegyzés',
         'export_post' => 'Exportálás',
