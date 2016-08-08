@@ -26,7 +26,8 @@ return [
     'posts' => [
         'list_title' => 'Blog bejegyzések',
         'filter_category' => 'Kategória',
-        'filter_published' => 'Közzétettek elrejtése',
+        'filter_published' => 'Közzétéve',
+        'filter_date' => 'Létrehozva',
         'new_post' => 'Új bejegyzés',
         'export_post' => 'Exportálás',
         'import_post' => 'Importálás'
@@ -42,8 +43,8 @@ return [
         'author_email' => 'Szerző e-mail címe',
         'created' => 'Létrehozva',
         'created_date' => 'Létrehozás dátuma',
-        'updated' => 'Frissítve',
-        'updated_date' => 'Frissítés dátuma',
+        'updated' => 'Módosítva',
+        'updated_date' => 'Módosítás dátuma',
         'published' => 'Közzétéve',
         'published_date' => 'Közzététel dátuma',
         'published_validation' => 'Adja meg a közzététel dátumát',
