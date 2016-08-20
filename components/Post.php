@@ -57,13 +57,13 @@ class Post extends ComponentBase
     {
         $slug = $this->property('slug');
 
-        $post = BlogPost::isPublished();
+        $post = new BlogPost;
 
         $post = $post->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')
             ? $post->transWhere('slug', $slug)
             : $post->where('slug', $slug);
 
-        $post = $post->first();
+        $post = $post->isPublished()->first();
 
         /*
          * Add a "url" helper attribute for linking to each category
