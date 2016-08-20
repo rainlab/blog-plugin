@@ -37,7 +37,8 @@ class Post extends Model
         'title',
         'content',
         'content_html',
-        'excerpt'
+        'excerpt',
+        ['slug', 'index' => true]
     ];
 
     /**

@@ -56,7 +56,14 @@ class Post extends ComponentBase
     protected function loadPost()
     {
         $slug = $this->property('slug');
-        $post = BlogPost::isPublished()->where('slug', $slug)->first();
+
+        $post = BlogPost::isPublished();
+
+        $post = $post->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')
+            ? $post->transWhere('slug', $slug)
+            : $post->where('slug', $slug);
+
+        $post = $post->first();
 
         /*
          * Add a "url" helper attribute for linking to each category
