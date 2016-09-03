@@ -35,3 +35,4 @@
 1.2.8: Fixes issue with translated `content_html` attribute on blog posts.
 1.2.9: Added translation support for blog categories.
 1.2.10: Added translation support for post slugs.
+1.2.11: Fixes bug where excerpt is not translated.

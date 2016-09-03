@@ -290,7 +290,7 @@ class Post extends Model
      */
     public function getSummaryAttribute()
     {
-        $excerpt = array_get($this->attributes, 'excerpt');
+        $excerpt = $this->excerpt;
         if (strlen(trim($excerpt))) {
             return $excerpt;
         }
