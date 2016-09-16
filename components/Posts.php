@@ -5,6 +5,7 @@ use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
 use RainLab\Blog\Models\Category as BlogCategory;
+use Request;
 
 class Posts extends ComponentBase
 {
@@ -162,7 +163,9 @@ class Posts extends ComponentBase
         /*
          * List all the posts, eager load their categories
          */
-        $posts = BlogPost::with('categories')->listFrontEnd([
+        $posts = BlogPost::with('categories')
+        ->where('domain', Request::getHost())
+        ->listFrontEnd([
             'page'       => $this->property('pageNumber'),
             'sort'       => $this->property('sortOrder'),
             'perPage'    => $this->property('postsPerPage'),

@@ -4,6 +4,10 @@
 
 columns:
 
+    domain:
+        label: rainlab.blog::lang.post.author_email
+        invisible: true
+
     title:
         label: rainlab.blog::lang.post.title
         searchable: true

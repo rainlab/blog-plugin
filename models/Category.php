@@ -7,6 +7,7 @@ use RainLab\Blog\Models\Post;
 use October\Rain\Router\Helper as RouterHelper;
 use Cms\Classes\Page as CmsPage;
 use Cms\Classes\Theme;
+use Request;
 
 class Category extends Model
 {
@@ -57,7 +58,7 @@ class Category extends Model
 
     public function getPostCountAttribute()
     {
-        return $this->posts()->count();
+        return $this->posts()->where('domain', Request::getHost())->count();
     }
 
     /**
