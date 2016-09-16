@@ -6,6 +6,7 @@ use BackendMenu;
 use Backend\Classes\Controller;
 use ApplicationException;
 use RainLab\Blog\Models\Post;
+use Request;
 
 class Posts extends Controller
 {
@@ -30,8 +31,8 @@ class Posts extends Controller
 
     public function index()
     {
-        $this->vars['postsTotal'] = Post::count();
-        $this->vars['postsPublished'] = Post::isPublished()->count();
+        $this->vars['postsTotal'] = Post::where('domain', Request::getHost())->count();
+        $this->vars['postsPublished'] = Post::where('domain', Request::getHost())->isPublished()->count();
         $this->vars['postsDrafts'] = $this->vars['postsTotal'] - $this->vars['postsPublished'];
 
         $this->asExtension('ListController')->index();
@@ -59,6 +60,7 @@ class Posts extends Controller
 
     public function listExtendQuery($query)
     {
+        $query->where('domain', Request::getHost());
         if (!$this->user->hasAnyAccess(['rainlab.blog.access_other_posts'])) {
             $query->where('user_id', $this->user->id);
         }

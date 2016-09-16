@@ -162,7 +162,8 @@ class Posts extends ComponentBase
         /*
          * List all the posts, eager load their categories
          */
-        $posts = BlogPost::with('categories')->listFrontEnd([
+        $posts = BlogPost::with('categories')
+        ->listFrontEnd([
             'page'       => $this->property('pageNumber'),
             'sort'       => $this->property('sortOrder'),
             'perPage'    => $this->property('postsPerPage'),

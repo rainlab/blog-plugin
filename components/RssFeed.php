@@ -122,7 +122,8 @@ class RssFeed extends ComponentBase
         /*
          * List all the posts, eager load their categories
          */
-        $posts = BlogPost::with('categories')->listFrontEnd([
+        $posts = BlogPost::with('categories')
+        ->listFrontEnd([
             'sort'       => $this->property('sortOrder'),
             'perPage'    => $this->property('postsPerPage'),
             'category'   => $category

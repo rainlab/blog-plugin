@@ -12,6 +12,7 @@ use RainLab\Blog\Classes\TagProcessor;
 use Backend\Models\User;
 use Carbon\Carbon;
 use DB;
+use Request;
 
 class Post extends Model
 {
@@ -102,6 +103,7 @@ class Post extends Model
     public function beforeSave()
     {
         $this->content_html = self::formatHtml($this->content);
+        $this->domain = Request::getHost();
     }
 
     /**
@@ -189,6 +191,8 @@ class Post extends Model
         ], $options));
 
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
+
+        $query->where('domain', Request::getHost());
 
         if ($published) {
             $query->isPublished();
