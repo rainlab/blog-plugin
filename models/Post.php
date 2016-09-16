@@ -192,6 +192,8 @@ class Post extends Model
 
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
 
+        $query->where('domain', Request::getHost());
+
         if ($published) {
             $query->isPublished();
         }

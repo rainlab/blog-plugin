@@ -60,10 +60,9 @@ class Posts extends Controller
 
     public function listExtendQuery($query)
     {
+        $query->where('domain', Request::getHost());
         if (!$this->user->hasAnyAccess(['rainlab.blog.access_other_posts'])) {
-            $query
-                ->where('user_id', $this->user->id)
-                ->where('domain', Request::getHost());
+            $query->where('user_id', $this->user->id);
         }
     }
 
