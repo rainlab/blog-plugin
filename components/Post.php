@@ -3,6 +3,7 @@
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
+use Redirect;
 
 class Post extends ComponentBase
 {
@@ -37,8 +38,8 @@ class Post extends ComponentBase
                 'title'       => 'rainlab.blog::lang.settings.post_category',
                 'description' => 'rainlab.blog::lang.settings.post_category_description',
                 'type'        => 'dropdown',
-                'default'     => 'blog/category',
-            ],
+                'default'     => 'blog/category'
+            ]
         ];
     }
 
@@ -63,13 +64,19 @@ class Post extends ComponentBase
             ? $post->transWhere('slug', $slug)
             : $post->where('slug', $slug);
 
-        $post = $post->isPublished()->first();
+        $post = $post->isPublished();
+
+        if ($post->count() == 0) {
+            return Redirect::to('404');
+        }
+
+        $post = $post->first();
 
         /*
          * Add a "url" helper attribute for linking to each category
          */
         if ($post && $post->categories->count()) {
-            $post->categories->each(function($category){
+            $post->categories->each(function($category) {
                 $category->setUrl($this->categoryPage, $this->controller);
             });
         }
