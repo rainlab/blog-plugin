@@ -30,6 +30,7 @@ class Category extends Model
      */
     public $translatable = [
         'name',
+        'description',
         ['slug', 'index' => true]
     ];
 
