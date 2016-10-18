@@ -69,6 +69,7 @@ return [
     'category' => [
         'name' => 'Name',
         'name_placeholder' => 'New category name',
+        'description' => 'Description',
         'slug' => 'Slug',
         'slug_placeholder' => 'new-category-slug',
         'posts' => 'Posts',

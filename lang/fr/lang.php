@@ -28,7 +28,7 @@ return [
         'filter_category' => 'Catégorie',
         'filter_published' => 'Masquer la publication',
         'filter_date' => 'Date',
-        'new_post' => 'Nouvel article'
+        'new_post' => 'Nouvel article',
         'export_post' => 'Exporter les articles',
         'import_post' => 'Importer des articles'
     ],
@@ -69,6 +69,7 @@ return [
     'category' => [
         'name' => 'Nom',
         'name_placeholder' => 'Nom de la nouvelle catégorie',
+        'description' => 'Description',
         'slug' => 'Adresse URL',
         'slug_placeholder' => 'adresse-de-la-nouvelle-catégorie',
         'posts' => 'Articles',
@@ -110,7 +111,7 @@ return [
         'posts_category' => 'Page des catégories',
         'posts_category_description' => 'Nom de la page des catégories pour les liens de catégories "Publié dans". Cette propriété est utilisée par le partial par défaut du composant.',
         'posts_post' => 'Page d’article',
-        'posts_post_description' => 'Nom de la page d’articles pour les liens "En savoir plus". Cette propriété est utilisée par le partial par défaut du composant.'
+        'posts_post_description' => 'Nom de la page d’articles pour les liens "En savoir plus". Cette propriété est utilisée par le partial par défaut du composant.',
         'rssfeed_blog' => 'Page du blog',
         'rssfeed_blog_description' => 'Nom de la page principale du blog pour générer les liens. Cette propriété est utilisé par le composant dans le partial.',
         'rssfeed_title' => 'Flux RSS',
