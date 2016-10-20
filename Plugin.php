@@ -135,15 +135,16 @@ class Plugin extends PluginBase
             return [
                 'blog-category'       => 'rainlab.blog::lang.menuitem.blog_category',
                 'all-blog-categories' => 'rainlab.blog::lang.menuitem.all_blog_categories',
-                'blog-post'           => 'Blog post',
-                'all-blog-posts'      => 'All blog posts',
+                'blog-post'           => 'rainlab.blog::lang.menuitem.blog_post',
+                'all-blog-posts'      => 'rainlab.blog::lang.menuitem.all_blog_posts',
             ];
         });
 
         Event::listen('pages.menuitem.getTypeInfo', function($type) {
             if ($type == 'blog-category' || $type == 'all-blog-categories') {
                 return Category::getMenuTypeInfo($type);
-            } elseif ($type == 'blog-post' || $type == 'all-blog-posts') {
+            }
+            elseif ($type == 'blog-post' || $type == 'all-blog-posts') {
                 return Post::getMenuTypeInfo($type);
             }
         });
@@ -151,7 +152,8 @@ class Plugin extends PluginBase
         Event::listen('pages.menuitem.resolveItem', function($type, $item, $url, $theme) {
             if ($type == 'blog-category' || $type == 'all-blog-categories') {
                 return Category::resolveMenuItem($item, $url, $theme);
-            } elseif ($type == 'blog-post' || $type == 'all-blog-posts') {
+            }
+            elseif ($type == 'blog-post' || $type == 'all-blog-posts') {
                 return Post::resolveMenuItem($item, $url, $theme);
             }
         });

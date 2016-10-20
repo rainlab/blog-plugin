@@ -1,5 +1,7 @@
 <?php namespace RainLab\Blog\Models;
 
+use Db;
+use Url;
 use App;
 use Str;
 use Html;
@@ -11,10 +13,8 @@ use ValidationException;
 use RainLab\Blog\Classes\TagProcessor;
 use Backend\Models\User;
 use Carbon\Carbon;
-use DB;
 use Cms\Classes\Page as CmsPage;
 use Cms\Classes\Theme;
-use URL;
 
 class Post extends Model
 {
@@ -92,6 +92,24 @@ class Post extends Model
     protected $appends = ['summary', 'has_summary'];
 
     public $preview = null;
+
+    /**
+     * Limit visibility of the published-button
+     * @return void
+     */
+    public function filterFields($fields, $context = null)
+    {
+        $user = BackendAuth::getUser();
+
+        if (!$user->hasAnyAccess(['rainlab.blog.access_publish'])) {
+            $fields->published->hidden = true;
+            $fields->published_at->hidden = true;
+        }
+        else {
+            $fields->published->hidden = false;
+            $fields->published_at->hidden = false;
+        }
+    }
 
     public function afterValidate()
     {
@@ -213,7 +231,7 @@ class Post extends Model
                 }
                 list($sortField, $sortDirection) = $parts;
                 if ($sortField == 'random') {
-                    $sortField = DB::raw('RAND()');
+                    $sortField = Db::raw('RAND()');
                 }
                 $query->orderBy($sortField, $sortDirection);
             }
@@ -308,7 +326,7 @@ class Post extends Model
     }
 
     //
-    // pages.menuitem handlers (usefull e.g. for RainLab.Blog)
+    // Menu helpers
     //
 
     /**
@@ -385,7 +403,7 @@ class Post extends Model
      * with the following keys:
      * - url - the menu item URL. Not required for menu item types that return all available records.
      *   The URL should be returned relative to the website root and include the subdirectory, if any.
-     *   Use the URL::to() helper to generate the URLs.
+     *   Use the Url::to() helper to generate the URLs.
      * - isActive - determines whether the menu item is active. Not required for menu item types that
      *   return all available records.
      * - items - an array of arrays with the same keys (url, isActive, items) + the title key.
@@ -412,7 +430,7 @@ class Post extends Model
             if (!$pageUrl)
                 return;
 
-            $pageUrl = URL::to($pageUrl);
+            $pageUrl = Url::to($pageUrl);
 
             $result = [];
             $result['url'] = $pageUrl;
@@ -466,23 +484,5 @@ class Post extends Model
         $url = CmsPage::url($page->getBaseFileName(), [$paramName => $category->slug]);
 
         return $url;
-    }
-    
-    /** 
-     * A new function to limit visibility of the published-button
-     * @return boolean
-     */
-    public function filterFields($fields, $context = null)
-    {
-        $user = BackendAuth::getUser();
-
-        if (!$user->hasAnyAccess(["rainlab.blog.access_publish"])) {
-            $fields->published->hidden = true;
-            $fields->published_at->hidden = true;
-        }
-        else {
-            $fields->published->hidden = false;
-            $fields->published_at->hidden = false;
-        }
     }
 }

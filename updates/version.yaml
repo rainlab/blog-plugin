@@ -37,3 +37,4 @@
 1.2.10: Added translation support for post slugs.
 1.2.11: Fixes bug where excerpt is not translated.
 1.2.12: Description field added to category form.
+1.2.13: Improved support for Static Pages menus, added a blog post and all blog posts.
