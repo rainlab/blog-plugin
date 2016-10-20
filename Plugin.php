@@ -134,7 +134,9 @@ class Plugin extends PluginBase
         Event::listen('pages.menuitem.listTypes', function() {
             return [
                 'blog-category'       => 'rainlab.blog::lang.menuitem.blog_category',
-                'all-blog-categories' => 'rainlab.blog::lang.menuitem.all_blog_categories'
+                'all-blog-categories' => 'rainlab.blog::lang.menuitem.all_blog_categories',
+                'blog-post'           => 'Blog post',
+                'all-blog-posts'      => 'All blog posts',
             ];
         });
 

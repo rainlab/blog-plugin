@@ -471,7 +471,7 @@ class Post extends Model
     /** 
      * A new function to limit visibility of the published-button
      * @return boolean
-    */
+     */
     public function filterFields($fields, $context = null)
     {
         $user = BackendAuth::getUser();
