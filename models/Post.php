@@ -312,13 +312,21 @@ class Post extends Model
     {
         $user = BackendAuth::getUser();
 
-        if (!$user->hasAnyAccess(["rainlab.blog.access_publish"])) {
-            $fields->published->hidden = true;
-            $fields->published_at->hidden = true;
+         if (!$user->hasAnyAccess(["rainlab.blog.access_publish"])) {
+        	if(isset($fields->published)) {
+            	$fields->published->hidden = true;
+        	}
+        	if(isset($fields->published_at)) {
+            	$fields->published_at->hidden = true;
+        	}
         }
         else {
-            $fields->published->hidden = false;
-            $fields->published_at->hidden = false;
+        	if(isset($fields->published)) {
+        		$fields->published->hidden = false;
+        	}
+        	if(isset($fields->published_at)) {
+        		$fields->published_at->hidden = false;
+        	}
         }
     }
 }
