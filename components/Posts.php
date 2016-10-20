@@ -175,6 +175,7 @@ class Posts extends ComponentBase
             'page'       => $this->property('pageNumber'),
             'sort'       => $this->property('sortOrder'),
             'perPage'    => $this->property('postsPerPage'),
+            'search'     => trim(input('search')),
             'category'   => $category,
             'exceptPost' => $this->property('exceptPost'),
         ]);
@@ -195,12 +196,18 @@ class Posts extends ComponentBase
 
     protected function loadCategory()
     {
-        if (!$categoryId = $this->property('categoryFilter'))
+        if (!$slug = $this->property('categoryFilter')) {
             return null;
+        }
 
-        if (!$category = BlogCategory::whereSlug($categoryId)->first())
-            return null;
+        $category = new BlogCategory;
 
-        return $category;
+        $category = $category->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')
+            ? $category->transWhere('slug', $slug)
+            : $category->where('slug', $slug);
+
+        $category = $category->first();
+
+        return $category ?: null;
     }
 }

@@ -145,6 +145,26 @@ The component can be used on any page. The next example shows the basic componen
 
 The category list is coded in the default component partial `plugins/rainlab/blog/components/categories/default.htm`.
 
+### RSS feed
+
+Use the `blogRssFeed` component to display an RSS feed containing the latest blog posts. The following properties are supported:
+
+* **categoryFilter** - a category slug to filter the posts by. If left blank, all posts are displayed.
+* **postsPerPage** - how many posts to display on the feed. The default value is 10.
+* **blogPage** - path to the main blog page. The default value is **blog** - it matches the pages/blog.htm file in the theme directory. This property is used in the RSS feed for creating links to the main blog page.
+* **postPage** - path to the post details page. The default value is **blog/post** - it matches the pages/blog/post.htm file in the theme directory. This property is used in the RSS feed for creating links to the blog posts.
+
+The component can be used on any page, it will hijack the entire page cycle to display the feed in RSS format. The next example shows how to use it:
+
+    title = "RSS Feed"
+    url = "/blog/rss.xml"
+
+    [blogRssFeed]
+    blogPage = "blog"
+    postPage = "blog/post"
+    ==
+    <!-- This markup will never be displayed -->
+
 ## Using markdown
 
 October supports [standard markdown syntax](http://daringfireball.net/projects/markdown/) as well as [extended markdown syntax](http://michelf.ca/projects/php-markdown/extra/)

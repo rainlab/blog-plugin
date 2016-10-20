@@ -23,8 +23,8 @@ return [
     ],
     'posts' => [
         'list_title' => 'Управление публикациите в блога',
-        'category' => 'Категория',
-        'hide_published' => 'Скрий публикуваните',
+        'filter_category' => 'Категория',
+        'filter_published' => 'Скрий публикуваните',
         'new_post' => 'Нова публикация'
     ],
     'post' => [

@@ -23,8 +23,8 @@ return [
     ],
     'posts' => [
         'list_title' => 'Blog gönderilerini yönet',
-        'category' => 'Kategori',
-        'hide_published' => 'Yayınlananı gizle',
+        'filter_category' => 'Kategori',
+        'filter_published' => 'Yayınlananı gizle',
         'new_post' => 'Yeni gönderi'
     ],
     'post' => [

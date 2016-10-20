@@ -24,8 +24,8 @@ return [
     ],
     'posts' => [
         'list_title' => 'Управление записями блога',
-        'category' => 'Категория',
-        'hide_published' => 'Скрыть опубликованные',
+        'filter_category' => 'Категория',
+        'filter_published' => 'Скрыть опубликованные',
         'new_post' => 'Новая запись'
     ],
     'post' => [

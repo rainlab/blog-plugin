@@ -16,6 +16,8 @@ return [
         'access_posts' => 'Blog Artikel verwalten',
         'access_categories' => 'Blog Kategorien verwalten',
         'access_other_posts' => 'Blog Artikel anderer Benutzer verwalten',
+        // A new permission for restricting access to publishing
+        'access_publish' => 'Kann Artikel veröffentlichen',
         'delete_confirm' => 'Bist du sicher?',
         'chart_published' => 'Veröffentlicht',
         'chart_drafts' => 'Entwurf',
@@ -23,8 +25,8 @@ return [
     ],
     'posts' => [
         'list_title' => 'Blog Artikel verwalten',
-        'category' => 'Kategorie',
-        'hide_published' => 'Veröffentlichte ausblenden',
+        'filter_category' => 'Kategorie',
+        'filter_published' => 'Veröffentlichte ausblenden',
         'new_post' => 'Neuer Artikel'
     ],
     'post' => [

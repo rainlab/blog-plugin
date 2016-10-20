@@ -71,6 +71,17 @@ class Posts extends Controller
         }
     }
 
+    public function formExtendFieldsBefore($widget)
+    {
+        if (!$model = $widget->model) {
+            return;
+        }
+
+        if ($model instanceof Post && $model->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')) {
+            $widget->secondaryTabs['fields']['content']['type'] = 'RainLab\Blog\FormWidgets\MLBlogMarkdown';
+        }
+    }
+
     public function index_onDelete()
     {
         if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
