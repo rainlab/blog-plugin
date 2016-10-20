@@ -24,8 +24,8 @@ return [
     ],
     'posts' => [
         'list_title' => 'مدیریت پست های ارسالی',
-        'category' => 'دسته بندی',
-        'hide_published' => 'مخفی کردن منتشر شده ها',
+        'filter_category' => 'دسته بندی',
+        'filter_published' => 'مخفی کردن منتشر شده ها',
         'new_post' => 'پست جدید'
     ],
     'post' => [
@@ -69,7 +69,8 @@ return [
         'slug_placeholder' => 'آدرس-جدید-دسته-بندی',
         'posts' => 'پست ها',
         'delete_confirm' => 'آیا از حذف این دسته بندی اطمینان دارید؟',
-        'return_to_categories' => 'بازگشت به لیست دسته بندی های وبلاگ'
+        'return_to_categories' => 'بازگشت به لیست دسته بندی های وبلاگ',
+        'reorder' => 'مرتب سازی دسته بندی ها'
     ],
     'settings' => [
         'category_title' => 'لیست دسته بندی',

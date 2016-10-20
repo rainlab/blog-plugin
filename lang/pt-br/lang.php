@@ -24,8 +24,8 @@ return [
     ],
     'posts' => [
         'list_title' => 'Gerencie os posts do blog',
-        'category' => 'Categoria',
-        'hide_published' => 'Esconder publicados',
+        'filter_category' => 'Categoria',
+        'filter_published' => 'Esconder publicados',
         'new_post' => 'Novo post'
     ],
     'post' => [
