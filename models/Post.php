@@ -216,10 +216,14 @@ class Post extends Model
             $query->isPublished();
         }
 
+        /*
+         * Ignore a post
+         */
         if ($exceptPost) {
             if (is_numeric($exceptPost)) {
                 $query->where('id', '<>', $exceptPost);
-            } else {
+            }
+            else {
                 $query->where('slug', '<>', $exceptPost);
             }
         }

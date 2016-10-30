@@ -35,6 +35,7 @@ Use the `blogPosts` component to display a list of latest blog posts on a page. 
 * **sortOrder** - the column name and direction used for the sort order of the posts. The default value is **published_at desc**.
 * **categoryPage** - path to the category page. The default value is **blog/category** - it matches the pages/blog/category.htm file in the theme directory. This property is used in the default component partial for creating links to the blog categories.
 * **postPage** - path to the post details page. The default value is **blog/post** - it matches the pages/blog/post.htm file in the theme directory. This property is used in the default component partial for creating links to the blog posts.
+* **exceptPost** - ignore a single post by its slug or unique ID. The ignored post will not be included in the list, useful for showing other/related posts.
 
 The blogPosts component injects the following variables to the page where it's used:
 
