@@ -111,6 +111,8 @@ return [
         'posts_category_description' => 'Vyberte stránku která slouží k zobrazení všech kategorií (nebo detailu kategorie).',
         'posts_post' => 'Stránka příspěvků',
         'posts_post_description' => 'Vyberte stránku která slouží k zobrazení článků (nebo detailu článku).',
+        'posts_except_post' => 'Vyloučit příspěvěk',
+        'posts_except_post_description' => 'Zadejte ID nebo URL příspěvku který chcete vyloučit',
         'rssfeed_blog' => 'Blogová stránka',
         'rssfeed_blog_description' => 'Name of the main blog page file for generating links. This property is used by the default component partial.',
         'rssfeed_title' => 'RSS Kanál',

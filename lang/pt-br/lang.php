@@ -101,6 +101,8 @@ return [
         'posts_category' => 'Página de Categoria',
         'posts_category_description' => 'Nome do arquivo de página da categoria para os links de categoria. Esta propriedade é usada pelo componente default parcial.',
         'posts_post' => 'Página de posts',
-        'posts_post_description' => 'Nome do arquivo post página para os "Saiba mais" links. Esta propriedade é usada pelo componente default parcial.'
+        'posts_post_description' => 'Nome do arquivo post página para os "Saiba mais" links. Esta propriedade é usada pelo componente default parcial.',
+        'posts_except_post' => 'Except post',
+        'posts_except_post_description' => 'Enter ID/URL or variable with post ID/URL you want to except',
     ]
 ];

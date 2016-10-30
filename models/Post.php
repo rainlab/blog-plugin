@@ -206,13 +206,22 @@ class Post extends Model
             'categories' => null,
             'category'   => null,
             'search'     => '',
-            'published'  => true
+            'published'  => true,
+            'exceptPost' => null,
         ], $options));
 
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
 
         if ($published) {
             $query->isPublished();
+        }
+
+        if ($exceptPost) {
+            if (is_numeric($exceptPost)) {
+                $query->where('id', '<>', $exceptPost);
+            } else {
+                $query->where('slug', '<>', $exceptPost);
+            }
         }
 
         /*

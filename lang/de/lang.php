@@ -95,6 +95,8 @@ return [
         'posts_category' => 'Kategorien-Seite',
         'posts_category_description' => 'Name der Kategorien-Seiten-Datei für "Veröffentlicht in" Kategorien-Links. Dieser Wert von der Standard-Komponente verwendet.',
         'posts_post' => 'Artikel Seite',
-        'posts_post_description' => 'Name der Artikel-Seiten-Datei für die "Erfahre mehr" Links. Dieser Wert für von der Standard-Komponente verwendet.'
+        'posts_post_description' => 'Name der Artikel-Seiten-Datei für die "Erfahre mehr" Links. Dieser Wert für von der Standard-Komponente verwendet.',
+        'posts_except_post' => 'Except post',
+        'posts_except_post_description' => 'Enter ID/URL or variable with post ID/URL you want to except',
     ]
 ];
