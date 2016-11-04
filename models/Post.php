@@ -99,6 +99,10 @@ class Post extends Model
      */
     public function filterFields($fields, $context = null)
     {
+        if (!isset($fields->published, $fields->published_at)) {
+            return;
+        }
+
         $user = BackendAuth::getUser();
 
         if (!$user->hasAnyAccess(['rainlab.blog.access_publish'])) {
