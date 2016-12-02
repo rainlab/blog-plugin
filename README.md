@@ -24,7 +24,7 @@ You can also add classes or ids to images by using the [markdown extra](http://m
 
 Posts are managed by selecting *Blog > Posts* from the menu. Each post can contain an excerpt by entering some text in this field on the *Manage* tab. This content is displayed on the page using the `summary` attribute of the blog post.
 
-    {{ post.summary }}
+    {{ post.summary|raw }}
 
 Alternatively this field can be left blank and the excerpt can be captured from the main content (*Edit* tab). Use the special tag `<!-- more -->` to specify a summary from the main content, all content above this tag will be treated as the summary. For example:
 
@@ -35,8 +35,6 @@ Alternatively this field can be left blank and the excerpt can be captured from 
     Let's dive in to more detail about why this post is so great. This text will not be included in the summary.
 
 Finally, if no excerpt is specified and the "more" tag is not used, the blog post will capture the first 600 characters of the content and use this for the summary.
-
-> **Note**: The HTML contents will be stripped from the `summary` attribute.
 
 ## Implementing front-end pages
 
