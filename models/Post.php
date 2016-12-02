@@ -336,7 +336,7 @@ class Post extends Model
         $more = '<!-- more -->';
         if (strpos($this->content_html, $more) !== false) {
             $parts = explode($more, $this->content_html);
-            return array_get($parts, 0);
+            return Html::strip(array_get($parts, 0));
         }
 
         return Str::limit(Html::strip($this->content_html), 600);
