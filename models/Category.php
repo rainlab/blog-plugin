@@ -205,7 +205,7 @@ class Category extends Model
             $result['mtime'] = $category->updated_at;
 
             if ($item->nesting) {
-                $categories = $category->getNested();
+                $categories = $category->getAllChildren()->toNested(false);
                 $iterator = function($categories) use (&$iterator, &$item, &$theme, $url) {
                     $branch = [];
 
