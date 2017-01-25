@@ -81,8 +81,7 @@ return [
         'blog_category' => 'Blog category',
         'all_blog_categories' => 'All blog categories',
         'blog_post' => 'Blog post',
-        'all_blog_posts' => 'All blog posts',
-
+        'all_blog_posts' => 'All blog posts'
     ],
     'settings' => [
         'category_title' => 'Category List',

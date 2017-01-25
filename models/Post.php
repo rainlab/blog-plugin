@@ -54,7 +54,7 @@ class Post extends Model
      * The attributes on which the post list can be ordered
      * @var array
      */
-    public static $allowedSortingOptions = array(
+    public static $allowedSortingOptions = [
         'title asc' => 'Title (ascending)',
         'title desc' => 'Title (descending)',
         'created_at asc' => 'Created (ascending)',
@@ -64,7 +64,7 @@ class Post extends Model
         'published_at asc' => 'Published (ascending)',
         'published_at desc' => 'Published (descending)',
         'random' => 'Random'
-    );
+    ];
 
     /*
      * Relations
@@ -137,7 +137,7 @@ class Post extends Model
     public function setUrl($pageName, $controller)
     {
         $params = [
-            'id' => $this->id,
+            'id'   => $this->id,
             'slug' => $this->slug,
         ];
 
@@ -393,17 +393,20 @@ class Post extends Model
 
             $pages = CmsPage::listInTheme($theme, true);
             $cmsPages = [];
+
             foreach ($pages as $page) {
-                if (!$page->hasComponent('blogPost'))
+                if (!$page->hasComponent('blogPost')) {
                     continue;
+                }
 
                 /*
                  * Component must use a categoryPage filter with a routing parameter and post slug
                  * eg: categoryPage = "{{ :somevalue }}", slug = "{{ :somevalue }}"
                  */
                 $properties = $page->getComponentProperties('blogPost');
-                if (!isset($properties['categoryPage']) || !preg_match('/{{\s*:/', $properties['slug']))
+                if (!isset($properties['categoryPage']) || !preg_match('/{{\s*:/', $properties['slug'])) {
                     continue;
+                }
 
                 $cmsPages[] = $page;
             }
