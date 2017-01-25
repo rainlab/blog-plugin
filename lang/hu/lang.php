@@ -18,7 +18,7 @@ return [
         'access_other_posts' => 'Más felhasználók bejegyzéseinek kezelése',
         'access_import_export' => 'Bejegyzések importálása és exportálása',
         'access_publish' => 'Blog bejegyzések közzététele',
-        'delete_confirm' => 'Valóban törölni akarja a kijelölt bejegyzéseket?',
+        'delete_confirm' => 'Törölni akarja a kijelölt bejegyzéseket?',
         'chart_published' => 'Közzétéve',
         'chart_drafts' => 'Piszkozatok',
         'chart_total' => 'Összesen'
@@ -79,7 +79,9 @@ return [
     ],
     'menuitem' => [
         'blog_category' => 'Blog kategória',
-        'all_blog_categories' => 'Összes blog kategória'
+        'all_blog_categories' => 'Összes blog kategória',
+        'blog_post' => 'Blog bejegyzés',
+        'all_blog_posts' => 'Összes blog bejegyzés'
     ],
     'settings' => [
         'category_title' => 'Blog kategória lista',
@@ -112,8 +114,8 @@ return [
         'posts_category_description' => 'A "Kategória" kategória hivatkozások kategórialap fájljának neve. Az alapértelmezett komponensrész használja ezt a tulajdonságot.',
         'posts_post' => 'Bejegyzéslap',
         'posts_post_description' => 'A "Tovább olvasom" hivatkozások blog bejegyzéslap fájljának neve. Az alapértelmezett komponensrész használja ezt a tulajdonságot.',
-        'posts_except_post' => 'Except post',
-        'posts_except_post_description' => 'Enter ID/URL or variable with post ID/URL you want to except',
+        'posts_except_post' => 'Bejegyzés kizárása',
+        'posts_except_post_description' => 'Adja meg annak a bejegyzésnek az azonosítóját vagy webcímét, amit nem akar megjeleníteni a listázáskor.',
         'rssfeed_blog' => 'Blog oldal',
         'rssfeed_blog_description' => 'Annak a lapnak a neve, ahol listázódnak a blog bejegyzések. Ezt a beállítást használja alapértelmezetten a blog komponens is.',
         'rssfeed_title' => 'RSS hírfolyam',
