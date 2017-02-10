@@ -65,6 +65,11 @@ class Post extends ComponentBase
 
         $post = $post->isPublished()->first();
 
+        if(!$post)
+        {
+            return $this->controller->run('404');
+        }
+        
         /*
          * Add a "url" helper attribute for linking to each category
          */
