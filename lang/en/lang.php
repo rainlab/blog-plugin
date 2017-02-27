@@ -57,6 +57,7 @@ return [
         'excerpt' => 'Excerpt',
         'summary' => 'Summary',
         'featured_images' => 'Featured Images',
+        'blog_image_thumbnail' => 'Blog Image Thumbnail',
         'delete_confirm' => 'Delete this post?',
         'close_confirm' => 'The post is not saved.',
         'return_to_posts' => 'Return to posts list'

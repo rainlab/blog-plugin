@@ -69,3 +69,9 @@ secondaryTabs:
             mode: image
             imageWidth: 200
             imageHeight: 200
+
+        blog_image_thumbnail:
+            tab: rainlab.blog::lang.post.tab_manage
+            label: rainlab.blog::lang.post.blog_image_thumbnail
+            type: mediafinder
+            mode: image
