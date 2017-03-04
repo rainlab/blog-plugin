@@ -50,6 +50,11 @@ class Posts extends ComponentBase
      */
     public $sortOrder;
 
+    /**
+     * @var integer
+     */
+    public $totalPublishedPost;
+
     public function componentDetails()
     {
         return [
@@ -141,6 +146,9 @@ class Posts extends ComponentBase
         $this->category = $this->page['category'] = $this->loadCategory();
         $this->posts = $this->page['posts'] = $this->listPosts();
 
+        // Allow the page to have the number of published post for an "All categories" badge
+        $this->totalPublishedPost = $this->page['totalPublishedPost'] = BlogPost::isPublished()->count();
+        
         /*
          * If the page number is not valid, redirect
          */
