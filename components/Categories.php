@@ -3,6 +3,7 @@
 use Db;
 use App;
 use Request;
+use Carbon\Carbon;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Category as BlogCategory;
@@ -82,6 +83,8 @@ class Categories extends ComponentBase
                     ->join('rainlab_blog_posts', 'rainlab_blog_posts.id', '=', 'rainlab_blog_posts_categories.post_id')
                     ->whereNotNull('rainlab_blog_posts.published')
                     ->where('rainlab_blog_posts.published', '=', 1)
+                    ->whereNotNull('rainlab_blog_posts.published_at')
+                    ->where('rainlab_blog_posts.published_at', '<', Carbon::now())
                     ->whereRaw($prefix.'rainlab_blog_categories.id = '.$prefix.'rainlab_blog_posts_categories.category_id')
                 ;
             });
