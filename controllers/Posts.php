@@ -18,6 +18,7 @@ class Posts extends Controller
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
     public $importExportConfig = 'config_import_export.yaml';
+    public $relationConfig;
 
     public $requiredPermissions = ['rainlab.blog.access_other_posts', 'rainlab.blog.access_posts'];
 
