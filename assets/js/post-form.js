@@ -35,6 +35,14 @@
             $button.data('button-template', '\n\n!['+self.buttonClickCount+'](image)\n')
             self.buttonClickCount++
         })
+
+        // Add Summary break button
+        this.$markdownEditor.markdownEditor('addToolbarButton', 'summarybreak', {
+            label: 'Summary Break',
+            action: 'insertLine',
+            icon: 'ellipsis-h',
+            template: '\n\n<!-- more -->\n'
+        });
     }
 
     PostForm.prototype.initPreview = function() {
