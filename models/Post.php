@@ -343,6 +343,36 @@ class Post extends Model
     }
 
     //
+    // Next / Previous
+    //
+
+    /**
+     * Returns the next post, if available.
+     * @return self
+     */
+    public function nextPost()
+    {
+        return self::isPublished()
+            ->where('id', '>' , $this->id)
+            ->orderBy('id', 'asc')
+            ->first()
+        ;
+    }
+
+    /**
+     * Returns the previous post, if available.
+     * @return self
+     */
+    public function previousPost()
+    {
+        return self::isPublished()
+            ->where('id', '<' , $this->id)
+            ->orderBy('id', 'desc')
+            ->first()
+        ;
+    }
+
+    //
     // Menu helpers
     //
 

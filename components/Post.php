@@ -69,10 +69,43 @@ class Post extends ComponentBase
          * Add a "url" helper attribute for linking to each category
          */
         if ($post && $post->categories->count()) {
-            $post->categories->each(function($category){
+            $post->categories->each(function($category) {
                 $category->setUrl($this->categoryPage, $this->controller);
             });
         }
+
+        return $post;
+    }
+
+    public function previousPost()
+    {
+        return $this->getPostSibling(-1);
+    }
+
+    public function nextPost()
+    {
+        return $this->getPostSibling(1);
+    }
+
+    protected function getPostSibling($direction = 1)
+    {
+        if (!$this->post) {
+            return;
+        }
+
+        $method = $direction === -1 ? 'previousPost' : 'nextPost';
+
+        if (!$post = $this->post->$method()) {
+            return;
+        }
+
+        $postPage = $this->getPage()->getBaseFileName();
+
+        $post->setUrl($postPage, $this->controller);
+
+        $post->categories->each(function($category) {
+            $category->setUrl($this->categoryPage, $this->controller);
+        });
 
         return $post;
     }
