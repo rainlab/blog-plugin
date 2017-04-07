@@ -41,3 +41,4 @@
 1.2.14: Added post exception property to the post list component, useful for showing related posts.
 1.2.15: Back-end navigation sort order updated.
 1.2.16: Added `nextPost` and `previousPost` to the blog post component.
+1.2.17: Improved the next and previous logic to sort by the published date.

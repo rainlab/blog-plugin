@@ -347,16 +347,47 @@ class Post extends Model
     //
 
     /**
+     * Apply a constraint to the query to find the nearest sibling
+     *
+     *     // Get the next post
+     *     Post::applyNextSibling('next')->first();
+     *
+     *     // Get the previous post
+     *     Post::applyNextSibling('previous')->first();
+     *
+     *     // Get the next post, ordered by the ID attribute instead
+     *     Post::applyNextSibling(['direction' => 'next', 'attribute' => 'id'])->first();
+     * 
+     */
+    public function scopeApplyNextSibling($query, $options = [])
+    {
+        if (is_string($options)) {
+            $options = ['direction' => $options];
+        }
+
+        extract(array_merge([
+            'direction' => 'next',
+            'attribute' => 'published_at',
+        ], $options));
+
+        $isPrevious = $direction == 'previous';
+        $directionOrder = $isPrevious ? 'asc' : 'desc';
+        $directionOperator = $isPrevious ? '>' : '<';
+
+        return $query
+            ->where('id', '<>', $this->id)
+            ->whereDate($attribute, $directionOperator , $this->$attribute)
+            ->orderBy($attribute, $directionOrder)
+        ;
+    }
+
+    /**
      * Returns the next post, if available.
      * @return self
      */
     public function nextPost()
     {
-        return self::isPublished()
-            ->where('id', '>' , $this->id)
-            ->orderBy('id', 'asc')
-            ->first()
-        ;
+        return self::isPublished()->applyNextSibling('next')->first();
     }
 
     /**
@@ -365,11 +396,7 @@ class Post extends Model
      */
     public function previousPost()
     {
-        return self::isPublished()
-            ->where('id', '<' , $this->id)
-            ->orderBy('id', 'desc')
-            ->first()
-        ;
+        return self::isPublished()->applyNextSibling('previous')->first();
     }
 
     //
