@@ -350,18 +350,18 @@ class Post extends Model
      * Apply a constraint to the query to find the nearest sibling
      *
      *     // Get the next post
-     *     Post::applyNextSibling()->first();
+     *     Post::applySibling()->first();
      *
      *     // Get the previous post
-     *     Post::applyNextSibling('previous')->first();
+     *     Post::applySibling(-1)->first();
      *
      *     // Get the previous post, ordered by the ID attribute instead
-     *     Post::applyNextSibling(['direction' => 'previous', 'attribute' => 'id'])->first();
+     *     Post::applySibling(['direction' => -1, 'attribute' => 'id'])->first();
      * 
      */
-    public function scopeApplyNextSibling($query, $options = [])
+    public function scopeApplySibling($query, $options = [])
     {
-        if (is_string($options)) {
+        if (!is_array($options)) {
             $options = ['direction' => $options];
         }
 
@@ -370,7 +370,7 @@ class Post extends Model
             'attribute' => 'published_at',
         ], $options));
 
-        $isPrevious = $direction == 'previous';
+        $isPrevious = in_array($direction, ['previous', -1]);
         $directionOrder = $isPrevious ? 'asc' : 'desc';
         $directionOperator = $isPrevious ? '>' : '<';
 
@@ -387,7 +387,7 @@ class Post extends Model
      */
     public function nextPost()
     {
-        return self::isPublished()->applyNextSibling()->first();
+        return self::isPublished()->applySibling()->first();
     }
 
     /**
@@ -396,7 +396,7 @@ class Post extends Model
      */
     public function previousPost()
     {
-        return self::isPublished()->applyNextSibling('previous')->first();
+        return self::isPublished()->applySibling(-1)->first();
     }
 
     //
