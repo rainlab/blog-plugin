@@ -66,6 +66,16 @@ class Post extends Model
         'random' => 'Random'
     ];
 
+    /**
+     * The options that allow to filter the post list in featured, not featured or all.
+     * @var array
+     */
+    public static $featuredFilteringOptions = [
+        'featured' => 'Yes',
+        'not_featured' => 'No',
+        'all' => 'Show all'
+    ];
+
     /*
      * Relations
      */
@@ -193,6 +203,18 @@ class Post extends Model
         ;
     }
 
+    public function scopeIsFeatured($query)
+    {
+        return $query
+            ->where('is_featured', true);
+    }
+
+    public function scopeIsNotFeatured($query)
+    {
+        return $query
+            ->where('is_featured', false);
+    }
+
     /**
      * Lists posts for the front end
      * @param  array $options Display options
@@ -212,12 +234,29 @@ class Post extends Model
             'search'     => '',
             'published'  => true,
             'exceptPost' => null,
+            'featured'   => 'all'
         ], $options));
+
 
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
 
         if ($published) {
             $query->isPublished();
+        }
+
+        /*
+         * Featured, not featured or all posts
+         */
+        switch($featured) {
+            case 'featured':
+                $query->isFeatured();
+                break;
+            case 'not_featured':
+                $query->isNotFeatured();
+                break;
+            case 'all':
+            default:
+                break;
         }
 
         /*

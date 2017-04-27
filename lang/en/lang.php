@@ -59,7 +59,8 @@ return [
         'featured_images' => 'Featured Images',
         'delete_confirm' => 'Delete this post?',
         'close_confirm' => 'The post is not saved.',
-        'return_to_posts' => 'Return to posts list'
+        'return_to_posts' => 'Return to posts list',
+        'featured' => 'Featured'
     ],
     'categories' => [
         'list_title' => 'Manage the blog categories',
@@ -116,6 +117,8 @@ return [
         'posts_post_description' => 'Name of the blog post page file for the "Learn more" links. This property is used by the default component partial.',
         'posts_except_post' => 'Except post',
         'posts_except_post_description' => 'Enter ID/URL or variable with post ID/URL you want to except',
+        'posts_filter_featured' => 'Featured filter',
+        'posts_filter_featured_description' => 'Filter the post list by featured, not featured or show regardless the value.',
         'rssfeed_blog' => 'Blog page',
         'rssfeed_blog_description' => 'Name of the main blog page file for generating links. This property is used by the default component partial.',
         'rssfeed_title' => 'RSS Feed',
