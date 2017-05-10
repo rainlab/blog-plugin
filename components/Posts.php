@@ -181,7 +181,7 @@ class Posts extends ComponentBase
         ]);
 
         /*
-         * Add a "url" helper attribute for linking to each post and category
+         * Add additional post attributes including URL helper and post author
          */
         $posts->each(function($post) {
             $post->setUrl($this->postPage, $this->controller);
@@ -189,6 +189,8 @@ class Posts extends ComponentBase
             $post->categories->each(function($category) {
                 $category->setUrl($this->categoryPage, $this->controller);
             });
+
+            $post->author = BackendAuth::findUserById($post->user_id)->attributes['first_name'];
         });
 
         return $posts;
