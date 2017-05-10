@@ -59,7 +59,7 @@ class Category extends Model
 
     public function getPostCountAttribute()
     {
-        return $this->posts()->count();
+        return $this->posts->count();
     }
 
     /**
