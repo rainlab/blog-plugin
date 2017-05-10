@@ -51,7 +51,6 @@ return [
         'tab_manage' => 'Beheer',
         'published_on' => 'Gepubliceerd op',
         'excerpt' => 'Samenvatting',
-        'summary' => 'Samenvatting',
         'featured_images' => 'Uitgelichte afbeelding',
         'delete_confirm' => 'Weet je zeker dat je dit artikel wilt verwijderen?',
         'close_confirm' => 'Artikel is nog niet opgeslagen.',
