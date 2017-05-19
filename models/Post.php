@@ -93,10 +93,14 @@ class Post extends Model
 
     public $preview = null;
 
-    /**
-     * Limit visibility of the published-button
-     * @return void
-     */
+	/**
+	 * Limit visibility of the published-button
+	 *
+	 * @param      $fields
+	 * @param null $context
+	 *
+	 * @return void
+	 */
     public function filterFields($fields, $context = null)
     {
         if (!isset($fields->published, $fields->published_at)) {
@@ -193,11 +197,14 @@ class Post extends Model
         ;
     }
 
-    /**
-     * Lists posts for the front end
-     * @param  array $options Display options
-     * @return self
-     */
+	/**
+	 * Lists posts for the front end
+	 *
+	 * @param        $query
+	 * @param  array $options Display options
+	 *
+	 * @return Post
+	 */
     public function scopeListFrontEnd($query, $options)
     {
         /*
@@ -346,19 +353,23 @@ class Post extends Model
     // Next / Previous
     //
 
-    /**
-     * Apply a constraint to the query to find the nearest sibling
-     *
-     *     // Get the next post
-     *     Post::applySibling()->first();
-     *
-     *     // Get the previous post
-     *     Post::applySibling(-1)->first();
-     *
-     *     // Get the previous post, ordered by the ID attribute instead
-     *     Post::applySibling(['direction' => -1, 'attribute' => 'id'])->first();
-     * 
-     */
+	/**
+	 * Apply a constraint to the query to find the nearest sibling
+	 *
+	 *     // Get the next post
+	 *     Post::applySibling()->first();
+	 *
+	 *     // Get the previous post
+	 *     Post::applySibling(-1)->first();
+	 *
+	 *     // Get the previous post, ordered by the ID attribute instead
+	 *     Post::applySibling(['direction' => -1, 'attribute' => 'id'])->first();
+	 *
+	 * @param       $query
+	 * @param array $options
+	 *
+	 * @return
+	 */
     public function scopeApplySibling($query, $options = [])
     {
         if (!is_array($options)) {
@@ -536,9 +547,13 @@ class Post extends Model
         return $result;
     }
 
-    /**
-     * Returns URL of a post page.
-     */
+	/**
+	 * Returns URL of a post page.
+	 *
+	 * @param $pageCode
+	 * @param $category
+	 * @param $theme
+	 */
     protected static function getPostPageUrl($pageCode, $category, $theme)
     {
         $page = CmsPage::loadCached($theme, $pageCode);
