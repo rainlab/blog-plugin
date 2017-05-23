@@ -64,7 +64,7 @@ class Post extends ComponentBase
 			? $post->transWhere('slug', $slug)
 			: $post->where('slug', $slug);
 
-		if(!BackendAuth::check())
+		if (!(BackendAuth::getUser() && BackendAuth::getUser()->hasAccess('rainlab.blog.access_posts')))
 		{
 			$post = $post->isPublished();
 		}
