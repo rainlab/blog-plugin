@@ -68,6 +68,7 @@ class Post extends ComponentBase
 		{
 			$post = $post->isPublished();
 		}
+
 		$post = $post->first();
 
 		/*
