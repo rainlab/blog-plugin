@@ -519,7 +519,10 @@ class Post extends Model
                 'items' => []
             ];
 
-            $posts = self::orderBy('title')->get();
+            $posts = self::isPublished()
+            ->orderBy('title')
+            ->get();
+            
             foreach ($posts as $post) {
                 $postItem = [
                     'title' => $post->title,
