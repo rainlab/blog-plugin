@@ -1,6 +1,6 @@
 <?php namespace RainLab\Blog\Components;
 
-use Backend\Facades\BackendAuth;
+use BackendAuth;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
@@ -64,8 +64,7 @@ class Post extends ComponentBase
             ? $post->transWhere('slug', $slug)
             : $post->where('slug', $slug);
 
-        if (!(BackendAuth::getUser() && BackendAuth::getUser()->hasAccess('rainlab.blog.access_posts')))
-        {
+        if (!$this->checkEditor()) {
             $post = $post->isPublished();
         }
 
@@ -114,5 +113,11 @@ class Post extends ComponentBase
         });
 
         return $post;
+    }
+
+    protected function checkEditor()
+    {
+        $backendUser = BackendAuth::getUser();
+        return $backendUser && $backendUser->hasAccess('rainlab.blog.access_posts');
     }
 }

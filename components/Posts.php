@@ -1,9 +1,9 @@
 <?php namespace RainLab\Blog\Components;
 
 use Redirect;
+use BackendAuth;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
-use Backend\Facades\BackendAuth;
 use RainLab\Blog\Models\Post as BlogPost;
 use RainLab\Blog\Models\Category as BlogCategory;
 
@@ -172,11 +172,7 @@ class Posts extends ComponentBase
         /*
          * List all the posts, eager load their categories
          */
-	    $isPublished = true;
-	    if (BackendAuth::getUser() && BackendAuth::getUser()->hasAccess('rainlab.blog.access_posts'))
-	    {
-		    $isPublished = false;
-	    }
+        $isPublished = !$this->checkEditor();
 
         $posts = BlogPost::with('categories')->listFrontEnd([
             'page'       => $this->property('pageNumber'),
@@ -217,5 +213,11 @@ class Posts extends ComponentBase
         $category = $category->first();
 
         return $category ?: null;
+    }
+
+    protected function checkEditor()
+    {
+        $backendUser = BackendAuth::getUser();
+        return $backendUser && $backendUser->hasAccess('rainlab.blog.access_posts');
     }
 }
