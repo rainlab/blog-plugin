@@ -256,9 +256,13 @@ class Category extends Model
         return $result;
     }
 
-    /**
-     * Returns URL of a category page.
-     */
+	/**
+	 * Returns URL of a category page.
+	 *
+	 * @param $pageCode
+	 * @param $category
+	 * @param $theme
+	 */
     protected static function getCategoryPageUrl($pageCode, $category, $theme)
     {
         $page = CmsPage::loadCached($theme, $pageCode);

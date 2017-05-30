@@ -1,5 +1,6 @@
 <?php namespace RainLab\Blog\Components;
 
+use Backend\Facades\BackendAuth;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
@@ -63,7 +64,12 @@ class Post extends ComponentBase
             ? $post->transWhere('slug', $slug)
             : $post->where('slug', $slug);
 
-        $post = $post->isPublished()->first();
+        if (!(BackendAuth::getUser() && BackendAuth::getUser()->hasAccess('rainlab.blog.access_posts')))
+        {
+            $post = $post->isPublished();
+        }
+
+        $post = $post->first();
 
         /*
          * Add a "url" helper attribute for linking to each category

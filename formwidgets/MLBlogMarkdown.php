@@ -57,10 +57,13 @@ class MLBlogMarkdown extends BlogMarkdown
         $this->prepareLocaleVars();
     }
 
-    /**
-     * Returns an array of translated values for this field
-     * @return array
-     */
+	/**
+	 * Returns an array of translated values for this field
+	 *
+	 * @param $value
+	 *
+	 * @return array
+	 */
     public function getSaveValue($value)
     {
         $localeData = $this->getLocaleSaveData();
