@@ -56,13 +56,33 @@ class Post extends ComponentBase
 
     protected function loadPost()
     {
+        return $this->getPost();
+    }
+
+    public function getPrevPost()
+    {
+        return $this->getPost('<');
+    }
+
+    public function getNextPost()
+    {
+        return $this->getPost('>');
+    }
+
+    private function getPost($operator = null)
+    {
         $slug = $this->property('slug');
 
         $post = new BlogPost;
 
-        $post = $post->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')
-            ? $post->transWhere('slug', $slug)
-            : $post->where('slug', $slug);
+        if ($operator) {
+            $post = $post->where('id', $operator, $this->post->id)->orderBy('id', $operator == '>' ? 'asc' : 'desc');
+        }
+        else {
+            $post = $post->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')
+                ? $post->transWhere('slug', $slug)
+                : $post->where('slug', $slug);
+        }
 
         if (!$this->checkEditor()) {
             $post = $post->isPublished();
