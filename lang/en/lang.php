@@ -92,6 +92,8 @@ return [
         'category_display_empty_description' => 'Show categories that do not have any posts.',
         'category_page' => 'Category page',
         'category_page_description' => 'Name of the category page file for the category links. This property is used by the default component partial.',
+        'category_hide_post_count' => 'Hide category post count',
+        'category_hide_post_count_description' => 'Don\'t show the numbers of posts in a category next to the category name.',
         'post_title' => 'Post',
         'post_description' => 'Displays a blog post on the page.',
         'post_slug' => 'Post slug',

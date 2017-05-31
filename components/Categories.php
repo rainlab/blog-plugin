@@ -47,6 +47,12 @@ class Categories extends ComponentBase
                 'type'        => 'checkbox',
                 'default'     => 0
             ],
+            'hidePostCount' => [
+                'title'       => 'rainlab.blog::lang.settings.category_hide_post_count',
+                'description' => 'rainlab.blog::lang.settings.category_hide_post_count_description',
+                'type'        => 'checkbox',
+                'default'     => 0
+            ],
             'categoryPage' => [
                 'title'       => 'rainlab.blog::lang.settings.category_page',
                 'description' => 'rainlab.blog::lang.settings.category_page_description',
@@ -67,6 +73,7 @@ class Categories extends ComponentBase
         $this->currentCategorySlug = $this->page['currentCategorySlug'] = $this->property('slug');
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
         $this->categories = $this->page['categories'] = $this->loadCategories();
+        $this->hidePostCount = $this->page['hidePostCount'] = ($this->property('hidePostCount') == 1);
     }
 
     protected function loadCategories()
