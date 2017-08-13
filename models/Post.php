@@ -533,7 +533,7 @@ class Post extends Model
             $posts = self::isPublished()
             ->orderBy('title')
             ->get();
-            
+
             foreach ($posts as $post) {
                 $postItem = [
                     'title' => $post->title,

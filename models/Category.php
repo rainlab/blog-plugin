@@ -22,7 +22,7 @@ class Category extends Model
     public $rules = [
         'name' => 'required',
         'slug' => 'required|between:3,64|unique:rainlab_blog_categories',
-        'code' => 'unique:rainlab_blog_categories',
+        'code' => 'nullable|unique:rainlab_blog_categories',
     ];
 
     /**
