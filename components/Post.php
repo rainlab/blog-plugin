@@ -56,7 +56,7 @@ class Post extends ComponentBase
 
     public function onRender()
     {
-        if( empty( $this->post ) ) {
+        if (empty($this->post)) {
             $this->post = $this->page['post'] = $this->loadPost();
         }
     }
