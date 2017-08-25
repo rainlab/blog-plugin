@@ -55,7 +55,8 @@ return [
         'featured_images' => 'Immagini in evidenza',
         'delete_confirm' => 'Vuoi veramente cancellare questo post?',
         'close_confirm' => 'Questo post non è salvato.',
-        'return_to_posts' => 'Ritorna all\'elenco dei post'
+        'return_to_posts' => 'Ritorna all\'elenco dei post',
+        'featured' => 'In evidenza'
     ],
     'categories' => [
         'list_title' => 'Gestisci le categorie del blog',
@@ -102,6 +103,8 @@ return [
         'posts_category' => 'Pagina delle categorie',
         'posts_category_description' => 'Nome del file per la pagina delle categorie per i link "Postato in" alle categorie. Questa proprietà è usata dal componente parziale di default.',
         'posts_post' => 'Pagina del post',
-        'posts_post_description' => 'Nome del file per la pagina del post per i link "Scopri di più". Questa proprietà è usata dal componente parziale di default.'
+        'posts_post_description' => 'Nome del file per la pagina del post per i link "Scopri di più". Questa proprietà è usata dal componente parziale di default.',
+        'posts_filter_featured' => 'Filtro in evidenza',
+        'posts_filter_featured_description' => 'Filtra la lista dei post se i post sono marcati come in evidenza o meno. In alternativa si possono visualizzare indipendentemente dal valore.',
     ]
 ];

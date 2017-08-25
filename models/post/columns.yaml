@@ -34,3 +34,7 @@ columns:
     published_at:
         label: rainlab.blog::lang.post.published
         type: date
+
+    is_featured:
+        label: rainlab.blog::lang.post.featured
+        type: switch

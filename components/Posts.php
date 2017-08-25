@@ -94,6 +94,12 @@ class Posts extends ComponentBase
                 'type'        => 'dropdown',
                 'default'     => 'published_at desc'
             ],
+            'featured' => [
+                'title'       => 'rainlab.blog::lang.settings.posts_filter_featured',
+                'description' => 'rainlab.blog::lang.settings.posts_filter_featured_description',
+                'type'        => 'dropdown',
+                'default'     => 'all'
+            ],
             'categoryPage' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_category',
                 'description' => 'rainlab.blog::lang.settings.posts_category_description',
@@ -133,6 +139,11 @@ class Posts extends ComponentBase
     public function getSortOrderOptions()
     {
         return BlogPost::$allowedSortingOptions;
+    }
+
+    public function getFeaturedOptions()
+    {
+        return BlogPost::$featuredFilteringOptions;
     }
 
     public function onRun()
@@ -182,6 +193,7 @@ class Posts extends ComponentBase
             'category'   => $category,
             'published'  => $isPublished,
             'exceptPost' => $this->property('exceptPost'),
+            'featured'   => $this->property('featured')
         ]);
 
         /*

@@ -56,6 +56,12 @@ secondaryTabs:
                 field: published
                 condition: checked
 
+        is_featured:
+            tab: rainlab.blog::lang.post.tab_manage
+            label: rainlab.blog::lang.post.featured
+            span: right
+            type: switch
+
         excerpt:
             tab: rainlab.blog::lang.post.tab_manage
             label: rainlab.blog::lang.post.excerpt
