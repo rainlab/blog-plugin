@@ -51,11 +51,14 @@ class Post extends ComponentBase
     public function onRun()
     {
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
+        $this->post = $this->page['post'] = $this->loadPost();
     }
 
     public function onRender()
     {
-        $this->post = $this->page['post'] = $this->loadPost();
+        if (empty($this->post)) {
+            $this->post = $this->page['post'] = $this->loadPost();
+        }
     }
 
     protected function loadPost()
