@@ -15,6 +15,7 @@ use Backend\Models\User;
 use Carbon\Carbon;
 use Cms\Classes\Page as CmsPage;
 use Cms\Classes\Theme;
+use System\Classes\PluginManager;
 
 class Post extends Model
 {
@@ -310,6 +311,12 @@ class Post extends Model
 
     public function scopeFilterBlogListByLocale($query, $locale = null)
     {
+        $pluginManager = PluginManager::instance()->findByIdentifier('Rainlab.Translate');
+
+        if (!$pluginManager || $pluginManager->disabled) {
+            return;
+        }
+
         if (!$locale) {
             $locale = $this->translatableContext;
         }
