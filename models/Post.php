@@ -219,6 +219,7 @@ class Post extends Model
             'search'     => '',
             'published'  => true,
             'exceptPost' => null,
+            'onlyCurrentLocalePost' => 0
         ], $options));
 
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
@@ -293,7 +294,9 @@ class Post extends Model
         /*
          * filtering blog list by current locale
          */
-        $query = $this->scopeFilterBlogListByLocale($query, App::getLocale());
+        if(!empty($options['onlyCurrentLocalePost'])){
+            $query = $this->scopeFilterBlogListByLocale($query, App::getLocale());
+        }
 
         return $query->paginate($perPage, $page);
     }
