@@ -327,7 +327,7 @@ class Post extends Model
 
         $query->select($this->getTable() . '.*');
         $query->where(function ($q) use ($locale) {
-            $q->where(Db::raw(\DbDongle::cast('rainlab_translate_attributes.attribute_data', 'TEXT')), 'NOT LIKE', '%{"title":""%');
+            $q->where(Db::raw(\DbDongle::cast('rainlab_translate_attributes.attribute_data', 'TEXT')), 'NOT LIKE', '{"title":""%');
             $q->where('rainlab_translate_attributes.locale', '=', $locale);
         });
 
