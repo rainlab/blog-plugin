@@ -69,11 +69,14 @@ class Categories extends ComponentBase
         $this->categories = $this->page['categories'] = $this->loadCategories();
     }
 
+    /**
+     * Load all categories or, depending on the <displayEmpty> option, only those that have blog posts
+     * @return mixed
+     */
     protected function loadCategories()
     {
-        $categories = BlogCategory::orderBy('name');
         if (!$this->property('displayEmpty')) {
-            $categories->whereExists(function($query) {
+            $categories = BlogCategory::whereExists(function($query) {
                 $prefix = Db::getTablePrefix();
 
                 $query
@@ -85,9 +88,11 @@ class Categories extends ComponentBase
                     ->whereRaw($prefix.'rainlab_blog_categories.id = '.$prefix.'rainlab_blog_posts_categories.category_id')
                 ;
             });
+            $categories = $categories->getNested();
         }
-
-        $categories = $categories->getNested();
+        else {
+            $categories = BlogCategory::getNested();
+        }
 
         /*
          * Add a "url" helper attribute for linking to each category
