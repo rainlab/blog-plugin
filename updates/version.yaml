@@ -43,3 +43,4 @@
 1.2.16: Added `nextPost` and `previousPost` to the blog post component.
 1.2.17: Improved the next and previous logic to sort by the published date.
 1.2.18: Minor change to internals.
+1.2.19: Improved support for Build 420+
