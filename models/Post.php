@@ -15,6 +15,7 @@ use Backend\Models\User;
 use Carbon\Carbon;
 use Cms\Classes\Page as CmsPage;
 use Cms\Classes\Theme;
+use System\Classes\PluginManager;
 
 class Post extends Model
 {
@@ -219,6 +220,7 @@ class Post extends Model
             'search'     => '',
             'published'  => true,
             'exceptPost' => null,
+            'onlyCurrentLocalePost' => 0
         ], $options));
 
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
@@ -290,9 +292,52 @@ class Post extends Model
                 $q->whereIn('id', $categories);
             });
         }
+        /*
+         * filtering blog list by current locale
+         */
+        if(!empty($options['onlyCurrentLocalePost'])){
+            $query = $this->scopeFilterBlogListByLocale($query, App::getLocale());
+        }
 
         return $query->paginate($perPage, $page);
     }
+
+    /**
+     * Allows filtering blog list by current locale
+     * @param  Illuminate\Query\Builder  $query      QueryBuilder
+     * @param  App\locale                $locale
+     * @return Illuminate\Query\Builder              QueryBuilder
+     */
+
+    public function scopeFilterBlogListByLocale($query, $locale = null)
+    {
+        $pluginManager = PluginManager::instance()->findByIdentifier('Rainlab.Translate');
+
+        if (!$pluginManager || $pluginManager->disabled) {
+            return;
+        }
+
+        if (!$locale) {
+            $locale = $this->translatableContext;
+        }
+
+        if ($locale == \RainLab\Translate\Models\Locale::getDefault()->code) {
+            return $query;
+        }
+
+        $query->select($this->getTable() . '.*');
+        $query->where(function ($q) use ($locale) {
+            $q->where(Db::raw(\DbDongle::cast('rainlab_translate_attributes.attribute_data', 'TEXT')), 'NOT LIKE', '{"title":""%');
+            $q->where('rainlab_translate_attributes.locale', '=', $locale);
+        });
+
+        $query->join('rainlab_translate_attributes', function ($join) use ($locale) {
+            $join->on('rainlab_blog_posts.id', '=', 'rainlab_translate_attributes.model_id');
+        });
+
+        return $query;
+    }
+
 
     /**
      * Allows filtering for specifc categories

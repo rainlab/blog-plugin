@@ -94,6 +94,12 @@ class Posts extends ComponentBase
                 'type'        => 'dropdown',
                 'default'     => 'published_at desc'
             ],
+            'onlyCurrentLocalePost' => [
+                'title'       => 'Show Active Locale Blog?',
+                'description' => 'Display only active current locale post on listing page',
+                'default'     => 0,
+                'type'        => 'checkbox'
+            ],
             'categoryPage' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_category',
                 'description' => 'rainlab.blog::lang.settings.posts_category_description',
@@ -182,6 +188,7 @@ class Posts extends ComponentBase
             'category'   => $category,
             'published'  => $isPublished,
             'exceptPost' => $this->property('exceptPost'),
+            'onlyCurrentLocalePost' => $this->property('onlyCurrentLocalePost')
         ]);
 
         /*
