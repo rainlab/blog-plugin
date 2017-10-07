@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>{{ this.page.meta_title ?: this.page.title }}</title>
+        <link>{{ link }}</link>
+
+        <description>{{ this.page.meta_description ? : 'Blog Feed' }}</description>
+        <atom:link href="{{ rssLink }}" rel="self" type="application/rss+xml" />
+        {% for post in posts %}
+        <item>
+            <title>{{ post.title }}</title>
+            <link>{{ post.url }}</link>
+            <pubDate>{{ post.published_at|date('Y-m-d') }}</pubDate>
+            <content:encoded><![CDATA[ <header><figure data-mode="fullscreen"><img src="{{ post.featured_images.first.getThumb(800, 400, 'crop') }}" /></figure></header> {{ post.content_html|raw }} ]]></content:encoded>
+        </item>
+        {% endfor %}
+    </channel>
+</rss>

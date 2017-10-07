@@ -16,6 +16,11 @@ class RssFeed extends ComponentBase
     public $posts;
 
     /**
+     * init variable for rssTemplate
+     */
+    public $rssTemplate;
+
+    /**
      * If the post list should be filtered by a category, the model to use.
      * @var Model
      */
@@ -77,6 +82,13 @@ class RssFeed extends ComponentBase
                 'default'     => 'blog/post',
                 'group'       => 'Links',
             ],
+            'rssTemplate' => [
+                'title'       => 'RSS Template',
+                'type'        => 'dropdown',
+                'options'     => ['@default'=>'Default', '@default-ia'=>'Instant Article'],
+                'default'     => 'default',
+                'group'       => 'Template',
+            ],
         ];
     }
 
@@ -99,7 +111,7 @@ class RssFeed extends ComponentBase
     {
         $this->prepareVars();
 
-        $xmlFeed = $this->renderPartial('@default');
+        $xmlFeed = $this->renderPartial($this->property('rssTemplate'));
 
         return Response::make($xmlFeed, '200')->header('Content-Type', 'text/xml');
     }
