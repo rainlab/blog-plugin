@@ -440,7 +440,9 @@ class Post extends Model
             $references = [];
             $posts = self::orderBy('title')->get();
             foreach ($posts as $post) {
-                $references[$post->id] = $post->title;
+                if(!is_null($post->published) && $post->published == true) {
+                    $references[$post->id] = $post->title;
+                }    
             }
 
             $result = [
@@ -535,15 +537,17 @@ class Post extends Model
             ->get();
 
             foreach ($posts as $post) {
-                $postItem = [
-                    'title' => $post->title,
-                    'url'   => self::getPostPageUrl($item->cmsPage, $post, $theme),
-                    'mtime' => $post->updated_at,
-                ];
+                if(!is_null($post->published) && $post->published == true) {
+                    $postItem = [
+                        'title' => $post->title,
+                        'url'   => self::getPostPageUrl($item->cmsPage, $post, $theme),
+                        'mtime' => $post->updated_at,
+                    ];
 
-                $postItem['isActive'] = $postItem['url'] == $url;
+                    $postItem['isActive'] = $postItem['url'] == $url;
 
-                $result['items'][] = $postItem;
+                    $result['items'][] = $postItem;
+                }
             }
         }
 
