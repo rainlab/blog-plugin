@@ -85,6 +85,11 @@ class Post extends ComponentBase
                 $category->setUrl($this->categoryPage, $this->controller);
             });
         }
+        
+        if (!$post || !$post->exists) {
+            $this->setStatusCode(404);
+            return $this->controller->run('404');
+        }
 
         return $post;
     }
