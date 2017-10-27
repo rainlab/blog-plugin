@@ -576,7 +576,13 @@ class Post extends Model
         }
 
         $paramName = substr(trim($matches[1]), 1);
-        $url = CmsPage::url($page->getBaseFileName(), [$paramName => $category->slug]);
+        $params = [
+            $paramName => $category->slug,
+            'year' => $category->published_at->format('Y'),
+            'month' => $category->published_at->format('m'),
+            'day' => $category->published_at->format('d'),
+        ];
+        $url = CmsPage::url($page->getBaseFileName(), $params);
 
         return $url;
     }
