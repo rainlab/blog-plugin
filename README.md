@@ -182,6 +182,18 @@ The component can be used on any page, it will hijack the entire page cycle to d
     ==
     <!-- This markup will never be displayed -->
 
+
+## Configuration
+
+To overwrite the default configuration create a `config/rainlab/blog/config.php`. You can return only values you want to override.
+
+### Summary
+
+A summary attribute is generated for each post.
+
+If you enter an excerpt manually, it gets used as summary. Alternatively, you can use the `summary_separator` (default is `<!-- more -->`) to mark the end of the summary. If a post contains no separator, the text gets truncated after the number of characters specified in `summary_default_length` (default is 600 characters).
+
+
 ## Markdown guide
 
 October supports [standard markdown syntax](http://daringfireball.net/projects/markdown/) as well as [extended markdown syntax](http://michelf.ca/projects/php-markdown/extra/)
