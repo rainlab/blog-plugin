@@ -349,7 +349,8 @@ class Post extends Model
         }
 
         $length = Config::get('rainlab.blog::summary_default_length', 600);
-        return Str::limit(Html::strip($this->content_html), $length);
+
+        return Html::limit($this->content_html, $length);
     }
 
     //
