@@ -5,6 +5,7 @@ use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
 use RainLab\Blog\Models\Category as BlogCategory;
+use Carbon\Carbon;
 
 class ArchivePosts extends ComponentBase
 {
@@ -153,23 +154,29 @@ class ArchivePosts extends ComponentBase
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
     }
 
-    protected function listPosts($monthSlug)
+    protected function listPosts($slug)
     {
-        $thisMonthInt = date('n', strtotime($monthSlug));
-        $thisYearInt = date('Y', strtotime($monthSlug));
-        $thisMonthTime = mktime(0, 0, 0, $thisMonthInt, 1, $thisYearInt);
-        $thisMonthDays = date('t', $thisMonthTime);
-        $monthBegin = date('Y-m-01 00:00:00', $thisMonthTime);
-        $monthEnd = date('Y-m-'.$thisMonthDays.' 00:00:00', $thisMonthTime);
+        try {
+            $slug = str_replace('+', ' ', $slug);
+            $dateMin = Carbon::parse("first day of ".$slug)->toDateTimeString();
+            $dateMax = Carbon::parse("last day of ".$slug)->addHours(24)->toDateTimeString();
+        }
+        catch (\Exception $e) {
+            return null;
+        }
 
         /*
          * List all the posts, eager load their categories
          */
-        $posts = BlogPost::with('categories')->where('published_at', '>', $monthBegin)->where('published_at', '<', $monthEnd)->listFrontEnd([
+        $posts = BlogPost::with('categories')->listFrontEnd([
             'page'       => $this->property('pageNumber'),
             'sort'       => $this->property('sortOrder'),
             'perPage'    => $this->property('postsPerPage'),
+            'dateMin'    => $dateMin,
+            'dateMax'    => $dateMax
         ]);
+
+        // dd($posts);
 
         /*
          * Add a "url" helper attribute for linking to each post and category

@@ -219,11 +219,13 @@ class Post extends Model
             'search'     => '',
             'published'  => true,
             'exceptPost' => null,
+            'dateMin'    => null,
+            'dateMax'    => null,
         ], $options));
 
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
 
-        if ($published) {
+        if ($published && $dateMin === null && $dateMax === null) {
             $query->isPublished();
         }
 
@@ -289,6 +291,19 @@ class Post extends Model
             $query->whereHas('categories', function($q) use ($categories) {
                 $q->whereIn('id', $categories);
             });
+        }
+
+        /*
+         * Date limits
+         */
+        if ($dateMin !== null) {
+            $query->where('published_at', '>', $dateMin);
+            $query->where('published', '=', 1);
+        }
+
+        if ($dateMax !== null) {
+            $query->where('published_at', '<', $dateMax);
+            $query->where('published', '=', 1);
         }
 
         return $query->paginate($perPage, $page);
