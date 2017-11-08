@@ -28,7 +28,7 @@ class Plugin extends PluginBase
             'RainLab\Blog\Components\Posts'      => 'blogPosts',
             'RainLab\Blog\Components\Categories' => 'blogCategories',
             'RainLab\Blog\Components\RssFeed'    => 'blogRssFeed',
-	    'RainLab\Blog\Components\ArchiveList'  => 'blogArchiveList',
+	        'RainLab\Blog\Components\ArchiveList' => 'blogArchiveList',
             'RainLab\Blog\Components\ArchivePosts' => 'blogArchivePosts'
         ];
     }
