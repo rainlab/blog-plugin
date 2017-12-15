@@ -167,22 +167,37 @@ class Posts extends ComponentBase
 
     protected function listPosts()
     {
-        $category = $this->category ? $this->category->id : null;
+        $categories = null;
+
+        if($this->category != null) {
+            $categories = [];
+            foreach ($this->category as $category) {
+                $categories[] = $category->id;
+            }
+        }
 
         /*
          * List all the posts, eager load their categories
          */
         $isPublished = !$this->checkEditor();
 
-        $posts = BlogPost::with('categories')->listFrontEnd([
+        $args = [
             'page'       => $this->property('pageNumber'),
             'sort'       => $this->property('sortOrder'),
             'perPage'    => $this->property('postsPerPage'),
             'search'     => trim(input('search')),
-            'category'   => $category,
             'published'  => $isPublished,
             'exceptPost' => $this->property('exceptPost'),
-        ]);
+        ];
+
+        if($this->category == null) 
+            $args['category'] = null;
+        elseif(count($this->category) > 1)
+            $args['categories'] = $categories;
+        else
+            $args['category'] = $categories[0];
+
+        $posts = BlogPost::with('categories')->listFrontEnd($args);
 
         /*
          * Add a "url" helper attribute for linking to each post and category
@@ -200,19 +215,32 @@ class Posts extends ComponentBase
 
     protected function loadCategory()
     {
-        if (!$slug = $this->property('categoryFilter')) {
+        if (!$slug = $this->property('categoryFilter'))
             return null;
+
+        if (strpos($slug, ',') !== false)
+            $slugs = explode(',', $slug);
+        else
+            $slugs = [$slug];
+
+        $categories = [];
+
+        foreach ($slugs as $slug) {
+            $category = new BlogCategory;
+
+            $category = $category->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')
+                ? $category->transWhere('slug', $slug)
+                : $category->where('slug', $slug);
+
+            $category = $category->first();
+
+            if(!$category)
+                $this->controller->run('404');
+            else
+                $categories[] = $category;
         }
 
-        $category = new BlogCategory;
-
-        $category = $category->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')
-            ? $category->transWhere('slug', $slug)
-            : $category->where('slug', $slug);
-
-        $category = $category->first();
-
-        return $category ?: null;
+        return $categories;
     }
 
     protected function checkEditor()
