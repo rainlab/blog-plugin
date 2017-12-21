@@ -111,7 +111,7 @@ return [
         'posts_order' => 'Postauksien järjestys',
         'posts_order_description' => 'Attribuutti, jonka mukaan postaukset tulisi järjestää',
         'posts_category' => 'Kategoriasivu',
-        'posts_category_description' => 'Kategoriasivun tiedosto "Julkaistu kohteesee" kategorialinkkejä varten. Tätä ominaisuutta käyttää oletuskomponentti.',
+        'posts_category_description' => 'Kategoriasivun tiedosto "Julkaistu kohteeseen" kategorialinkkejä varten. Tätä ominaisuutta käyttää oletuskomponentti.',
         'posts_post' => 'Postaussivu',
         'posts_post_description' => 'Blogisivun tiedostonimi "Lue lisää" linkkejä varten. Tätä ominaisuutta käyttää oletuskomponentti.',
         'posts_except_post' => 'Poissulje postauksia',
