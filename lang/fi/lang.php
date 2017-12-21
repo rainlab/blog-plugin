@@ -51,7 +51,7 @@ return [
         'tab_edit' => 'Muokkaa',
         'tab_categories' => 'Kategoriat',
         'categories_comment' => 'Valitse kategoriat joihin postaus kuuluu',
-        'categories_placeholder' => 'Kategorioita ei ole, There are no categories, sinun pitäisi luoda ensimmäinen ensin!',
+        'categories_placeholder' => 'Kategorioita ei ole, sinun pitäisi luoda ensimmäinen ensin!',
         'tab_manage' => 'Hallitse',
         'published_on' => 'Julkaistu',
         'excerpt' => 'Poiminto',
