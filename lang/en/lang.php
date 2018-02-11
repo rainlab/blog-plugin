@@ -82,7 +82,7 @@ return [
         'all_blog_categories' => 'All blog categories',
         'blog_post' => 'Blog post',
         'all_blog_posts' => 'All blog posts',
-        'category_blog_posts' => 'Category blog posts'
+        'category_blog_posts' => 'Blog category posts'
     ],
     'settings' => [
         'category_title' => 'Category List',
