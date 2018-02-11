@@ -455,10 +455,10 @@ class Post extends Model
                 'dynamicItems' => true
             ];
         }
-		
+        
         if ($type == 'category-blog-posts') {
-			$references = [];
-			
+            $references = [];
+            
             $categories = Category::orderBy('name')->get();
             foreach ($categories as $category) {
                 $references[$category->id] = $category->name;
@@ -560,28 +560,28 @@ class Post extends Model
                 $result['items'][] = $postItem;
             }
         }
-		elseif ($item->type == 'category-blog-posts') {
-			if (!$item->reference || !$item->cmsPage)
+        elseif ($item->type == 'category-blog-posts') {
+            if (!$item->reference || !$item->cmsPage)
                 return;
-			
-			$category = Category::find($item->reference);
+            
+            $category = Category::find($item->reference);
             if (!$category)
                 return;
-			
+            
             $result = [
                 'items' => []
             ];
-			
+            
             $query = self::isPublished()
             ->orderBy('title');
 
-			$categories = $category->getAllChildrenAndSelf()->lists('id');
-			$query->whereHas('categories', function($q) use ($categories) {
-				$q->whereIn('id', $categories);
-			});
-		
-			$posts = $query->get();
-			
+            $categories = $category->getAllChildrenAndSelf()->lists('id');
+            $query->whereHas('categories', function($q) use ($categories) {
+                $q->whereIn('id', $categories);
+            });
+        
+            $posts = $query->get();
+            
             foreach ($posts as $post) {
                 $postItem = [
                     'title' => $post->title,
