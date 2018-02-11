@@ -455,6 +455,20 @@ class Post extends Model
                 'dynamicItems' => true
             ];
         }
+        
+        if ($type == 'category-blog-posts') {
+            $references = [];
+            
+            $categories = Category::orderBy('name')->get();
+            foreach ($categories as $category) {
+                $references[$category->id] = $category->name;
+            }
+
+            $result = [
+                'references'   => $references,
+                'dynamicItems' => true
+            ];
+        }
 
         if ($result) {
             $theme = Theme::getActiveTheme();
@@ -534,6 +548,40 @@ class Post extends Model
             ->orderBy('title')
             ->get();
 
+            foreach ($posts as $post) {
+                $postItem = [
+                    'title' => $post->title,
+                    'url'   => self::getPostPageUrl($item->cmsPage, $post, $theme),
+                    'mtime' => $post->updated_at,
+                ];
+
+                $postItem['isActive'] = $postItem['url'] == $url;
+
+                $result['items'][] = $postItem;
+            }
+        }
+        elseif ($item->type == 'category-blog-posts') {
+            if (!$item->reference || !$item->cmsPage)
+                return;
+            
+            $category = Category::find($item->reference);
+            if (!$category)
+                return;
+            
+            $result = [
+                'items' => []
+            ];
+            
+            $query = self::isPublished()
+            ->orderBy('title');
+
+            $categories = $category->getAllChildrenAndSelf()->lists('id');
+            $query->whereHas('categories', function($q) use ($categories) {
+                $q->whereIn('id', $categories);
+            });
+        
+            $posts = $query->get();
+            
             foreach ($posts as $post) {
                 $postItem = [
                     'title' => $post->title,
