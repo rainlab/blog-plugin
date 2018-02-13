@@ -3,6 +3,7 @@
 use BackendAuth;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
+use RainLab\Blog\Models\Category;
 use RainLab\Blog\Models\Post as BlogPost;
 
 class Post extends ComponentBase
@@ -40,12 +41,26 @@ class Post extends ComponentBase
                 'type'        => 'dropdown',
                 'default'     => 'blog/category',
             ],
+            'categoryFilter' => [
+                'title'       => 'rainlab.blog::lang.settings.posts_filter',
+                'description' => 'rainlab.blog::lang.settings.post_filter_description',
+                'type'        => 'dropdown',
+                'default'     => ''
+            ],
         ];
     }
 
     public function getCategoryPageOptions()
     {
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+    }
+
+    public function getCategoryFilterOptions()
+    {
+        $options[''] = '&nbsp;';
+        $categories = Category::with('id', 'name')->lists('name', 'id');
+        $result = $options + $categories;
+        return $result;
     }
 
     public function onRun()
@@ -80,10 +95,27 @@ class Post extends ComponentBase
         /*
          * Add a "url" helper attribute for linking to each category
          */
-        if ($post && $post->categories->count()) {
-            $post->categories->each(function($category) {
-                $category->setUrl($this->categoryPage, $this->controller);
-            });
+        if($post) {
+            $categoryFilter = $this->property('categoryFilter');
+            if ($post->categories->count()) {
+                if($categoryFilter !== "") {
+                    $found = false;
+                    foreach($post->categories as $category) {
+                        if($category->id == $categoryFilter) {
+                            $found = true;
+                            break;
+                        }
+                    }
+                    if(!$found)
+                        return null;
+                }
+
+                $post->categories->each(function($category) {
+                    $category->setUrl($this->categoryPage, $this->controller);
+                });
+            } else if($categoryFilter !== "") {
+                return null;
+            }
         }
 
         return $post;
