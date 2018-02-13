@@ -99,6 +99,7 @@ return [
         'post_slug_description' => "Look up the blog post using the supplied slug value.",
         'post_category' => 'Category page',
         'post_category_description' => 'Name of the category page file for the category links. This property is used by the default component partial.',
+        'post_filter_description' => 'Select a category to filter the posts by. Leave empty to show all posts.',
         'posts_title' => 'Post List',
         'posts_description' => 'Displays a list of latest blog posts on the page.',
         'posts_pagination' => 'Page number',
