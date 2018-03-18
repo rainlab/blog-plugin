@@ -117,6 +117,13 @@ class Posts extends ComponentBase
                 'default'           => '',
                 'group'             => 'Exceptions',
             ],
+            'exceptCategories' => [
+                'title'             => 'rainlab.blog::lang.settings.posts_except_categories',
+                'description'       => 'rainlab.blog::lang.settings.posts_except_categories_description',
+                'type'              => 'string',
+                'default'           => '',
+                'group'             => 'Exceptions',
+            ],
         ];
     }
 
@@ -175,13 +182,16 @@ class Posts extends ComponentBase
         $isPublished = !$this->checkEditor();
 
         $posts = BlogPost::with('categories')->listFrontEnd([
-            'page'       => $this->property('pageNumber'),
-            'sort'       => $this->property('sortOrder'),
-            'perPage'    => $this->property('postsPerPage'),
-            'search'     => trim(input('search')),
-            'category'   => $category,
-            'published'  => $isPublished,
-            'exceptPost' => $this->property('exceptPost'),
+            'page'             => $this->property('pageNumber'),
+            'sort'             => $this->property('sortOrder'),
+            'perPage'          => $this->property('postsPerPage'),
+            'search'           => trim(input('search')),
+            'category'         => $category,
+            'published'        => $isPublished,
+            'exceptPost'       => $this->property('exceptPost'),
+            'exceptCategories' => is_array($this->property('exceptCategories'))
+                ? $this->property('exceptCategories')
+                : explode(',', $this->property('exceptCategories')),
         ]);
 
         /*
