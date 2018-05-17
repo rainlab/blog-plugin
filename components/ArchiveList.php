@@ -82,6 +82,6 @@ class ArchiveList extends ComponentBase
             $month->url = $this->controller->pageUrl($this->property('archivePage'), ['slug' => urlencode($month->month)]);
         }
 
-        return collect($archiveRange);
+        return $archiveRange;
     }
 }
