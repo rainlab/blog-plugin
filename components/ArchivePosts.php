@@ -57,8 +57,8 @@ class ArchivePosts extends ComponentBase
     {
         return [
             'month' => [
-                'title'       => 'rainlab.blog::lang.settings.post_slug',
-                'description' => 'rainlab.blog::lang.settings.post_slug_description',
+                'title'       => 'rainlab.blog::lang.settings.archive_month',
+                'description' => 'rainlab.blog::lang.settings.archive_month_description',
                 'default'     => '{{ :month }}',
                 'type'        => 'string'
             ],

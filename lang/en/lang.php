@@ -130,6 +130,8 @@ return [
         'archive_list_slug_description' => "Look up the blog posts using a slug containing the month and year",
         'archive_list_page' => 'Archive page',
         'archive_list_page_description' => 'Name of the CMS page used for displaying archive posts',
+        'archive_month' => 'Archive Month',
+        'archive_month_description' => 'Name of the month that you would like to filter posts by.',
         'archive_posts_title' => 'Archive posts',
         'archive_posts_description' => 'Displays a list of posts filtered by month and year',
     ]
