@@ -170,8 +170,6 @@ class ArchivePosts extends ComponentBase
             'dateMax'    => $dateMax
         ]);
 
-        // dd($posts);
-
         /*
          * Add a "url" helper attribute for linking to each post and category
          */
