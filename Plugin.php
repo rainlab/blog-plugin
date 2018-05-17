@@ -24,10 +24,10 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'RainLab\Blog\Components\Post'       => 'blogPost',
-            'RainLab\Blog\Components\Posts'      => 'blogPosts',
-            'RainLab\Blog\Components\Categories' => 'blogCategories',
-            'RainLab\Blog\Components\RssFeed'    => 'blogRssFeed'
+            'RainLab\Blog\Components\Post'         => 'blogPost',
+            'RainLab\Blog\Components\Posts'        => 'blogPosts',
+            'RainLab\Blog\Components\Categories'   => 'blogCategories',
+            'RainLab\Blog\Components\RssFeed'      => 'blogRssFeed'
             'RainLab\Blog\Components\ArchiveList'  => 'blogArchiveList',
             'RainLab\Blog\Components\ArchivePosts' => 'blogArchivePosts',
         ];
