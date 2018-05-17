@@ -183,15 +183,4 @@ class ArchivePosts extends ComponentBase
 
         return $posts;
     }
-
-    protected function loadCategory()
-    {
-        if (!$categoryId = $this->property('categoryFilter'))
-            return null;
-
-        if (!$category = BlogCategory::whereSlug($categoryId)->first())
-            return null;
-
-        return $category;
-    }
 }
