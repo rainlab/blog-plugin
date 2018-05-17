@@ -85,11 +85,11 @@ class ArchiveList extends ComponentBase
                                 ->groupBy(DB::raw("DATE_FORMAT(published_at, '%M %Y')"))
                                 ->get();
 
-        foreach ($archiveRange as $post) {
-            $post->url = $this->controller->pageUrl($this->property('archivePage'), ['slug' => urlencode($post->month)]);
+        foreach ($archiveRange as $month) {
+            $month->url = $this->controller->pageUrl($this->property('archivePage'), ['slug' => urlencode($month->month)]);
             
             if (!$this->property('showPostCount')) {
-                $post->count = false;
+                $month->count = false;
             }
         }
 
