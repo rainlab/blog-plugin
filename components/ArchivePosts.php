@@ -16,12 +16,6 @@ class ArchivePosts extends ComponentBase
     public $posts;
 
     /**
-     * Slug containing month to filter by
-     * @var string
-     */
-    public $archiveSlug;
-
-    /**
      * Parameter to use for the page number
      * @var string
      */
@@ -62,10 +56,10 @@ class ArchivePosts extends ComponentBase
     public function defineProperties()
     {
         return [
-            'slug' => [
+            'month' => [
                 'title'       => 'rainlab.blog::lang.settings.post_slug',
                 'description' => 'rainlab.blog::lang.settings.post_slug_description',
-                'default'     => '{{ :slug }}',
+                'default'     => '{{ :month }}',
                 'type'        => 'string'
             ],
             'currentPage' => [
@@ -129,7 +123,7 @@ class ArchivePosts extends ComponentBase
     public function onRun()
     {
         $this->prepareVars();
-        $this->posts = $this->page['posts'] = $this->listPosts($this->property('slug'));
+        $this->posts = $this->page['posts'] = $this->listPosts($this->property('month'));
 
         /*
          * If the page number is not valid, redirect
@@ -154,12 +148,12 @@ class ArchivePosts extends ComponentBase
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
     }
 
-    protected function listPosts($slug)
+    protected function listPosts($month)
     {
         try {
-            $slug = str_replace('+', ' ', $slug);
-            $dateMin = Carbon::parse("first day of ".$slug)->toDateTimeString();
-            $dateMax = Carbon::parse("last day of ".$slug)->addHours(24)->toDateTimeString();
+            $month = str_replace('+', ' ', $month);
+            $dateMin = Carbon::parse("first day of ".$month)->toDateTimeString();
+            $dateMax = Carbon::parse("last day of ".$month)->addHours(24)->toDateTimeString();
         }
         catch (\Exception $e) {
             return null;
