@@ -41,11 +41,6 @@ class ArchiveList extends ComponentBase
                 'validationMessage' => 'rainlab.blog::lang.settings.archive_list_months_to_show_validation',
                 'default'           => '5',
             ],
-            'showPostCount' => [
-                'title'             => 'rainlab.blog::lang.settings.archive_list_show_post_count',
-                'type'              => 'checkbox',
-                'default'           => 'false'
-            ],
             'slug' => [
                 'title'             => 'rainlab.blog::lang.settings.archive_list_slug',
                 'description'       => 'rainlab.blog::lang.settings.archive_list_slug_description',
@@ -87,10 +82,6 @@ class ArchiveList extends ComponentBase
 
         foreach ($archiveRange as $month) {
             $month->url = $this->controller->pageUrl($this->property('archivePage'), ['slug' => urlencode($month->month)]);
-            
-            if (!$this->property('showPostCount')) {
-                $month->count = false;
-            }
         }
 
         return collect($archiveRange);
