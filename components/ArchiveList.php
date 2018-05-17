@@ -71,12 +71,10 @@ class ArchiveList extends ComponentBase
 
     protected function loadMonths($monthsToShow)
     {
-        if (($monthsToShow > 0) ? $limit = $monthsToShow : $limit = 100);
-
         $archiveRange = BlogPost::select(DB::raw("DATE_FORMAT(published_at, '%M %Y') AS month, count(*) as count"))
                                 ->where('published', 1)
                                 ->orderBy('published_at', 'ASC')
-                                ->limit($limit)
+                                ->limit($monthsToShow)
                                 ->groupBy(DB::raw("DATE_FORMAT(published_at, '%M %Y')"))
                                 ->get();
 
