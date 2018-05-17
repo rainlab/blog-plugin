@@ -68,7 +68,7 @@ class ArchivePosts extends ComponentBase
                 'default'     => '{{ :slug }}',
                 'type'        => 'string'
             ],
-            'pageNumber' => [
+            'currentPage' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_pagination',
                 'description' => 'rainlab.blog::lang.settings.posts_pagination_description',
                 'type'        => 'string',
@@ -134,17 +134,17 @@ class ArchivePosts extends ComponentBase
         /*
          * If the page number is not valid, redirect
          */
-        if ($pageNumberParam = $this->paramName('pageNumber')) {
-            $currentPage = $this->property('pageNumber');
+        if ($currentPageParam = $this->paramName('currentPage')) {
+            $currentPage = $this->property('currentPage');
 
             if ($currentPage > ($lastPage = $this->posts->lastPage()) && $currentPage > 1)
-                return Redirect::to($this->currentPageUrl([$pageNumberParam => $lastPage]));
+                return Redirect::to($this->currentPageUrl([$currentPageParam => $lastPage]));
         }
     }
 
     protected function prepareVars()
     {
-        $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber');
+        $this->pageParam = $this->page['pageParam'] = $this->paramName('currentPage');
         $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
 
         /*
@@ -169,7 +169,7 @@ class ArchivePosts extends ComponentBase
          * List all the posts, eager load their categories
          */
         $posts = BlogPost::with('categories')->listFrontEnd([
-            'page'       => $this->property('pageNumber'),
+            'page'       => $this->property('currentPage'),
             'sort'       => $this->property('sortOrder'),
             'perPage'    => $this->property('postsPerPage'),
             'dateMin'    => $dateMin,
