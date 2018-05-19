@@ -18,11 +18,6 @@ class ArchiveList extends ComponentBase
      */
     public $archivePage;
 
-    /**
-     * @var string Reference to the current archive slug.
-     */
-    public $currentArchiveSlug;
-
     public function componentDetails()
     {
         return [
@@ -40,12 +35,6 @@ class ArchiveList extends ComponentBase
                 'validationPattern' => '^[0-9]+$',
                 'validationMessage' => 'rainlab.blog::lang.settings.archive_list_months_to_show_validation',
                 'default'           => '5',
-            ],
-            'slug' => [
-                'title'             => 'rainlab.blog::lang.settings.archive_list_slug',
-                'description'       => 'rainlab.blog::lang.settings.archive_list_slug_description',
-                'default'           => '{{ :slug }}',
-                'type'              => 'string'
             ],
             'archivePage' => [
                 'title'             => 'rainlab.blog::lang.settings.archive_list_page',
@@ -65,7 +54,6 @@ class ArchiveList extends ComponentBase
     public function onRun()
     {
         $this->archiveMonths = $this->page['archiveMonths'] = $this->loadMonths($this->property('monthsToShow'));
-        $this->currentArchiveSlug = $this->page['currentArchiveSlug'] = $this->property('slug');
         $this->archivePage = $this->page['archivePage'] = $this->property('archivePage');
     }
 
