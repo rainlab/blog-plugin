@@ -120,7 +120,7 @@ return [
         'rssfeed_blog' => 'Blog page',
         'rssfeed_blog_description' => 'Name of the main blog page file for generating links. This property is used by the default component partial.',
         'rssfeed_title' => 'RSS Feed',
-        'rssfeed_description' => 'Generates an RSS feed containing posts from the blog.'
+        'rssfeed_description' => 'Generates an RSS feed containing posts from the blog.',
         'archive_list_name' => 'Archive List',
         'archive_list_description' => 'Displays a list of the past n months on the page',
         'archive_list_months_to_show' => 'Number of past months to show',
