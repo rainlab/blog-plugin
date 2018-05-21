@@ -13,8 +13,9 @@
                 {% endfor %}
                 on {{ post.published_at|date('M d, Y') }}
             </p>
-
-            <p class="excerpt">{{ post.summary|raw }}</p>
+            <div class="excerpt">
+                {{ post.summary|raw }}
+            </div>
         </li>
     {% else %}
         <li class="no-data">{{ noPostsMessage }}</li>
