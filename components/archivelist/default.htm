@@ -1,7 +1,7 @@
 {% set archiveMonths = __SELF__.archiveMonths %}
 
 <ul>
-{% for archiveMonth in archiveMonths %}
-    <li><a href="{{archiveMonth.url}}">{{archiveMonth.month}} {% if archiveMonth.count %}({{ archiveMonth.count }}){% endif %}</a></li>
+{% for month in archiveMonths %}
+    <li><a href="{{month.url}}">{{month.month}} ({{month.count}})</a></li>
 {% endfor %}
 </ul>

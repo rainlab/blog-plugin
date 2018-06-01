@@ -16,12 +16,6 @@ class ArchivePosts extends ComponentBase
     public $posts;
 
     /**
-     * Slug containing month to filter by
-     * @var string
-     */
-    public $archiveSlug;
-
-    /**
      * Parameter to use for the page number
      * @var string
      */
@@ -62,13 +56,13 @@ class ArchivePosts extends ComponentBase
     public function defineProperties()
     {
         return [
-            'slug' => [
-                'title'       => 'rainlab.blog::lang.settings.post_slug',
-                'description' => 'rainlab.blog::lang.settings.post_slug_description',
-                'default'     => '{{ :slug }}',
+            'month' => [
+                'title'       => 'rainlab.blog::lang.settings.archive_month',
+                'description' => 'rainlab.blog::lang.settings.archive_month_description',
+                'default'     => '{{ :month }}',
                 'type'        => 'string'
             ],
-            'pageNumber' => [
+            'currentPage' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_pagination',
                 'description' => 'rainlab.blog::lang.settings.posts_pagination_description',
                 'type'        => 'string',
@@ -129,22 +123,22 @@ class ArchivePosts extends ComponentBase
     public function onRun()
     {
         $this->prepareVars();
-        $this->posts = $this->page['posts'] = $this->listPosts($this->property('slug'));
+        $this->posts = $this->page['posts'] = $this->listPosts($this->property('month'));
 
         /*
          * If the page number is not valid, redirect
          */
-        if ($pageNumberParam = $this->paramName('pageNumber')) {
-            $currentPage = $this->property('pageNumber');
+        if ($currentPageParam = $this->paramName('currentPage')) {
+            $currentPage = $this->property('currentPage');
 
             if ($currentPage > ($lastPage = $this->posts->lastPage()) && $currentPage > 1)
-                return Redirect::to($this->currentPageUrl([$pageNumberParam => $lastPage]));
+                return Redirect::to($this->currentPageUrl([$currentPageParam => $lastPage]));
         }
     }
 
     protected function prepareVars()
     {
-        $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber');
+        $this->pageParam = $this->page['pageParam'] = $this->paramName('currentPage');
         $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
 
         /*
@@ -154,12 +148,12 @@ class ArchivePosts extends ComponentBase
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
     }
 
-    protected function listPosts($slug)
+    protected function listPosts($month)
     {
         try {
-            $slug = str_replace('+', ' ', $slug);
-            $dateMin = Carbon::parse("first day of ".$slug)->toDateTimeString();
-            $dateMax = Carbon::parse("last day of ".$slug)->addHours(24)->toDateTimeString();
+            $month = str_replace('+', ' ', $month);
+            $dateMin = Carbon::parse("first day of ".$month)->toDateTimeString();
+            $dateMax = Carbon::parse("last day of ".$month)->addHours(24)->toDateTimeString();
         }
         catch (\Exception $e) {
             return null;
@@ -169,14 +163,12 @@ class ArchivePosts extends ComponentBase
          * List all the posts, eager load their categories
          */
         $posts = BlogPost::with('categories')->listFrontEnd([
-            'page'       => $this->property('pageNumber'),
+            'page'       => $this->property('currentPage'),
             'sort'       => $this->property('sortOrder'),
             'perPage'    => $this->property('postsPerPage'),
             'dateMin'    => $dateMin,
             'dateMax'    => $dateMax
         ]);
-
-        // dd($posts);
 
         /*
          * Add a "url" helper attribute for linking to each post and category
@@ -190,16 +182,5 @@ class ArchivePosts extends ComponentBase
         });
 
         return $posts;
-    }
-
-    protected function loadCategory()
-    {
-        if (!$categoryId = $this->property('categoryFilter'))
-            return null;
-
-        if (!$category = BlogCategory::whereSlug($categoryId)->first())
-            return null;
-
-        return $category;
     }
 }

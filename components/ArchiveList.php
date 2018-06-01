@@ -18,11 +18,6 @@ class ArchiveList extends ComponentBase
      */
     public $archivePage;
 
-    /**
-     * @var string Reference to the current archive slug.
-     */
-    public $currentArchiveSlug;
-
     public function componentDetails()
     {
         return [
@@ -40,17 +35,6 @@ class ArchiveList extends ComponentBase
                 'validationPattern' => '^[0-9]+$',
                 'validationMessage' => 'rainlab.blog::lang.settings.archive_list_months_to_show_validation',
                 'default'           => '5',
-            ],
-            'showPostCount' => [
-                'title'             => 'rainlab.blog::lang.settings.archive_list_show_post_count',
-                'type'              => 'checkbox',
-                'default'           => 'false'
-            ],
-            'slug' => [
-                'title'             => 'rainlab.blog::lang.settings.archive_list_slug',
-                'description'       => 'rainlab.blog::lang.settings.archive_list_slug_description',
-                'default'           => '{{ :slug }}',
-                'type'              => 'string'
             ],
             'archivePage' => [
                 'title'             => 'rainlab.blog::lang.settings.archive_list_page',
@@ -70,29 +54,22 @@ class ArchiveList extends ComponentBase
     public function onRun()
     {
         $this->archiveMonths = $this->page['archiveMonths'] = $this->loadMonths($this->property('monthsToShow'));
-        $this->currentArchiveSlug = $this->page['currentArchiveSlug'] = $this->property('slug');
         $this->archivePage = $this->page['archivePage'] = $this->property('archivePage');
     }
 
     protected function loadMonths($monthsToShow)
     {
-        if (($monthsToShow > 0) ? $limit = $monthsToShow : $limit = 100);
-
         $archiveRange = BlogPost::select(DB::raw("DATE_FORMAT(published_at, '%M %Y') AS month, count(*) as count"))
                                 ->where('published', 1)
                                 ->orderBy('published_at', 'ASC')
-                                ->limit($limit)
+                                ->limit($monthsToShow)
                                 ->groupBy(DB::raw("DATE_FORMAT(published_at, '%M %Y')"))
                                 ->get();
 
-        foreach ($archiveRange as $post) {
-            $post->url = $this->controller->pageUrl($this->property('archivePage'), ['slug' => urlencode($post->month)]);
-            
-            if (!$this->property('showPostCount')) {
-                $post->count = false;
-            }
+        foreach ($archiveRange as $month) {
+            $month->url = $this->controller->pageUrl($this->property('archivePage'), ['month' => urlencode($month->month)]);
         }
 
-        return collect($archiveRange);
+        return $archiveRange;
     }
 }

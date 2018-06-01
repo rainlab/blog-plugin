@@ -118,7 +118,7 @@ The next example shows the basic component usage on the blog page:
     function onEnd()
     {
         // Optional - set the page title to the post title
-        if (isset($this->post))
+        if ($this->post)
             $this->page->title = $this->post->title;
     }
     ?>

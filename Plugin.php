@@ -24,11 +24,11 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'RainLab\Blog\Components\Post'       => 'blogPost',
-            'RainLab\Blog\Components\Posts'      => 'blogPosts',
-            'RainLab\Blog\Components\Categories' => 'blogCategories',
-            'RainLab\Blog\Components\RssFeed'    => 'blogRssFeed',
-	        'RainLab\Blog\Components\ArchiveList' => 'blogArchiveList',
+            'RainLab\Blog\Components\Post'         => 'blogPost',
+            'RainLab\Blog\Components\Posts'        => 'blogPosts',
+            'RainLab\Blog\Components\Categories'   => 'blogCategories',
+            'RainLab\Blog\Components\RssFeed'      => 'blogRssFeed',
+            'RainLab\Blog\Components\ArchiveList'  => 'blogArchiveList',
             'RainLab\Blog\Components\ArchivePosts' => 'blogArchivePosts'
         ];
     }
@@ -139,6 +139,7 @@ class Plugin extends PluginBase
                 'all-blog-categories' => 'rainlab.blog::lang.menuitem.all_blog_categories',
                 'blog-post'           => 'rainlab.blog::lang.menuitem.blog_post',
                 'all-blog-posts'      => 'rainlab.blog::lang.menuitem.all_blog_posts',
+                'category-blog-posts' => 'rainlab.blog::lang.menuitem.category_blog_posts',
             ];
         });
 
@@ -146,7 +147,7 @@ class Plugin extends PluginBase
             if ($type == 'blog-category' || $type == 'all-blog-categories') {
                 return Category::getMenuTypeInfo($type);
             }
-            elseif ($type == 'blog-post' || $type == 'all-blog-posts') {
+            elseif ($type == 'blog-post' || $type == 'all-blog-posts' || $type == 'category-blog-posts') {
                 return Post::getMenuTypeInfo($type);
             }
         });
@@ -155,7 +156,7 @@ class Plugin extends PluginBase
             if ($type == 'blog-category' || $type == 'all-blog-categories') {
                 return Category::resolveMenuItem($item, $url, $theme);
             }
-            elseif ($type == 'blog-post' || $type == 'all-blog-posts') {
+            elseif ($type == 'blog-post' || $type == 'all-blog-posts' || $type == 'category-blog-posts') {
                 return Post::resolveMenuItem($item, $url, $theme);
             }
         });
