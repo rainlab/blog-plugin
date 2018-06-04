@@ -130,9 +130,10 @@ class ArchivePosts extends ComponentBase
          */
         if ($currentPageParam = $this->paramName('currentPage')) {
             $currentPage = $this->property('currentPage');
+        }
 
-            if ($currentPage > ($lastPage = $this->posts->lastPage()) && $currentPage > 1)
-                return Redirect::to($this->currentPageUrl([$currentPageParam => $lastPage]));
+        if ($currentPage > ($lastPage = $this->posts->lastPage()) && $currentPage > 1) {
+            return Redirect::to($this->currentPageUrl([$currentPageParam => $lastPage]));
         }
     }
 
@@ -151,7 +152,7 @@ class ArchivePosts extends ComponentBase
     protected function listPosts($month)
     {
         try {
-            $month = str_replace('+', ' ', $month);
+            $month = urldecode($month);
             $dateMin = Carbon::parse("first day of ".$month)->toDateTimeString();
             $dateMax = Carbon::parse("last day of ".$month)->addHours(24)->toDateTimeString();
         }
