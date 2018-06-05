@@ -4,6 +4,7 @@ use DB;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
+use Carbon\Carbon;
 
 class ArchiveList extends ComponentBase
 {
@@ -59,15 +60,27 @@ class ArchiveList extends ComponentBase
 
     protected function loadMonths($monthsToShow)
     {
-        $archiveRange = BlogPost::select(DB::raw("DATE_FORMAT(published_at, '%M %Y') AS month, count(*) as count"))
-                                ->where('published', 1)
-                                ->orderBy('published_at', 'ASC')
-                                ->limit($monthsToShow)
-                                ->groupBy(DB::raw("DATE_FORMAT(published_at, '%M %Y')"))
-                                ->get();
+        $latestPost = BlogPost::orderBy('published_at', 'DESC')->first();
+        $currentMonth = Carbon::parse($latestPost->published_at);
+        $archiveRange = [];
+        
+        for ($i=0; $i < $monthsToShow; $i++) {
+            $currentMonthStart = $currentMonth->copy()->startOfMonth()->toDateTimeString();
+            $currentMonthEnd = $currentMonth->copy()->endOfMonth()->toDateTimeString();
+            $currentMonthCount = BlogPost::whereBetween('published_at', [$currentMonthStart, $currentMonthEnd])->count();
 
-        foreach ($archiveRange as $month) {
-            $month->url = $this->controller->pageUrl($this->property('archivePage'), ['month' => urlencode($month->month)]);
+            if ($currentMonthCount > 0) {
+                $archiveRange[] = [
+                    'month' => $currentMonth->format('F Y'),
+                    'count' => $currentMonthCount,
+                    'url' => $this->controller->pageUrl($this->property('archivePage'), ['month' => urlencode($currentMonth->format('F Y'))])
+                ];
+            }
+            else {
+                $i--;
+            }
+
+            $currentMonth->subMonth();
         }
 
         return $archiveRange;
