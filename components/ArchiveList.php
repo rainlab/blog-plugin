@@ -67,7 +67,7 @@ class ArchiveList extends ComponentBase
         for ($i=0; $i < $monthsToShow; $i++) {
             $currentMonthStart = $currentMonth->copy()->startOfMonth()->toDateTimeString();
             $currentMonthEnd = $currentMonth->copy()->endOfMonth()->toDateTimeString();
-            $currentMonthCount = BlogPost::whereBetween('published_at', [$currentMonthStart, $currentMonthEnd])->count();
+            $currentMonthCount = BlogPost::where('published', '=', 1)->whereBetween('published_at', [$currentMonthStart, $currentMonthEnd])->count();
 
             if ($currentMonthCount > 0) {
                 $archiveRange[] = [
