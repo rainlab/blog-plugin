@@ -387,7 +387,7 @@ class Post extends Model
 
         return $query
             ->where('id', '<>', $this->id)
-            ->whereDate($attribute, $directionOperator, $this->$attribute)
+            ->where($attribute, $directionOperator, $this->$attribute)
             ->orderBy($attribute, $directionOrder)
         ;
     }
