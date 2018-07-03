@@ -1,6 +1,4 @@
-<?php
-
-namespace RainLab\Blog\Components;
+<?php namespace RainLab\Blog\Components;
 
 use Redirect;
 use BackendAuth;

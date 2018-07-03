@@ -14,14 +14,13 @@ use ValidationException;
 use Cms\Classes\Controller;
 use Cms\Classes\Page as CmsPage;
 use RainLab\Blog\Classes\TagProcessor;
-use October\Rain\Database\Traits\Validation;
 
 /**
  * Class Post
  */
 class Post extends Model
 {
-    use Validation;
+    use \October\Rain\Database\Traits\Validation;
     use ModelUrlParamTrait;
 
     public $table = 'rainlab_blog_posts';
