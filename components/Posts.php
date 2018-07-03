@@ -1,9 +1,13 @@
-<?php namespace RainLab\Blog\Components;
+<?php
+
+namespace RainLab\Blog\Components;
 
 use Redirect;
 use BackendAuth;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
+use October\Rain\Database\Model;
+use October\Rain\Database\Collection;
 use RainLab\Blog\Models\Post as BlogPost;
 use RainLab\Blog\Models\Category as BlogCategory;
 
@@ -11,45 +15,59 @@ class Posts extends ComponentBase
 {
     /**
      * A collection of posts to display
+     *
      * @var Collection
      */
     public $posts;
 
     /**
      * Parameter to use for the page number
+     *
      * @var string
      */
     public $pageParam;
 
     /**
-     * If the post list should be filtered by a category, the model to use.
+     * If the post list should be filtered by a category, the model to use
+     *
      * @var Model
      */
     public $category;
 
     /**
-     * Message to display when there are no messages.
+     * Message to display when there are no messages
+     *
      * @var string
      */
     public $noPostsMessage;
 
     /**
-     * Reference to the page name for linking to posts.
+     * Reference to the page name for linking to posts
+     *
      * @var string
      */
     public $postPage;
 
     /**
-     * Reference to the page name for linking to categories.
+     * Reference to the page name for linking to categories
+     *
      * @var string
      */
     public $categoryPage;
 
     /**
-     * If the post list should be ordered by another attribute.
+     * If the post list should be ordered by another attribute
+     *
      * @var string
      */
     public $sortOrder;
+
+    /**
+     * Slug parameter name which is used in URL for Post page
+     *
+     * @var string
+     */
+    public $postSlugParam;
 
     public function componentDetails()
     {
@@ -67,6 +85,13 @@ class Posts extends ComponentBase
                 'description' => 'rainlab.blog::lang.settings.posts_pagination_description',
                 'type'        => 'string',
                 'default'     => '{{ :page }}',
+            ],
+            'postSlugParam' => [
+                'title'       => 'rainlab.blog::lang.settings.post_slug_param',
+                'description' => 'rainlab.blog::lang.settings.post_slug_param_description',
+                'type'        => 'string',
+                'default'     => ':slug',
+                'showExternalParam' => false
             ],
             'categoryFilter' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_filter',
@@ -157,6 +182,7 @@ class Posts extends ComponentBase
     {
         $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber');
         $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
+        $this->postSlugParam = $this->page['postSlugParam'] = $this->property('postSlugParam');
 
         /*
          * Page links
@@ -188,7 +214,8 @@ class Posts extends ComponentBase
          * Add a "url" helper attribute for linking to each post and category
          */
         $posts->each(function($post) {
-            $post->setUrl($this->postPage, $this->controller);
+            /** @var BlogPost $post */
+            $post->setUrl($this->postPage, $this->controller, ['slug' => $this->postSlugParam]);
 
             $post->categories->each(function($category) {
                 $category->setUrl($this->categoryPage, $this->controller);

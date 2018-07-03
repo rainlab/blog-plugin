@@ -8,7 +8,7 @@ use RainLab\Blog\Models\Post as BlogPost;
 class Post extends ComponentBase
 {
     /**
-     * @var RainLab\Blog\Models\Post The post model used for display.
+     * @var BlogPost The post model used for display.
      */
     public $post;
 

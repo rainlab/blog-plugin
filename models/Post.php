@@ -2,23 +2,27 @@
 
 use Db;
 use Url;
-use App;
-use Str;
 use Html;
 use Lang;
 use Model;
 use Markdown;
 use BackendAuth;
-use ValidationException;
-use RainLab\Blog\Classes\TagProcessor;
-use Backend\Models\User;
 use Carbon\Carbon;
-use Cms\Classes\Page as CmsPage;
 use Cms\Classes\Theme;
+use Backend\Models\User;
+use ValidationException;
+use Cms\Classes\Controller;
+use Cms\Classes\Page as CmsPage;
+use RainLab\Blog\Classes\TagProcessor;
+use October\Rain\Database\Traits\Validation;
 
+/**
+ * Class Post
+ */
 class Post extends Model
 {
-    use \October\Rain\Database\Traits\Validation;
+    use Validation;
+    use ModelUrlParamTrait;
 
     public $table = 'rainlab_blog_posts';
     public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
@@ -136,13 +140,16 @@ class Post extends Model
     /**
      * Sets the "url" attribute with a URL to this object
      * @param string $pageName
-     * @param Cms\Classes\Controller $controller
+     * @param Controller $controller
+     * @param string[] $params
+     *
+     * @return string
      */
-    public function setUrl($pageName, $controller)
+    public function setUrl($pageName, $controller, array $params = array())
     {
         $params = [
-            'id'   => $this->id,
-            'slug' => $this->slug,
+            $this->getModelUrlParam('id', $params)   => $this->id,
+            $this->getModelUrlParam('slug', $params) => $this->slug,
         ];
 
         if (array_key_exists('categories', $this->getRelations())) {
@@ -151,9 +158,9 @@ class Post extends Model
 
         //expose published year, month and day as URL parameters
         if ($this->published) {
-            $params['year'] = $this->published_at->format('Y');
-            $params['month'] = $this->published_at->format('m');
-            $params['day'] = $this->published_at->format('d');
+            $params[$this->getModelUrlParam('year', $params)] = $this->published_at->format('Y');
+            $params[$this->getModelUrlParam('month', $params)] = $this->published_at->format('m');
+            $params[$this->getModelUrlParam('day', $params)] = $this->published_at->format('d');
         }
 
         return $this->url = $controller->pageUrl($pageName, $params);
@@ -455,10 +462,10 @@ class Post extends Model
                 'dynamicItems' => true
             ];
         }
-        
+
         if ($type == 'category-blog-posts') {
             $references = [];
-            
+
             $categories = Category::orderBy('name')->get();
             foreach ($categories as $category) {
                 $references[$category->id] = $category->name;
@@ -563,15 +570,15 @@ class Post extends Model
         elseif ($item->type == 'category-blog-posts') {
             if (!$item->reference || !$item->cmsPage)
                 return;
-            
+
             $category = Category::find($item->reference);
             if (!$category)
                 return;
-            
+
             $result = [
                 'items' => []
             ];
-            
+
             $query = self::isPublished()
             ->orderBy('title');
 
@@ -579,9 +586,9 @@ class Post extends Model
             $query->whereHas('categories', function($q) use ($categories) {
                 $q->whereIn('id', $categories);
             });
-        
+
             $posts = $query->get();
-            
+
             foreach ($posts as $post) {
                 $postItem = [
                     'title' => $post->title,
