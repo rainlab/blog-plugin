@@ -242,7 +242,7 @@ class Post extends Model
         /*
          * Sorting
          */
-        if (in_array($sort, array_keys(self::$allowedSortingOptions))) {
+        if (in_array($sort, array_keys(static::$allowedSortingOptions))) {
             if ($sort == 'random') {
                 $query->inRandomOrder();
             } else {
