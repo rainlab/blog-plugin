@@ -3,6 +3,7 @@
 use Redirect;
 use BackendAuth;
 use Cms\Classes\Page;
+use Cms\Classes\Theme;
 use Cms\Classes\ComponentBase;
 use October\Rain\Database\Model;
 use October\Rain\Database\Collection;
@@ -83,13 +84,6 @@ class Posts extends ComponentBase
                 'description' => 'rainlab.blog::lang.settings.posts_pagination_description',
                 'type'        => 'string',
                 'default'     => '{{ :page }}',
-            ],
-            'postSlugParam' => [
-                'title'       => 'rainlab.blog::lang.settings.post_slug_param',
-                'description' => 'rainlab.blog::lang.settings.post_slug_param_description',
-                'type'        => 'string',
-                'default'     => ':slug',
-                'showExternalParam' => false
             ],
             'categoryFilter' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_filter',
@@ -180,7 +174,6 @@ class Posts extends ComponentBase
     {
         $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber');
         $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
-        $this->postSlugParam = $this->page['postSlugParam'] = $this->property('postSlugParam');
 
         /*
          * Page links
@@ -211,12 +204,15 @@ class Posts extends ComponentBase
         /*
          * Add a "url" helper attribute for linking to each post and category
          */
-        $posts->each(function($post) {
-            /** @var BlogPost $post */
-            $post->setUrl($this->postPage, $this->controller, ['slug' => $this->postSlugParam]);
+        $blogPost = Page::load(Theme::getActiveTheme(), $this->postPage)->getComponent('blogPost');
+        $blogCategories = Page::load(Theme::getActiveTheme(), $this->categoryPage)->getComponent('blogCategories');
 
-            $post->categories->each(function($category) {
-                $category->setUrl($this->categoryPage, $this->controller);
+        $posts->each(function($post) use ($blogPost, $blogCategories) {
+            /** @var BlogPost $post */
+            $post->setUrl($this->postPage, $this->controller, ['slug' => $blogPost ? $blogPost->propertyName('slug', 'slug') : '']);
+
+            $post->categories->each(function($category) use ($blogCategories) {
+                $category->setUrl($this->categoryPage, $this->controller, ['slug' => $blogCategories ? $blogCategories->propertyName('slug', 'slug') : '']);
             });
         });
 

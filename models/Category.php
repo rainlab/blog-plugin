@@ -1,17 +1,19 @@
 <?php namespace RainLab\Blog\Models;
 
 use Str;
-use Model;
 use URL;
-use RainLab\Blog\Models\Post;
-use October\Rain\Router\Helper as RouterHelper;
-use Cms\Classes\Page as CmsPage;
+use Model;
 use Cms\Classes\Theme;
+use Cms\Classes\Controller;
+use RainLab\Blog\Models\Post;
+use Cms\Classes\Page as CmsPage;
+use October\Rain\Router\Helper as RouterHelper;
 
 class Category extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \October\Rain\Database\Traits\NestedTree;
+    use ModelUrlParamTrait;
 
     public $table = 'rainlab_blog_categories';
     public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
@@ -64,14 +66,18 @@ class Category extends Model
 
     /**
      * Sets the "url" attribute with a URL to this object
+     *
      * @param string $pageName
-     * @param Cms\Classes\Controller $controller
+     * @param Controller $controller
+     * @param array $params
+     *
+     * @return string
      */
-    public function setUrl($pageName, $controller)
+    public function setUrl($pageName, $controller, array $params = array())
     {
         $params = [
-            'id'   => $this->id,
-            'slug' => $this->slug,
+            $this->getModelUrlParam('id', $params)   => $this->id,
+            $this->getModelUrlParam('slug', $params)  => $this->slug,
         ];
 
         return $this->url = $controller->pageUrl($pageName, $params);
