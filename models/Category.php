@@ -4,7 +4,6 @@ use Str;
 use URL;
 use Model;
 use Cms\Classes\Theme;
-use Cms\Classes\Controller;
 use RainLab\Blog\Models\Post;
 use Cms\Classes\Page as CmsPage;
 use October\Rain\Router\Helper as RouterHelper;
@@ -13,7 +12,6 @@ class Category extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \October\Rain\Database\Traits\NestedTree;
-    use ModelUrlParamTrait;
 
     public $table = 'rainlab_blog_categories';
     public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
@@ -69,15 +67,15 @@ class Category extends Model
      *
      * @param string $pageName
      * @param Controller $controller
-     * @param array $params
+     * @param array $urlParams A mapping of overrides for default URL parameter names
      *
      * @return string
      */
-    public function setUrl($pageName, $controller, array $params = array())
+    public function setUrl($pageName, $controller, array $urlParams = array())
     {
         $params = [
-            $this->getModelUrlParam('id', $params)   => $this->id,
-            $this->getModelUrlParam('slug', $params)  => $this->slug,
+            array_get($urlParams, 'id', 'id')   => $this->id,
+            array_get($urlParams, 'slug', 'slug')  => $this->slug,
         ];
 
         return $this->url = $controller->pageUrl($pageName, $params);

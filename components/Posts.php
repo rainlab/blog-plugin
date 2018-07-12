@@ -204,15 +204,26 @@ class Posts extends ComponentBase
         /*
          * Add a "url" helper attribute for linking to each post and category
          */
-        $blogPost = Page::load(Theme::getActiveTheme(), $this->postPage)->getComponent('blogPost');
-        $blogCategories = Page::load(Theme::getActiveTheme(), $this->categoryPage)->getComponent('blogCategories');
+        $blogPostComponent = Page::load(Theme::getActiveTheme(), $this->postPage)->getComponent('blogPost');
+        $blogCategoriesComponent = Page::load(Theme::getActiveTheme(), $this->categoryPage)->getComponent('blogCategories');
 
-        $posts->each(function($post) use ($blogPost, $blogCategories) {
-            /** @var BlogPost $post */
-            $post->setUrl($this->postPage, $this->controller, ['slug' => $blogPost ? $blogPost->propertyName('slug', 'slug') : '']);
+        $posts->each(function($post) use ($blogPostComponent, $blogCategoriesComponent) {
+            $post->setUrl(
+                $this->postPage,
+                $this->controller,
+                [
+                    'slug' => $blogPostComponent ? $blogPostComponent->propertyName('slug', 'slug') : ''
+                ]
+            );
 
-            $post->categories->each(function($category) use ($blogCategories) {
-                $category->setUrl($this->categoryPage, $this->controller, ['slug' => $blogCategories ? $blogCategories->propertyName('slug', 'slug') : '']);
+            $post->categories->each(function($category) use ($blogCategoriesComponent) {
+                $category->setUrl(
+                    $this->categoryPage,
+                    $this->controller,
+                    [
+                        'slug' => $blogCategoriesComponent ? $blogCategoriesComponent->propertyName('slug', 'slug') : ''
+                    ]
+                );
             });
         });
 

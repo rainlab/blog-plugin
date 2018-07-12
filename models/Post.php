@@ -21,7 +21,6 @@ use RainLab\Blog\Classes\TagProcessor;
 class Post extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-    use ModelUrlParamTrait;
 
     public $table = 'rainlab_blog_posts';
     public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
@@ -140,15 +139,15 @@ class Post extends Model
      * Sets the "url" attribute with a URL to this object
      * @param string $pageName
      * @param Controller $controller
-     * @param string[] $params
+     * @param array $urlParams A mapping of possible overrides of default URL parameter names
      *
      * @return string
      */
-    public function setUrl($pageName, $controller, array $params = array())
+    public function setUrl($pageName, $controller, array $urlParams = array())
     {
         $params = [
-            $this->getModelUrlParam('id', $params)   => $this->id,
-            $this->getModelUrlParam('slug', $params) => $this->slug,
+            array_get($urlParams, 'id', 'id')   => $this->id,
+            array_get($urlParams, 'slug', 'slug') => $this->slug,
         ];
 
         if (array_key_exists('categories', $this->getRelations())) {
@@ -157,9 +156,9 @@ class Post extends Model
 
         //expose published year, month and day as URL parameters
         if ($this->published) {
-            $params[$this->getModelUrlParam('year', $params)] = $this->published_at->format('Y');
-            $params[$this->getModelUrlParam('month', $params)] = $this->published_at->format('m');
-            $params[$this->getModelUrlParam('day', $params)] = $this->published_at->format('d');
+            $params[array_get($urlParams, 'year', 'year')] = $this->published_at->format('Y');
+            $params[array_get($urlParams, 'month', 'month')] = $this->published_at->format('m');
+            $params[array_get($urlParams, 'day', 'day')] = $this->published_at->format('d');
         }
 
         return $this->url = $controller->pageUrl($pageName, $params);
