@@ -66,7 +66,7 @@ class Category extends Model
      * Sets the "url" attribute with a URL to this object
      *
      * @param string $pageName
-     * @param Controller $controller
+     * @param Cms\Classes\Controller $controller
      * @param array $urlParams A mapping of overrides for default URL parameter names
      *
      * @return string
