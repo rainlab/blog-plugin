@@ -3,7 +3,6 @@
 use Redirect;
 use BackendAuth;
 use Cms\Classes\Page;
-use Cms\Classes\Theme;
 use Cms\Classes\ComponentBase;
 use October\Rain\Database\Model;
 use October\Rain\Database\Collection;
@@ -204,8 +203,8 @@ class Posts extends ComponentBase
         /*
          * Add a "url" helper attribute for linking to each post and category
          */
-        $blogPostComponent = Page::load(Theme::getActiveTheme(), $this->postPage)->getComponent('blogPost');
-        $blogCategoriesComponent = Page::load(Theme::getActiveTheme(), $this->categoryPage)->getComponent('blogCategories');
+        $blogPostComponent = $this->getComponent('blogPost', $this->postPage);
+        $blogCategoriesComponent = $this->getComponent('blogCategories', $this->categoryPage);
 
         $posts->each(function($post) use ($blogPostComponent, $blogCategoriesComponent) {
             $post->setUrl(
