@@ -3,6 +3,7 @@
 use Redirect;
 use BackendAuth;
 use Cms\Classes\Page;
+use Cms\Classes\Theme;
 use Cms\Classes\ComponentBase;
 use October\Rain\Database\Model;
 use October\Rain\Database\Collection;
@@ -250,5 +251,21 @@ class Posts extends ComponentBase
     {
         $backendUser = BackendAuth::getUser();
         return $backendUser && $backendUser->hasAccess('rainlab.blog.access_posts');
+    }
+
+    /**
+     * @param string $componentName
+     * @param string $page
+     * @return ComponentBase|null
+     */
+    protected function getComponent(string $componentName, string $page)
+    {
+        $component = Page::load(Theme::getActiveTheme(), $page)->getComponent($componentName);
+
+        if (!is_null($component)) {
+            $this->controller->setComponentPropertiesFromParams($component);
+        }
+
+        return $component;
     }
 }
