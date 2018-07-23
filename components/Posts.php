@@ -262,7 +262,7 @@ class Posts extends ComponentBase
     {
         $component = Page::load(Theme::getActiveTheme(), $page)->getComponent($componentName);
 
-        if (!is_null($component)) {
+        if (!is_null($component) && is_callable([$this->controller, 'setComponentPropertiesFromParams'])) {
             $this->controller->setComponentPropertiesFromParams($component);
         }
 
