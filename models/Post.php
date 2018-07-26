@@ -242,21 +242,16 @@ class Post extends Model
         /*
          * Sorting
          */
-        if (!is_array($sort)) {
-            $sort = [$sort];
-        }
+        if (in_array($sort, array_keys(static::$allowedSortingOptions))) {
+            if ($sort == 'random') {
+                $query->inRandomOrder();
+            } else {
+                @list($sortField, $sortDirection) = explode(' ', $sort);
 
-        foreach ($sort as $_sort) {
+                if (is_null($sortDirection)) {
+                    $sortDirection = "desc";
+                }
 
-            if (in_array($_sort, array_keys(self::$allowedSortingOptions))) {
-                $parts = explode(' ', $_sort);
-                if (count($parts) < 2) {
-                    array_push($parts, 'desc');
-                }
-                list($sortField, $sortDirection) = $parts;
-                if ($sortField == 'random') {
-                    $sortField = Db::raw('RAND()');
-                }
                 $query->orderBy($sortField, $sortDirection);
             }
         }
