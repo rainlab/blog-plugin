@@ -4,9 +4,7 @@ use Str;
 use URL;
 use Model;
 use Cms\Classes\Theme;
-use RainLab\Blog\Models\Post;
 use Cms\Classes\Page as CmsPage;
-use October\Rain\Router\Helper as RouterHelper;
 
 class Category extends Model
 {
