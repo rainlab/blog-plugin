@@ -2,10 +2,9 @@
 
 use BackendAuth;
 use Cms\Classes\Page;
-use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
 
-class Post extends ComponentBase
+class Post extends ComponentAbstract
 {
     /**
      * @var BlogPost The post model used for display.
@@ -81,8 +80,12 @@ class Post extends ComponentBase
          * Add a "url" helper attribute for linking to each category
          */
         if ($post && $post->categories->count()) {
-            $post->categories->each(function($category) {
-                $category->setUrl($this->categoryPage, $this->controller);
+            $blogCategoriesComponent = $this->getComponent('blogCategories', $this->categoryPage);
+
+            $post->categories->each(function($category) use ($blogCategoriesComponent) {
+                $category->setUrl($this->categoryPage, $this->controller, [
+                    'slug' => $this->urlProperty($blogCategoriesComponent, 'slug')
+                ]);
             });
         }
 
@@ -113,10 +116,17 @@ class Post extends ComponentBase
 
         $postPage = $this->getPage()->getBaseFileName();
 
-        $post->setUrl($postPage, $this->controller);
+        $blogPostComponent = $this->getComponent('blogPost', $postPage);
+        $blogCategoriesComponent = $this->getComponent('blogCategories', $this->categoryPage);
 
-        $post->categories->each(function($category) {
-            $category->setUrl($this->categoryPage, $this->controller);
+        $post->setUrl($postPage, $this->controller, [
+            'slug' => $this->urlProperty($blogPostComponent, 'slug')
+        ]);
+
+        $post->categories->each(function($category) use ($blogCategoriesComponent) {
+            $category->setUrl($this->categoryPage, $this->controller, [
+                'slug' => $this->urlProperty($blogCategoriesComponent, 'slug')
+            ]);
         });
 
         return $post;

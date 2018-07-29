@@ -3,14 +3,12 @@
 use Redirect;
 use BackendAuth;
 use Cms\Classes\Page;
-use Cms\Classes\Theme;
-use Cms\Classes\ComponentBase;
 use October\Rain\Database\Model;
 use October\Rain\Database\Collection;
 use RainLab\Blog\Models\Post as BlogPost;
 use RainLab\Blog\Models\Category as BlogCategory;
 
-class Posts extends ComponentBase
+class Posts extends ComponentAbstract
 {
     /**
      * A collection of posts to display
@@ -60,13 +58,6 @@ class Posts extends ComponentBase
      * @var string
      */
     public $sortOrder;
-
-    /**
-     * Slug parameter name which is used in URL for Post page
-     *
-     * @var string
-     */
-    public $postSlugParam;
 
     public function componentDetails()
     {
@@ -212,7 +203,7 @@ class Posts extends ComponentBase
                 $this->postPage,
                 $this->controller,
                 [
-                    'slug' => $blogPostComponent ? $blogPostComponent->propertyName('slug', 'slug') : ''
+                    'slug' => $this->urlProperty($blogPostComponent, 'slug')
                 ]
             );
 
@@ -221,7 +212,7 @@ class Posts extends ComponentBase
                     $this->categoryPage,
                     $this->controller,
                     [
-                        'slug' => $blogCategoriesComponent ? $blogCategoriesComponent->propertyName('slug', 'slug') : ''
+                        'slug' => $this->urlProperty($blogCategoriesComponent, 'slug')
                     ]
                 );
             });
@@ -251,21 +242,5 @@ class Posts extends ComponentBase
     {
         $backendUser = BackendAuth::getUser();
         return $backendUser && $backendUser->hasAccess('rainlab.blog.access_posts');
-    }
-
-    /**
-     * @param string $componentName
-     * @param string $page
-     * @return ComponentBase|null
-     */
-    protected function getComponent(string $componentName, string $page)
-    {
-        $component = Page::load(Theme::getActiveTheme(), $page)->getComponent($componentName);
-
-        if (!is_null($component) && is_callable([$this->controller, 'setComponentPropertiesFromParams'])) {
-            $this->controller->setComponentPropertiesFromParams($component);
-        }
-
-        return $component;
     }
 }
