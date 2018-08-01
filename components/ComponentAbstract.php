@@ -29,7 +29,13 @@ abstract class ComponentAbstract extends ComponentBase
      */
     protected function getComponent(string $componentName, string $page)
     {
-        $component = Page::load(Theme::getActiveTheme(), $page)->getComponent($componentName);
+        $component = null;
+
+        $page = Page::load(Theme::getActiveTheme(), $page);
+
+        if (!is_null($page)) {
+            $component = $page->getComponent($componentName);
+        }
 
         if (!is_null($component) && is_callable([$this->controller, 'setComponentPropertiesFromParams'])) {
             $this->controller->setComponentPropertiesFromParams($component);
