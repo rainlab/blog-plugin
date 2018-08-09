@@ -41,8 +41,14 @@ class Post extends Model
         'content',
         'content_html',
         'excerpt',
+        'metadata',
         ['slug', 'index' => true]
     ];
+
+    /**
+     * @var array Attributes to be stored as JSON
+     */
+    protected $jsonable = ['metadata'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -450,10 +456,10 @@ class Post extends Model
                 'dynamicItems' => true
             ];
         }
-        
+
         if ($type == 'category-blog-posts') {
             $references = [];
-            
+
             $categories = Category::orderBy('name')->get();
             foreach ($categories as $category) {
                 $references[$category->id] = $category->name;
@@ -558,15 +564,15 @@ class Post extends Model
         elseif ($item->type == 'category-blog-posts') {
             if (!$item->reference || !$item->cmsPage)
                 return;
-            
+
             $category = Category::find($item->reference);
             if (!$category)
                 return;
-            
+
             $result = [
                 'items' => []
             ];
-            
+
             $query = self::isPublished()
             ->orderBy('title');
 
@@ -574,9 +580,9 @@ class Post extends Model
             $query->whereHas('categories', function($q) use ($categories) {
                 $q->whereIn('id', $categories);
             });
-        
+
             $posts = $query->get();
-            
+
             foreach ($posts as $post) {
                 $postItem = [
                     'title' => $post->title,
