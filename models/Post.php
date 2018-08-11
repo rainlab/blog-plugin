@@ -217,14 +217,15 @@ class Post extends Model
          * Default options
          */
         extract(array_merge([
-            'page'       => 1,
-            'perPage'    => 30,
-            'sort'       => 'created_at',
-            'categories' => null,
-            'category'   => null,
-            'search'     => '',
-            'published'  => true,
-            'exceptPost' => null,
+            'page'             => 1,
+            'perPage'          => 30,
+            'sort'             => 'created_at',
+            'categories'       => null,
+            'exceptCategories' => null,
+            'category'         => null,
+            'search'           => '',
+            'published'        => true,
+            'exceptPost'       => null,
         ], $options));
 
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
@@ -274,9 +275,19 @@ class Post extends Model
          * Categories
          */
         if ($categories !== null) {
-            if (!is_array($categories)) $categories = [$categories];
+            $categories = is_array($categories) ? $categories : [$categories];
             $query->whereHas('categories', function($q) use ($categories) {
                 $q->whereIn('id', $categories);
+            });
+        }
+
+        /*
+         * Except Categories
+         */
+        if ($exceptCategories !== null) {
+            $exceptCategories = is_array($exceptCategories) ? $exceptCategories : [$exceptCategories];
+            $query->whereDoesntHave('categories', function($q) use ($exceptCategories) {
+                $q->whereIn('slug', $exceptCategories);
             });
         }
 
