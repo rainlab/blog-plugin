@@ -397,11 +397,13 @@ class Post extends Model
         $directionOrder = $isPrevious ? 'asc' : 'desc';
         $directionOperator = $isPrevious ? '>' : '<';
 
-        return $query
-            ->where('id', '<>', $this->id)
-            ->where($attribute, $directionOperator, $this->$attribute)
-            ->orderBy($attribute, $directionOrder)
-        ;
+        $query->where('id', '<>', $this->id);
+
+        if (!is_null($this->$attribute)) {
+            $query->where($attribute, $directionOperator, $this->$attribute);
+        }
+
+        return $query->orderBy($attribute, $directionOrder);
     }
 
     /**
