@@ -92,16 +92,6 @@ class Plugin extends PluginBase
         ];
     }
 
-    public function registerFormWidgets()
-    {
-        return [
-            'RainLab\Blog\FormWidgets\Preview' => [
-                'label' => 'Preview',
-                'code'  => 'preview'
-            ]
-        ];
-    }
-
     /**
      * Register method, called when the plugin is first registered.
      */
