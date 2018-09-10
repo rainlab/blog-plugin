@@ -151,9 +151,7 @@ class Post extends Model
             'slug' => $this->slug,
         ];
 
-        if (array_key_exists('categories', $this->getRelations())) {
-            $params['category'] = $this->categories->count() ? $this->categories->first()->slug : null;
-        }
+        $params['category'] = $this->categories->count() ? $this->categories->first()->slug : null;
 
         //expose published year, month and day as URL parameters
         if ($this->published) {
