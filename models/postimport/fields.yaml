@@ -18,7 +18,7 @@ fields:
         default: true
         span: right
 
-    post_categories:
+    categories:
         label: Categories
         commentAbove: Select the categories that imported posts will belong to (optional).
         type: checkboxlist
