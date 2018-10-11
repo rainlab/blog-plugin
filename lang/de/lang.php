@@ -81,7 +81,8 @@ return [
         'blog_category' => 'Blog Kategorie',
         'all_blog_categories' => 'Alle Blog Kategorien',
         'blog_post' => 'Blog Artikel',
-        'all_blog_posts' => 'Alle Blog Artikel'
+        'all_blog_posts' => 'Alle Blog Artikel',
+        'category_blog_posts' => 'Blog Kategorie Artikel'
     ],
     'settings' => [
         'category_title' => 'Blog Kategorie-Übersicht',
@@ -121,6 +122,8 @@ return [
         'rssfeed_blog' => 'Blog Seite',
         'rssfeed_blog_description' => 'Name der Artikel-Seiten-Datei für die Links. Dieser Wert für von der Standard-Komponente verwendet.',
         'rssfeed_title' => 'RSS-Feed',
-        'rssfeed_description' => 'Erstellt einen RSS-Feed mit Artikeln aus dem Blog.'
+        'rssfeed_description' => 'Erstellt einen RSS-Feed mit Artikeln aus dem Blog.',
+        'group_links' => 'Links',
+        'group_exceptions' => 'Ausnahmen'
     ]
 ];

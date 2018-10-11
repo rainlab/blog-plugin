@@ -58,6 +58,7 @@ return [
         'summary' => 'Summary',
         'featured_images' => 'Featured Images',
         'delete_confirm' => 'Delete this post?',
+        'delete_success' => 'Successfully deleted those posts.',
         'close_confirm' => 'The post is not saved.',
         'return_to_posts' => 'Return to posts list'
     ],
@@ -74,6 +75,7 @@ return [
         'slug_placeholder' => 'new-category-slug',
         'posts' => 'Posts',
         'delete_confirm' => 'Delete this category?',
+        'delete_success' => 'Successfully deleted those categories.',
         'return_to_categories' => 'Return to the blog category list',
         'reorder' => 'Reorder Categories'
     ],
@@ -109,6 +111,7 @@ return [
         'posts_per_page_validation' => 'Invalid format of the posts per page value',
         'posts_no_posts' => 'No posts message',
         'posts_no_posts_description' => 'Message to display in the blog post list in case if there are no posts. This property is used by the default component partial.',
+        'posts_no_posts_default' => 'No posts found',
         'posts_order' => 'Post order',
         'posts_order_description' => 'Attribute on which the posts should be ordered',
         'posts_category' => 'Category page',
@@ -122,6 +125,19 @@ return [
         'rssfeed_blog' => 'Blog page',
         'rssfeed_blog_description' => 'Name of the main blog page file for generating links. This property is used by the default component partial.',
         'rssfeed_title' => 'RSS Feed',
-        'rssfeed_description' => 'Generates an RSS feed containing posts from the blog.'
+        'rssfeed_description' => 'Generates an RSS feed containing posts from the blog.',
+        'group_links' => 'Links',
+        'group_exceptions' => 'Exceptions'
+    ],
+    'sorting' => [
+        'title_asc' => 'Title (ascending)',
+        'title_desc' => 'Title (descending)',
+        'created_asc' => 'Created (ascending)',
+        'created_desc' => 'Created (descending)',
+        'updated_asc' => 'Updated (ascending)',
+        'updated_desc' => 'Updated (descending)',
+        'published_asc' => 'Published (ascending)',
+        'published_desc' => 'Published (descending)',
+        'random' => 'Random'
     ]
 ];

@@ -1,8 +1,6 @@
 <?php namespace RainLab\Blog\Components;
 
 use Db;
-use App;
-use Request;
 use Carbon\Carbon;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
@@ -53,8 +51,8 @@ class Categories extends ComponentBase
                 'description' => 'rainlab.blog::lang.settings.category_page_description',
                 'type'        => 'dropdown',
                 'default'     => 'blog/category',
-                'group'       => 'Links',
-            ],
+                'group'       => 'rainlab.blog::lang.settings.group_links'
+            ]
         ];
     }
 
