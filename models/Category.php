@@ -2,7 +2,7 @@
 
 use Str;
 use Model;
-use URL;
+use Url;
 use RainLab\Blog\Models\Post;
 use October\Rain\Router\Helper as RouterHelper;
 use Cms\Classes\Page as CmsPage;
@@ -171,7 +171,7 @@ class Category extends Model
      * with the following keys:
      * - url - the menu item URL. Not required for menu item types that return all available records.
      *   The URL should be returned relative to the website root and include the subdirectory, if any.
-     *   Use the URL::to() helper to generate the URLs.
+     *   Use the Url::to() helper to generate the URLs.
      * - isActive - determines whether the menu item is active. Not required for menu item types that
      *   return all available records.
      * - items - an array of arrays with the same keys (url, isActive, items) + the title key.
@@ -201,7 +201,7 @@ class Category extends Model
                 return;
             }
 
-            $pageUrl = URL::to($pageUrl);
+            $pageUrl = Url::to($pageUrl);
 
             $result = [];
             $result['url'] = $pageUrl;

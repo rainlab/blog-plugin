@@ -38,8 +38,8 @@ class Post extends ComponentBase
                 'title'       => 'rainlab.blog::lang.settings.post_category',
                 'description' => 'rainlab.blog::lang.settings.post_category_description',
                 'type'        => 'dropdown',
-                'default'     => 'blog/category',
-            ],
+                'default'     => 'blog/category'
+            ]
         ];
     }
 
@@ -125,6 +125,7 @@ class Post extends ComponentBase
     protected function checkEditor()
     {
         $backendUser = BackendAuth::getUser();
+
         return $backendUser && $backendUser->hasAccess('rainlab.blog.access_posts');
     }
 }

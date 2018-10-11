@@ -61,15 +61,15 @@ class Post extends Model
      * @var array
      */
     public static $allowedSortingOptions = [
-        'title asc' => 'Title (ascending)',
-        'title desc' => 'Title (descending)',
-        'created_at asc' => 'Created (ascending)',
-        'created_at desc' => 'Created (descending)',
-        'updated_at asc' => 'Updated (ascending)',
-        'updated_at desc' => 'Updated (descending)',
-        'published_at asc' => 'Published (ascending)',
-        'published_at desc' => 'Published (descending)',
-        'random' => 'Random'
+        'title asc',
+        'title desc',
+        'created_at asc',
+        'created_at desc',
+        'updated_at asc',
+        'updated_at desc',
+        'published_at asc',
+        'published_at desc',
+        'random'
     ];
 
     /*
@@ -89,7 +89,7 @@ class Post extends Model
 
     public $attachMany = [
         'featured_images' => ['System\Models\File', 'order' => 'sort_order'],
-        'content_images' => ['System\Models\File']
+        'content_images'  => ['System\Models\File']
     ];
 
     /**
@@ -533,16 +533,19 @@ class Post extends Model
         $result = null;
 
         if ($item->type == 'blog-post') {
-            if (!$item->reference || !$item->cmsPage)
+            if (!$item->reference || !$item->cmsPage) {
                 return;
+            }
 
             $category = self::find($item->reference);
-            if (!$category)
+            if (!$category) {
                 return;
+            }
 
             $pageUrl = self::getPostPageUrl($item->cmsPage, $category, $theme);
-            if (!$pageUrl)
+            if (!$pageUrl) {
                 return;
+            }
 
             $pageUrl = Url::to($pageUrl);
 
@@ -573,12 +576,14 @@ class Post extends Model
             }
         }
         elseif ($item->type == 'category-blog-posts') {
-            if (!$item->reference || !$item->cmsPage)
+            if (!$item->reference || !$item->cmsPage) {
                 return;
+            }
 
             $category = Category::find($item->reference);
-            if (!$category)
+            if (!$category) {
                 return;
+            }
 
             $result = [
                 'items' => []
@@ -620,7 +625,9 @@ class Post extends Model
     protected static function getPostPageUrl($pageCode, $category, $theme)
     {
         $page = CmsPage::loadCached($theme, $pageCode);
-        if (!$page) return;
+        if (!$page) {
+            return;
+        }
 
         $properties = $page->getComponentProperties('blogPost');
         if (!isset($properties['slug'])) {
@@ -638,9 +645,9 @@ class Post extends Model
         $paramName = substr(trim($matches[1]), 1);
         $params = [
             $paramName => $category->slug,
-            'year' => $category->published_at->format('Y'),
+            'year'  => $category->published_at->format('Y'),
             'month' => $category->published_at->format('m'),
-            'day' => $category->published_at->format('d'),
+            'day'   => $category->published_at->format('d'),
         ];
         $url = CmsPage::url($page->getBaseFileName(), $params);
 
