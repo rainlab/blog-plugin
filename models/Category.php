@@ -74,7 +74,7 @@ class Category extends Model
             'slug' => $this->slug,
         ];
 
-        return $this->url = $controller->pageUrl($pageName, $params);
+        return $this->url = $controller->pageUrl($pageName, $params, false);
     }
 
     /**
