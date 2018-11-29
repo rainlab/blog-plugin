@@ -54,17 +54,6 @@ class RssFeed extends ComponentBase
                 'title'       => 'rainlab.blog::lang.settings.posts_order',
                 'description' => 'rainlab.blog::lang.settings.posts_order_description',
                 'type'        => 'dropdown',
-                'options' => [
-                    'title asc'         => Lang::get('rainlab.blog::lang.sorting.title_asc'),
-                    'title desc'        => Lang::get('rainlab.blog::lang.sorting.title_desc'),
-                    'created_at asc'    => Lang::get('rainlab.blog::lang.sorting.created_asc'),
-                    'created_at desc'   => Lang::get('rainlab.blog::lang.sorting.created_desc'),
-                    'updated_at asc'    => Lang::get('rainlab.blog::lang.sorting.updated_asc'),
-                    'updated_at desc'   => Lang::get('rainlab.blog::lang.sorting.updated_desc'),
-                    'published_at asc'  => Lang::get('rainlab.blog::lang.sorting.published_asc'),
-                    'published_at desc' => Lang::get('rainlab.blog::lang.sorting.published_desc'),
-                    'random'            => Lang::get('rainlab.blog::lang.sorting.random')
-                ],
                 'default'     => 'created_at desc'
             ],
             'postsPerPage' => [
@@ -99,6 +88,17 @@ class RssFeed extends ComponentBase
     public function getPostPageOptions()
     {
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+    }
+
+    public function getSortOrderOptions()
+    {
+        $options = BlogPost::$allowedSortingOptions;
+
+        foreach ($options as $key => $value) {
+            $options[$key] = Lang::get('rainlab.blog::lang.sorting.'.str_replace([' ', '_at'], ['_', ''], $value));
+        }
+
+        return $options;
     }
 
     public function onRun()
