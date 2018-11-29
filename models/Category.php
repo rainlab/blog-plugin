@@ -71,7 +71,7 @@ class Category extends Model
     {
         $params = [
             'id'   => $this->id,
-            'slug' => $this->slug,
+            'slug' => $this->slug
         ];
 
         return $this->url = $controller->pageUrl($pageName, $params);
@@ -244,7 +244,7 @@ class Category extends Model
                 $categoryItem = [
                     'title' => $category->name,
                     'url'   => self::getCategoryPageUrl($item->cmsPage, $category, $theme),
-                    'mtime' => $category->updated_at,
+                    'mtime' => $category->updated_at
                 ];
 
                 $categoryItem['isActive'] = $categoryItem['url'] == $url;

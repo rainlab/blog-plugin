@@ -27,8 +27,8 @@ class Post extends Model
      * Validation
      */
     public $rules = [
-        'title' => 'required',
-        'slug' => ['required', 'regex:/^[a-z0-9\/\:_\-\*\[\]\+\?\|]*$/i', 'unique:rainlab_blog_posts'],
+        'title'   => 'required',
+        'slug'    => ['required', 'regex:/^[a-z0-9\/\:_\-\*\[\]\+\?\|]*$/i', 'unique:rainlab_blog_posts'],
         'content' => 'required',
         'excerpt' => ''
     ];
@@ -148,16 +148,16 @@ class Post extends Model
     {
         $params = [
             'id'   => $this->id,
-            'slug' => $this->slug,
+            'slug' => $this->slug
         ];
 
         $params['category'] = $this->categories->count() ? $this->categories->first()->slug : null;
 
         //expose published year, month and day as URL parameters
         if ($this->published) {
-            $params['year'] = $this->published_at->format('Y');
+            $params['year']  = $this->published_at->format('Y');
             $params['month'] = $this->published_at->format('m');
-            $params['day'] = $this->published_at->format('d');
+            $params['day']   = $this->published_at->format('d');
         }
 
         return $this->url = $controller->pageUrl($pageName, $params);
@@ -223,7 +223,7 @@ class Post extends Model
             'category'         => null,
             'search'           => '',
             'published'        => true,
-            'exceptPost'       => null,
+            'exceptPost'       => null
         ], $options));
 
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
@@ -353,6 +353,7 @@ class Post extends Model
         $more = '<!-- more -->';
         if (strpos($this->content_html, $more) !== false) {
             $parts = explode($more, $this->content_html);
+
             return array_get($parts, 0);
         }
 
@@ -388,7 +389,7 @@ class Post extends Model
 
         extract(array_merge([
             'direction' => 'next',
-            'attribute' => 'published_at',
+            'attribute' => 'published_at'
         ], $options));
 
         $isPrevious = in_array($direction, ['previous', -1]);
@@ -448,8 +449,8 @@ class Post extends Model
         $result = [];
 
         if ($type == 'blog-post') {
-
             $references = [];
+
             $posts = self::orderBy('title')->get();
             foreach ($posts as $post) {
                 $references[$post->id] = $post->title;
@@ -567,7 +568,7 @@ class Post extends Model
                 $postItem = [
                     'title' => $post->title,
                     'url'   => self::getPostPageUrl($item->cmsPage, $post, $theme),
-                    'mtime' => $post->updated_at,
+                    'mtime' => $post->updated_at
                 ];
 
                 $postItem['isActive'] = $postItem['url'] == $url;
@@ -603,7 +604,7 @@ class Post extends Model
                 $postItem = [
                     'title' => $post->title,
                     'url'   => self::getPostPageUrl($item->cmsPage, $post, $theme),
-                    'mtime' => $post->updated_at,
+                    'mtime' => $post->updated_at
                 ];
 
                 $postItem['isActive'] = $postItem['url'] == $url;
@@ -647,7 +648,7 @@ class Post extends Model
             $paramName => $category->slug,
             'year'  => $category->published_at->format('Y'),
             'month' => $category->published_at->format('m'),
-            'day'   => $category->published_at->format('d'),
+            'day'   => $category->published_at->format('d')
         ];
         $url = CmsPage::url($page->getBaseFileName(), $params);
 

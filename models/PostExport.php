@@ -23,8 +23,8 @@ class PostExport extends ExportModel
     public $belongsToMany = [
         'post_categories' => [
             'RainLab\Blog\Models\Category',
-            'table' => 'rainlab_blog_posts_categories',
-            'key' => 'post_id',
+            'table'    => 'rainlab_blog_posts_categories',
+            'key'      => 'post_id',
             'otherKey' => 'category_id'
         ]
     ];
