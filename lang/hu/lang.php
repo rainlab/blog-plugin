@@ -139,5 +139,16 @@ return [
         'published_asc' => 'Publikálva (növekvő)',
         'published_desc' => 'Publikálva (csökkenő)',
         'random' => 'Véletlenszerű'
+    ],
+    'import' => [
+        'update_existing_label' => 'Meglévő bejegyzések frissítése',
+        'update_existing_comment' => 'Két bejegyzés akkor számít ugyanannak, ha megegyezik az ID számuk, a címük vagy a webcímük.',
+        'auto_create_categories_label' => 'Az import fájlban megadott kategóriák létrehozása',
+        'auto_create_categories_comment' => 'A funkció használatához meg kell felelnie a Kategóriák oszlopnak, különben az alábbi elemekből válassza ki az alapértelmezett kategóriákat.',
+        'categories_label' => 'Kategóriák',
+        'categories_comment' => 'Válassza ki azokat a kategóriákat, amelyekhez az importált bejegyzések tartoznak (nem kötelező).',
+        'default_author_label' => 'Alapértelmezett szerző (nem kötelező)',
+        'default_author_comment' => 'A rendszer megpróbál egy meglévő felhasználót társítani a bejegyzéshez az Email oszlop alapján. Amennyiben ez nem sikerül, az itt megadott szerzőt fogja alapul venni.',
+        'default_author_placeholder' => '-- válasszon felhasználót --'
     ]
 ];

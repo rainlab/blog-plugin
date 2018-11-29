@@ -139,5 +139,16 @@ return [
         'published_asc' => 'Published (ascending)',
         'published_desc' => 'Published (descending)',
         'random' => 'Random'
+    ],
+    'import' => [
+        'update_existing_label' => 'Update existing posts',
+        'update_existing_comment' => 'Check this box to update posts that have exactly the same ID, title or slug.',
+        'auto_create_categories_label' => 'Create categories specified in the import file',
+        'auto_create_categories_comment' => 'You should match the Categories column to use this feature, otherwise select the default categories to use from the items below.',
+        'categories_label' => 'Categories',
+        'categories_comment' => 'Select the categories that imported posts will belong to (optional).',
+        'default_author_label' => 'Default post author (optional)',
+        'default_author_comment' => 'The import will try to use an existing author if you match the Author Email column, otherwise the author specified above is used.',
+        'default_author_placeholder' => '-- select author --'
     ]
 ];
