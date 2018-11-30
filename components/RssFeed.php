@@ -95,7 +95,7 @@ class RssFeed extends ComponentBase
         $options = BlogPost::$allowedSortingOptions;
 
         foreach ($options as $key => $value) {
-            $options[$key] = Lang::get('rainlab.blog::lang.sorting.'.str_replace([' ', '_at'], ['_', ''], $value));
+            $options[$key] = Lang::get($value);
         }
 
         return $options;

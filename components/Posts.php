@@ -83,10 +83,10 @@ class Posts extends ComponentBase
                 'default'           => '10',
             ],
             'noPostsMessage' => [
-                'title'        => 'rainlab.blog::lang.settings.posts_no_posts',
-                'description'  => 'rainlab.blog::lang.settings.posts_no_posts_description',
-                'type'         => 'string',
-                'default'      => Lang::get('rainlab.blog::lang.settings.posts_no_posts_default'),
+                'title'             => 'rainlab.blog::lang.settings.posts_no_posts',
+                'description'       => 'rainlab.blog::lang.settings.posts_no_posts_description',
+                'type'              => 'string',
+                'default'           => Lang::get('rainlab.blog::lang.settings.posts_no_posts_default'),
                 'showExternalParam' => false
             ],
             'sortOrder' => [
@@ -143,7 +143,7 @@ class Posts extends ComponentBase
         $options = BlogPost::$allowedSortingOptions;
 
         foreach ($options as $key => $value) {
-            $options[$key] = Lang::get('rainlab.blog::lang.sorting.'.str_replace([' ', '_at'], ['_', ''], $value));
+            $options[$key] = Lang::get($value);
         }
 
         return $options;
