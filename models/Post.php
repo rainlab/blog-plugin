@@ -46,7 +46,7 @@ class Post extends Model
     ];
 
     /**
-     * @var array Attributes to be stored as JSON.
+     * @var array Attributes to be stored as JSON
      */
     protected $jsonable = ['metadata'];
 
