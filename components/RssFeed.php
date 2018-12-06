@@ -48,35 +48,35 @@ class RssFeed extends ComponentBase
                 'title'       => 'rainlab.blog::lang.settings.posts_filter',
                 'description' => 'rainlab.blog::lang.settings.posts_filter_description',
                 'type'        => 'string',
-                'default'     => ''
+                'default'     => '',
             ],
             'sortOrder' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_order',
                 'description' => 'rainlab.blog::lang.settings.posts_order_description',
                 'type'        => 'dropdown',
-                'default'     => 'created_at desc'
+                'default'     => 'created_at desc',
             ],
             'postsPerPage' => [
                 'title'             => 'rainlab.blog::lang.settings.posts_per_page',
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$',
                 'validationMessage' => 'rainlab.blog::lang.settings.posts_per_page_validation',
-                'default'           => '10'
+                'default'           => '10',
             ],
             'blogPage' => [
                 'title'       => 'rainlab.blog::lang.settings.rssfeed_blog',
                 'description' => 'rainlab.blog::lang.settings.rssfeed_blog_description',
                 'type'        => 'dropdown',
                 'default'     => 'blog/post',
-                'group'       => 'rainlab.blog::lang.settings.group_links'
+                'group'       => 'rainlab.blog::lang.settings.group_links',
             ],
             'postPage' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_post',
                 'description' => 'rainlab.blog::lang.settings.posts_post_description',
                 'type'        => 'dropdown',
                 'default'     => 'blog/post',
-                'group'       => 'rainlab.blog::lang.settings.group_links'
-            ]
+                'group'       => 'rainlab.blog::lang.settings.group_links',
+            ],
         ];
     }
 

@@ -32,14 +32,14 @@ class Post extends ComponentBase
                 'title'       => 'rainlab.blog::lang.settings.post_slug',
                 'description' => 'rainlab.blog::lang.settings.post_slug_description',
                 'default'     => '{{ :slug }}',
-                'type'        => 'string'
+                'type'        => 'string',
             ],
             'categoryPage' => [
                 'title'       => 'rainlab.blog::lang.settings.post_category',
                 'description' => 'rainlab.blog::lang.settings.post_category_description',
                 'type'        => 'dropdown',
-                'default'     => 'blog/category'
-            ]
+                'default'     => 'blog/category',
+            ],
         ];
     }
 

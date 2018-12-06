@@ -38,21 +38,21 @@ class Categories extends ComponentBase
                 'title'       => 'rainlab.blog::lang.settings.category_slug',
                 'description' => 'rainlab.blog::lang.settings.category_slug_description',
                 'default'     => '{{ :slug }}',
-                'type'        => 'string'
+                'type'        => 'string',
             ],
             'displayEmpty' => [
                 'title'       => 'rainlab.blog::lang.settings.category_display_empty',
                 'description' => 'rainlab.blog::lang.settings.category_display_empty_description',
                 'type'        => 'checkbox',
-                'default'     => 0
+                'default'     => 0,
             ],
             'categoryPage' => [
                 'title'       => 'rainlab.blog::lang.settings.category_page',
                 'description' => 'rainlab.blog::lang.settings.category_page_description',
                 'type'        => 'dropdown',
                 'default'     => 'blog/category',
-                'group'       => 'rainlab.blog::lang.settings.group_links'
-            ]
+                'group'       => 'rainlab.blog::lang.settings.group_links',
+            ],
         ];
     }
 

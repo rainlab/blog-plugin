@@ -67,13 +67,13 @@ class Posts extends ComponentBase
                 'title'       => 'rainlab.blog::lang.settings.posts_pagination',
                 'description' => 'rainlab.blog::lang.settings.posts_pagination_description',
                 'type'        => 'string',
-                'default'     => '{{ :page }}'
+                'default'     => '{{ :page }}',
             ],
             'categoryFilter' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_filter',
                 'description' => 'rainlab.blog::lang.settings.posts_filter_description',
                 'type'        => 'string',
-                'default'     => ''
+                'default'     => '',
             ],
             'postsPerPage' => [
                 'title'             => 'rainlab.blog::lang.settings.posts_per_page',
@@ -87,27 +87,27 @@ class Posts extends ComponentBase
                 'description'       => 'rainlab.blog::lang.settings.posts_no_posts_description',
                 'type'              => 'string',
                 'default'           => Lang::get('rainlab.blog::lang.settings.posts_no_posts_default'),
-                'showExternalParam' => false
+                'showExternalParam' => false,
             ],
             'sortOrder' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_order',
                 'description' => 'rainlab.blog::lang.settings.posts_order_description',
                 'type'        => 'dropdown',
-                'default'     => 'published_at desc'
+                'default'     => 'published_at desc',
             ],
             'categoryPage' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_category',
                 'description' => 'rainlab.blog::lang.settings.posts_category_description',
                 'type'        => 'dropdown',
                 'default'     => 'blog/category',
-                'group'       => 'rainlab.blog::lang.settings.group_links'
+                'group'       => 'rainlab.blog::lang.settings.group_links',
             ],
             'postPage' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_post',
                 'description' => 'rainlab.blog::lang.settings.posts_post_description',
                 'type'        => 'dropdown',
                 'default'     => 'blog/post',
-                'group'       => 'rainlab.blog::lang.settings.group_links'
+                'group'       => 'rainlab.blog::lang.settings.group_links',
             ],
             'exceptPost' => [
                 'title'             => 'rainlab.blog::lang.settings.posts_except_post',
@@ -116,15 +116,15 @@ class Posts extends ComponentBase
                 'validationPattern' => 'string',
                 'validationMessage' => 'rainlab.blog::lang.settings.posts_except_post_validation',
                 'default'           => '',
-                'group'             => 'rainlab.blog::lang.settings.group_exceptions'
+                'group'             => 'rainlab.blog::lang.settings.group_exceptions',
             ],
             'exceptCategories' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_except_categories',
                 'description' => 'rainlab.blog::lang.settings.posts_except_categories_description',
                 'type'        => 'string',
                 'default'     => '',
-                'group'       => 'rainlab.blog::lang.settings.group_exceptions'
-            ]
+                'group'       => 'rainlab.blog::lang.settings.group_exceptions',
+            ],
         ];
     }
 
