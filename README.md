@@ -2,7 +2,7 @@
 
 A simple, extensible blogging platform for October CMS.
 
-!![560x315](https://player.vimeo.com/video/97088926)
+[Blog & Forum Building Tutorial Video](https://player.vimeo.com/video/97088926)
 
 ## Editing posts
 
@@ -101,7 +101,7 @@ The post list and the pagination are coded in the default component partial `plu
 
 Use the `blogPost` component to display a blog post on a page. The component has the following properties:
 
-* **slug** - the value used for looking up the post by its slug. The default value is **{{ :slug }}** to obtain the value from the route parameter `:slug`.
+* **slug** - the value used for looking up the post by its slug. The default value is **{{ :slug }}** to obtain the value from the route parameter `:slug`. Note: the default value must be used if default behavior is  expected. You cannot use another value other than `:slug`, even if the same value is specified in the page's url. 
 * **categoryPage** - path to the category page. The default value is **blog/category** - it matches the pages/blog/category.htm file in the theme directory. This property is used in the default component partial for creating links to the blog categories.
 
 The component injects the following variables to the page where it's used:
@@ -138,7 +138,7 @@ The post details is coded in the default component partial `plugins/rainlab/blog
 
 Use the `blogCategories` component to display a list of blog post categories with links. The component has the following properties:
 
-* **slug** - the value used for looking up the current category by its slug. The default value is **{{ :slug }}** to obtain the value from the route parameter `:slug`.
+* **slug** - the value used for looking up the current category by its slug. The default value is **{{ :slug }}** to obtain the value from the route parameter `:slug`. Note: the default value must be used if default behavior is  expected. You cannot use another value other than `:slug`, even if the same value is specified in the page's url. 
 * **displayEmpty** - determines if empty categories should be displayed. The default value is false.
 * **categoryPage** - path to the category page. The default value is **blog/category** - it matches the pages/blog/category.htm file in the theme directory. This property is used in the default component partial for creating links to the blog categories.
 
