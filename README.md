@@ -2,7 +2,7 @@
 
 A simple, extensible blogging platform for October CMS.
 
-!![560x315](https://player.vimeo.com/video/97088926)
+[Blog & Forum Building Tutorial Video](https://player.vimeo.com/video/97088926)
 
 ## Editing posts
 
