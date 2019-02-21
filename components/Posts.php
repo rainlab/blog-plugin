@@ -113,8 +113,6 @@ class Posts extends ComponentBase
                 'title'             => 'rainlab.blog::lang.settings.posts_except_post',
                 'description'       => 'rainlab.blog::lang.settings.posts_except_post_description',
                 'type'              => 'string',
-                'validationPattern' => 'string',
-                'validationMessage' => 'rainlab.blog::lang.settings.posts_except_post_validation',
                 'default'           => '',
                 'group'             => 'rainlab.blog::lang.settings.group_exceptions',
             ],
