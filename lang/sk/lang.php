@@ -1,4 +1,5 @@
 <?php
+
 return [
     'plugin' => [
         'name' => 'Blog',
@@ -57,6 +58,7 @@ return [
         'summary' => 'Zhrnutie',
         'featured_images' => 'Obrázky',
         'delete_confirm' => 'Zmazať tento príspevok?',
+        'delete_success' => 'Vybrané príspevky boli úspešne odstránené.',
         'close_confirm' => 'Príspevok nie je uložený.',
         'return_to_posts' => 'Späť na zoznam príspevkov'
     ],
@@ -73,6 +75,7 @@ return [
         'slug_placeholder' => 'url-novej-kategórie',
         'posts' => 'Počet príspevkov',
         'delete_confirm' => 'Zmazať túto kategóriu?',
+        'delete_success' => 'Vybrané kategórie boli úspešne odstránené.',
         'return_to_categories' => 'Späť na zoznam kategórií',
         'reorder' => 'Zmeniť poradie kategórií'
     ],
@@ -108,6 +111,7 @@ return [
         'posts_per_page_validation' => 'Neplatný formát hodnoty počtu príspevkov na stránku',
         'posts_no_posts' => 'Správa prázdnej stránky',
         'posts_no_posts_description' => 'Správa, ktorá bude zobrazená v zozname príspevkov v prípade, že nie sú žiadne na zobrazenie. Táto hodnota je použitá v predvolenej čiastočnej stránke komponentu.',
+        'posts_no_posts_default' => 'Nenašli sa žiadne príspevky',
         'posts_order' => 'Zoradenie príspevkov',
         'posts_order_description' => 'Atribút podľa ktorého budú príspevky zoradené',
         'posts_category' => 'Stránka kategórie',
@@ -121,6 +125,30 @@ return [
         'rssfeed_blog' => 'Stránka blogu',
         'rssfeed_blog_description' => 'Názov hlavnej stránky blogu na generovanie odkazov. Táto hodnota je použitá v predvolenej čiastočnej stránke komponentu.',
         'rssfeed_title' => 'RSS Kanál',
-        'rssfeed_description' => 'Vygeneruje RSS kanál, ktorý obsahuje blogové príspevky.'
+        'rssfeed_description' => 'Vygeneruje RSS kanál, ktorý obsahuje blogové príspevky.',
+        'group_links' => 'Odkazy',
+        'group_exceptions' => 'Výnimky'
+    ],
+    'sorting' => [
+        'title_asc' => 'Názov (vzostupne)',
+        'title_desc' => 'Názov (zostupne)',
+        'created_asc' => 'Vytvorené (vzostupne)',
+        'created_desc' => 'Vytvorené (zostupne)',
+        'updated_asc' => 'Upravené (vzostupne)',
+        'updated_desc' => 'Upravené (zostupne)',
+        'published_asc' => 'Publikované (vzostupne)',
+        'published_desc' => 'Publikované (zostupne)',
+        'random' => 'Náhodne'
+    ],
+    'import' => [
+        'update_existing_label' => 'Aktualizovať existujúce príspevky',
+        'update_existing_comment' => 'Začiarknutím tohto políčka aktualizujte príspevky, ktoré majú presne to isté ID, titul alebo URL príspevku.',
+        'auto_create_categories_label' => 'Vytvoriť kategórie zadané v importovanom súbore',
+        'auto_create_categories_comment' => 'Ak chcete túto funkciu použiť, mali by sa zhodovať so stĺpcom Kategórie, inak vyberte predvolené kategórie, ktoré chcete použiť z nižšie uvedených položiek.',
+        'categories_label' => 'Kategórie',
+        'categories_comment' => 'Vyberte kategórie, do ktorých budú patriť importované príspevky (voliteľné).',
+        'default_author_label' => 'Predvolený autor príspevku (voliteľné)',
+        'default_author_comment' => 'Import sa pokúsi použiť existujúceho autora, ak sa zhoduje so stĺpcom e-mail, inak sa použije vyššie uvedený autor.',
+        'default_author_placeholder' => '-- vyberte autora --'
     ]
 ];
