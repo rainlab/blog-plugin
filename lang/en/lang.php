@@ -18,7 +18,7 @@ return [
         'access_other_posts' => 'Manage other users blog posts',
         'access_import_export' => 'Allowed to import and export posts',
         'access_publish' => 'Allowed to publish posts',
-        'access_blog' => 'Manage blog settings',
+        'manage_settings' => 'Manage blog settings',
         'delete_confirm' => 'Are you sure?',
         'chart_published' => 'Published',
         'chart_drafts' => 'Drafts',
