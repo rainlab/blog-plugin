@@ -34,6 +34,10 @@ class Plugin extends PluginBase
     public function registerPermissions()
     {
         return [
+            'rainlab.blog.manage_settings' => [
+                'tab'   => 'rainlab.blog::lang.blog.tab',
+                'label' => 'rainlab.blog::lang.blog.manage_settings'
+            ],
             'rainlab.blog.access_posts' => [
                 'tab'   => 'rainlab.blog::lang.blog.tab',
                 'label' => 'rainlab.blog::lang.blog.access_posts'
@@ -88,6 +92,22 @@ class Plugin extends PluginBase
                         'permissions' => ['rainlab.blog.access_categories']
                     ]
                 ]
+            ]
+        ];
+    }
+
+    public function registerSettings()
+    {
+        return [
+            'blog' => [
+                'label' => 'rainlab.blog::lang.blog.menu_label',
+                'description' => 'rainlab.blog::lang.blog.settings_description',
+                'category' => 'rainlab.blog::lang.blog.menu_label',
+                'icon' => 'icon-pencil',
+                'class' => 'RainLab\Blog\Models\Settings',
+                'order' => 500,
+                'keywords' => 'blog post category',
+                'permissions' => ['rainlab.blog.manage_settings']
             ]
         ];
     }
