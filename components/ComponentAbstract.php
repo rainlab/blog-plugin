@@ -37,23 +37,31 @@ abstract class ComponentAbstract extends ComponentBase
             $component = $page->getComponent($componentName);
         }
 
-        if (!is_null($component) && is_callable([$this->controller, 'setComponentPropertiesFromParams'])) {
-            $this->controller->setComponentPropertiesFromParams($component);
-        }
-
         return $component;
     }
 
     /**
-     * A helper function to return property value
+     * A helper function to get the real URL parameter name. For example, slug for posts
+     * can be injected as :post into URL. Real argument is necessary if you want to generate
+     * valid URLs for such pages
      *
      * @param ComponentBase|null $component
      * @param string $name
      *
      * @return string|null
      */
-    protected function urlProperty(ComponentBase $component = null, string $name)
+    protected function urlProperty(ComponentBase $component = null, string $name = '')
     {
-        return $component ? $component->propertyName($name, $name) : null;
+        $property = null;
+
+        if ($component && ($property = $component->property($name))) {
+            preg_match('/{{ :([^ ]+) }}/', $property, $matches);
+
+            if (isset($matches[1])) {
+                $property = $matches[1];
+            }
+        }
+
+        return $property;
     }
 }
