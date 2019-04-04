@@ -1,10 +1,12 @@
 <?php namespace RainLab\Blog\Models;
 
 use Str;
-use URL;
 use Model;
-use Cms\Classes\Theme;
+use Url;
+use RainLab\Blog\Models\Post;
+use October\Rain\Router\Helper as RouterHelper;
 use Cms\Classes\Page as CmsPage;
+use Cms\Classes\Theme;
 
 class Category extends Model
 {
@@ -76,7 +78,7 @@ class Category extends Model
             array_get($urlParams, 'slug', 'slug')  => $this->slug,
         ];
 
-        return $this->url = $controller->pageUrl($pageName, $params);
+        return $this->url = $controller->pageUrl($pageName, $params, false);
     }
 
     /**
@@ -173,7 +175,7 @@ class Category extends Model
      * with the following keys:
      * - url - the menu item URL. Not required for menu item types that return all available records.
      *   The URL should be returned relative to the website root and include the subdirectory, if any.
-     *   Use the URL::to() helper to generate the URLs.
+     *   Use the Url::to() helper to generate the URLs.
      * - isActive - determines whether the menu item is active. Not required for menu item types that
      *   return all available records.
      * - items - an array of arrays with the same keys (url, isActive, items) + the title key.
@@ -203,7 +205,7 @@ class Category extends Model
                 return;
             }
 
-            $pageUrl = URL::to($pageUrl);
+            $pageUrl = Url::to($pageUrl);
 
             $result = [];
             $result['url'] = $pageUrl;
@@ -246,7 +248,7 @@ class Category extends Model
                 $categoryItem = [
                     'title' => $category->name,
                     'url'   => self::getCategoryPageUrl($item->cmsPage, $category, $theme),
-                    'mtime' => $category->updated_at,
+                    'mtime' => $category->updated_at
                 ];
 
                 $categoryItem['isActive'] = $categoryItem['url'] == $url;
