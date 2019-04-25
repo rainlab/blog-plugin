@@ -78,10 +78,14 @@ class Categories extends ComponentBase
     {
         $categories = BlogCategory::with('posts_count')->getNested();
         if (!$this->property('displayEmpty')) {
-            $iterator = function($categories) use (&$iterator) {
-                return $categories->reject(function($category) use (&$iterator) {
-                    if($category->post_count == 0) return true;
-                    if($category->children) $category->children = $iterator($category->children);
+            $iterator = function ($categories) use (&$iterator) {
+                return $categories->reject(function ($category) use (&$iterator) {
+                    if ($category->post_count == 0) {
+                        return true;
+                    }
+                    if ($category->children) {
+                        $category->children = $iterator($category->children);
+                    }
                     return false;
                 });
             };
@@ -96,7 +100,7 @@ class Categories extends ComponentBase
 
     protected function linkCategories($categories)
     {
-        return $categories->each(function($category) {
+        return $categories->each(function ($category) {
             $category->setUrl($this->categoryPage, $this->controller);
 
             if ($category->children) {
