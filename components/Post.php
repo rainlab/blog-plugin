@@ -81,11 +81,11 @@ class Post extends ComponentAbstract
          * Add a "url" helper attribute for linking to each category
          */
         if ($post && $post->categories->count()) {
-            $blogCategoriesComponent = $this->getComponent('blogCategories', $this->categoryPage);
+            $blogPostsComponent = $this->getComponent('blogPosts', $this->categoryPage);
 
-            $post->categories->each(function($category) use ($blogCategoriesComponent) {
+            $post->categories->each(function($category) use ($blogPostsComponent) {
                 $category->setUrl($this->categoryPage, $this->controller, [
-                    'slug' => $this->urlProperty($blogCategoriesComponent, 'slug')
+                    'slug' => $this->urlProperty($blogPostsComponent, 'categoryFilter')
                 ]);
             });
         }
@@ -118,15 +118,15 @@ class Post extends ComponentAbstract
         $postPage = $this->getPage()->getBaseFileName();
 
         $blogPostComponent = $this->getComponent('blogPost', $postPage);
-        $blogCategoriesComponent = $this->getComponent('blogCategories', $this->categoryPage);
+        $blogPostsComponent = $this->getComponent('blogPosts', $this->categoryPage);
 
         $post->setUrl($postPage, $this->controller, [
             'slug' => $this->urlProperty($blogPostComponent, 'slug')
         ]);
 
-        $post->categories->each(function($category) use ($blogCategoriesComponent) {
+        $post->categories->each(function($category) use ($blogPostsComponent) {
             $category->setUrl($this->categoryPage, $this->controller, [
-                'slug' => $this->urlProperty($blogCategoriesComponent, 'slug')
+                'slug' => $this->urlProperty($blogPostsComponent, 'categoryFilter')
             ]);
         });
 

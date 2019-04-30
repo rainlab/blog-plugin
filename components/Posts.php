@@ -216,9 +216,9 @@ class Posts extends ComponentAbstract
          * Add a "url" helper attribute for linking to each post and category
          */
         $blogPostComponent = $this->getComponent('blogPost', $this->postPage);
-        $blogCategoriesComponent = $this->getComponent('blogCategories', $this->categoryPage);
+        $blogPostsComponent = $this->getComponent('blogPosts', $this->categoryPage);
 
-        $posts->each(function($post) use ($blogPostComponent, $blogCategoriesComponent) {
+        $posts->each(function($post) use ($blogPostComponent, $blogPostsComponent) {
             $post->setUrl(
                 $this->postPage,
                 $this->controller,
@@ -227,12 +227,12 @@ class Posts extends ComponentAbstract
                 ]
             );
 
-            $post->categories->each(function($category) use ($blogCategoriesComponent) {
+            $post->categories->each(function($category) use ($blogPostsComponent) {
                 $category->setUrl(
                     $this->categoryPage,
                     $this->controller,
                     [
-                        'slug' => $this->urlProperty($blogCategoriesComponent, 'slug')
+                        'slug' => $this->urlProperty($blogPostsComponent, 'categoryFilter')
                     ]
                 );
             });

@@ -52,12 +52,14 @@ abstract class ComponentAbstract extends ComponentBase
     {
         $property = null;
 
-        if ($component && ($property = $component->property($name))) {
+        if ($component !== null && ($property = $component->property($name))) {
             preg_match('/{{ :([^ ]+) }}/', $property, $matches);
 
             if (isset($matches[1])) {
                 $property = $matches[1];
             }
+        } else {
+            $property = $name;
         }
 
         return $property;
