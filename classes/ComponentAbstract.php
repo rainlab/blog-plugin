@@ -1,6 +1,4 @@
-<?php
-
-namespace RainLab\Blog\Components;
+<?php namespace RainLab\Blog\Classes;
 
 use Cms\Classes\Page;
 use Cms\Classes\Theme;

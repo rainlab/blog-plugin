@@ -4,6 +4,7 @@ use Lang;
 use Response;
 use Cms\Classes\Page;
 use RainLab\Blog\Models\Post as BlogPost;
+use RainLab\Blog\Classes\ComponentAbstract;
 use RainLab\Blog\Models\Category as BlogCategory;
 
 class RssFeed extends ComponentAbstract
