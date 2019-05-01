@@ -64,8 +64,17 @@ class Category extends Model
 
     public function getPostCountAttribute()
     {
-        return optional($this->posts_count->first())->count + $this->children->sum(function ($category) {
-            return $category->post_count;
+        return optional($this->posts_count->first())->count ?? 0;
+    }
+
+    /**
+     * Count posts in this and nested categories
+     * @return int
+     */
+    public function getNestedPostCount()
+    {
+        return $this->post_count + $this->children->sum(function ($category) {
+            return $category->getNestedPostCount();
         });
     }
 

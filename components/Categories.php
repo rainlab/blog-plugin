@@ -80,7 +80,7 @@ class Categories extends ComponentBase
         if (!$this->property('displayEmpty')) {
             $iterator = function ($categories) use (&$iterator) {
                 return $categories->reject(function ($category) use (&$iterator) {
-                    if ($category->post_count == 0) {
+                    if ($category->getNestedPostCount() == 0) {
                         return true;
                     }
                     if ($category->children) {
