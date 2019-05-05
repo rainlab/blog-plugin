@@ -231,14 +231,28 @@ class Post extends Model
         }
 
         /*
-         * Ignore a post
+         * Except post(s)
          */
         if ($exceptPost) {
-            if (is_numeric($exceptPost)) {
-                $query->where('id', '<>', $exceptPost);
+            $exceptPosts = (is_array($exceptPost)) ? $exceptPost : [$exceptPost];
+            $exceptPostIds = [];
+            $exceptPostSlugs = [];
+
+            foreach ($exceptPosts as $exceptPost) {
+                $exceptPost = trim($exceptPost);
+
+                if (is_numeric($exceptPost)) {
+                    $exceptPostIds[] = $exceptPost;
+                } else {
+                    $exceptPostSlugs[] = $exceptPost;
+                }
             }
-            else {
-                $query->where('slug', '<>', $exceptPost);
+
+            if (count($exceptPostIds)) {
+                $query->whereNotIn('id', $exceptPostIds);
+            }
+            if (count($exceptPostSlugs)) {
+                $query->whereNotIn('slug', $exceptPostSlugs);
             }
         }
 
@@ -282,7 +296,9 @@ class Post extends Model
          */
         if ($exceptCategories !== null) {
             $exceptCategories = is_array($exceptCategories) ? $exceptCategories : [$exceptCategories];
-            $query->whereDoesntHave('categories', function($q) use ($exceptCategories) {
+            array_walk($exceptCategories, 'trim');
+
+            $query->whereDoesntHave('categories', function ($q) use ($exceptCategories) {
                 $q->whereIn('slug', $exceptCategories);
             });
         }
