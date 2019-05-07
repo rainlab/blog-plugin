@@ -103,6 +103,14 @@ class Post extends ComponentBase
                 $category->setUrl($this->categoryPage, $this->controller);
             });
         }
+        
+        /*
+         * Throw a 404 error when a blogpost does not exist
+         */
+        if (!$post || !$post->exists) {
+            $this->setStatusCode(404);
+            return $this->controller->run('404');
+        }
 
         return $post;
     }
