@@ -105,23 +105,12 @@ class Post extends ComponentBase
                 });
             }
             return $post;
-
         }
         catch (\Exception $ex) {
             $this->setStatusCode(404);
             return $this->controller->run('404');
         }
-
-        /*
-         * Add a "url" helper attribute for linking to each category
-         */
-        if ($post && $post->categories->count()) {
-            $post->categories->each(function($category) {
-                $category->setUrl($this->categoryPage, $this->controller);
-            });
-        }
-
-        return $post;
+        
     }
 
     public function previousPost()
