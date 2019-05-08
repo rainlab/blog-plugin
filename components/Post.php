@@ -93,7 +93,24 @@ class Post extends ComponentBase
             $post = $post->isPublished();
         }
 
-        $post = $post->first();
+        try {
+            $post = $post->firstOrFail();
+
+            /*
+             * Add a "url" helper attribute for linking to each category
+             */
+            if ($post && $post->categories->count()) {
+                $post->categories->each(function($category) {
+                    $category->setUrl($this->categoryPage, $this->controller);
+                });
+            }
+            return $post;
+
+        }
+        catch (\Exception $ex) {
+            $this->setStatusCode(404);
+            return $this->controller->run('404');
+        }
 
         /*
          * Add a "url" helper attribute for linking to each category
@@ -102,14 +119,6 @@ class Post extends ComponentBase
             $post->categories->each(function($category) {
                 $category->setUrl($this->categoryPage, $this->controller);
             });
-        }
-        
-        /*
-         * Throw a 404 error when a blogpost does not exist
-         */
-        if (!$post || !$post->exists) {
-            $this->setStatusCode(404);
-            return $this->controller->run('404');
         }
 
         return $post;
