@@ -5,6 +5,7 @@ use BackendAuth;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Post extends ComponentBase
 {
@@ -95,22 +96,21 @@ class Post extends ComponentBase
 
         try {
             $post = $post->firstOrFail();
-
-            /*
-             * Add a "url" helper attribute for linking to each category
-             */
-            if ($post && $post->categories->count()) {
-                $post->categories->each(function($category) {
-                    $category->setUrl($this->categoryPage, $this->controller);
-                });
-            }
-            return $post;
-        }
-        catch (\Exception $ex) {
+        } catch (ModelNotFoundException $ex) {
             $this->setStatusCode(404);
             return $this->controller->run('404');
         }
+
+        /*
+        * Add a "url" helper attribute for linking to each category
+        */
+        if ($post && $post->categories->count()) {
+            $post->categories->each(function($category) {
+                $category->setUrl($this->categoryPage, $this->controller);
+            });
+        }
         
+        return $post;
     }
 
     public function previousPost()
