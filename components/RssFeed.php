@@ -139,7 +139,7 @@ class RssFeed extends ComponentAbstract
          */
         $blogPostComponent = $this->getComponent('blogPost', $this->postPage);
 
-        $posts->each(function($post) use ($blogPostComponent) {
+        $posts->each(function ($post) use ($blogPostComponent) {
             $post->setUrl($this->postPage, $this->controller, [
                 'slug' => $this->urlProperty($blogPostComponent, 'slug')
             ]);

@@ -83,7 +83,7 @@ class Post extends ComponentAbstract
         if ($post && $post->categories->count()) {
             $blogPostsComponent = $this->getComponent('blogPosts', $this->categoryPage);
 
-            $post->categories->each(function($category) use ($blogPostsComponent) {
+            $post->categories->each(function ($category) use ($blogPostsComponent) {
                 $category->setUrl($this->categoryPage, $this->controller, [
                     'slug' => $this->urlProperty($blogPostsComponent, 'categoryFilter')
                 ]);
@@ -124,7 +124,7 @@ class Post extends ComponentAbstract
             'slug' => $this->urlProperty($blogPostComponent, 'slug')
         ]);
 
-        $post->categories->each(function($category) use ($blogPostsComponent) {
+        $post->categories->each(function ($category) use ($blogPostsComponent) {
             $category->setUrl($this->categoryPage, $this->controller, [
                 'slug' => $this->urlProperty($blogPostsComponent, 'categoryFilter')
             ]);

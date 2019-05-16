@@ -105,13 +105,14 @@ class Categories extends ComponentAbstract
     {
         $blogPostsComponent = $this->getComponent('blogPosts', $this->categoryPage);
 
-        return $categories->each(function($category) use ($blogPostsComponent) {
+        return $categories->each(function ($category) use ($blogPostsComponent) {
             $category->setUrl(
                 $this->categoryPage,
                 $this->controller,
                 [
                     'slug' => $this->urlProperty($blogPostsComponent, 'categoryFilter')
-                ]);
+                ]
+            );
 
             if ($category->children) {
                 $this->linkCategories($category->children);

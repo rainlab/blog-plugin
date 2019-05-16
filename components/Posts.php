@@ -218,7 +218,7 @@ class Posts extends ComponentAbstract
         $blogPostComponent = $this->getComponent('blogPost', $this->postPage);
         $blogPostsComponent = $this->getComponent('blogPosts', $this->categoryPage);
 
-        $posts->each(function($post) use ($blogPostComponent, $blogPostsComponent) {
+        $posts->each(function ($post) use ($blogPostComponent, $blogPostsComponent) {
             $post->setUrl(
                 $this->postPage,
                 $this->controller,
@@ -227,7 +227,7 @@ class Posts extends ComponentAbstract
                 ]
             );
 
-            $post->categories->each(function($category) use ($blogPostsComponent) {
+            $post->categories->each(function ($category) use ($blogPostsComponent) {
                 $category->setUrl(
                     $this->categoryPage,
                     $this->controller,
