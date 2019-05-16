@@ -123,17 +123,19 @@ class Posts extends ComponentAbstract
                 'title'             => 'rainlab.blog::lang.settings.posts_except_post',
                 'description'       => 'rainlab.blog::lang.settings.posts_except_post_description',
                 'type'              => 'string',
-                'validationPattern' => 'string',
+                'validationPattern' => '^[a-z0-9\-_,\s]+$',
                 'validationMessage' => 'rainlab.blog::lang.settings.posts_except_post_validation',
                 'default'           => '',
                 'group'             => 'rainlab.blog::lang.settings.group_exceptions',
             ],
             'exceptCategories' => [
-                'title'       => 'rainlab.blog::lang.settings.posts_except_categories',
-                'description' => 'rainlab.blog::lang.settings.posts_except_categories_description',
-                'type'        => 'string',
-                'default'     => '',
-                'group'       => 'rainlab.blog::lang.settings.group_exceptions',
+                'title'             => 'rainlab.blog::lang.settings.posts_except_categories',
+                'description'       => 'rainlab.blog::lang.settings.posts_except_categories_description',
+                'type'              => 'string',
+                'validationPattern' => '^[a-z0-9\-_,\s]+$',
+                'validationMessage' => 'rainlab.blog::lang.settings.posts_except_categories_validation',
+                'default'           => '',
+                'group'             => 'rainlab.blog::lang.settings.group_exceptions',
             ],
         ];
     }
@@ -206,10 +208,12 @@ class Posts extends ComponentAbstract
             'search'           => trim(input('search')),
             'category'         => $category,
             'published'        => $isPublished,
-            'exceptPost'       => $this->property('exceptPost'),
+            'exceptPost'       => is_array($this->property('exceptPost'))
+                ? $this->property('exceptPost')
+                : preg_split('/,\s*/', $this->property('exceptPost'), -1, PREG_SPLIT_NO_EMPTY),
             'exceptCategories' => is_array($this->property('exceptCategories'))
                 ? $this->property('exceptCategories')
-                : explode(',', $this->property('exceptCategories')),
+                : preg_split('/,\s*/', $this->property('exceptCategories'), -1, PREG_SPLIT_NO_EMPTY),
         ]);
 
         /*

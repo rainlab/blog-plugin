@@ -41,6 +41,11 @@ class Category extends Model
             'table' => 'rainlab_blog_posts_categories',
             'order' => 'published_at desc',
             'scope' => 'isPublished'
+        ],
+        'posts_count' => ['RainLab\Blog\Models\Post',
+            'table' => 'rainlab_blog_posts_categories',
+            'scope' => 'isPublished',
+            'count' => true
         ]
     ];
 
@@ -59,7 +64,18 @@ class Category extends Model
 
     public function getPostCountAttribute()
     {
-        return $this->posts()->count();
+        return optional($this->posts_count->first())->count ?? 0;
+    }
+
+    /**
+     * Count posts in this and nested categories
+     * @return int
+     */
+    public function getNestedPostCount()
+    {
+        return $this->post_count + $this->children->sum(function ($category) {
+            return $category->getNestedPostCount();
+        });
     }
 
     /**

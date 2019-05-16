@@ -1,9 +1,11 @@
 <?php namespace RainLab\Blog\Components;
 
+use Event;
 use BackendAuth;
 use Cms\Classes\Page;
 use RainLab\Blog\Models\Post as BlogPost;
 use RainLab\Blog\Classes\ComponentAbstract;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Post extends ComponentAbstract
 {
@@ -48,6 +50,23 @@ class Post extends ComponentAbstract
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
+    public function init()
+    {
+        Event::listen('translate.localePicker.translateParams', function ($page, $params, $oldLocale, $newLocale) {
+            $newParams = $params;
+
+            foreach ($params as $paramName => $paramValue) {
+                $records = BlogPost::transWhere($paramName, $paramValue, $oldLocale)->first();
+
+                if ($records) {
+                    $records->translateContext($newLocale);
+                    $newParams[$paramName] = $records[$paramName];
+                }
+            }
+            return $newParams;
+        });
+    }
+
     public function onRun()
     {
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
@@ -75,7 +94,12 @@ class Post extends ComponentAbstract
             $post = $post->isPublished();
         }
 
-        $post = $post->first();
+        try {
+            $post = $post->firstOrFail();
+        } catch (ModelNotFoundException $ex) {
+            $this->setStatusCode(404);
+            return $this->controller->run('404');
+        }
 
         /*
          * Add a "url" helper attribute for linking to each category
