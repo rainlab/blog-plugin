@@ -3,14 +3,14 @@
 use Event;
 use BackendAuth;
 use Cms\Classes\Page;
-use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
+use RainLab\Blog\Classes\ComponentAbstract;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class Post extends ComponentBase
+class Post extends ComponentAbstract
 {
     /**
-     * @var RainLab\Blog\Models\Post The post model used for display.
+     * @var BlogPost The post model used for display.
      */
     public $post;
 
@@ -102,14 +102,18 @@ class Post extends ComponentBase
         }
 
         /*
-        * Add a "url" helper attribute for linking to each category
-        */
+         * Add a "url" helper attribute for linking to each category
+         */
         if ($post && $post->categories->count()) {
-            $post->categories->each(function($category) {
-                $category->setUrl($this->categoryPage, $this->controller);
+            $blogPostsComponent = $this->getComponent('blogPosts', $this->categoryPage);
+
+            $post->categories->each(function ($category) use ($blogPostsComponent) {
+                $category->setUrl($this->categoryPage, $this->controller, [
+                    'slug' => $this->urlProperty($blogPostsComponent, 'categoryFilter')
+                ]);
             });
         }
-        
+
         return $post;
     }
 
@@ -137,10 +141,17 @@ class Post extends ComponentBase
 
         $postPage = $this->getPage()->getBaseFileName();
 
-        $post->setUrl($postPage, $this->controller);
+        $blogPostComponent = $this->getComponent('blogPost', $postPage);
+        $blogPostsComponent = $this->getComponent('blogPosts', $this->categoryPage);
 
-        $post->categories->each(function($category) {
-            $category->setUrl($this->categoryPage, $this->controller);
+        $post->setUrl($postPage, $this->controller, [
+            'slug' => $this->urlProperty($blogPostComponent, 'slug')
+        ]);
+
+        $post->categories->each(function ($category) use ($blogPostsComponent) {
+            $category->setUrl($this->categoryPage, $this->controller, [
+                'slug' => $this->urlProperty($blogPostsComponent, 'categoryFilter')
+            ]);
         });
 
         return $post;

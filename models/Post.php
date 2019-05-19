@@ -10,12 +10,16 @@ use Model;
 use Markdown;
 use BackendAuth;
 use ValidationException;
-use RainLab\Blog\Classes\TagProcessor;
 use Backend\Models\User;
 use Carbon\Carbon;
 use Cms\Classes\Page as CmsPage;
 use Cms\Classes\Theme;
+use Cms\Classes\Controller;
+use RainLab\Blog\Classes\TagProcessor;
 
+/**
+ * Class Post
+ */
 class Post extends Model
 {
     use \October\Rain\Database\Traits\Validation;
@@ -141,22 +145,25 @@ class Post extends Model
     /**
      * Sets the "url" attribute with a URL to this object.
      * @param string $pageName
-     * @param Cms\Classes\Controller $controller
+     * @param Controller $controller
+     * @param array $urlParams A mapping of possible overrides of default URL parameter names
+     *
+     * @return string
      */
-    public function setUrl($pageName, $controller)
+    public function setUrl($pageName, $controller, array $urlParams = array())
     {
         $params = [
-            'id'   => $this->id,
-            'slug' => $this->slug
+            array_get($urlParams, 'id', 'id')   => $this->id,
+            array_get($urlParams, 'slug', 'slug') => $this->slug,
         ];
 
         $params['category'] = $this->categories->count() ? $this->categories->first()->slug : null;
 
         // Expose published year, month and day as URL parameters.
         if ($this->published) {
-            $params['year']  = $this->published_at->format('Y');
-            $params['month'] = $this->published_at->format('m');
-            $params['day']   = $this->published_at->format('d');
+            $params[array_get($urlParams, 'year', 'year')] = $this->published_at->format('Y');
+            $params[array_get($urlParams, 'month', 'month')] = $this->published_at->format('m');
+            $params[array_get($urlParams, 'day', 'day')] = $this->published_at->format('d');
         }
 
         return $this->url = $controller->pageUrl($pageName, $params);

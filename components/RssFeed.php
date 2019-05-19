@@ -3,11 +3,11 @@
 use Lang;
 use Response;
 use Cms\Classes\Page;
-use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
+use RainLab\Blog\Classes\ComponentAbstract;
 use RainLab\Blog\Models\Category as BlogCategory;
 
-class RssFeed extends ComponentBase
+class RssFeed extends ComponentAbstract
 {
     /**
      * A collection of posts to display
@@ -137,8 +137,12 @@ class RssFeed extends ComponentBase
         /*
          * Add a "url" helper attribute for linking to each post and category
          */
-        $posts->each(function($post) {
-            $post->setUrl($this->postPage, $this->controller);
+        $blogPostComponent = $this->getComponent('blogPost', $this->postPage);
+
+        $posts->each(function ($post) use ($blogPostComponent) {
+            $post->setUrl($this->postPage, $this->controller, [
+                'slug' => $this->urlProperty($blogPostComponent, 'slug')
+            ]);
         });
 
         return $posts;

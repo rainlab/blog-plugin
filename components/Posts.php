@@ -4,51 +4,60 @@ use Lang;
 use Redirect;
 use BackendAuth;
 use Cms\Classes\Page;
-use Cms\Classes\ComponentBase;
+use October\Rain\Database\Model;
+use October\Rain\Database\Collection;
 use RainLab\Blog\Models\Post as BlogPost;
+use RainLab\Blog\Classes\ComponentAbstract;
 use RainLab\Blog\Models\Category as BlogCategory;
 use RainLab\Blog\Models\Settings as BlogSettings;
 
-class Posts extends ComponentBase
+class Posts extends ComponentAbstract
 {
     /**
      * A collection of posts to display
+     *
      * @var Collection
      */
     public $posts;
 
     /**
      * Parameter to use for the page number
+     *
      * @var string
      */
     public $pageParam;
 
     /**
-     * If the post list should be filtered by a category, the model to use.
+     * If the post list should be filtered by a category, the model to use
+     *
      * @var Model
      */
     public $category;
 
     /**
-     * Message to display when there are no messages.
+     * Message to display when there are no messages
+     *
      * @var string
      */
     public $noPostsMessage;
 
     /**
-     * Reference to the page name for linking to posts.
+     * Reference to the page name for linking to posts
+     *
      * @var string
      */
     public $postPage;
 
     /**
-     * Reference to the page name for linking to categories.
+     * Reference to the page name for linking to categories
+     *
      * @var string
      */
     public $categoryPage;
 
     /**
-     * If the post list should be ordered by another attribute.
+     * If the post list should be ordered by another attribute
+     *
      * @var string
      */
     public $sortOrder;
@@ -210,11 +219,26 @@ class Posts extends ComponentBase
         /*
          * Add a "url" helper attribute for linking to each post and category
          */
-        $posts->each(function($post) {
-            $post->setUrl($this->postPage, $this->controller);
+        $blogPostComponent = $this->getComponent('blogPost', $this->postPage);
+        $blogPostsComponent = $this->getComponent('blogPosts', $this->categoryPage);
 
-            $post->categories->each(function($category) {
-                $category->setUrl($this->categoryPage, $this->controller);
+        $posts->each(function ($post) use ($blogPostComponent, $blogPostsComponent) {
+            $post->setUrl(
+                $this->postPage,
+                $this->controller,
+                [
+                    'slug' => $this->urlProperty($blogPostComponent, 'slug')
+                ]
+            );
+
+            $post->categories->each(function ($category) use ($blogPostsComponent) {
+                $category->setUrl(
+                    $this->categoryPage,
+                    $this->controller,
+                    [
+                        'slug' => $this->urlProperty($blogPostsComponent, 'categoryFilter')
+                    ]
+                );
             });
         });
 

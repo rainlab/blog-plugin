@@ -3,10 +3,10 @@
 use Db;
 use Carbon\Carbon;
 use Cms\Classes\Page;
-use Cms\Classes\ComponentBase;
+use RainLab\Blog\Classes\ComponentAbstract;
 use RainLab\Blog\Models\Category as BlogCategory;
 
-class Categories extends ComponentBase
+class Categories extends ComponentAbstract
 {
     /**
      * @var Collection A collection of categories to display
@@ -98,8 +98,16 @@ class Categories extends ComponentBase
 
     protected function linkCategories($categories)
     {
-        return $categories->each(function ($category) {
-            $category->setUrl($this->categoryPage, $this->controller);
+        $blogPostsComponent = $this->getComponent('blogPosts', $this->categoryPage);
+
+        return $categories->each(function ($category) use ($blogPostsComponent) {
+            $category->setUrl(
+                $this->categoryPage,
+                $this->controller,
+                [
+                    'slug' => $this->urlProperty($blogPostsComponent, 'categoryFilter')
+                ]
+            );
 
             if ($category->children) {
                 $this->linkCategories($category->children);

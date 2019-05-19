@@ -80,14 +80,18 @@ class Category extends Model
 
     /**
      * Sets the "url" attribute with a URL to this object
+     *
      * @param string $pageName
      * @param Cms\Classes\Controller $controller
+     * @param array $urlParams A mapping of overrides for default URL parameter names
+     *
+     * @return string
      */
-    public function setUrl($pageName, $controller)
+    public function setUrl($pageName, $controller, array $urlParams = array())
     {
         $params = [
-            'id'   => $this->id,
-            'slug' => $this->slug
+            array_get($urlParams, 'id', 'id')   => $this->id,
+            array_get($urlParams, 'slug', 'slug')  => $this->slug,
         ];
 
         return $this->url = $controller->pageUrl($pageName, $params, false);
