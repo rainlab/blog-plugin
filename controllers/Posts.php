@@ -56,6 +56,13 @@ class Posts extends Controller
         return $this->asExtension('FormController')->update($recordId);
     }
 
+    public function export()
+    {
+        $this->addCss('/plugins/rainlab/blog/assets/css/rainlab.blog-export.css');
+
+        return $this->asExtension('ImportExportController')->export();
+    }
+
     public function listExtendQuery($query)
     {
         if (!$this->user->hasAnyAccess(['rainlab.blog.access_other_posts'])) {

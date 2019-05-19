@@ -29,13 +29,23 @@ class PostExport extends ExportModel
         ]
     ];
 
+    public $hasMany = [
+        'featured_images' => [
+            'System\Models\File',
+            'order' => 'sort_order',
+            'key' => 'attachment_id',
+            'conditions' => 'field = "featured_images" AND attachment_type = "RainLab\\\\Blog\\\\Models\\\\Post"'
+        ]
+    ];
+
     /**
      * The accessors to append to the model's array form.
      * @var array
      */
     protected $appends = [
         'author_email',
-        'categories'
+        'categories',
+        'featured_image_urls'
     ];
 
     public function exportData($columns, $sessionKey = null)
@@ -43,7 +53,8 @@ class PostExport extends ExportModel
         $result = self::make()
             ->with([
                 'post_user',
-                'post_categories'
+                'post_categories',
+                'featured_images'
             ])
             ->get()
             ->toArray()
@@ -68,5 +79,16 @@ class PostExport extends ExportModel
         }
 
         return $this->encodeArrayValue($this->post_categories->lists('name'));
+    }
+
+    public function getFeaturedImageUrlsAttribute()
+    {
+        if (!$this->featured_images) {
+            return '';
+        }
+
+        return $this->encodeArrayValue($this->featured_images->map(function ($image) {
+            return $image->getPath();
+        }));
     }
 }
