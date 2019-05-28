@@ -48,3 +48,4 @@
     - Added metadata column for plugins to store data in
     - posts_add_metadata.php
 1.3.1: Fixed metadata column not being jsonable
+1.3.2: Allow custom slug name for components, add 404 handling for missing blog posts, allow exporting of blog images.
