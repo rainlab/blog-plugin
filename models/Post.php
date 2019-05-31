@@ -301,7 +301,7 @@ class Post extends Model
         /*
          * Except Categories
          */
-        if ($exceptCategories !== null) {
+        if (!empty($exceptCategories)) {
             $exceptCategories = is_array($exceptCategories) ? $exceptCategories : [$exceptCategories];
             array_walk($exceptCategories, 'trim');
 
