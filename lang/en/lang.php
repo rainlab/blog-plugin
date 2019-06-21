@@ -27,7 +27,6 @@ return [
         'show_all_posts_label' => 'Show all posts to backend users',
         'show_all_posts_comment' => 'Display both published and unpublished posts on the frontend to backend users',
         'tab_general' => 'General'
-
     ],
     'posts' => [
         'list_title' => 'Manage the blog posts',
