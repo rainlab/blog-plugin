@@ -26,8 +26,7 @@ return [
         'settings_description' => 'Blog ayarlarını yönet',
         'show_all_posts_label' => 'Tüm gönderileri yönetim paneli kullanıcılarına göster',
         'show_all_posts_comment' => 'Hem yayınlanmış hem de yayınlanmamış gönderileri önyüzde yönetim paneli kullanıcılarına göster.',
-        'tab_general' => 'Genel'
-        
+        'tab_general' => 'Genel',
     ],
     'posts' => [
         'list_title' => 'Blog gönderilerini yönet',
