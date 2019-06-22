@@ -32,7 +32,7 @@ abstract class ComponentAbstract extends ComponentBase
         $page = Page::load(Theme::getActiveTheme(), $page);
 
         if (!is_null($page)) {
-            $component = $page->getComponent($componentName);
+            $component = $page->getComponent($componentName, $this->page);
         }
 
         return $component;
