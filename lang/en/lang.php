@@ -51,6 +51,7 @@ return [
         'updated' => 'Updated',
         'updated_date' => 'Updated date',
         'published' => 'Published',
+        'published_by' => 'Published by',
         'published_date' => 'Published date',
         'published_validation' => 'Please specify the published date',
         'tab_edit' => 'Edit',
