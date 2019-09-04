@@ -42,6 +42,7 @@ return [
         'updated' => 'Bijgewerkt',
         'updated_date' => 'Bijgewerkt op',
         'published' => 'Gepubliceerd',
+        'published_by' => 'Gepubliceerd door',
         'published_date' => 'Gepubliceerd op',
         'published_validation' => 'Graag een publicatie datum opgeven',
         'tab_edit' => 'Bewerken',
