@@ -104,8 +104,7 @@ class Post extends Model
     public $preview = null;
 
     /**
-     * Set value for the field user to current user in the create context
-     * Limit visibility of the published-button
+     * Update fields based on current user.
      *
      * @param       $fields
      * @param  null $context
@@ -114,15 +113,17 @@ class Post extends Model
     public function filterFields($fields, $context = null)
     {
         $user = BackendAuth::getUser();
-        
-        if ($context == 'create') {
+
+        // Set value for the field user to current user in the create context
+        if ($context === 'create' && empty($fields->user->value)) {
             $fields->user->value = $user->id;
         }
-        
+
         if (!isset($fields->published, $fields->published_at)) {
             return;
         }
 
+        // Limit visibility of the published-button
         if (!$user->hasAnyAccess(['rainlab.blog.access_publish'])) {
             $fields->published->hidden = true;
             $fields->published_at->hidden = true;
