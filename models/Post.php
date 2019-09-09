@@ -139,7 +139,7 @@ class Post extends Model
 
     public function beforeSave()
     {
-        if(empty($this->user)) {
+        if (empty($this->user)) {
             $user = BackendAuth::getUser();
             $this->user = $user->id;
         }
