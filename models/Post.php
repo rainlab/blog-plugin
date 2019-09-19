@@ -67,7 +67,7 @@ class Post extends Model
     public static $allowedSortingOptions = [
         'title asc'         => 'rainlab.blog::lang.sorting.title_asc',
         'title desc'        => 'rainlab.blog::lang.sorting.title_desc',
-        'created_at asc '   => 'rainlab.blog::lang.sorting.created_asc',
+        'created_at asc'    => 'rainlab.blog::lang.sorting.created_asc',
         'created_at desc'   => 'rainlab.blog::lang.sorting.created_desc',
         'updated_at asc'    => 'rainlab.blog::lang.sorting.updated_asc',
         'updated_at desc'   => 'rainlab.blog::lang.sorting.updated_desc',
