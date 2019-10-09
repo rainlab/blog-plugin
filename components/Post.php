@@ -103,7 +103,7 @@ class Post extends ComponentAbstract
 
         if ($post->categories->count() && $this->param('category')) {
 
-            if(false === $post->categories->pluck('slug')->search($this->param('category'))) {
+            if ($post->categories->pluck('slug')->search($this->param('category')) === false) {
                 $canonicalUrl = $this->controller->pageUrl($this->page->baseFilename, [
                     'category' => $post->categories[0]->slug,
                     'slug' => $post->slug
