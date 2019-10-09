@@ -105,7 +105,7 @@ class Post extends ComponentAbstract
             if ($post->categories->pluck('slug')->search($this->param('category')) === false) {
                 $canonicalUrl = $this->controller->pageUrl($this->page->baseFilename, [
                     'category' => $post->categories[0]->slug,
-                    'slug' => $post->slug
+                    $this->paramName('slug') => $post->slug,
                 ]);
                 return response()->redirectTo($canonicalUrl)->send();
             }
