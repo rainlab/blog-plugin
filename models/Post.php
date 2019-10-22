@@ -141,7 +141,9 @@ class Post extends Model
     {
         if (empty($this->user)) {
             $user = BackendAuth::getUser();
-            $this->user = $user->id;
+            if (!is_null($user)) {
+                $this->user = $user->id;
+            }
         }
         $this->content_html = self::formatHtml($this->content);
     }
