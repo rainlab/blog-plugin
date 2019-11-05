@@ -52,3 +52,4 @@
 1.3.3: Fixed 'excluded categories' filter from being run when value is empty.
 1.3.4: Allow post author to be specified. Improved translations.
 1.3.5: Fixed missing user info from breaking initial seeder in migrations. Fixed a PostgreSQL issue with blog exports.
+1.3.6: Improved French translations.
