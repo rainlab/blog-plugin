@@ -134,7 +134,7 @@ return [
         'rssfeed_blog' => 'Page du blog',
         'rssfeed_blog_description' => 'Nom de la page principale du blog pour générer les liens. Cette propriété est utilisé par le composant dans le partial.',
         'rssfeed_title' => 'Flux RSS',
-        'rssfeed_description' => 'Génère un Flux RSS contenant les articles du blog.'
+        'rssfeed_description' => 'Génère un Flux RSS contenant les articles du blog.',
         'group_links' => 'Liens',
         'group_exceptions' => 'Exceptions'
     ],
