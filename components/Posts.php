@@ -230,7 +230,9 @@ class Posts extends ComponentAbstract
                     'slug' => $this->urlProperty($blogPostComponent, 'slug')
                 ]
             );
-
+            $post->postedOnPrefix=Lang::get('rainlab.blog::lang.post.posted_on_prefix');
+            $post->postedOnMid=Lang::get('rainlab.blog::lang.post.posted_on_mid');
+            $post->postedOnDateFormat=Lang::get('rainlab.blog::lang.post.posted_on_date_format');
             $post->categories->each(function ($category) use ($blogPostsComponent) {
                 $category->setUrl(
                     $this->categoryPage,

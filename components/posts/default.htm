@@ -6,12 +6,12 @@
             <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
 
             <p class="info">
-                Posted
-                {% if post.categories.count %} in {% endif %}
+                {{ post.postedOnPrefix|_|default('Posted') }}
+                {% if post.categories.count %} {{ post.postedOnInCategory|_|default('in')}} {% endif %}
                 {% for category in post.categories %}
                     <a href="{{ category.url }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
                 {% endfor %}
-                on {{ post.published_at|date('M d, Y') }}
+                {{ post.postedOnMid|_|default('on') }} {{ post.published_at|date(post.postedOnDateFormat|_|default('M d, Y')) }}
             </p>
 
             <p class="excerpt">{{ post.summary|raw }}</p>

@@ -17,11 +17,11 @@
 {% endif %}
 
 <p class="info">
-    Posted
-    {% if post.categories.count %} in
+    {{ post.postedOnPrefix|_|default('Posted') }}
+    {% if post.categories.count %} {{ post.postedOnInCategory|_|default('in')}}
         {% for category in post.categories %}
             <a href="{{ category.url }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
         {% endfor %}
     {% endif %}
-    on {{ post.published_at|date('M d, Y') }}
+    {{ post.postedOnMid|_|default('on') }} {{ post.published_at|date(post.postedOnDateFormat|_|default('M d, Y')) }}
 </p>
