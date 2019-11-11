@@ -59,7 +59,11 @@ return [
         'featured_images' => 'Zugehörige Bilder',
         'delete_confirm' => 'Möchtest du diesen Artikel wirklich löschen?',
         'close_confirm' => 'Der Artikel ist noch nicht gespeichert.',
-        'return_to_posts' => 'Zurück zur Artikel-Übersicht'
+        'return_to_posts' => 'Zurück zur Artikel-Übersicht',
+        'posted_on_prefix' => 'Veröffentlicht',
+        'posted_on_mid' => 'am',
+        'posted_on_in_category' => 'in',
+        'posted_on_date_format' => 'd. F Y'
     ],
     'categories' => [
         'list_title' => 'Blog Kategorien verwalten',

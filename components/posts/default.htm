@@ -6,12 +6,13 @@
             <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
 
             <p class="info">
-                {{ post.postedOnPrefix|_|default('Posted') }}
-                {% if post.categories.count %} {{ post.postedOnInCategory|_|default('in')}} {% endif %}
+              {{ 'rainlab.blog::lang.post.posted_on_prefix'|trans }}
+              {% if post.categories.count %} {{ 'rainlab.blog::lang.post.posted_on_in_category'|trans}}
                 {% for category in post.categories %}
-                    <a href="{{ category.url }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
+                  <a href="{{ category.url }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
                 {% endfor %}
-                {{ post.postedOnMid|_|default('on') }} {{ post.published_at|date(post.postedOnDateFormat|_|default('M d, Y')) }}
+              {% endif %}
+            {{ 'rainlab.blog::lang.post.posted_on_mid'|trans }} {{ post.published_at|date('rainlab.blog::lang.post.posted_on_date_format'|trans) }}
             </p>
 
             <p class="excerpt">{{ post.summary|raw }}</p>

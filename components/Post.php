@@ -1,7 +1,6 @@
 <?php namespace RainLab\Blog\Components;
 
 use Event;
-use Lang;
 use BackendAuth;
 use Cms\Classes\Page;
 use RainLab\Blog\Models\Post as BlogPost;
@@ -113,9 +112,6 @@ class Post extends ComponentAbstract
                     'slug' => $this->urlProperty($blogPostsComponent, 'categoryFilter')
                 ]);
             });
-            $post->postedOnPrefix=Lang::get('rainlab.blog::lang.post.posted_on_prefix');
-            $post->postedOnMid=Lang::get('rainlab.blog::lang.post.posted_on_mid');
-            $post->postedOnDateFormat=Lang::get('rainlab.blog::lang.post.posted_on_date_format');
         }
 
         return $post;

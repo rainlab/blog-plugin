@@ -17,11 +17,11 @@
 {% endif %}
 
 <p class="info">
-    {{ post.postedOnPrefix|_|default('Posted') }}
-    {% if post.categories.count %} {{ post.postedOnInCategory|_|default('in')}}
+    {{ 'rainlab.blog::lang.post.posted_on_prefix'|trans }}
+    {% if post.categories.count %} {{ 'rainlab.blog::lang.post.posted_on_in_category'|trans}}
         {% for category in post.categories %}
             <a href="{{ category.url }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
         {% endfor %}
     {% endif %}
-    {{ post.postedOnMid|_|default('on') }} {{ post.published_at|date(post.postedOnDateFormat|_|default('M d, Y')) }}
+    {{ 'rainlab.blog::lang.post.posted_on_mid'|trans }} {{ post.published_at|date('rainlab.blog::lang.post.posted_on_date_format'|trans) }}
 </p>
