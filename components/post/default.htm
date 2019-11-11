@@ -17,8 +17,8 @@
 {% endif %}
 
 <p class="info">
-    {{ 'rainlab.blog::lang.post.posted_on_prefix'|trans }}
-    {% if post.categories.count %} {{ 'rainlab.blog::lang.post.posted_on_in_category'|trans}}
+    {{ 'rainlab.blog::lang.post.posted'|trans }}
+    {% if post.categories.count %} {{ 'rainlab.blog::lang.post.posted_in'|trans}}
         {% for category in post.categories %}
             <a href="{{ category.url }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
         {% endfor %}

@@ -68,8 +68,8 @@ return [
         'delete_success' => 'Successfully deleted those posts.',
         'close_confirm' => 'The post is not saved.',
         'return_to_posts' => 'Return to posts list',
-        'posted_on_prefix' => 'Posted',
-        'posted_on_in_category' => 'in',
+        'posted' => 'Posted',
+        'posted_in' => 'in',
         'posted_on_mid' => 'on',
         'posted_on_date_format' => 'M d, Y'
     ],

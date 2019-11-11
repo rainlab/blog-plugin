@@ -230,6 +230,7 @@ class Posts extends ComponentAbstract
                     'slug' => $this->urlProperty($blogPostComponent, 'slug')
                 ]
             );
+
             $post->categories->each(function ($category) use ($blogPostsComponent) {
                 $category->setUrl(
                     $this->categoryPage,
