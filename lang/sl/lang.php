@@ -1,4 +1,5 @@
 <?php
+
 return [
     'plugin' => [
         'name' => 'Blog',
@@ -160,4 +161,3 @@ return [
         'default_author_placeholder' => '-- izberite avtorja --',
     ],
 ];
-
