@@ -68,10 +68,8 @@ return [
         'delete_success' => 'Successfully deleted those posts.',
         'close_confirm' => 'The post is not saved.',
         'return_to_posts' => 'Return to posts list',
-        'posted' => 'Posted',
-        'posted_in' => 'in',
-        'posted_on_mid' => 'on',
-        'posted_on_date_format' => 'M d, Y'
+        'posted_byline' => 'Posted in :categories on :date.',
+        'date_format' => 'M d, Y',
     ],
     'categories' => [
         'list_title' => 'Manage the blog categories',

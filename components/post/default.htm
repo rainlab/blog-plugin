@@ -1,4 +1,9 @@
 {% set post = __SELF__.post %}
+{% if post.categories.count %}
+    {% set categoryLinks = __SELF__.post.categories|map(c => "<a href=\"#{c.url}\">#{c.name}</a>")|join(', ') %}
+{% else %}
+    {% set categoryLinks = 'rainlab.blog::lang.categories.uncategorized'|trans %}
+{% endif %}
 
 <div class="content">{{ post.content_html|raw }}</div>
 
@@ -17,11 +22,8 @@
 {% endif %}
 
 <p class="info">
-    {{ 'rainlab.blog::lang.post.posted'|trans }}
-    {% if post.categories.count %} {{ 'rainlab.blog::lang.post.posted_in'|trans}}
-        {% for category in post.categories %}
-            <a href="{{ category.url }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
-        {% endfor %}
-    {% endif %}
-    {{ 'rainlab.blog::lang.post.posted_on_mid'|trans }} {{ post.published_at|date('rainlab.blog::lang.post.posted_on_date_format'|trans) }}
+    {{ 'rainlab.blog::lang.post.posted_byline'|trans({
+        date: post.published_at|date('rainlab.blog::lang.post.date_format'|trans),
+        categories: categoryLinks
+    }) }}
 </p>

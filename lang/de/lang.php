@@ -60,10 +60,8 @@ return [
         'delete_confirm' => 'Möchtest du diesen Artikel wirklich löschen?',
         'close_confirm' => 'Der Artikel ist noch nicht gespeichert.',
         'return_to_posts' => 'Zurück zur Artikel-Übersicht',
-        'posted' => 'Veröffentlicht',
-        'posted_on_mid' => 'am',
-        'posted_in' => 'in',
-        'posted_on_date_format' => 'd. F Y'
+        'posted_byline' => 'Veröffentlicht in :categories am :date',
+        'date_format' => 'd. F Y',
     ],
     'categories' => [
         'list_title' => 'Blog Kategorien verwalten',
