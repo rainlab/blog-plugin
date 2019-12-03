@@ -1,6 +1,6 @@
 {% set post = __SELF__.post %}
 {% if post.categories.count %}
-    {% set categoryLinks = __SELF__.post.categories|map(c => "<a href=\"#{c.url}\">#{c.name}</a>")|join(', ') %}
+    {% set categoryLinks = post.categories|map(c => "<a href=\"#{c.url}\">#{c.name}</a>")|join(', ') %}
 {% else %}
     {% set categoryLinks = 'rainlab.blog::lang.categories.uncategorized'|trans %}
 {% endif %}
