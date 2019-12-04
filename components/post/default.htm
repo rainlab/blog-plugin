@@ -1,9 +1,4 @@
 {% set post = __SELF__.post %}
-{% if post.categories.count %}
-    {% set categoryLinks = post.categories|map(c => "<a href=\"#{c.url}\">#{c.name}</a>")|join(', ') %}
-{% else %}
-    {% set categoryLinks = 'rainlab.blog::lang.categories.uncategorized'|trans %}
-{% endif %}
 
 <div class="content">{{ post.content_html|raw }}</div>
 
@@ -22,8 +17,16 @@
 {% endif %}
 
 <p class="info">
-    {{ 'rainlab.blog::lang.post.posted_byline'|trans({
-        date: post.published_at|date('rainlab.blog::lang.post.date_format'|trans),
-        categories: categoryLinks
-    }) }}
+    {% if post.categories.count %}
+        {% set categoryLinks = post.categories|map(c => "<a href=\"#{c.url}\">#{c.name}</a>")|join(', ') %}
+
+        {{ 'rainlab.blog::lang.post.posted_byline'|trans({
+            date: post.published_at|date('rainlab.blog::lang.post.date_format'|trans),
+            categories: categoryLinks
+        }) }}
+    {% else %}
+        {{ 'rainlab.blog::lang.post.posted_byline_no_categories'|trans({
+            date: post.published_at|date('rainlab.blog::lang.post.date_format'|trans)
+        }) }}
+    {% endif %}
 </p>

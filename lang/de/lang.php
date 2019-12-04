@@ -61,6 +61,7 @@ return [
         'close_confirm' => 'Der Artikel ist noch nicht gespeichert.',
         'return_to_posts' => 'Zurück zur Artikel-Übersicht',
         'posted_byline' => 'Veröffentlicht in :categories am :date',
+        'posted_byline_no_categories' => 'Veröffentlicht am :date',
         'date_format' => 'd. F Y',
     ],
     'categories' => [

@@ -69,6 +69,7 @@ return [
         'close_confirm' => 'The post is not saved.',
         'return_to_posts' => 'Return to posts list',
         'posted_byline' => 'Posted in :categories on :date.',
+        'posted_byline_no_categories' => 'Posted on :date.',
         'date_format' => 'M d, Y',
     ],
     'categories' => [
