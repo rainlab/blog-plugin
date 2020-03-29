@@ -134,7 +134,7 @@
                         processData: false,
                         data: formData
                     })
-                    .done(function(response) {
+                    .done(function (response) {
                         self.resumeUpdates();
                         self.codeEditor.insertSnippet('![' + response.file + '](' + response.path + ')')
                     })
