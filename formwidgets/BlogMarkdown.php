@@ -57,11 +57,11 @@ class BlogMarkdown extends MarkdownEditor
         try {
 
             if (Input::has('file')) {
-
                 $uploadedFile = Input::file('file');
 
-                if ($uploadedFile)
+                if ($uploadedFile) {
                     $uploadedFileName = $uploadedFile->getClientOriginalName();
+                }
 
                 $validationRules = ['max:'.File::getMaxFilesize()];
                 $validationRules[] = 'mimes:jpg,jpeg,bmp,png,gif';
@@ -81,20 +81,18 @@ class BlogMarkdown extends MarkdownEditor
 
                 $file = new File();
                 $file->data = $uploadedFile;
-    
-            } else if (Input::has('_image')) {
-
+            } elseif (Input::has('_image')) {
                 $content = Input::get('_image');
 
                 preg_match('/^(data:\s*image\/(\w+);base64,)/', $content, $result);
         
-                $file_content = base64_decode( str_replace( $result[1], '', $content ) );
-                $file_ext = $result[2];
-                $file_name = md5( $file_content ) . "." . $file_ext;
-                $uploadedFileName = "image" . "." . $file_ext;
+                $fileContent = base64_decode(str_replace($result[1], '', $content));
+                $fileExt = $result[2];
+                $fileName = md5( $fileContent ) . "." . $fileExt;
+                $uploadedFileName = 'image' . '.' . $fileExt;
 
                 $file = new File();
-                $file->fromData($file_content, $file_name);
+                $file->fromData($fileContent, $fileName);
             }
 
             $fileRelation = $this->model->content_images();
