@@ -60,8 +60,9 @@ class BlogMarkdown extends MarkdownEditor
 
                 $uploadedFile = Input::file('file');
 
-                if ($uploadedFile)
+                if ($uploadedFile) {
                     $uploadedFileName = $uploadedFile->getClientOriginalName();
+                }
 
                 $validationRules = ['max:'.File::getMaxFilesize()];
                 $validationRules[] = 'mimes:jpg,jpeg,bmp,png,gif';
