@@ -128,7 +128,7 @@
 
                     $.ajax({
                         url: self.formAction,
-                        type: "POST",
+                        type: 'POST',
                         cache: false,
                         contentType: false,
                         processData: false,
