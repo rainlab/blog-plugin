@@ -110,7 +110,7 @@
 
         self.$markdownEditor.bind('paste', function (event) {
             if (event.type.indexOf('copy') === 0 || event.type.indexOf('paste') === 0) {
-                event.clipboardData = event.originalEvent.clipboardData;
+                event.clipboardData = event.originalEvent.clipboardData
             }
 
             var clipboardData = event.clipboardData;
