@@ -94,7 +94,7 @@ class BlogMarkdown extends MarkdownEditor
                 $uploadedFileName = 'image' . '.' . $fileExt;
 
                 $file = new File();
-                $file->fromData($file_content, $file_name);
+                $file->fromData($fileContent, $fileName);
             }
 
             $fileRelation = $this->model->content_images();
