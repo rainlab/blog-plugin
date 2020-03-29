@@ -82,9 +82,7 @@ class BlogMarkdown extends MarkdownEditor
 
                 $file = new File();
                 $file->data = $uploadedFile;
-    
-            } else if (Input::has('_image')) {
-
+            } elseif (Input::has('_image')) {
                 $content = Input::get('_image');
 
                 preg_match('/^(data:\s*image\/(\w+);base64,)/', $content, $result);
