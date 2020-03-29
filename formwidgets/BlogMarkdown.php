@@ -88,7 +88,7 @@ class BlogMarkdown extends MarkdownEditor
                 preg_match('/^(data:\s*image\/(\w+);base64,)/', $content, $result);
         
                 $fileContent = base64_decode(str_replace($result[1], '', $content));
-                $file_ext = $result[2];
+                $fileExt = $result[2];
                 $fileName = md5($file_content) . '.' . $fileExt;
                 $uploadedFileName = 'image' . '.' . $fileExt;
 
