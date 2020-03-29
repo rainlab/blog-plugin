@@ -138,7 +138,7 @@
                         self.resumeUpdates();
                         self.codeEditor.insertSnippet('![' + response.file + '](' + response.path + ')')
                     })
-                    .fail(function(response) {
+                    .fail(function (response) {
                         self.resumeUpdates();
                     });
                 };
