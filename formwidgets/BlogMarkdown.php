@@ -88,7 +88,7 @@ class BlogMarkdown extends MarkdownEditor
         
                 $fileContent = base64_decode(str_replace($result[1], '', $content));
                 $fileExt = $result[2];
-                $fileName = md5( $fileContent ) . "." . $fileExt;
+                $fileName = md5($file_content) . '.' . $fileExt;
                 $uploadedFileName = 'image' . '.' . $fileExt;
 
                 $file = new File();
