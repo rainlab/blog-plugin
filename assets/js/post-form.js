@@ -126,7 +126,7 @@
                     formData.append("_image", evt.target.result)
                     formData.append('_session_key', self.sessionKey)
 
-                    jQuery.ajax({
+                    $.ajax({
                         url: self.formAction,
                         type: "POST",
                         cache: false,
