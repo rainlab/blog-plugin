@@ -115,7 +115,7 @@
 
             var clipboardData = event.clipboardData;
 
-            if (clipboardData.types.indexOf('Files') != -1) {
+            if (clipboardData.types.indexOf('Files') !== -1) {
                 var file = clipboardData.items[0].getAsFile();
                 var reader = new FileReader();
                 reader.onload = function (evt) {
