@@ -123,7 +123,7 @@
 
                     var formData = new FormData()
                     formData.append('X_BLOG_IMAGE_UPLOAD', 1)
-                    formData.append("_image", evt.target.result)
+                    formData.append('_image', evt.target.result)
                     formData.append('_session_key', self.sessionKey)
 
                     $.ajax({
