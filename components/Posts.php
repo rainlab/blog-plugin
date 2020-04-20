@@ -201,7 +201,7 @@ class Posts extends ComponentBase
          */
         $isPublished = !$this->checkEditor();
 
-        $posts = BlogPost::with('categories')->listFrontEnd([
+        $posts = BlogPost::with(['categories', 'featured_images'])->listFrontEnd([
             'page'             => $this->property('pageNumber'),
             'sort'             => $this->property('sortOrder'),
             'perPage'          => $this->property('postsPerPage'),
