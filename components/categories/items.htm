@@ -1,7 +1,8 @@
 {% for category in categories %}
     {% set postCount = category.post_count %}
+    {% set url = parent ? parent.slug ~ '/' ~ category.slug : category.slug %}
     <li {% if category.slug == currentCategorySlug %}class="active"{% endif %}>
-        <a href="{{ category.url }}">{{ category.name }}</a> 
+        <a href="{{ url }}">{{ category.name }}</a> 
         {% if postCount %}
             <span class="badge">{{ postCount }}</span>
         {% endif %}
@@ -11,6 +12,7 @@
                 {% partial __SELF__ ~ "::items"
                     categories=category.children
                     currentCategorySlug=currentCategorySlug
+                    parent=category
                 %}
             </ul>
         {% endif %}
