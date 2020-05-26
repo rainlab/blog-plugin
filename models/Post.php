@@ -189,6 +189,12 @@ class Post extends Model
     {
         $result = Markdown::parse(trim($input));
 
+        // Check to see if the HTML should be cleaned from potential XSS
+        $user = BackendAuth::getUser();
+        if (!$user || !$user->hasAccess('backend.allow_unsafe_markdown')) {
+            $result = Html::clean($result);
+        }
+
         if ($preview) {
             $result = str_replace('<pre>', '<pre class="prettyprint">', $result);
         }
