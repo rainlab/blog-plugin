@@ -54,3 +54,4 @@
 1.3.5: Fixed missing user info from breaking initial seeder in migrations. Fixed a PostgreSQL issue with blog exports.
 1.3.6: Improved French translations.
 1.4.0: Stability improvements. Rollback custom slug names for components
+1.4.1: Fixes potential security issue with unsafe Markdown. Allow blog bylines to be translated.
