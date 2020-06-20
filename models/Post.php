@@ -152,17 +152,20 @@ class Post extends Model
      * Sets the "url" attribute with a URL to this object.
      * @param string $pageName
      * @param Controller $controller
+     * @param array $params Override request URL parameters
      *
      * @return string
      */
-    public function setUrl($pageName, $controller)
+    public function setUrl($pageName, $controller, $params = [])
     {
-        $params = [
-            'id'   => $this->id,
-            'slug' => $this->slug
-        ];
+        $category = $this->categories->count() ? $this->categories->first()->slug : null;
 
-        $params['category'] = $this->categories->count() ? $this->categories->first()->slug : null;
+        $params = array_merge( [
+            'id'        => $this->id,
+            'slug'      => $this->slug,
+            'category'  => $category,
+        ], $params);
+
 
         // Expose published year, month and day as URL parameters.
         if ($this->published) {

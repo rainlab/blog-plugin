@@ -195,6 +195,7 @@ class Posts extends ComponentBase
     protected function listPosts()
     {
         $category = $this->category ? $this->category->id : null;
+        $categorySlug = $this->category ? $this->category->slug : null;
 
         /*
          * List all the posts, eager load their categories
@@ -219,8 +220,8 @@ class Posts extends ComponentBase
         /*
          * Add a "url" helper attribute for linking to each post and category
          */
-        $posts->each(function($post) {
-            $post->setUrl($this->postPage, $this->controller);
+        $posts->each(function($post) use ($categorySlug) {
+            $post->setUrl($this->postPage, $this->controller, ['category'=>$categorySlug]);
 
             $post->categories->each(function($category) {
                 $category->setUrl($this->categoryPage, $this->controller);
