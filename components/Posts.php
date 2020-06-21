@@ -221,7 +221,7 @@ class Posts extends ComponentBase
          * Add a "url" helper attribute for linking to each post and category
          */
         $posts->each(function($post) use ($categorySlug) {
-            $post->setUrl($this->postPage, $this->controller, ['category'=>$categorySlug]);
+            $post->setUrl($this->postPage, $this->controller, ['category' => $categorySlug]);
 
             $post->categories->each(function($category) {
                 $category->setUrl($this->categoryPage, $this->controller);
