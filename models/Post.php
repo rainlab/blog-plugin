@@ -166,7 +166,6 @@ class Post extends Model
             'category'  => $category,
         ], $params);
 
-
         // Expose published year, month and day as URL parameters.
         if ($this->published) {
             $params['year']  = $this->published_at->format('Y');
