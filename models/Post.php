@@ -161,9 +161,9 @@ class Post extends Model
         $category = $this->categories->count() ? $this->categories->first()->slug : null;
 
         $params = array_merge([
-            'id'        => $this->id,
-            'slug'      => $this->slug,
-            'category'  => $category,
+            'id'       => $this->id,
+            'slug'     => $this->slug,
+            'category' => $category,
         ], $params);
 
         // Expose published year, month and day as URL parameters.
