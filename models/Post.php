@@ -158,13 +158,14 @@ class Post extends Model
      */
     public function setUrl($pageName, $controller, $params = [])
     {
-        $category = $this->categories->count() ? $this->categories->first()->slug : null;
-
         $params = array_merge([
             'id'       => $this->id,
             'slug'     => $this->slug,
-            'category' => $category,
         ], $params);
+
+        if (!$params['category']) {
+            $params['category'] = $this->categories->count() ? $this->categories->first()->slug : null;
+        }
 
         // Expose published year, month and day as URL parameters.
         if ($this->published) {
