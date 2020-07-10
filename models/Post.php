@@ -159,8 +159,8 @@ class Post extends Model
     public function setUrl($pageName, $controller, $params = [])
     {
         $params = array_merge([
-            'id'       => $this->id,
-            'slug'     => $this->slug,
+            'id'   => $this->id,
+            'slug' => $this->slug,
         ], $params);
 
         if (!$params['category']) {
