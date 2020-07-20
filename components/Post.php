@@ -87,7 +87,7 @@ class Post extends ComponentBase
     {
         $slug = $this->property('slug');
 
-        $post = BlogPost;
+        $post = new BlogPost;
         $query = $post->query();
 
         if ($post->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')) {
