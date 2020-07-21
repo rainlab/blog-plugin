@@ -55,3 +55,4 @@
 1.3.6: Improved French translations.
 1.4.0: Stability improvements. Rollback custom slug names for components
 1.4.1: Fixes potential security issue with unsafe Markdown. Allow blog bylines to be translated.
+1.4.2: Fix 404 redirects for missing blog posts. Assign current category to the listed posts when using the Posts component on a page with the category parameter available.
