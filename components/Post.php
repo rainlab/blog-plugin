@@ -5,7 +5,6 @@ use BackendAuth;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Post extends ComponentBase
 {
@@ -71,6 +70,10 @@ class Post extends ComponentBase
     {
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
         $this->post = $this->page['post'] = $this->loadPost();
+        if (!$this->post) {
+            $this->setStatusCode(404);
+            return $this->controller->run('404');
+        }
     }
 
     public function onRender()
@@ -85,26 +88,24 @@ class Post extends ComponentBase
         $slug = $this->property('slug');
 
         $post = new BlogPost;
+        $query = $post->query();
 
-        $post = $post->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')
-            ? $post->transWhere('slug', $slug)
-            : $post->where('slug', $slug);
+        if ($post->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')) {
+            $query->transWhere('slug', $slug);
+        } else {
+            $query->where('slug', $slug);
+        }
 
         if (!$this->checkEditor()) {
-            $post = $post->isPublished();
+            $query->isPublished();
         }
-
-        try {
-            $post = $post->firstOrFail();
-        } catch (ModelNotFoundException $ex) {
-            $this->setStatusCode(404);
-            return $this->controller->run('404');
-        }
+        
+        $post = $query->first();
 
         /*
          * Add a "url" helper attribute for linking to each category
          */
-        if ($post && $post->categories->count()) {
+        if ($post && $post->exists && $post->categories->count()) {
             $post->categories->each(function($category) {
                 $category->setUrl($this->categoryPage, $this->controller);
             });
