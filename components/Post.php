@@ -51,10 +51,16 @@ class Post extends ComponentBase
 
     public function init()
     {
-        Event::listen('translate.localePicker.translateParams', function ($page, $params, $oldLocale, $newLocale) {
+        $model = $this;
+        Event::listen('translate.localePicker.translateParams', function ($page, $params, $oldLocale, $newLocale) use ($model) {
             $newParams = $params;
 
             foreach ($params as $paramName => $paramValue) {
+                if (!Schema::hasColumn($model->table, $paramName)) {
+                    // skip non-existent parameters
+                    continue;
+                }
+
                 $records = BlogPost::transWhere($paramName, $paramValue, $oldLocale)->first();
 
                 if ($records) {
