@@ -52,12 +52,11 @@ class Post extends ComponentBase
 
     public function init()
     {
-        $model = $this;
-        Event::listen('translate.localePicker.translateParams', function ($page, $params, $oldLocale, $newLocale) use ($model) {
+        Event::listen('translate.localePicker.translateParams', function ($page, $params, $oldLocale, $newLocale) {
             $newParams = $params;
 
             foreach ($params as $paramName => $paramValue) {
-                if (!Schema::hasColumn($model->table, $paramName)) {
+                if (!Schema::hasColumn('rainlab_blog_posts', $paramName)) {
                     // skip non-existent parameters
                     continue;
                 }
