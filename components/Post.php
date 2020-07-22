@@ -2,6 +2,7 @@
 
 use Event;
 use BackendAuth;
+use Schema;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
