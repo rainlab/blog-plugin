@@ -2,7 +2,6 @@
 
 use Event;
 use BackendAuth;
-use Schema;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
@@ -55,19 +54,15 @@ class Post extends ComponentBase
         Event::listen('translate.localePicker.translateParams', function ($page, $params, $oldLocale, $newLocale) {
             $newParams = $params;
 
-            foreach ($params as $paramName => $paramValue) {
-                if (!Schema::hasColumn('rainlab_blog_posts', $paramName)) {
-                    // skip non-existent parameters
-                    continue;
-                }
-
-                $records = BlogPost::transWhere($paramName, $paramValue, $oldLocale)->first();
-
-                if ($records) {
+            if (isset($params['slug'])) {
+                $paramName = 'slug';
+                $paramValue = $params[$paramName];
+                if ($records = BlogPost::transWhere($paramName, $paramValue, $oldLocale)->first()) {
                     $records->translateContext($newLocale);
                     $newParams[$paramName] = $records[$paramName];
                 }
             }
+
             return $newParams;
         });
     }
