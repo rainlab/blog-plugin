@@ -163,7 +163,7 @@ class Post extends Model
             'slug' => $this->slug,
         ], $params);
 
-        if (!$params['category']) {
+        if (empty($params['category'])) {
             $params['category'] = $this->categories->count() ? $this->categories->first()->slug : null;
         }
 
