@@ -9,9 +9,9 @@ use RainLab\Blog\Models\Post;
 class Posts extends Controller
 {
     public $implement = [
-        'Backend.Behaviors.FormController',
-        'Backend.Behaviors.ListController',
-        'Backend.Behaviors.ImportExportController'
+        \Backend\Behaviors\FormController::class,
+        \Backend\Behaviors\ListController::class,
+        \Backend\Behaviors\ImportExportController::class
     ];
 
     public $formConfig = 'config_form.yaml';
