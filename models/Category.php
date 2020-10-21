@@ -3,8 +3,6 @@
 use Str;
 use Model;
 use Url;
-use RainLab\Blog\Models\Post;
-use October\Rain\Router\Helper as RouterHelper;
 use Cms\Classes\Page as CmsPage;
 use Cms\Classes\Theme;
 
