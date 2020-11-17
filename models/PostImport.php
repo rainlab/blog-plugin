@@ -73,7 +73,10 @@ class PostImport extends ImportModel
                 $except = ['id', 'categories', 'author_email'];
 
                 foreach (array_except($data, $except) as $attribute => $value) {
-                    $post->{$attribute} = $value ?: null;
+                    if (in_array($attribute, $post->getDates()) && empty($value)) {
+                        continue;
+                    }
+                    $post->{$attribute} = isset($value) ? $value : null;
                 }
 
                 if ($author = $this->findAuthorFromEmail($data)) {
