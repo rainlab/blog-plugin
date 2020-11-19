@@ -1,9 +1,6 @@
 <?php namespace RainLab\Blog\Models;
 
-use Db;
 use Url;
-use App;
-use Str;
 use Html;
 use Lang;
 use Model;
@@ -14,6 +11,7 @@ use Backend\Models\User;
 use Cms\Classes\Page as CmsPage;
 use Cms\Classes\Theme;
 use Cms\Classes\Controller;
+use October\Rain\Database\NestedTreeScope;
 use RainLab\Blog\Classes\TagProcessor;
 use ValidationException;
 
@@ -308,7 +306,7 @@ class Post extends Model
         if ($categories !== null) {
             $categories = is_array($categories) ? $categories : [$categories];
             $query->whereHas('categories', function($q) use ($categories) {
-                $q->whereIn('id', $categories);
+                $q->withoutGlobalScope(NestedTreeScope::class)->whereIn('id', $categories);
             });
         }
 
@@ -320,7 +318,7 @@ class Post extends Model
             array_walk($exceptCategories, 'trim');
 
             $query->whereDoesntHave('categories', function ($q) use ($exceptCategories) {
-                $q->whereIn('slug', $exceptCategories);
+                $q->withoutGlobalScope(NestedTreeScope::class)->whereIn('slug', $exceptCategories);
             });
         }
 
@@ -332,7 +330,7 @@ class Post extends Model
 
             $categories = $category->getAllChildrenAndSelf()->lists('id');
             $query->whereHas('categories', function($q) use ($categories) {
-                $q->whereIn('id', $categories);
+                $q->withoutGlobalScope(NestedTreeScope::class)->whereIn('id', $categories);
             });
         }
 
@@ -348,7 +346,7 @@ class Post extends Model
     public function scopeFilterCategories($query, $categories)
     {
         return $query->whereHas('categories', function($q) use ($categories) {
-            $q->whereIn('id', $categories);
+            $q->withoutGlobalScope(NestedTreeScope::class)->whereIn('id', $categories);
         });
     }
 
@@ -631,7 +629,7 @@ class Post extends Model
 
             $categories = $category->getAllChildrenAndSelf()->lists('id');
             $query->whereHas('categories', function($q) use ($categories) {
-                $q->whereIn('id', $categories);
+                $q->withoutGlobalScope(NestedTreeScope::class)->whereIn('id', $categories);
             });
 
             $posts = $query->get();
