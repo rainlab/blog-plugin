@@ -7,11 +7,14 @@
 
             <p class="info">
                 {% if post.categories.count %}
-                    {% set categoryLinks = post.categories | map(c => "<a href=\"#{c.url}\">#{c.name}</a>") | join(', ') %}
+                    {% set categoryLinks = [] %}
+                    {% for category in post.categories %}
+                        {% set categoryLinks = categoryLinks|merge(["<a href=\"#{category.url}\">#{category.name}</a>"]) %}
+                    {% endfor %}
 
                     {{ 'rainlab.blog::lang.post.posted_byline' | trans({
                         date: post.published_at | date('rainlab.blog::lang.post.date_format' | trans),
-                        categories: categoryLinks
+                        categories: categoryLinks | join(', ')
                     }) }}
                 {% else %}
                     {{ 'rainlab.blog::lang.post.posted_byline_no_categories' | trans({
