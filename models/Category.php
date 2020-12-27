@@ -256,7 +256,7 @@ class Category extends Model
                 'items' => []
             ];
 
-            $categories = self::orderBy('name')->get();
+            $categories = self::has('posts')->orderBy('name')->get();
             foreach ($categories as $category) {
                 $categoryItem = [
                     'title' => $category->name,
