@@ -256,7 +256,11 @@ class Category extends Model
                 'items' => []
             ];
 
-            $categories = self::has('posts')->orderBy('name')->get();
+            $categories = self::select(self::query()->qualifyColumn('*'))
+                ->leftJoin(self::posts()->getTable(), self::posts()->getQualifiedParentKeyName(), '=', self::posts()->getQualifiedForeignPivotKeyName())
+                ->leftJoin(self::posts()->getRelated()->getTable(), self::posts()->qualifyColumn(self::posts()->getRelatedKeyName()), '=', self::posts()->getQualifiedRelatedPivotKeyName())
+                ->where(\Closure::fromCallable([new Post, 'scopeIsPublished']))->orderBy('name')->get();
+            
             foreach ($categories as $category) {
                 $categoryItem = [
                     'title' => $category->name,
