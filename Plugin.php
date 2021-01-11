@@ -77,19 +77,22 @@ class Plugin extends PluginBase
                         'label'       => 'rainlab.blog::lang.posts.new_post',
                         'icon'        => 'icon-plus',
                         'url'         => Backend::url('rainlab/blog/posts/create'),
-                        'permissions' => ['rainlab.blog.access_posts']
+                        'permissions' => ['rainlab.blog.access_posts'],
+                        'order' => 1,
                     ],
                     'posts' => [
                         'label'       => 'rainlab.blog::lang.blog.posts',
                         'icon'        => 'icon-copy',
                         'url'         => Backend::url('rainlab/blog/posts'),
-                        'permissions' => ['rainlab.blog.access_posts']
+                        'permissions' => ['rainlab.blog.access_posts'],
+                        'order' => 2,
                     ],
                     'categories' => [
                         'label'       => 'rainlab.blog::lang.blog.categories',
                         'icon'        => 'icon-list-ul',
                         'url'         => Backend::url('rainlab/blog/categories'),
-                        'permissions' => ['rainlab.blog.access_categories']
+                        'permissions' => ['rainlab.blog.access_categories'],
+                        'order' => 3,
                     ]
                 ]
             ]
