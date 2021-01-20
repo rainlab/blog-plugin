@@ -67,7 +67,10 @@ return [
         'delete_confirm' => 'Valóban törölni akarja ezt a bejegyzést?',
         'delete_success' => 'Sikeresen törölve lettek a bejegyzések.',
         'close_confirm' => 'A bejegyzés nem került mentésre.',
-        'return_to_posts' => 'Vissza a bejegyzésekhez'
+        'return_to_posts' => 'Vissza a bejegyzésekhez',
+        'posted_byline' => 'Publikálva: :date, itt: :categories',
+        'posted_byline_no_categories' => 'Publikálva: :date.',
+        'date_format' => 'Y.M.d.',
     ],
     'categories' => [
         'list_title' => 'Blog kategóriák',
