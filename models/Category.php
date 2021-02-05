@@ -95,6 +95,37 @@ class Category extends Model
     }
 
     /**
+     * Scope to query for all categories containing published posts
+     */
+    public function scopeWherePublishedPosts($query)
+    {
+        return $query
+            // Select all columns
+            ->select(
+                self::query()->qualifyColumn('*')
+            )
+            // Left join the pivot table on category id
+            ->leftJoin(
+                self::posts()->getTable(),
+                self::posts()->getQualifiedParentKeyName(),
+                '=',
+                self::posts()->getQualifiedForeignPivotKeyName()
+            )
+            // Left join the posts table on post id
+            ->leftJoin(
+                self::posts()->getRelated()->getTable(),
+                self::posts()->qualifyColumn(self::posts()->getRelatedKeyName()),
+                '=',
+                self::posts()->getQualifiedRelatedPivotKeyName()
+            )
+            // Where a Post satisfies the isPublished scope constraints
+            ->where(
+                \Closure::fromCallable([new Post, 'scopeIsPublished'])
+            )
+        ;
+    }
+
+    /**
      * Handler for the pages.menuitem.getTypeInfo event.
      * Returns a menu item type information. The type information is returned as array
      * with the following elements:
@@ -256,10 +287,7 @@ class Category extends Model
                 'items' => []
             ];
 
-            $categories = self::select(self::query()->qualifyColumn('*'))
-                ->leftJoin(self::posts()->getTable(), self::posts()->getQualifiedParentKeyName(), '=', self::posts()->getQualifiedForeignPivotKeyName())
-                ->leftJoin(self::posts()->getRelated()->getTable(), self::posts()->qualifyColumn(self::posts()->getRelatedKeyName()), '=', self::posts()->getQualifiedRelatedPivotKeyName())
-                ->where(\Closure::fromCallable([new Post, 'scopeIsPublished']))->orderBy('name')->get();
+            $categories = self::wherePublishedPosts()->orderBy('name')->get();
             
             foreach ($categories as $category) {
                 $categoryItem = [
