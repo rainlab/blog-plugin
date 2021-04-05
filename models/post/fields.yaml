@@ -3,7 +3,6 @@
 # ===================================
 
 fields:
-
     title:
         label: rainlab.blog::lang.post.title
         span: left
@@ -48,8 +47,7 @@ secondaryTabs:
             tab: rainlab.blog::lang.post.tab_manage
             label: rainlab.blog::lang.post.published_by
             span: right
-            type: relation
-            nameFrom: login
+            type: dropdown
             emptyOption: rainlab.blog::lang.post.current_user
 
         published_at:

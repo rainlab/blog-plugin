@@ -7,7 +7,7 @@ use Model;
 use Markdown;
 use BackendAuth;
 use Carbon\Carbon;
-use Backend\Models\User;
+use Backend\Models\User as BackendUser;
 use Cms\Classes\Page as CmsPage;
 use Cms\Classes\Theme;
 use Cms\Classes\Controller;
@@ -78,20 +78,20 @@ class Post extends Model
      * Relations
      */
     public $belongsTo = [
-        'user' => ['Backend\Models\User']
+        'user' => BackendUser::class
     ];
 
     public $belongsToMany = [
         'categories' => [
-            'RainLab\Blog\Models\Category',
+            Category::class,
             'table' => 'rainlab_blog_posts_categories',
             'order' => 'name'
         ]
     ];
 
     public $attachMany = [
-        'featured_images' => ['System\Models\File', 'order' => 'sort_order'],
-        'content_images'  => ['System\Models\File']
+        'featured_images' => [\System\Models\File::class, 'order' => 'sort_order'],
+        'content_images'  => \System\Models\File::class
     ];
 
     /**
@@ -133,6 +133,17 @@ class Post extends Model
                'published_at' => Lang::get('rainlab.blog::lang.post.published_validation')
             ]);
         }
+    }
+
+    public function getUserOptions()
+    {
+        $options = [];
+
+        foreach (BackendUser::all() as $user) {
+            $options[$user->id] = $user->fullname . ' ('.$user->login.')';
+        }
+
+        return $options;
     }
 
     public function beforeSave()
@@ -178,10 +189,10 @@ class Post extends Model
     /**
      * Used to test if a certain user has permission to edit post,
      * returns TRUE if the user is the owner or has other posts access.
-     * @param  User $user
+     * @param  BackendUser $user
      * @return bool
      */
-    public function canEdit(User $user)
+    public function canEdit(BackendUser $user)
     {
         return ($this->user_id == $user->id) || $user->hasAnyAccess(['rainlab.blog.access_other_posts']);
     }
@@ -595,8 +606,9 @@ class Post extends Model
             ];
 
             $posts = self::isPublished()
-            ->orderBy('title')
-            ->get();
+                ->orderBy('title')
+                ->get()
+            ;
 
             foreach ($posts as $post) {
                 $postItem = [
