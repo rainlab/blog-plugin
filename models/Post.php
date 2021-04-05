@@ -4,6 +4,7 @@ use Url;
 use Html;
 use Lang;
 use Model;
+use Config;
 use Markdown;
 use BackendAuth;
 use Carbon\Carbon;
@@ -371,12 +372,13 @@ class Post extends Model
      */
     public function getHasSummaryAttribute()
     {
-        $more = '<!-- more -->';
+        $more = Config::get('rainlab.blog::summary_separator', '<!-- more -->');
+        $length = Config::get('rainlab.blog::summary_default_length', 600);
 
         return (
             !!strlen(trim($this->excerpt)) ||
             strpos($this->content_html, $more) !== false ||
-            strlen(Html::strip($this->content_html)) > 600
+            strlen(Html::strip($this->content_html)) > $length
         );
     }
 
@@ -394,14 +396,17 @@ class Post extends Model
             return $excerpt;
         }
 
-        $more = '<!-- more -->';
+        $more = Config::get('rainlab.blog::summary_separator', '<!-- more -->');
+
         if (strpos($this->content_html, $more) !== false) {
             $parts = explode($more, $this->content_html);
 
             return array_get($parts, 0);
         }
 
-        return Html::limit($this->content_html, 600);
+        $length = Config::get('rainlab.blog::summary_default_length', 600);
+
+        return Html::limit($this->content_html, $length);
     }
 
     //

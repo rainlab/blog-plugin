@@ -144,7 +144,7 @@ Use the `blogCategories` component to display a list of blog post categories wit
 
 The component injects the following variables to the page where it's used:
 
-* **categoryPage** - contains the value of the `categoryPage` component's property. 
+* **categoryPage** - contains the value of the `categoryPage` component's property.
 * **categories** - a list of blog categories loaded from the database.
 * **currentCategorySlug** - slug of the current category. This property is used for marking the current category in the category list.
 
@@ -183,6 +183,16 @@ The component can be used on any page, it will hijack the entire page cycle to d
     ==
     <!-- This markup will never be displayed -->
 
+## Configuration
+
+To overwrite the default configuration create a `config/rainlab/blog/config.php`. You can return only values you want to override.
+
+### Summary
+
+A summary attribute is generated for each post.
+
+If you enter an excerpt manually, it gets used as summary. Alternatively, you can use the `summary_separator` (default is `<!-- more -->`) to mark the end of the summary. If a post contains no separator, the text gets truncated after the number of characters specified in `summary_default_length` (default is 600 characters).
+
 ## Markdown guide
 
 October supports [standard markdown syntax](http://daringfireball.net/projects/markdown/) as well as [extended markdown syntax](http://michelf.ca/projects/php-markdown/extra/)
@@ -205,7 +215,7 @@ Markdown extra makes it possible to use fenced code blocks. With fenced code blo
     ```
     Code goes here
     ```
-    
+
 You can also use the `~` symbol:
 
     ~~~
@@ -219,8 +229,8 @@ A *simple* table can be defined as follows:
 ```
 First Header  | Second Header
 ------------- | -------------
-Content Cell  | Content Cell 
-Content Cell  | Content Cell 
+Content Cell  | Content Cell
+Content Cell  | Content Cell
 ```
 
 If you want to you can also add a leading and tailing pipe:
