@@ -226,7 +226,6 @@ class Category extends Model
             $result['mtime'] = $category->updated_at;
 
             if ($item->nesting) {
-                $categories = $category->getNested();
                 $iterator = function($categories) use (&$iterator, &$item, &$theme, $url) {
                     $branch = [];
 
@@ -248,7 +247,7 @@ class Category extends Model
                     return $branch;
                 };
 
-                $result['items'] = $iterator($categories);
+                $result['items'] = $iterator($category->children);
             }
         }
         elseif ($item->type == 'all-blog-categories') {
