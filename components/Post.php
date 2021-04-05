@@ -99,7 +99,7 @@ class Post extends ComponentBase
         if (!$this->checkEditor()) {
             $query->isPublished();
         }
-        
+
         $post = $query->first();
 
         /*

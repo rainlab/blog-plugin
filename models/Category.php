@@ -255,8 +255,16 @@ class Category extends Model
                 'items' => []
             ];
 
-            $categories = self::orderBy('name')->get();
+            $categories = self::with('posts_count')->orderBy('name')->get();
             foreach ($categories as $category) {
+                try {
+                    $postCount = $category->posts_count->first()->count ?? null;
+                    if ($postCount === 0) {
+                        continue;
+                    }
+                }
+                catch (\Exception $ex) {}
+
                 $categoryItem = [
                     'title' => $category->name,
                     'url'   => self::getCategoryPageUrl($item->cmsPage, $category, $theme),
