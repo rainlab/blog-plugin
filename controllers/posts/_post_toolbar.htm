@@ -28,6 +28,13 @@
         </a>
     <?php endif ?>
 
+    <!-- Cancel -->
+    <a
+        href="<?= Backend::url('rainlab/blog/posts') ?>"
+        class="btn btn-primary oc-icon-arrow-left cancel">
+            <?= e(trans('backend::lang.form.cancel')) ?>
+    </a>
+
     <!-- Preview -->
     <a
         href="<?= URL::to($pageUrl) ?>"
