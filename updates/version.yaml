@@ -58,3 +58,4 @@
 1.4.2: Fix 404 redirects for missing blog posts. Assign current category to the listed posts when using the Posts component on a page with the category parameter available.
 1.4.3: Fixes incompatibility with locale switching when plugin is used in conjunction with the Translate plugin. Fixes undefined category error.
 1.4.4: Rollback translated bylines, please move or override the default component markup instead.
+1.5.0: Implement support for October CMS v2.0
