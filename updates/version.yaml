@@ -59,3 +59,4 @@
 1.4.3: Fixes incompatibility with locale switching when plugin is used in conjunction with the Translate plugin. Fixes undefined category error.
 1.4.4: Rollback translated bylines, please move or override the default component markup instead.
 1.5.0: Implement support for October CMS v2.0
+1.5.1: Fixes interaction with Translate plugin
