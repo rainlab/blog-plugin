@@ -67,7 +67,10 @@ return [
         'delete_confirm' => 'Confirmez-vous la suppression de cet article ?',
         'delete_success' => 'Ces articles ont été supprimés avec succès.',
         'close_confirm' => 'L’article n’est pas enregistré.',
-        'return_to_posts' => 'Retour à la liste des articles'
+        'return_to_posts' => 'Retour à la liste des articles',
+        'posted_byline' => 'Posté dans :categories le :date.',
+        'posted_byline_no_categories' => 'Posté le :date.',
+        'date_format' => 'd M Y'
     ],
     'categories' => [
         'list_title' => 'Gérer les catégories',
