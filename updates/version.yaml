@@ -60,3 +60,4 @@
 1.4.4: Rollback translated bylines, please move or override the default component markup instead.
 1.5.0: Implement support for October CMS v2.0
 1.5.1: Fixes interaction with Translate plugin
+1.5.2: Minor styling improvements
