@@ -1,5 +1,6 @@
 <?php namespace RainLab\Blog\Components;
 
+use Event;
 use Db;
 use Carbon\Carbon;
 use Cms\Classes\Page;
@@ -59,6 +60,23 @@ class Categories extends ComponentBase
     public function getCategoryPageOptions()
     {
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+    }
+
+    public function init()
+    {
+        Event::listen('translate.localePicker.translateParams', function ($page, $params, $oldLocale, $newLocale) {
+            $newParams = $params;
+
+            if (isset($params['slug'])) {
+                $records = BlogCategory::transWhere('slug', $params['slug'], $oldLocale)->first();
+                if ($records) {
+                    $records->translateContext($newLocale);
+                    $newParams['slug'] = $records['slug'];
+                }
+            }
+
+            return $newParams;
+        });
     }
 
     public function onRun()
