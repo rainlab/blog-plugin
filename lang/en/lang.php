@@ -33,9 +33,9 @@ return [
         'filter_category' => 'Category',
         'filter_published' => 'Published',
         'filter_date' => 'Date',
-        'new_post' => 'New post',
-        'export_post' => 'Export posts',
-        'import_post' => 'Import posts'
+        'new_post' => 'New Post',
+        'export_post' => 'Export Posts',
+        'import_post' => 'Import Posts'
     ],
     'post' => [
         'title' => 'Title',
@@ -74,7 +74,7 @@ return [
     ],
     'categories' => [
         'list_title' => 'Manage the blog categories',
-        'new_category' => 'New category',
+        'new_category' => 'New Category',
         'uncategorized' => 'Uncategorized'
     ],
     'category' => [
