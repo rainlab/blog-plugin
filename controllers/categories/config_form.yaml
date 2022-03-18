@@ -3,7 +3,7 @@
 # ===================================
 
 name: rainlab.blog::lang.blog.create_category
-form: ~/plugins/rainlab/blog/models/category/fields.yaml
+form: $/rainlab/blog/models/category/fields.yaml
 modelClass: RainLab\Blog\Models\Category
 defaultRedirect: rainlab/blog/categories
 

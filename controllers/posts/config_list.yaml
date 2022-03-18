@@ -3,7 +3,10 @@
 # ===================================
 
 # Model List Column configuration
-list: ~/plugins/rainlab/blog/models/post/columns.yaml
+list: $/rainlab/blog/models/post/columns.yaml
+
+# Filter widget configuration
+filter: $/rainlab/blog/models/post/scopes.yaml
 
 # Model Class name
 modelClass: RainLab\Blog\Models\Post
@@ -42,6 +45,3 @@ toolbar:
     # Search widget configuration
     search:
         prompt: backend::lang.list.search_prompt
-
-# Filter widget configuration
-filter: config_filter.yaml
