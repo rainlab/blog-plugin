@@ -39,4 +39,5 @@ showTree: true
 structure:
     showTree: true
     showReorder: true
+    treeExpanded: true
     maxDepth: 0
