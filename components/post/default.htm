@@ -2,7 +2,7 @@
 
 <div class="content">{{ post.content_html|raw }}</div>
 
-{% if post.featured_images.count %}
+{% if post.featured_images|length %}
     <div class="featured-images text-center">
         {% for image in post.featured_images %}
             <p>
@@ -18,7 +18,7 @@
 
 <p class="info">
     Posted
-    {% if post.categories.count %} in
+    {% if post.categories|length %} in
         {% for category in post.categories %}
             <a href="{{ category.url }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
         {% endfor %}

@@ -7,7 +7,7 @@
 
             <p class="info">
                 Posted
-                {% if post.categories.count %} in {% endif %}
+                {% if post.categories|length %} in {% endif %}
                 {% for category in post.categories %}
                     <a href="{{ category.url }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
                 {% endfor %}
