@@ -24,7 +24,7 @@ return [
         'chart_drafts' => 'Drafts',
         'chart_total' => 'Total',
         'settings_description' => 'Manage blog settings',
-        'show_all_posts_label' => 'Show all posts to backend users',
+        'show_all_posts_label' => 'Show All Posts to Backend Users',
         'show_all_posts_comment' => 'Display both published and unpublished posts on the frontend to backend users',
         'use_legacy_editor_label' => 'Use the Legacy Markdown Editor',
         'use_legacy_editor_comment' => 'Enable the older version of the markdown editor when using October CMS v2 and above',
