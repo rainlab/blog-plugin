@@ -1,10 +1,11 @@
 <?php namespace RainLab\Blog\Controllers;
 
-use BackendMenu;
-use Flash;
 use Lang;
-use Backend\Classes\Controller;
+use Flash;
+use BackendMenu;
 use RainLab\Blog\Models\Post;
+use RainLab\Blog\Models\Settings as BlogSettings;
+use Backend\Classes\Controller;
 
 class Posts extends Controller
 {
@@ -85,6 +86,10 @@ class Posts extends Controller
 
         if ($model instanceof Post && $model->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')) {
             $widget->secondaryTabs['fields']['content']['type'] = 'RainLab\Blog\FormWidgets\MLBlogMarkdown';
+        }
+
+        if (BlogSettings::get('use_legacy_editor', false)) {
+            $widget->secondaryTabs['fields']['content']['legacyMode'] = true;
         }
     }
 

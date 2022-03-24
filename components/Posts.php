@@ -252,6 +252,8 @@ class Posts extends ComponentBase
     {
         $backendUser = BackendAuth::getUser();
 
-        return $backendUser && $backendUser->hasAccess('rainlab.blog.access_posts') && BlogSettings::get('show_all_posts', true);
+        return $backendUser &&
+            $backendUser->hasAccess('rainlab.blog.access_posts') &&
+            BlogSettings::get('show_all_posts', true);
     }
 }

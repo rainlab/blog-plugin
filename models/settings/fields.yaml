@@ -1,9 +1,17 @@
 tabs:
     fields:
         show_all_posts:
-            span: left
+            span: auto
             label: rainlab.blog::lang.blog.show_all_posts_label
             comment: rainlab.blog::lang.blog.show_all_posts_comment
             type: switch
             default: 1
+            tab: rainlab.blog::lang.blog.tab_general
+
+        use_legacy_editor:
+            span: auto
+            label: rainlab.blog::lang.blog.use_legacy_editor_label
+            comment: rainlab.blog::lang.blog.use_legacy_editor_comment
+            type: switch
+            default: 0
             tab: rainlab.blog::lang.blog.tab_general
