@@ -30,7 +30,7 @@ class Posts extends Controller
     /**
      * @var bool turboVisitControl
      */
-    public $turboVisitControl = 'reload';
+    public $turboVisitControl = 'disable';
 
     /**
      * __construct
