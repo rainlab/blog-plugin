@@ -63,3 +63,4 @@ v1.5.1: Fixes interaction with Translate plugin
 v1.5.2: Minor styling improvements
 v1.5.3: Adds setting to use legacy markdown editor
 v1.5.4: Compatibility with October CMS v2.2
+v1.5.5: Compatibility with October CMS v3.0

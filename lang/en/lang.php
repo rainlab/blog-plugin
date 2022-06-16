@@ -28,7 +28,8 @@ return [
         'show_all_posts_comment' => 'Display both published and unpublished posts on the frontend to backend users',
         'use_legacy_editor_label' => 'Use the Legacy Markdown Editor',
         'use_legacy_editor_comment' => 'Enable the older version of the markdown editor when using October CMS v2 and above',
-        'tab_general' => 'General'
+        'tab_general' => 'General',
+        'preview' => 'Preview'
     ],
     'posts' => [
         'list_title' => 'Manage the blog posts',

@@ -38,16 +38,12 @@ class PostImport extends ImportModel
     {
         $firstRow = reset($results);
 
-        /*
-         * Validation
-         */
+        //  Validation
         if ($this->auto_create_categories && !array_key_exists('categories', $firstRow)) {
             throw new ApplicationException('Please specify a match for the Categories column.');
         }
 
-        /*
-         * Import
-         */
+        // Import
         foreach ($results as $row => $data) {
             try {
 
@@ -56,9 +52,7 @@ class PostImport extends ImportModel
                     continue;
                 }
 
-                /*
-                 * Find or create
-                 */
+                // Find or create
                 $post = Post::make();
 
                 if ($this->update_existing) {
@@ -67,9 +61,7 @@ class PostImport extends ImportModel
 
                 $postExists = $post->exists;
 
-                /*
-                 * Set attributes
-                 */
+                // Set attributes
                 $except = ['id', 'categories', 'author_email'];
 
                 foreach (array_except($data, $except) as $attribute => $value) {
@@ -89,9 +81,7 @@ class PostImport extends ImportModel
                     $post->categories()->sync($categoryIds, false);
                 }
 
-                /*
-                 * Log results
-                 */
+                // Log results
                 if ($postExists) {
                     $this->logUpdated();
                 }

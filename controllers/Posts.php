@@ -7,6 +7,9 @@ use RainLab\Blog\Models\Post;
 use RainLab\Blog\Models\Settings as BlogSettings;
 use Backend\Classes\Controller;
 
+/**
+ * Posts
+ */
 class Posts extends Controller
 {
     public $implement = [
@@ -19,8 +22,19 @@ class Posts extends Controller
     public $listConfig = 'config_list.yaml';
     public $importExportConfig = 'config_import_export.yaml';
 
+    /**
+     * @var array requiredPermissions
+     */
     public $requiredPermissions = ['rainlab.blog.access_other_posts', 'rainlab.blog.access_posts'];
 
+    /**
+     * @var bool turboVisitControl
+     */
+    public $turboVisitControl = 'reload';
+
+    /**
+     * __construct
+     */
     public function __construct()
     {
         parent::__construct();
