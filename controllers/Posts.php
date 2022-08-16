@@ -98,7 +98,8 @@ class Posts extends Controller
             return;
         }
 
-        if ($model instanceof Post && $model->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')) {
+        // Support for October CMS 3.0 and below
+        if (!class_exists('Site') && $model instanceof Post && $model->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')) {
             $widget->secondaryTabs['fields']['content']['type'] = 'RainLab\Blog\FormWidgets\MLBlogMarkdown';
         }
 
