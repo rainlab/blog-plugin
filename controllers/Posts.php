@@ -6,6 +6,8 @@ use BackendMenu;
 use RainLab\Blog\Models\Post;
 use RainLab\Blog\Models\Settings as BlogSettings;
 use Backend\Classes\Controller;
+use Cms\Classes\Controller as CmsController;
+use Cms\Classes\Theme;
 
 /**
  * Posts
@@ -68,7 +70,18 @@ class Posts extends Controller
         $this->addCss('/plugins/rainlab/blog/assets/css/rainlab.blog-preview.css');
         $this->addJs('/plugins/rainlab/blog/assets/js/post-form.js');
 
-        return $this->asExtension('FormController')->update($recordId);
+        $result = $this->asExtension('FormController')->update($recordId);
+
+        // Set pageUrl
+        if (!empty($model = $this->vars['formModel'])) {
+            if (!empty($cmsPage = BlogSettings::get('preview_cms_page'))) {
+                $ctrl = new CmsController(Theme::getActiveTheme());
+                $model->setUrl($cmsPage, $ctrl);
+                $this->vars['pageUrl'] = $model->url;
+            }
+        }
+
+        return $result;
     }
 
     public function export()

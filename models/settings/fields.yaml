@@ -15,3 +15,10 @@ tabs:
             type: switch
             default: 0
             tab: rainlab.blog::lang.blog.tab_general
+
+        preview_cms_page:
+            span: auto
+            label: rainlab.blog::lang.blog.preview_cms_page_label
+            comment: rainlab.blog::lang.blog.preview_cms_page_comment
+            type: dropdown
+            tab: rainlab.blog::lang.blog.tab_general
