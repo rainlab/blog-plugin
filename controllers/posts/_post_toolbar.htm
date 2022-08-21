@@ -39,7 +39,7 @@
     <a
         href="<?= Url::to($pageUrl) ?>"
         target="_blank"
-        class="btn btn-primary oc-icon-crosshairs <?php if (!false): ?>hide oc-hide<?php endif ?>"
+        class="btn btn-primary oc-icon-crosshairs <?php if (empty($pageUrl)): ?>hide oc-hide<?php endif ?>"
         data-control="preview-button">
             <?= e(trans('rainlab.blog::lang.blog.preview')) ?>
     </a>
