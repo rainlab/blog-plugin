@@ -20,7 +20,7 @@ class Settings extends Model
 
     /**
      * Get Preview CMS Page dropdown options
-     * 
+     *
      * @return array
      */
     public function getPreviewCmsPageOptions()
@@ -50,7 +50,7 @@ class Settings extends Model
 
             $result[$baseName] = strlen($page->title) ? $dir.$page->title : $baseName;
         }
-        
+
         return $result;
     }
 }

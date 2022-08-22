@@ -71,17 +71,23 @@ class Posts extends Controller
         $this->addJs('/plugins/rainlab/blog/assets/js/post-form.js');
 
         $result = $this->asExtension('FormController')->update($recordId);
-
-        // Set pageUrl
-        if (!empty($model = $this->vars['formModel'])) {
-            if (!empty($cmsPage = BlogSettings::get('preview_cms_page'))) {
-                $ctrl = new CmsController(Theme::getActiveTheme());
-                $model->setUrl($cmsPage, $ctrl);
-                $this->vars['pageUrl'] = $model->url;
-            }
-        }
-
+        $this->setPreviewPageUrlVars();
         return $result;
+    }
+
+    /**
+     * setPreviewPageUrlVars
+     */
+    protected function setPreviewPageUrlVars()
+    {
+        if (
+            ($model = $this->formGetModel()) &&
+            ($cmsPage = BlogSettings::get('preview_cms_page'))
+        ) {
+            $controller = new CmsController(Theme::getActiveTheme());
+            $model->setUrl($cmsPage, $controller);
+            $this->vars['pageUrl'] = $model->url;
+        }
     }
 
     public function export()
