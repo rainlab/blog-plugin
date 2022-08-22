@@ -128,7 +128,7 @@ class Plugin extends PluginBase
             return preg_replace('|\<img src="image" alt="([0-9]+)"([^>]*)\/>|m',
                 '<span class="image-placeholder" data-index="$1">
                     <span class="upload-dropzone">
-                        <span class="label">Click or drop an image...</span>
+                        <span class="label">'. trans('rainlab.blog::lang.post.dropzone') .'</span>
                         <span class="indicator"></span>
                     </span>
                 </span>',

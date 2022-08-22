@@ -76,6 +76,7 @@ return [
         'posted_byline' => 'Veröffentlicht in :categories am :date',
         'posted_byline_no_categories' => 'Veröffentlicht am :date',
         'date_format' => 'd. F Y',
+        'dropzone' => 'Klicken oder Bild hier ablegen...'
     ],
     'categories' => [
         'list_title' => 'Blog Kategorien verwalten',
