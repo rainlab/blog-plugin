@@ -37,7 +37,7 @@ return [
         'list_title' => 'Blog Artikel verwalten',
         'filter_category' => 'Kategorie',
         'filter_published' => 'Veröffentlichte ausblenden',
-        'filter_date' => 'Date',
+        'filter_date' => 'Datum',
         'new_post' => 'Neuer Artikel',
         'export_post' => 'Exportiere Artikel',
         'import_post' => 'Importiere Artikel'
