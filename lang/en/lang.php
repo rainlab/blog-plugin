@@ -76,6 +76,7 @@ return [
         'posted_byline' => 'Posted in :categories on :date.',
         'posted_byline_no_categories' => 'Posted on :date.',
         'date_format' => 'M d, Y',
+        'dropzone' => 'Click or drop an image...'
     ],
     'categories' => [
         'list_title' => 'Manage the blog categories',
