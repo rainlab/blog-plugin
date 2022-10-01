@@ -77,20 +77,21 @@
             })
             dropzone.on('success', function(file, data){
                 if (data.error)
-                    alert(data.error)
+                    alert(data.error);
                 else {
-                    self.pauseUpdates()
-                    var $img = $('<img src="'+data.path+'">')
-                    $img.load(function(){
-                        self.updateScroll()
-                    })
+                    self.pauseUpdates();
+                    var $img = $('<img src="'+data.path+'" />');
+                    $img.one('load', function(){
+                        self.updateScroll();
+                    });
 
-                    $placeholder.replaceWith($img)
+                    $placeholder.replaceWith($img);
 
                     self.codeEditor.replace('!['+data.file+']('+data.path+')', {
                         needle: '!['+placeholderIndex+'](image)'
-                    })
-                    self.resumeUpdates()
+                    });
+
+                    self.resumeUpdates();
                 }
             })
             dropzone.on('complete', function(){
