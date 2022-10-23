@@ -127,6 +127,24 @@ class Post extends Model
         }
     }
 
+    /**
+     * beforeValidate
+     */
+    public function beforeValidate()
+    {
+        if (empty($this->user)) {
+            $user = BackendAuth::getUser();
+            if (!is_null($user)) {
+                $this->user = $user->id;
+            }
+        }
+
+        $this->content_html = self::formatHtml($this->content);
+    }
+
+    /**
+     * afterValidate
+     */
     public function afterValidate()
     {
         if ($this->published && !$this->published_at) {
@@ -136,6 +154,9 @@ class Post extends Model
         }
     }
 
+    /**
+     * getUserOptions
+     */
     public function getUserOptions()
     {
         $options = [];
@@ -145,17 +166,6 @@ class Post extends Model
         }
 
         return $options;
-    }
-
-    public function beforeSave()
-    {
-        if (empty($this->user)) {
-            $user = BackendAuth::getUser();
-            if (!is_null($user)) {
-                $this->user = $user->id;
-            }
-        }
-        $this->content_html = self::formatHtml($this->content);
     }
 
     /**

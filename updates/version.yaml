@@ -66,3 +66,4 @@ v1.5.4: Compatibility with October CMS v2.2
 v1.5.6: Compatibility with October CMS v3.0
 v1.6.0: Adds preview CMS page to settings and preview button to posts page
 v1.6.1: Fixes JS error when uploading images in newer versions
+v1.6.2: Fixes content_html attribute compatibility with Translate
