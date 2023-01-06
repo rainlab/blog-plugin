@@ -64,6 +64,22 @@ class Post extends ComponentBase
 
             return $newParams;
         });
+
+        Event::listen('cms.sitePicker.overrideParams', function ($page, $params, $currentSite, $proposedSite) {
+            $newParams = $params;
+            $oldLocale = $currentSite->hard_locale;
+            $newLocale = $proposedSite->hard_locale;
+
+            if (isset($params['slug'])) {
+                $records = BlogPost::transWhere('slug', $params['slug'], $oldLocale)->first();
+                if ($records) {
+                    $records->translateContext($newLocale);
+                    $newParams['slug'] = $records['slug'];
+                }
+            }
+
+            return $newParams;
+        });
     }
 
     public function onRun()
