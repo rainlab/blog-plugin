@@ -96,11 +96,11 @@ return [
         'reorder' => 'Reorder Categories'
     ],
     'menuitem' => [
-        'blog_category' => 'Blog category',
-        'all_blog_categories' => 'All blog categories',
-        'blog_post' => 'Blog post',
-        'all_blog_posts' => 'All blog posts',
-        'category_blog_posts' => 'Blog category posts'
+        'blog_category' => 'Blog Category',
+        'all_blog_categories' => 'All Blog Categories',
+        'blog_post' => 'Blog Post',
+        'all_blog_posts' => 'All Blog Posts',
+        'category_blog_posts' => 'Blog Category Posts'
     ],
     'settings' => [
         'category_title' => 'Category List',

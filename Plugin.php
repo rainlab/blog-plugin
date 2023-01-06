@@ -141,7 +141,7 @@ class Plugin extends PluginBase
         /*
          * Register menu items for the RainLab.Pages plugin
          */
-        Event::listen('pages.menuitem.listTypes', function() {
+        Event::listen(['cms.pageLookup.listTypes', 'pages.menuitem.listTypes'], function() {
             return [
                 'blog-category'       => 'rainlab.blog::lang.menuitem.blog_category',
                 'all-blog-categories' => 'rainlab.blog::lang.menuitem.all_blog_categories',
@@ -151,7 +151,7 @@ class Plugin extends PluginBase
             ];
         });
 
-        Event::listen('pages.menuitem.getTypeInfo', function($type) {
+        Event::listen(['cms.pageLookup.getTypeInfo', 'pages.menuitem.getTypeInfo'], function($type) {
             if ($type == 'blog-category' || $type == 'all-blog-categories') {
                 return Category::getMenuTypeInfo($type);
             }
@@ -160,7 +160,7 @@ class Plugin extends PluginBase
             }
         });
 
-        Event::listen('pages.menuitem.resolveItem', function($type, $item, $url, $theme) {
+        Event::listen(['cms.pageLookup.resolveItem', 'pages.menuitem.resolveItem'], function($type, $item, $url, $theme) {
             if ($type == 'blog-category' || $type == 'all-blog-categories') {
                 return Category::resolveMenuItem($item, $url, $theme);
             }
