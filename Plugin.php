@@ -141,7 +141,17 @@ class Plugin extends PluginBase
         /*
          * Register menu items for the RainLab.Pages plugin
          */
-        Event::listen(['cms.pageLookup.listTypes', 'pages.menuitem.listTypes'], function() {
+        Event::listen('cms.pageLookup.listTypes', function() {
+            return [
+                'blog-category'       => 'rainlab.blog::lang.menuitem.blog_category',
+                'all-blog-categories' => ['rainlab.blog::lang.menuitem.all_blog_categories', true],
+                'blog-post'           => 'rainlab.blog::lang.menuitem.blog_post',
+                'all-blog-posts'      => ['rainlab.blog::lang.menuitem.all_blog_posts', true],
+                'category-blog-posts' => ['rainlab.blog::lang.menuitem.category_blog_posts', true],
+            ];
+        });
+
+        Event::listen('pages.menuitem.listTypes', function() {
             return [
                 'blog-category'       => 'rainlab.blog::lang.menuitem.blog_category',
                 'all-blog-categories' => 'rainlab.blog::lang.menuitem.all_blog_categories',
