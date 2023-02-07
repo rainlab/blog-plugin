@@ -23,11 +23,10 @@ tabs:
             type: dropdown
             tab: rainlab.blog::lang.blog.tab_general
 
-        use_richeditor_editor:
+        force_richeditor_editor:
             span: auto
-            label: rainlab.blog::lang.blog.use_richeditor_editor_label
-            comment: rainlab.blog::lang.blog.use_richeditor_editor_comment
+            label: rainlab.blog::lang.blog.force_richeditor_editor_label
+            comment: rainlab.blog::lang.blog.force_richeditor_editor_comment
             type: switch
             default: 0
             tab: rainlab.blog::lang.blog.tab_general
-

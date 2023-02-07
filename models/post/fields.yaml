@@ -26,8 +26,7 @@ secondaryTabs:
     fields:
         content:
             tab: rainlab.blog::lang.post.tab_edit
-            # type: RainLab\Blog\FormWidgets\BlogMarkdown
-            type: richeditor
+            type: RainLab\Blog\FormWidgets\BlogMarkdown
             cssClass: field-slim blog-post-preview
             stretch: true
             mode: split

@@ -125,6 +125,11 @@ class Posts extends Controller
         if (BlogSettings::get('use_legacy_editor', false)) {
             $widget->secondaryTabs['fields']['content']['legacyMode'] = true;
         }
+
+        // Force richeditor by settings
+        if ($model instanceof Post && BlogSettings::get('force_richeditor_editor', false)) {
+            $widget->secondaryTabs['fields']['content']['type'] = 'richeditor';
+        }
     }
 
     public function index_onDelete()
