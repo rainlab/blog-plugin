@@ -22,6 +22,17 @@ return [
         'chart_published' => 'Publikované',
         'chart_drafts' => 'Návrhy',
         'chart_total' => 'Celkem',
+        'settings_description' => 'Správa nastavení blogu',
+        'show_all_posts_label' => 'Zobrazit všechny příspěvky uživatelům na pozadí',
+        'show_all_posts_comment' => 'Zobrazit publikované i nepublikované příspěvky na frontend uživatelům backendu',
+        'use_legacy_editor_label' => 'Použít starší editor Markdown',
+        'use_legacy_editor_comment' => 'Povolit starší verzi editoru markdown při použití systému October CMS v2 a vyšší',
+        'force_richeditor_editor_label' => 'Vynutit WYSIWYG editor',
+        'force_richeditor_editor_comment' => 'Použít běžný richtextový editor místo editoru Markdown',
+        'preview_cms_page_label' => 'Náhled stránky CMS',
+        'preview_cms_page_comment' => 'Vyberte stránku, která se otevře pro tlačítko Náhled',
+        'tab_general' => 'Obecné',
+        'preview' => 'Náhled'
     ],
     'posts' => [
         'list_title' => 'Správa blogových příspěvků',
