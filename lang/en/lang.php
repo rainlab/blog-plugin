@@ -28,6 +28,8 @@ return [
         'show_all_posts_comment' => 'Display both published and unpublished posts on the frontend to backend users',
         'use_legacy_editor_label' => 'Use the Legacy Markdown Editor',
         'use_legacy_editor_comment' => 'Enable the older version of the markdown editor when using October CMS v2 and above',
+        'force_richeditor_editor_label' => 'Force the WYSIWYG editor',
+        'force_richeditor_editor_comment' => 'Use common richtext editor instead of the Markdown editor',
         'preview_cms_page_label' => 'Preview CMS Page',
         'preview_cms_page_comment' => 'Select a page to open for the Preview button',
         'tab_general' => 'General',
