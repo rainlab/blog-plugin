@@ -68,3 +68,4 @@ v1.6.0: Adds preview CMS page to settings and preview button to posts page
 v1.6.1: Fixes JS error when uploading images in newer versions
 v1.6.2: Fixes content_html attribute compatibility with Translate
 v1.6.3: Adds page finder support for October v3.2
+v1.7.0: Adds setting for editing posts with rich editor
