@@ -30,6 +30,7 @@ secondaryTabs:
             cssClass: field-slim blog-post-preview
             stretch: true
             mode: split
+            sideBySide: true
 
         categories:
             tab: rainlab.blog::lang.post.tab_categories
