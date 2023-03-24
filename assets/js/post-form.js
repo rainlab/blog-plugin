@@ -14,6 +14,7 @@
 
             this.initDropzones()
             this.initFormEvents()
+            this.initImagePasting()
             this.addToolbarButton()
         }
 
@@ -103,6 +104,48 @@
                 $placeholder.addClass('loading')
             })
         })
+    }
+
+    PostForm.prototype.initImagePasting = function() {
+        var self = this
+
+        self.$markdownEditor.bind('paste', function (event) {
+            if (event.type.indexOf('copy') === 0 || event.type.indexOf('paste') === 0) {
+                event.clipboardData = event.originalEvent.clipboardData
+            }
+
+            var clipboardData = event.clipboardData
+
+            if (clipboardData.types.indexOf('Files') != -1) {
+                var file = clipboardData.items[0].getAsFile()
+                var reader = new FileReader()
+                reader.onload = function (evt) {
+                    self.pauseUpdates()
+
+                    var formData = new FormData()
+                    formData.append('X_BLOG_IMAGE_UPLOAD', 1)
+                    formData.append('_image', evt.target.result)
+                    formData.append('_session_key', self.sessionKey)
+
+                    $.ajax({
+                        url: self.formAction,
+                        type: 'POST',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: formData
+                    })
+                    .done(function(response) {
+                        self.resumeUpdates()
+                        self.codeEditor.insertSnippet('!['+response.file+']('+response.path+')')
+                    })
+                    .fail(function(response) {
+                        self.resumeUpdates()
+                    });
+                };
+                reader.readAsDataURL(file)
+            }
+        });
     }
 
     PostForm.prototype.pauseUpdates = function() {
