@@ -14,6 +14,7 @@ use Cms\Classes\Theme;
 use Cms\Classes\Controller;
 use October\Rain\Database\NestedTreeScope;
 use RainLab\Blog\Classes\TagProcessor;
+use RainLab\Blog\Models\Settings as BlogSettings;
 use ValidationException;
 
 /**
@@ -208,9 +209,17 @@ class Post extends Model
         return ($this->user_id == $user->id) || $user->hasAnyAccess(['rainlab.blog.access_other_posts']);
     }
 
+    /**
+     * formatHtml for the post
+     */
     public static function formatHtml($input, $preview = false)
     {
-        $result = Markdown::parse(trim($input));
+        if (BlogSettings::get('force_richeditor_editor', false)) {
+            $result = trim($input);
+        }
+        else {
+            $result = Markdown::parse(trim($input));
+        }
 
         // Check to see if the HTML should be cleaned from potential XSS
         $user = BackendAuth::getUser();
