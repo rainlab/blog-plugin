@@ -79,31 +79,48 @@ class BlogMarkdown extends MarkdownEditor
         $uploadedFileName = null;
 
         try {
-            $uploadedFile = Input::file('file');
 
-            if ($uploadedFile)
-                $uploadedFileName = $uploadedFile->getClientOriginalName();
+            if (Input::has('file')) {
+                $uploadedFile = Input::file('file');
 
-            $validationRules = ['max:'.File::getMaxFilesize()];
-            $validationRules[] = 'mimes:jpg,jpeg,bmp,png,gif';
+                if ($uploadedFile) {
+                    $uploadedFileName = $uploadedFile->getClientOriginalName();
+                }
 
-            $validation = Validator::make(
-                ['file_data' => $uploadedFile],
-                ['file_data' => $validationRules]
-            );
+                $validationRules = ['max:'.File::getMaxFilesize()];
+                $validationRules[] = 'mimes:jpg,jpeg,bmp,png,gif';
 
-            if ($validation->fails()) {
-                throw new ValidationException($validation);
-            }
+                $validation = Validator::make(
+                    ['file_data' => $uploadedFile],
+                    ['file_data' => $validationRules]
+                );
 
-            if (!$uploadedFile->isValid()) {
-                throw new SystemException(Lang::get('cms::lang.asset.file_not_valid'));
+                if ($validation->fails()) {
+                    throw new ValidationException($validation);
+                }
+
+                if (!$uploadedFile->isValid()) {
+                    throw new SystemException(Lang::get('cms::lang.asset.file_not_valid'));
+                }
+
+                $file = new File();
+                $file->data = $uploadedFile;
+            } elseif (Input::has('_image')) {
+                $content = Input::get('_image');
+
+                preg_match('/^(data:\s*image\/(\w+);base64,)/', $content, $result);
+        
+                $fileContent = base64_decode(str_replace($result[1], '', $content));
+                $fileExt = $result[2];
+                $fileName = md5($file_content) . '.' . $fileExt;
+                $uploadedFileName = 'image' . '.' . $fileExt;
+
+                $file = new File();
+                $file->fromData($fileContent, $fileName);
             }
 
             $fileRelation = $this->model->content_images();
 
-            $file = new File();
-            $file->data = $uploadedFile;
             $file->is_public = true;
             $file->save();
 
