@@ -274,6 +274,9 @@ class Post extends Model
             'exceptPost'       => null
         ], $options));
 
+        $page = (int) $page;
+        $perPage = (int) $perPage;
+
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
 
         if ($published) {
