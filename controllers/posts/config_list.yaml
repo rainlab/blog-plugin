@@ -12,7 +12,7 @@ filter: $/rainlab/blog/models/post/scopes.yaml
 modelClass: RainLab\Blog\Models\Post
 
 # List Title
-title: rainlab.blog::lang.posts.list_title
+title: Manage the blog posts
 
 # Link URL for each record
 recordUrl: rainlab/blog/posts/update/:id

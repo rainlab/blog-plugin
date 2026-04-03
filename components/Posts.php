@@ -65,8 +65,8 @@ class Posts extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'rainlab.blog::lang.settings.posts_title',
-            'description' => 'rainlab.blog::lang.settings.posts_description'
+            'name'        => "Post List",
+            'description' => "Displays a list of latest blog posts on the page.",
         ];
     }
 
@@ -74,68 +74,68 @@ class Posts extends ComponentBase
     {
         return [
             'pageNumber' => [
-                'title'       => 'rainlab.blog::lang.settings.posts_pagination',
-                'description' => 'rainlab.blog::lang.settings.posts_pagination_description',
+                'title'       => "Page number",
+                'description' => "This value is used to determine what page the user is on.",
                 'type'        => 'string',
                 'default'     => '{{ :page }}',
             ],
             'categoryFilter' => [
-                'title'       => 'rainlab.blog::lang.settings.posts_filter',
-                'description' => 'rainlab.blog::lang.settings.posts_filter_description',
+                'title'       => "Category filter",
+                'description' => "Enter a category slug or URL parameter to filter the posts by. Leave empty to show all posts.",
                 'type'        => 'string',
                 'default'     => '',
             ],
             'postsPerPage' => [
-                'title'             => 'rainlab.blog::lang.settings.posts_per_page',
+                'title'             => "Posts per page",
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'rainlab.blog::lang.settings.posts_per_page_validation',
+                'validationMessage' => "Invalid format of the posts per page value",
                 'default'           => '10',
             ],
             'noPostsMessage' => [
-                'title'             => 'rainlab.blog::lang.settings.posts_no_posts',
-                'description'       => 'rainlab.blog::lang.settings.posts_no_posts_description',
+                'title'             => "No posts message",
+                'description'       => "Message to display in the blog post list in case if there are no posts. This property is used by the default component partial.",
                 'type'              => 'string',
-                'default'           => Lang::get('rainlab.blog::lang.settings.posts_no_posts_default'),
+                'default'           => __("No posts found"),
                 'showExternalParam' => false,
             ],
             'sortOrder' => [
-                'title'       => 'rainlab.blog::lang.settings.posts_order',
-                'description' => 'rainlab.blog::lang.settings.posts_order_description',
+                'title'       => "Post order",
+                'description' => "Attribute on which the posts should be ordered",
                 'type'        => 'dropdown',
                 'default'     => 'published_at desc',
             ],
             'categoryPage' => [
-                'title'       => 'rainlab.blog::lang.settings.posts_category',
-                'description' => 'rainlab.blog::lang.settings.posts_category_description',
+                'title'       => "Category page",
+                'description' => "Name of the category page file for the \"Posted into\" category links. This property is used by the default component partial.",
                 'type'        => 'dropdown',
                 'default'     => 'blog/category',
-                'group'       => 'rainlab.blog::lang.settings.group_links',
+                'group'       => "Links",
             ],
             'postPage' => [
-                'title'       => 'rainlab.blog::lang.settings.posts_post',
-                'description' => 'rainlab.blog::lang.settings.posts_post_description',
+                'title'       => "Post page",
+                'description' => "Name of the blog post page file for the \"Learn more\" links. This property is used by the default component partial.",
                 'type'        => 'dropdown',
                 'default'     => 'blog/post',
-                'group'       => 'rainlab.blog::lang.settings.group_links',
+                'group'       => "Links",
             ],
             'exceptPost' => [
-                'title'             => 'rainlab.blog::lang.settings.posts_except_post',
-                'description'       => 'rainlab.blog::lang.settings.posts_except_post_description',
+                'title'             => "Except post",
+                'description'       => "Enter ID/URL or variable with post ID/URL you want to exclude. You may use a comma-separated list to specify multiple posts.",
                 'type'              => 'string',
                 'validationPattern' => '^[a-z0-9\-_,\s]+$',
-                'validationMessage' => 'rainlab.blog::lang.settings.posts_except_post_validation',
+                'validationMessage' => "Post exceptions must be a single slug or ID, or a comma-separated list of slugs and IDs",
                 'default'           => '',
-                'group'             => 'rainlab.blog::lang.settings.group_exceptions',
+                'group'             => "Exceptions",
             ],
             'exceptCategories' => [
-                'title'             => 'rainlab.blog::lang.settings.posts_except_categories',
-                'description'       => 'rainlab.blog::lang.settings.posts_except_categories_description',
+                'title'             => "Except categories",
+                'description'       => "Enter a comma-separated list of category slugs or variable with such a list of categories you want to exclude",
                 'type'              => 'string',
                 'validationPattern' => '^[a-z0-9\-_,\s]+$',
-                'validationMessage' => 'rainlab.blog::lang.settings.posts_except_categories_validation',
+                'validationMessage' => "Category exceptions must be a single category slug, or a comma-separated list of slugs",
                 'default'           => '',
-                'group'             => 'rainlab.blog::lang.settings.group_exceptions',
+                'group'             => "Exceptions",
             ],
         ];
     }

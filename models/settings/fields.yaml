@@ -2,31 +2,31 @@ tabs:
     fields:
         show_all_posts:
             span: full
-            label: rainlab.blog::lang.blog.show_all_posts_label
-            comment: rainlab.blog::lang.blog.show_all_posts_comment
+            label: Show All Posts to Backend Users
+            comment: Display both published and unpublished posts on the frontend to backend users
             type: switch
             default: 1
-            tab: rainlab.blog::lang.blog.tab_general
+            tab: General
 
         preview_cms_page:
             span: full
-            label: rainlab.blog::lang.blog.preview_cms_page_label
-            comment: rainlab.blog::lang.blog.preview_cms_page_comment
+            label: Preview CMS Page
+            comment: Select a page to open for the Preview button
             type: dropdown
-            tab: rainlab.blog::lang.blog.tab_general
+            tab: General
 
         use_legacy_editor:
             span: full
-            label: rainlab.blog::lang.blog.use_legacy_editor_label
-            comment: rainlab.blog::lang.blog.use_legacy_editor_comment
+            label: Use the Legacy Markdown Editor
+            comment: Enable the older version of the markdown editor when using October CMS v2 and above
             type: switch
             default: 0
-            tab: rainlab.blog::lang.blog.tab_general
+            tab: General
 
         force_richeditor_editor:
             span: full
-            label: rainlab.blog::lang.blog.force_richeditor_editor_label
-            comment: rainlab.blog::lang.blog.force_richeditor_editor_comment
+            label: Force the WYSIWYG editor
+            comment: Use common richtext editor instead of the Markdown editor
             type: switch
             default: 0
-            tab: rainlab.blog::lang.blog.tab_general
+            tab: General

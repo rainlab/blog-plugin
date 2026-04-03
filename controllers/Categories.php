@@ -2,7 +2,6 @@
 
 use BackendMenu;
 use Flash;
-use Lang;
 use Backend\Classes\Controller;
 use RainLab\Blog\Models\Category;
 
@@ -39,7 +38,7 @@ class Categories extends Controller
                 $category->delete();
             }
 
-            Flash::success(Lang::get('rainlab.blog::lang.category.delete_success'));
+            Flash::success(__("Successfully deleted those categories."));
         }
 
         return $this->listRefresh();

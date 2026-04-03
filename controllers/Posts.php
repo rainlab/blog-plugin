@@ -1,6 +1,5 @@
 <?php namespace RainLab\Blog\Controllers;
 
-use Lang;
 use Flash;
 use BackendMenu;
 use RainLab\Blog\Models\Post;
@@ -144,7 +143,7 @@ class Posts extends Controller
                 $post->delete();
             }
 
-            Flash::success(Lang::get('rainlab.blog::lang.post.delete_success'));
+            Flash::success(__("Successfully deleted those posts."));
         }
 
         return $this->listRefresh();

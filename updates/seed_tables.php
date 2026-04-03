@@ -36,7 +36,7 @@ You can edit this content by selecting **Blog** from the administration back-end
 
         if (Category::where('slug', 'uncategorized')->count() === 0) {
             Category::create([
-                'name' => trans('rainlab.blog::lang.categories.uncategorized'),
+                'name' => __("Uncategorized"),
                 'slug' => 'uncategorized',
             ]);
         }

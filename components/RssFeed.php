@@ -36,8 +36,8 @@ class RssFeed extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'rainlab.blog::lang.settings.rssfeed_title',
-            'description' => 'rainlab.blog::lang.settings.rssfeed_description'
+            'name'        => "RSS Feed",
+            'description' => "Generates an RSS feed containing posts from the blog.",
         ];
     }
 
@@ -45,37 +45,37 @@ class RssFeed extends ComponentBase
     {
         return [
             'categoryFilter' => [
-                'title'       => 'rainlab.blog::lang.settings.posts_filter',
-                'description' => 'rainlab.blog::lang.settings.posts_filter_description',
+                'title'       => "Category filter",
+                'description' => "Enter a category slug or URL parameter to filter the posts by. Leave empty to show all posts.",
                 'type'        => 'string',
                 'default'     => '',
             ],
             'sortOrder' => [
-                'title'       => 'rainlab.blog::lang.settings.posts_order',
-                'description' => 'rainlab.blog::lang.settings.posts_order_description',
+                'title'       => "Post order",
+                'description' => "Attribute on which the posts should be ordered",
                 'type'        => 'dropdown',
                 'default'     => 'created_at desc',
             ],
             'postsPerPage' => [
-                'title'             => 'rainlab.blog::lang.settings.posts_per_page',
+                'title'             => "Posts per page",
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'rainlab.blog::lang.settings.posts_per_page_validation',
+                'validationMessage' => "Invalid format of the posts per page value",
                 'default'           => '10',
             ],
             'blogPage' => [
-                'title'       => 'rainlab.blog::lang.settings.rssfeed_blog',
-                'description' => 'rainlab.blog::lang.settings.rssfeed_blog_description',
+                'title'       => "Blog page",
+                'description' => "Name of the main blog page file for generating links. This property is used by the default component partial.",
                 'type'        => 'dropdown',
                 'default'     => 'blog/post',
-                'group'       => 'rainlab.blog::lang.settings.group_links',
+                'group'       => "Links",
             ],
             'postPage' => [
-                'title'       => 'rainlab.blog::lang.settings.posts_post',
-                'description' => 'rainlab.blog::lang.settings.posts_post_description',
+                'title'       => "Post page",
+                'description' => "Name of the blog post page file for the \"Learn more\" links. This property is used by the default component partial.",
                 'type'        => 'dropdown',
                 'default'     => 'blog/post',
-                'group'       => 'rainlab.blog::lang.settings.group_links',
+                'group'       => "Links",
             ],
         ];
     }

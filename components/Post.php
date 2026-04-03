@@ -21,8 +21,8 @@ class Post extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'rainlab.blog::lang.settings.post_title',
-            'description' => 'rainlab.blog::lang.settings.post_description'
+            'name'        => "Post",
+            'description' => "Displays a blog post on the page.",
         ];
     }
 
@@ -30,14 +30,14 @@ class Post extends ComponentBase
     {
         return [
             'slug' => [
-                'title'       => 'rainlab.blog::lang.settings.post_slug',
-                'description' => 'rainlab.blog::lang.settings.post_slug_description',
+                'title'       => "Post slug",
+                'description' => "Look up the blog post using the supplied slug value.",
                 'default'     => '{{ :slug }}',
                 'type'        => 'string',
             ],
             'categoryPage' => [
-                'title'       => 'rainlab.blog::lang.settings.post_category',
-                'description' => 'rainlab.blog::lang.settings.post_category_description',
+                'title'       => "Category page",
+                'description' => "Name of the category page file for the category links. This property is used by the default component partial.",
                 'type'        => 'dropdown',
                 'default'     => 'blog/category',
             ],
