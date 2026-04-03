@@ -15,14 +15,6 @@ tabs:
             type: dropdown
             tab: General
 
-        use_legacy_editor:
-            span: full
-            label: Use the Legacy Markdown Editor
-            comment: Enable the older version of the markdown editor when using October CMS v2 and above
-            type: switch
-            default: 0
-            tab: General
-
         force_richeditor_editor:
             span: full
             label: Force the WYSIWYG editor

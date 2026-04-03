@@ -57,8 +57,6 @@ class Posts extends Controller
         BackendMenu::setContextSideMenu('new_post');
 
         $this->bodyClass = 'compact-container';
-        $this->addCss('/plugins/rainlab/blog/assets/css/rainlab.blog-preview.css');
-        $this->addJs('/plugins/rainlab/blog/assets/js/post-form.js');
 
         return $this->asExtension('FormController')->create();
     }
@@ -66,8 +64,6 @@ class Posts extends Controller
     public function update($recordId = null)
     {
         $this->bodyClass = 'compact-container';
-        $this->addCss('/plugins/rainlab/blog/assets/css/rainlab.blog-preview.css');
-        $this->addJs('/plugins/rainlab/blog/assets/js/post-form.js');
 
         $result = $this->asExtension('FormController')->update($recordId);
         $this->setPreviewPageUrlVars();
@@ -116,11 +112,6 @@ class Posts extends Controller
             return;
         }
 
-        if (BlogSettings::get('use_legacy_editor', false)) {
-            $widget->secondaryTabs['fields']['content']['legacyMode'] = true;
-        }
-
-        // Force richeditor by settings
         if ($model instanceof Post && BlogSettings::get('force_richeditor_editor', false)) {
             $widget->secondaryTabs['fields']['content']['type'] = 'richeditor';
         }
@@ -157,16 +148,5 @@ class Posts extends Controller
     public function formBeforeCreate($model)
     {
         $model->user_id = $this->user->id;
-    }
-
-    public function onRefreshPreview()
-    {
-        $data = post('Post');
-
-        $previewHtml = Post::formatHtml($data['content'], true);
-
-        return [
-            'preview' => $previewHtml
-        ];
     }
 }

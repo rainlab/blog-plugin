@@ -23,11 +23,14 @@ fields:
 
 secondaryTabs:
     stretch: true
+    paneCssClass:
+        Categories: padded-pane
+        Manage: padded-pane
     fields:
         content:
             tab: Edit
-            type: RainLab\Blog\FormWidgets\BlogMarkdown
-            cssClass: field-slim blog-post-preview
+            type: markdown
+            cssClass: field-slim
             stretch: true
             mode: split
             sideBySide: true
