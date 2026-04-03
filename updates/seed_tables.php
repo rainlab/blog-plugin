@@ -5,11 +5,20 @@ use RainLab\Blog\Models\Post;
 use RainLab\Blog\Models\Category;
 use October\Rain\Database\Updates\Seeder;
 
-class SeedAllTables extends Seeder
+/**
+ * SeedTables for the blog plugin
+ */
+class SeedTables extends Seeder
 {
-
+    /**
+     * run migration
+     */
     public function run()
     {
+        if (Post::count() > 0) {
+            return;
+        }
+
         Post::create([
             'title' => 'First blog post',
             'slug' => 'first-blog-post',
@@ -25,10 +34,11 @@ You can edit this content by selecting **Blog** from the administration back-end
             'published' => true
         ]);
 
-        Category::create([
-            'name' => trans('rainlab.blog::lang.categories.uncategorized'),
-            'slug' => 'uncategorized',
-        ]);
+        if (Category::where('slug', 'uncategorized')->count() === 0) {
+            Category::create([
+                'name' => trans('rainlab.blog::lang.categories.uncategorized'),
+                'slug' => 'uncategorized',
+            ]);
+        }
     }
-
 }
