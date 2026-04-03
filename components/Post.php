@@ -55,10 +55,10 @@ class Post extends ComponentBase
             $newParams = $params;
 
             if (isset($params['slug'])) {
-                $records = BlogPost::transWhere('slug', $params['slug'], $oldLocale)->first();
-                if ($records) {
-                    $records->translateContext($newLocale);
-                    $newParams['slug'] = $records['slug'];
+                $record = BlogPost::whereTranslation('slug', $oldLocale, $params['slug'])->first();
+                if ($record) {
+                    $record->setLocale($newLocale);
+                    $newParams['slug'] = $record->slug;
                 }
             }
 
@@ -71,10 +71,10 @@ class Post extends ComponentBase
             $newLocale = $proposedSite->hard_locale;
 
             if (isset($params['slug'])) {
-                $records = BlogPost::transWhere('slug', $params['slug'], $oldLocale)->first();
-                if ($records) {
-                    $records->translateContext($newLocale);
-                    $newParams['slug'] = $records['slug'];
+                $record = BlogPost::whereTranslation('slug', $oldLocale, $params['slug'])->first();
+                if ($record) {
+                    $record->setLocale($newLocale);
+                    $newParams['slug'] = $record->slug;
                 }
             }
 
@@ -103,14 +103,7 @@ class Post extends ComponentBase
     {
         $slug = $this->property('slug');
 
-        $post = new BlogPost;
-        $query = $post->query();
-
-        if ($post->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')) {
-            $query->transWhere('slug', $slug);
-        } else {
-            $query->where('slug', $slug);
-        }
+        $query = BlogPost::where('slug', $slug);
 
         if (!$this->checkEditor()) {
             $query->isPublished();

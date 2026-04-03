@@ -237,13 +237,7 @@ class Posts extends ComponentBase
             return null;
         }
 
-        $category = new BlogCategory;
-
-        $category = $category->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')
-            ? $category->transWhere('slug', $slug)
-            : $category->where('slug', $slug);
-
-        $category = $category->first();
+        $category = BlogCategory::where('slug', $slug)->first();
 
         return $category ?: null;
     }

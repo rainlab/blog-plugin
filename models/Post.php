@@ -22,9 +22,9 @@ use ValidationException;
 class Post extends Model
 {
     use \October\Rain\Database\Traits\Validation;
+    use \October\Rain\Database\Traits\Translatable;
 
     public $table = 'rainlab_blog_posts';
-    public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
 
     /*
      * Validation
@@ -37,7 +37,7 @@ class Post extends Model
     ];
 
     /**
-     * @var array Attributes that support translation, if available.
+     * @var array Attributes that support translation.
      */
     public $translatable = [
         'title',
@@ -45,7 +45,7 @@ class Post extends Model
         'content_html',
         'excerpt',
         'metadata',
-        ['slug', 'index' => true]
+        'slug',
     ];
 
     /**
