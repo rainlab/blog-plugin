@@ -7,16 +7,16 @@
         this.formAction = this.$form.attr('action')
         this.sessionKey = $('input[name=_session_key]', this.$form).val()
 
-        if (this.$markdownEditor.length > 0) {
+        if (this.$markdownEditor.length > 0 && typeof this.$markdownEditor.markdownEditor === 'function') {
             this.codeEditor = this.$markdownEditor.markdownEditor('getEditorObject')
 
             this.$markdownEditor.on('initPreview.oc.markdowneditor', $.proxy(this.initPreview, this))
 
             this.initDropzones()
-            this.initFormEvents()
             this.addToolbarButton()
         }
 
+        this.initFormEvents()
         this.initLayout()
     }
 
