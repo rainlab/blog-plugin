@@ -159,7 +159,7 @@
     }
 
     PostForm.prototype.initLayout = function() {
-        $('#Form-secondaryTabs .tab-pane.layout-cell:not(:first-child)').addClass('padded-pane')
+        $('#Form-secondaryTabs .tab-pane.layout-cell:not(:first-child), #Form-secondaryTabs .tab-pane.form-tab-pane:not(:first-child)').addClass('padded-pane')
         $('#Form-secondaryTabs .nav-tabs > li:not(:first-child)').addClass('tab-content-bg')
     }
 
