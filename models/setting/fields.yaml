@@ -1,5 +1,13 @@
 tabs:
     fields:
+        force_richeditor_editor:
+            span: full
+            label: Force the WYSIWYG editor
+            comment: Use common richtext editor instead of the Markdown editor
+            type: switch
+            default: 0
+            tab: General
+
         show_all_posts:
             span: full
             label: Show All Posts to Backend Users
@@ -13,12 +21,4 @@ tabs:
             label: Preview CMS Page
             comment: Select a page to open for the Preview button
             type: dropdown
-            tab: General
-
-        force_richeditor_editor:
-            span: full
-            label: Force the WYSIWYG editor
-            comment: Use common richtext editor instead of the Markdown editor
-            type: switch
-            default: 0
             tab: General
