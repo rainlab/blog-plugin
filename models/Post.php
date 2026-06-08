@@ -13,7 +13,7 @@ use Cms\Classes\Theme;
 use Cms\Classes\Controller;
 use October\Rain\Database\NestedTreeScope;
 use RainLab\Blog\Classes\TagProcessor;
-use RainLab\Blog\Models\Settings as BlogSettings;
+use RainLab\Blog\Models\Setting as BlogSettings;
 use ValidationException;
 
 /**

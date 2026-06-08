@@ -9,7 +9,7 @@ use October\Rain\Database\Model;
 use October\Rain\Database\Collection;
 use RainLab\Blog\Models\Post as BlogPost;
 use RainLab\Blog\Models\Category as BlogCategory;
-use RainLab\Blog\Models\Settings as BlogSettings;
+use RainLab\Blog\Models\Setting as BlogSettings;
 
 /**
  * Posts

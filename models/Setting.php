@@ -2,28 +2,52 @@
 
 use Cms\Classes\Page as CmsPage;
 use Cms\Classes\Theme;
-use October\Rain\Database\Model;
+use System\Models\SettingModel;
 
-class Settings extends Model
+/**
+ * Setting configuration
+ *
+ * @property bool show_all_posts
+ * @property string preview_cms_page
+ * @property bool force_richeditor_editor
+ *
+ * @package rainlab\blog
+ * @author Alexey Bobkov, Samuel Georges
+ */
+class Setting extends SettingModel
 {
     use \October\Rain\Database\Traits\Validation;
 
-    public $implement = ['System.Behaviors.SettingsModel'];
-
+    /**
+     * @var string settingsCode is a unique code for this object
+     */
     public $settingsCode = 'rainlab_blog_settings';
 
+    /**
+     * @var mixed settingsFields definition file
+     */
     public $settingsFields = 'fields.yaml';
 
+    /**
+     * @var array rules for validation
+     */
     public $rules = [
         'show_all_posts' => ['boolean'],
     ];
 
     /**
-     * Get Preview CMS Page dropdown options
-     *
-     * @return array
+     * initSettingsData
      */
-    public function getPreviewCmsPageOptions()
+    public function initSettingsData()
+    {
+        $this->show_all_posts = true;
+        $this->force_richeditor_editor = false;
+    }
+
+    /**
+     * getPreviewCmsPageOptions returns the dropdown options for the preview CMS page setting
+     */
+    public function getPreviewCmsPageOptions(): array
     {
         $theme = Theme::getActiveTheme();
 
@@ -35,10 +59,6 @@ class Settings extends Model
                 continue;
             }
 
-            /*
-             * Component must use a categoryPage filter with a routing parameter and post slug
-             * eg: categoryPage = "{{ :somevalue }}", slug = "{{ :somevalue }}"
-             */
             $properties = $page->getComponentProperties('blogPost');
             if (!isset($properties['categoryPage']) || !preg_match('/{{\s*:/', $properties['slug'])) {
                 continue;

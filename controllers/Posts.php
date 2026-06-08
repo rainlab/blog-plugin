@@ -3,7 +3,7 @@
 use Flash;
 use BackendMenu;
 use RainLab\Blog\Models\Post;
-use RainLab\Blog\Models\Settings as BlogSettings;
+use RainLab\Blog\Models\Setting as BlogSettings;
 use Backend\Classes\Controller;
 use Cms\Classes\Controller as CmsController;
 use Cms\Classes\Theme;
@@ -144,7 +144,7 @@ class Posts extends Controller
         }
 
         if ($model instanceof Post && BlogSettings::get('force_richeditor_editor', false)) {
-            $widget->secondaryTabs['fields']['content']['type'] = 'richeditor';
+            $widget->tabs['fields']['content']['type'] = 'richeditor';
         }
     }
 

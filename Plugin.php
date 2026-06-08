@@ -123,11 +123,11 @@ class Plugin extends PluginBase
     {
         return [
             'blog' => [
-                'label' => "Blog",
+                'label' => "Blog Settings",
                 'description' => "Manage blog settings",
                 'category' => "Blog",
                 'icon' => 'icon-pencil',
-                'class' => \RainLab\Blog\Models\Settings::class,
+                'class' => \RainLab\Blog\Models\Setting::class,
                 'order' => 500,
                 'keywords' => 'blog post category',
                 'permissions' => ['rainlab.blog.manage_settings'],
