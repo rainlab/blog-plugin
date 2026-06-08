@@ -36,7 +36,7 @@ class RssFeed extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => "RSS Feed",
+            'name' => "RSS Feed",
             'description' => "Generates an RSS feed containing posts from the blog.",
         ];
     }
@@ -45,51 +45,60 @@ class RssFeed extends ComponentBase
     {
         return [
             'categoryFilter' => [
-                'title'       => "Category filter",
+                'title' => "Category filter",
                 'description' => "Enter a category slug or URL parameter to filter the posts by. Leave empty to show all posts.",
-                'type'        => 'string',
-                'default'     => '',
+                'type' => 'string',
+                'default' => '',
             ],
             'sortOrder' => [
-                'title'       => "Post order",
+                'title' => "Post order",
                 'description' => "Attribute on which the posts should be ordered",
-                'type'        => 'dropdown',
-                'default'     => 'created_at desc',
+                'type' => 'dropdown',
+                'default' => 'created_at desc',
             ],
             'postsPerPage' => [
-                'title'             => "Posts per page",
-                'type'              => 'string',
+                'title' => "Posts per page",
+                'type' => 'string',
                 'validationPattern' => '^[0-9]+$',
                 'validationMessage' => "Invalid format of the posts per page value",
-                'default'           => '10',
+                'default' => '10',
             ],
             'blogPage' => [
-                'title'       => "Blog page",
+                'title' => "Blog page",
                 'description' => "Name of the main blog page file for generating links. This property is used by the default component partial.",
-                'type'        => 'dropdown',
-                'default'     => 'blog/post',
-                'group'       => "Links",
+                'type' => 'dropdown',
+                'default' => 'blog/post',
+                'group' => "Links",
             ],
             'postPage' => [
-                'title'       => "Post page",
+                'title' => "Post page",
                 'description' => "Name of the blog post page file for the \"Learn more\" links. This property is used by the default component partial.",
-                'type'        => 'dropdown',
-                'default'     => 'blog/post',
-                'group'       => "Links",
+                'type' => 'dropdown',
+                'default' => 'blog/post',
+                'group' => "Links",
             ],
         ];
     }
 
+    /**
+     * getBlogPageOptions
+     */
     public function getBlogPageOptions()
     {
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
+    /**
+     * getPostPageOptions
+     */
     public function getPostPageOptions()
     {
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
+    /**
+     * getSortOrderOptions
+     */
     public function getSortOrderOptions()
     {
         $options = BlogPost::$allowedSortingOptions;
@@ -101,6 +110,9 @@ class RssFeed extends ComponentBase
         return $options;
     }
 
+    /**
+     * onRun
+     */
     public function onRun()
     {
         $this->prepareVars();
@@ -110,6 +122,9 @@ class RssFeed extends ComponentBase
         return Response::make($xmlFeed, '200')->header('Content-Type', 'text/xml');
     }
 
+    /**
+     * prepareVars
+     */
     protected function prepareVars()
     {
         $this->blogPage = $this->page['blogPage'] = $this->property('blogPage');
@@ -121,22 +136,21 @@ class RssFeed extends ComponentBase
         $this->page['rssLink'] = $this->currentPageUrl();
     }
 
+    /**
+     * listPosts
+     */
     protected function listPosts()
     {
         $category = $this->category ? $this->category->id : null;
 
-        /*
-         * List all the posts, eager load their categories
-         */
+        // List all the posts, eager load their categories
         $posts = BlogPost::with('categories')->listFrontEnd([
-            'sort'     => $this->property('sortOrder'),
-            'perPage'  => $this->property('postsPerPage'),
+            'sort' => $this->property('sortOrder'),
+            'perPage' => $this->property('postsPerPage'),
             'category' => $category
         ]);
 
-        /*
-         * Add a "url" helper attribute for linking to each post and category
-         */
+        // Add a "url" helper attribute for linking to each post and category
         $posts->each(function($post) {
             $post->setUrl($this->postPage, $this->controller);
         });
@@ -144,6 +158,9 @@ class RssFeed extends ComponentBase
         return $posts;
     }
 
+    /**
+     * loadCategory
+     */
     protected function loadCategory()
     {
         if (!$categoryId = $this->property('categoryFilter')) {

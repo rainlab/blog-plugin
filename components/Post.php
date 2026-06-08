@@ -6,10 +6,13 @@ use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
 
+/**
+ * Post
+ */
 class Post extends ComponentBase
 {
     /**
-     * @var RainLab\Blog\Models\Post The post model used for display.
+     * @var \RainLab\Blog\Models\Post The post model used for display.
      */
     public $post;
 
@@ -21,7 +24,7 @@ class Post extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => "Post",
+            'name' => "Post",
             'description' => "Displays a blog post on the page.",
         ];
     }
@@ -30,16 +33,16 @@ class Post extends ComponentBase
     {
         return [
             'slug' => [
-                'title'       => "Post slug",
+                'title' => "Post slug",
                 'description' => "Look up the blog post using the supplied slug value.",
-                'default'     => '{{ :slug }}',
-                'type'        => 'string',
+                'default' => '{{ :slug }}',
+                'type' => 'string',
             ],
             'categoryPage' => [
-                'title'       => "Category page",
+                'title' => "Category page",
                 'description' => "Name of the category page file for the category links. This property is used by the default component partial.",
-                'type'        => 'dropdown',
-                'default'     => 'blog/category',
+                'type' => 'dropdown',
+                'default' => 'blog/category',
             ],
         ];
     }
@@ -51,20 +54,6 @@ class Post extends ComponentBase
 
     public function init()
     {
-        Event::listen('translate.localePicker.translateParams', function ($page, $params, $oldLocale, $newLocale) {
-            $newParams = $params;
-
-            if (isset($params['slug'])) {
-                $record = BlogPost::whereTranslation('slug', $oldLocale, $params['slug'])->first();
-                if ($record) {
-                    $record->setLocale($newLocale);
-                    $newParams['slug'] = $record->slug;
-                }
-            }
-
-            return $newParams;
-        });
-
         Event::listen('cms.sitePicker.overrideParams', function ($page, $params, $currentSite, $proposedSite) {
             $newParams = $params;
             $oldLocale = $currentSite->hard_locale;

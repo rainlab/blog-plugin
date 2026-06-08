@@ -11,6 +11,9 @@ use RainLab\Blog\Models\Post as BlogPost;
 use RainLab\Blog\Models\Category as BlogCategory;
 use RainLab\Blog\Models\Settings as BlogSettings;
 
+/**
+ * Posts
+ */
 class Posts extends ComponentBase
 {
     /**
@@ -62,80 +65,86 @@ class Posts extends ComponentBase
      */
     public $sortOrder;
 
+    /**
+     * componentDetails
+     */
     public function componentDetails()
     {
         return [
-            'name'        => "Post List",
+            'name' => "Post List",
             'description' => "Displays a list of latest blog posts on the page.",
         ];
     }
 
+    /**
+     * defineProperties
+     */
     public function defineProperties()
     {
         return [
             'pageNumber' => [
-                'title'       => "Page number",
+                'title' => "Page number",
                 'description' => "This value is used to determine what page the user is on.",
-                'type'        => 'string',
-                'default'     => '{{ :page }}',
+                'type' => 'string',
+                'default' => '{{ :page }}',
             ],
             'categoryFilter' => [
-                'title'       => "Category filter",
+                'title' => "Category filter",
                 'description' => "Enter a category slug or URL parameter to filter the posts by. Leave empty to show all posts.",
-                'type'        => 'string',
-                'default'     => '',
+                'type' => 'string',
+                'default' => '',
             ],
             'postsPerPage' => [
-                'title'             => "Posts per page",
-                'type'              => 'string',
+                'title' => "Posts per page",
+                'type' => 'string',
                 'validationPattern' => '^[0-9]+$',
                 'validationMessage' => "Invalid format of the posts per page value",
-                'default'           => '10',
+                'default' => '10',
             ],
             'noPostsMessage' => [
-                'title'             => "No posts message",
-                'description'       => "Message to display in the blog post list in case if there are no posts. This property is used by the default component partial.",
-                'type'              => 'string',
-                'default'           => __("No posts found"),
+                'title' => "No posts message",
+                'description' => "Message to display in the blog post list in case if there are no posts. This property is used by the default component partial.",
+                'type' => 'string',
+                'default' => __("No posts found"),
                 'showExternalParam' => false,
             ],
             'sortOrder' => [
-                'title'       => "Post order",
+                'title' => "Post order",
                 'description' => "Attribute on which the posts should be ordered",
-                'type'        => 'dropdown',
-                'default'     => 'published_at desc',
+                'type' => 'dropdown',
+                'default' => 'published_at desc',
             ],
             'categoryPage' => [
-                'title'       => "Category page",
+                'title' => "Category page",
                 'description' => "Name of the category page file for the \"Posted into\" category links. This property is used by the default component partial.",
-                'type'        => 'dropdown',
-                'default'     => 'blog/category',
-                'group'       => "Links",
+                'type' => 'dropdown',
+                'default' => 'blog/category',
+                'group' => "Links",
             ],
             'postPage' => [
-                'title'       => "Post page",
+                'title' => "Post page",
                 'description' => "Name of the blog post page file for the \"Learn more\" links. This property is used by the default component partial.",
-                'type'        => 'dropdown',
-                'default'     => 'blog/post',
-                'group'       => "Links",
+                'type' => 'dropdown',
+                'default' => 'blog/post',
+                'group' => "Links",
             ],
             'exceptPost' => [
-                'title'             => "Except post",
-                'description'       => "Enter ID/URL or variable with post ID/URL you want to exclude. You may use a comma-separated list to specify multiple posts.",
-                'type'              => 'string',
+                'title' => "Except post",
+                'description' => "Enter ID/URL or variable with post ID/URL you want to exclude. You may use a comma-separated list to specify multiple posts.",
+                'type' => 'string',
                 'validationPattern' => '^[a-z0-9\-_,\s]+$',
                 'validationMessage' => "Post exceptions must be a single slug or ID, or a comma-separated list of slugs and IDs",
-                'default'           => '',
-                'group'             => "Exceptions",
+                'default' => '',
+                'group' => "Exceptions",
             ],
             'exceptCategories' => [
-                'title'             => "Except categories",
-                'description'       => "Enter a comma-separated list of category slugs or variable with such a list of categories you want to exclude",
-                'type'              => 'string',
+                'title' => "Except categories",
+                'description' => "Enter a comma-separated list of category slugs or variable with such a list of categories you want to exclude",
+                'type' => 'string',
                 'validationPattern' => '^[a-z0-9\-_,\s]+$',
                 'validationMessage' => "Category exceptions must be a single category slug, or a comma-separated list of slugs",
-                'default'           => '',
-                'group'             => "Exceptions",
+                'default' => '',
+                'group' => "Exceptions",
             ],
         ];
     }
