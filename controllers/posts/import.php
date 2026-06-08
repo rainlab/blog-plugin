@@ -5,21 +5,20 @@
     </ul>
 <?php Block::endPut() ?>
 
-<?= Form::open(['class' => 'layout']) ?>
+<?= Form::open(['class' => 'd-flex flex-column h-100']) ?>
 
-    <div class="layout-row">
+    <div class="flex-grow-1">
         <?= $this->importRender() ?>
     </div>
 
     <div class="form-buttons">
-        <button
-            type="submit"
-            data-control="popup"
-            data-handler="onImportLoadForm"
-            data-keyboard="false"
-            class="btn btn-primary">
-            <?= e(__("Import Posts")) ?>
-        </button>
+        <?= Ui::popupButton(
+            label: __("Import Posts"),
+            handler: 'onImportLoadForm',
+            icon: 'icon-cloud-upload',
+            primary: true,
+            dataKeyboard: 'false'
+        ) ?>
     </div>
 
 <?= Form::close() ?>

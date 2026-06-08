@@ -1,20 +1,21 @@
 <div data-control="toolbar">
-    <a href="<?= Backend::url('rainlab/blog/categories/create') ?>" class="btn btn-primary oc-icon-plus">
-        <?= e(__("New Category")) ?>
-    </a>
-    <button
-        class="btn btn-default oc-icon-trash-o"
-        disabled="disabled"
-        onclick="$(this).data('request-data', {
-            checked: $('.control-list').listWidget('getChecked')
-        })"
-        data-request="onDelete"
-        data-request-confirm="<?= e(__("Are you sure?")) ?>"
-        data-trigger-action="enable"
-        data-trigger=".control-list input[type=checkbox]"
-        data-trigger-condition="checked"
-        data-request-success="$(this).prop('disabled', false)"
-        data-stripe-load-indicator>
-        <?= e(trans('backend::lang.list.delete_selected')) ?>
-    </button>
+    <?= Ui::button(
+        label: __("New Category"),
+        href: Backend::url('rainlab/blog/categories/create'),
+        icon: 'icon-plus',
+        primary: true
+    ) ?>
+
+    <div class="toolbar-divider"></div>
+
+    <?= Ui::ajaxButton(
+        label: __("Delete"),
+        handler: 'onDelete',
+        icon: 'icon-delete',
+        secondary: true,
+        dataRequestConfirm: __("Are you sure?"),
+        dataListCheckedTrigger: true,
+        dataListCheckedRequest: true,
+        disabled: true
+    ) ?>
 </div>

@@ -2,57 +2,62 @@
     $isCreate = $this->formGetContext() == 'create';
     $pageUrl = isset($pageUrl) ? $pageUrl : null;
 ?>
-<div class="form-buttons loading-indicator-container">
+<div class="form-buttons">
+    <div data-control="loader-container" class="control-loader-container">
 
-    <!-- Save -->
-    <a
-        href="javascript:;"
-        class="btn btn-primary oc-icon-check save"
-        data-request="onSave"
-        data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
-        data-load-indicator-size="small"
-        data-request-before-update="$(this).trigger('unchange.oc.changeMonitor')"
-        <?php if (!$isCreate): ?>data-request-data="redirect:0"<?php endif ?>
-        data-hotkey="ctrl+s, cmd+s">
-            <?= e(trans('backend::lang.form.save')) ?>
-    </a>
+        <!-- Save -->
+        <?= Ui::ajaxButton(
+            label: __("Save"),
+            handler: 'onSave',
+            icon: 'icon-check',
+            primary: true,
+            hotkey: ['ctrl+s', 'cmd+s'],
+            dataRequestData: $isCreate ? null : "redirect: 0",
+            dataRequestBeforeUpdate: "\$(this).trigger('unchange.oc.changeMonitor')",
+            dataRequestMessage: __("Saving...")
+        ) ?>
 
-    <?php if (!$isCreate): ?>
-        <!-- Save and Close -->
-        <a
-            href="javascript:;"
-            class="btn btn-primary oc-icon-check save"
-            data-request-before-update="$(this).trigger('unchange.oc.changeMonitor')"
-            data-request="onSave"
-            data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
-            data-load-indicator-size="small">
-                <?= e(trans('backend::lang.form.save_and_close')) ?>
-        </a>
-    <?php endif ?>
+        <?php if (!$isCreate): ?>
+            <!-- Save and Close -->
+            <?= Ui::ajaxButton(
+                label: __("Save & Close"),
+                handler: 'onSave',
+                icon: 'icon-check',
+                primary: true,
+                dataRequestBeforeUpdate: "\$(this).trigger('unchange.oc.changeMonitor')",
+                dataRequestMessage: __("Saving...")
+            ) ?>
+        <?php endif ?>
 
-    <!-- Cancel -->
-    <a
-        href="<?= Backend::url('rainlab/blog/posts') ?>"
-        class="btn btn-primary oc-icon-arrow-left cancel">
-            <?= e(trans('backend::lang.form.cancel')) ?>
-    </a>
+        <!-- Cancel -->
+        <?= Ui::button(
+            label: __("Cancel"),
+            href: Backend::url('rainlab/blog/posts'),
+            icon: 'icon-arrow-left',
+            primary: true
+        ) ?>
 
-    <!-- Preview -->
-    <a
-        href="<?= Url::to($pageUrl) ?>"
-        target="_blank"
-        class="btn btn-primary oc-icon-crosshairs <?php if (empty($pageUrl)): ?>hide oc-hide<?php endif ?>"
-        data-control="preview-button">
-            <?= e(__("Preview")) ?>
-    </a>
+        <?php if (!empty($pageUrl)): ?>
+            <!-- Preview -->
+            <?= Ui::button(
+                label: __("Preview"),
+                href: Url::to($pageUrl),
+                icon: 'icon-crosshairs',
+                primary: true,
+                target: '_blank',
+                dataControl: 'preview-button'
+            ) ?>
+        <?php endif ?>
 
-    <?php if (!$isCreate): ?>
-        <!-- Delete -->
-        <button
-            type="button"
-            class="btn btn-default empty oc-icon-trash-o"
-            data-request="onDelete"
-            data-request-confirm="<?= e(__("Delete this post?")) ?>"
-            data-control="delete-button"></button>
-    <?php endif ?>
+        <?php if (!$isCreate): ?>
+            <!-- Delete -->
+            <?= Ui::iconButton(
+                label: __("Delete"),
+                icon: 'oc-icon-trash-o',
+                handler: 'onDelete',
+                dataRequestConfirm: __("Delete this post?"),
+                dataControl: 'delete-button'
+            ) ?>
+        <?php endif ?>
+    </div>
 </div>

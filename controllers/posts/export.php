@@ -5,22 +5,21 @@
     </ul>
 <?php Block::endPut() ?>
 
-<?= Form::open(['class' => 'layout']) ?>
+<?= Form::open(['class' => 'd-flex flex-column h-100']) ?>
 
-    <div class="layout-row">
+    <div class="flex-grow-1">
         <?= $this->exportRender() ?>
     </div>
 
     <div class="form-buttons">
-        <div class="loading-indicator-container">
-            <button
-                type="submit"
-                data-control="popup"
-                data-handler="onExportLoadForm"
-                data-keyboard="false"
-                class="btn btn-primary">
-                <?= e(__("Export Posts")) ?>
-            </button>
+        <div data-control="loader-container">
+            <?= Ui::popupButton(
+                label: __("Export Posts"),
+                handler: 'onExportLoadForm',
+                icon: 'icon-cloud-download',
+                primary: true,
+                dataKeyboard: 'false'
+            ) ?>
         </div>
     </div>
 
