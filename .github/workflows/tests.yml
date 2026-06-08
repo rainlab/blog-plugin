@@ -1,0 +1,58 @@
+name: Tests
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [8.2, 8.3, 8.4]
+
+    name: PHP ${{ matrix.php }}
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, intl, pdo_sqlite
+          coverage: none
+          ini-values: memory_limit=512M
+
+      - name: Install October CMS
+        run: |
+          composer create-project october/october october --no-interaction --no-progress
+
+      - name: Configure environment
+        run: |
+          cd october
+          mkdir -p database && touch database/database.sqlite
+          sed -i 's/DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env
+          sed -i 's|DB_DATABASE=.*|DB_DATABASE=database/database.sqlite|' .env
+
+      - name: Migrate core tables
+        run: |
+          cd october
+          php artisan october:migrate --no-interaction
+
+      - name: Checkout plugin
+        uses: actions/checkout@v4
+        with:
+          path: october/plugins/rainlab/blog
+
+      - name: Migrate plugin
+        run: |
+          cd october
+          php artisan october:migrate --no-interaction
+
+      - name: Run tests
+        run: |
+          cd october
+          php vendor/bin/phpunit --configuration plugins/rainlab/blog/phpunit.xml
