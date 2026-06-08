@@ -10,6 +10,7 @@
         class="btn btn-primary oc-icon-check save"
         data-request="onSave"
         data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
+        data-load-indicator-size="small"
         data-request-before-update="$(this).trigger('unchange.oc.changeMonitor')"
         <?php if (!$isCreate): ?>data-request-data="redirect:0"<?php endif ?>
         data-hotkey="ctrl+s, cmd+s">
@@ -23,7 +24,8 @@
             class="btn btn-primary oc-icon-check save"
             data-request-before-update="$(this).trigger('unchange.oc.changeMonitor')"
             data-request="onSave"
-            data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>">
+            data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
+            data-load-indicator-size="small">
                 <?= e(trans('backend::lang.form.save_and_close')) ?>
         </a>
     <?php endif ?>

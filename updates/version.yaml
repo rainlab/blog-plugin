@@ -66,6 +66,7 @@ v1.6.3: Adds page finder support for October v3.2
 v1.7.0: Adds setting for editing posts with rich editor
 v1.7.1: Fixes bug using Rich Editor in content field
 v1.7.2: Fixes compatibility with PHP 8.3
+v1.7.3: Compatibility with October CMS v4.2
 v2.0.0:
     - Complete support with October CMS v4.2
     - migrate_v2_0_0.php
