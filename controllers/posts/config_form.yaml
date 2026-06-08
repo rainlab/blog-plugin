@@ -10,7 +10,11 @@ defaultRedirect: rainlab/blog/posts
 create:
     redirect: rainlab/blog/posts/update/:id
     redirectClose: rainlab/blog/posts
+    design:
+        displayMode: document
 
 update:
     redirect: rainlab/blog/posts
     redirectClose: rainlab/blog/posts
+    design:
+        displayMode: document

@@ -16,22 +16,13 @@ fields:
             field: title
             type: slug
 
-    toolbar:
-        type: partial
-        path: post_toolbar
-        cssClass: collapse-visible
-
-secondaryTabs:
-    stretch: true
-    paneCssClass:
-        Categories: padded-pane
-        Manage: padded-pane
+tabs:
     fields:
         content:
             tab: Edit
             type: markdown
             cssClass: field-slim
-            stretch: true
+            span: adaptive
             mode: split
             sideBySide: true
 

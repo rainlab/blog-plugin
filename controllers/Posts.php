@@ -13,14 +13,28 @@ use Cms\Classes\Theme;
  */
 class Posts extends Controller
 {
+    /**
+     * @var array implement
+     */
     public $implement = [
         \Backend\Behaviors\FormController::class,
         \Backend\Behaviors\ListController::class,
         \Backend\Behaviors\ImportExportController::class
     ];
 
+    /**
+     * @var string formConfig
+     */
     public $formConfig = 'config_form.yaml';
+
+    /**
+     * @var string listConfig
+     */
     public $listConfig = 'config_list.yaml';
+
+    /**
+     * @var string importExportConfig
+     */
     public $importExportConfig = 'config_import_export.yaml';
 
     /**
@@ -43,6 +57,9 @@ class Posts extends Controller
         BackendMenu::setContext('RainLab.Blog', 'blog', 'posts');
     }
 
+    /**
+     * index
+     */
     public function index()
     {
         $this->vars['postsTotal'] = Post::count();
@@ -52,19 +69,21 @@ class Posts extends Controller
         $this->asExtension('ListController')->index();
     }
 
+    /**
+     * create
+     */
     public function create()
     {
         BackendMenu::setContextSideMenu('new_post');
 
-        $this->bodyClass = 'compact-container';
-
         return $this->asExtension('FormController')->create();
     }
 
+    /**
+     * update
+     */
     public function update($recordId = null)
     {
-        $this->bodyClass = 'compact-container';
-
         $result = $this->asExtension('FormController')->update($recordId);
         $this->setPreviewPageUrlVars();
         return $result;
@@ -85,6 +104,9 @@ class Posts extends Controller
         }
     }
 
+    /**
+     * export
+     */
     public function export()
     {
         $this->addCss('/plugins/rainlab/blog/assets/css/rainlab.blog-export.css');
@@ -92,6 +114,9 @@ class Posts extends Controller
         return $this->asExtension('ImportExportController')->export();
     }
 
+    /**
+     * listExtendQuery
+     */
     public function listExtendQuery($query)
     {
         if (!$this->user->hasAnyAccess(['rainlab.blog.access_other_posts'])) {
@@ -99,6 +124,9 @@ class Posts extends Controller
         }
     }
 
+    /**
+     * formExtendQuery
+     */
     public function formExtendQuery($query)
     {
         if (!$this->user->hasAnyAccess(['rainlab.blog.access_other_posts'])) {
@@ -106,6 +134,9 @@ class Posts extends Controller
         }
     }
 
+    /**
+     * formExtendFieldsBefore
+     */
     public function formExtendFieldsBefore($widget)
     {
         if (!$model = $widget->model) {
@@ -117,6 +148,9 @@ class Posts extends Controller
         }
     }
 
+    /**
+     * index_onDelete
+     */
     public function index_onDelete()
     {
         if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
@@ -145,6 +179,9 @@ class Posts extends Controller
         }
     }
 
+    /**
+     * formBeforeCreate
+     */
     public function formBeforeCreate($model)
     {
         $model->user_id = $this->user->id;

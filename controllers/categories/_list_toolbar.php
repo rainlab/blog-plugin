@@ -17,9 +17,4 @@
         data-stripe-load-indicator>
         <?= e(trans('backend::lang.list.delete_selected')) ?>
     </button>
-    <?php if (!class_exists('System')): ?>
-        <a href="<?= Backend::url('rainlab/blog/categories/reorder') ?>" class="btn btn-default oc-icon-sitemap">
-            <?= e(__("Reorder Categories")) ?>
-        </a>
-    <?php endif ?>
 </div>
