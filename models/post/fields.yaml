@@ -32,6 +32,15 @@ tabs:
             commentAbove: Select categories the blog post belongs to
             placeholder: "There are no categories, you should create one first!"
 
+        featured_images:
+            tab: Images
+            label: Featured Images
+            type: fileupload
+            mode: image
+            imageWidth: 200
+            imageHeight: 200
+            span: adaptive
+
         published:
             tab: Manage
             label: Published
@@ -62,11 +71,3 @@ tabs:
             label: Excerpt
             type: textarea
             size: small
-
-        featured_images:
-            tab: Manage
-            label: Featured Images
-            type: fileupload
-            mode: image
-            imageWidth: 200
-            imageHeight: 200
