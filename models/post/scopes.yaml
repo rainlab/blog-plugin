@@ -7,7 +7,7 @@ scopes:
     category:
 
         # Filter name
-        label: rainlab.blog::lang.posts.filter_category
+        label: Category
 
         # Model Class name
         modelClass: RainLab\Blog\Models\Category
@@ -21,7 +21,7 @@ scopes:
     published:
 
         # Filter name
-        label: rainlab.blog::lang.posts.filter_published
+        label: Published
 
         # Filter type
         type: switch
@@ -34,7 +34,7 @@ scopes:
     created_at:
 
         # Filter name
-        label: rainlab.blog::lang.posts.filter_date
+        label: Date
 
         # Filter type
         type: daterange

@@ -2,7 +2,6 @@
 
 use Url;
 use Html;
-use Lang;
 use Model;
 use Config;
 use Markdown;
@@ -14,7 +13,7 @@ use Cms\Classes\Theme;
 use Cms\Classes\Controller;
 use October\Rain\Database\NestedTreeScope;
 use RainLab\Blog\Classes\TagProcessor;
-use RainLab\Blog\Models\Settings as BlogSettings;
+use RainLab\Blog\Models\Setting as BlogSettings;
 use ValidationException;
 
 /**
@@ -23,9 +22,9 @@ use ValidationException;
 class Post extends Model
 {
     use \October\Rain\Database\Traits\Validation;
+    use \October\Rain\Database\Traits\Translatable;
 
     public $table = 'rainlab_blog_posts';
-    public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
 
     /*
      * Validation
@@ -38,7 +37,7 @@ class Post extends Model
     ];
 
     /**
-     * @var array Attributes that support translation, if available.
+     * @var array Attributes that support translation.
      */
     public $translatable = [
         'title',
@@ -46,7 +45,7 @@ class Post extends Model
         'content_html',
         'excerpt',
         'metadata',
-        ['slug', 'index' => true]
+        'slug',
     ];
 
     /**
@@ -65,15 +64,15 @@ class Post extends Model
      * @var array
      */
     public static $allowedSortingOptions = [
-        'title asc'         => 'rainlab.blog::lang.sorting.title_asc',
-        'title desc'        => 'rainlab.blog::lang.sorting.title_desc',
-        'created_at asc'    => 'rainlab.blog::lang.sorting.created_asc',
-        'created_at desc'   => 'rainlab.blog::lang.sorting.created_desc',
-        'updated_at asc'    => 'rainlab.blog::lang.sorting.updated_asc',
-        'updated_at desc'   => 'rainlab.blog::lang.sorting.updated_desc',
-        'published_at asc'  => 'rainlab.blog::lang.sorting.published_asc',
-        'published_at desc' => 'rainlab.blog::lang.sorting.published_desc',
-        'random'            => 'rainlab.blog::lang.sorting.random'
+        'title asc'         => "Title (ascending)",
+        'title desc'        => "Title (descending)",
+        'created_at asc'    => "Created (ascending)",
+        'created_at desc'   => "Created (descending)",
+        'updated_at asc'    => "Updated (ascending)",
+        'updated_at desc'   => "Updated (descending)",
+        'published_at asc'  => "Published (ascending)",
+        'published_at desc' => "Published (descending)",
+        'random'            => "Random"
     ];
 
     /*
@@ -150,7 +149,7 @@ class Post extends Model
     {
         if ($this->published && !$this->published_at) {
             throw new ValidationException([
-               'published_at' => Lang::get('rainlab.blog::lang.post.published_validation')
+               'published_at' => __("Please specify the published date")
             ]);
         }
     }

@@ -6,10 +6,13 @@ use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
 
+/**
+ * Post
+ */
 class Post extends ComponentBase
 {
     /**
-     * @var RainLab\Blog\Models\Post The post model used for display.
+     * @var \RainLab\Blog\Models\Post The post model used for display.
      */
     public $post;
 
@@ -21,8 +24,8 @@ class Post extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'rainlab.blog::lang.settings.post_title',
-            'description' => 'rainlab.blog::lang.settings.post_description'
+            'name' => "Post",
+            'description' => "Displays a blog post on the page.",
         ];
     }
 
@@ -30,16 +33,16 @@ class Post extends ComponentBase
     {
         return [
             'slug' => [
-                'title'       => 'rainlab.blog::lang.settings.post_slug',
-                'description' => 'rainlab.blog::lang.settings.post_slug_description',
-                'default'     => '{{ :slug }}',
-                'type'        => 'string',
+                'title' => "Post slug",
+                'description' => "Look up the blog post using the supplied slug value.",
+                'default' => '{{ :slug }}',
+                'type' => 'string',
             ],
             'categoryPage' => [
-                'title'       => 'rainlab.blog::lang.settings.post_category',
-                'description' => 'rainlab.blog::lang.settings.post_category_description',
-                'type'        => 'dropdown',
-                'default'     => 'blog/category',
+                'title' => "Category page",
+                'description' => "Name of the category page file for the category links. This property is used by the default component partial.",
+                'type' => 'dropdown',
+                'default' => 'blog/category',
             ],
         ];
     }
@@ -51,30 +54,16 @@ class Post extends ComponentBase
 
     public function init()
     {
-        Event::listen('translate.localePicker.translateParams', function ($page, $params, $oldLocale, $newLocale) {
-            $newParams = $params;
-
-            if (isset($params['slug'])) {
-                $records = BlogPost::transWhere('slug', $params['slug'], $oldLocale)->first();
-                if ($records) {
-                    $records->translateContext($newLocale);
-                    $newParams['slug'] = $records['slug'];
-                }
-            }
-
-            return $newParams;
-        });
-
         Event::listen('cms.sitePicker.overrideParams', function ($page, $params, $currentSite, $proposedSite) {
             $newParams = $params;
             $oldLocale = $currentSite->hard_locale;
             $newLocale = $proposedSite->hard_locale;
 
             if (isset($params['slug'])) {
-                $records = BlogPost::transWhere('slug', $params['slug'], $oldLocale)->first();
-                if ($records) {
-                    $records->translateContext($newLocale);
-                    $newParams['slug'] = $records['slug'];
+                $record = BlogPost::whereTranslation('slug', $oldLocale, $params['slug'])->first();
+                if ($record) {
+                    $record->setLocale($newLocale);
+                    $newParams['slug'] = $record->slug;
                 }
             }
 
@@ -103,14 +92,7 @@ class Post extends ComponentBase
     {
         $slug = $this->property('slug');
 
-        $post = new BlogPost;
-        $query = $post->query();
-
-        if ($post->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')) {
-            $query->transWhere('slug', $slug);
-        } else {
-            $query->where('slug', $slug);
-        }
+        $query = BlogPost::where('slug', $slug);
 
         if (!$this->checkEditor()) {
             $query->isPublished();

@@ -3,21 +3,19 @@
 # ===================================
 
 fields:
-
     name:
-        label: rainlab.blog::lang.category.name
-        placeholder: rainlab.blog::lang.category.name_placeholder
+        label: Name
+        placeholder: New category name
         span: left
 
     slug:
-        label: rainlab.blog::lang.category.slug
+        label: Slug
         span: right
-        placeholder: rainlab.blog::lang.category.slug_placeholder
+        placeholder: new-category-slug
         preset: name
 
     description:
-        label: 'rainlab.blog::lang.category.description'
+        label: Description
         size: large
-        oc.commentPosition: ''
         span: full
         type: textarea

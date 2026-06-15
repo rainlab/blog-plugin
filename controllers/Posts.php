@@ -1,10 +1,9 @@
 <?php namespace RainLab\Blog\Controllers;
 
-use Lang;
 use Flash;
 use BackendMenu;
 use RainLab\Blog\Models\Post;
-use RainLab\Blog\Models\Settings as BlogSettings;
+use RainLab\Blog\Models\Setting as BlogSettings;
 use Backend\Classes\Controller;
 use Cms\Classes\Controller as CmsController;
 use Cms\Classes\Theme;
@@ -14,14 +13,28 @@ use Cms\Classes\Theme;
  */
 class Posts extends Controller
 {
+    /**
+     * @var array implement
+     */
     public $implement = [
         \Backend\Behaviors\FormController::class,
         \Backend\Behaviors\ListController::class,
         \Backend\Behaviors\ImportExportController::class
     ];
 
+    /**
+     * @var string formConfig
+     */
     public $formConfig = 'config_form.yaml';
+
+    /**
+     * @var string listConfig
+     */
     public $listConfig = 'config_list.yaml';
+
+    /**
+     * @var string importExportConfig
+     */
     public $importExportConfig = 'config_import_export.yaml';
 
     /**
@@ -44,6 +57,9 @@ class Posts extends Controller
         BackendMenu::setContext('RainLab.Blog', 'blog', 'posts');
     }
 
+    /**
+     * index
+     */
     public function index()
     {
         $this->vars['postsTotal'] = Post::count();
@@ -53,23 +69,21 @@ class Posts extends Controller
         $this->asExtension('ListController')->index();
     }
 
+    /**
+     * create
+     */
     public function create()
     {
         BackendMenu::setContextSideMenu('new_post');
 
-        $this->bodyClass = 'compact-container';
-        $this->addCss('/plugins/rainlab/blog/assets/css/rainlab.blog-preview.css');
-        $this->addJs('/plugins/rainlab/blog/assets/js/post-form.js');
-
         return $this->asExtension('FormController')->create();
     }
 
+    /**
+     * update
+     */
     public function update($recordId = null)
     {
-        $this->bodyClass = 'compact-container';
-        $this->addCss('/plugins/rainlab/blog/assets/css/rainlab.blog-preview.css');
-        $this->addJs('/plugins/rainlab/blog/assets/js/post-form.js');
-
         $result = $this->asExtension('FormController')->update($recordId);
         $this->setPreviewPageUrlVars();
         return $result;
@@ -90,6 +104,9 @@ class Posts extends Controller
         }
     }
 
+    /**
+     * export
+     */
     public function export()
     {
         $this->addCss('/plugins/rainlab/blog/assets/css/rainlab.blog-export.css');
@@ -97,6 +114,9 @@ class Posts extends Controller
         return $this->asExtension('ImportExportController')->export();
     }
 
+    /**
+     * listExtendQuery
+     */
     public function listExtendQuery($query)
     {
         if (!$this->user->hasAnyAccess(['rainlab.blog.access_other_posts'])) {
@@ -104,6 +124,9 @@ class Posts extends Controller
         }
     }
 
+    /**
+     * formExtendQuery
+     */
     public function formExtendQuery($query)
     {
         if (!$this->user->hasAnyAccess(['rainlab.blog.access_other_posts'])) {
@@ -111,27 +134,23 @@ class Posts extends Controller
         }
     }
 
+    /**
+     * formExtendFieldsBefore
+     */
     public function formExtendFieldsBefore($widget)
     {
         if (!$model = $widget->model) {
             return;
         }
 
-        // Support for October CMS 3.0 and below
-        if (!class_exists('Site') && $model instanceof Post && $model->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')) {
-            $widget->secondaryTabs['fields']['content']['type'] = 'RainLab\Blog\FormWidgets\MLBlogMarkdown';
-        }
-
-        if (BlogSettings::get('use_legacy_editor', false)) {
-            $widget->secondaryTabs['fields']['content']['legacyMode'] = true;
-        }
-
-        // Force richeditor by settings
         if ($model instanceof Post && BlogSettings::get('force_richeditor_editor', false)) {
-            $widget->secondaryTabs['fields']['content']['type'] = 'richeditor';
+            $widget->tabs['fields']['content']['type'] = 'richeditor';
         }
     }
 
+    /**
+     * index_onDelete
+     */
     public function index_onDelete()
     {
         if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
@@ -144,7 +163,7 @@ class Posts extends Controller
                 $post->delete();
             }
 
-            Flash::success(Lang::get('rainlab.blog::lang.post.delete_success'));
+            Flash::success(__("Successfully deleted those posts."));
         }
 
         return $this->listRefresh();
@@ -160,19 +179,11 @@ class Posts extends Controller
         }
     }
 
+    /**
+     * formBeforeCreate
+     */
     public function formBeforeCreate($model)
     {
         $model->user_id = $this->user->id;
-    }
-
-    public function onRefreshPreview()
-    {
-        $data = post('Post');
-
-        $previewHtml = Post::formatHtml($data['content'], true);
-
-        return [
-            'preview' => $previewHtml
-        ];
     }
 }

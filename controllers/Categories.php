@@ -1,25 +1,41 @@
 <?php namespace RainLab\Blog\Controllers;
 
-use BackendMenu;
 use Flash;
-use Lang;
+use BackendMenu;
 use Backend\Classes\Controller;
 use RainLab\Blog\Models\Category;
 
+/**
+ * Categories
+ */
 class Categories extends Controller
 {
+    /**
+     * @var array implement
+     */
     public $implement = [
         \Backend\Behaviors\FormController::class,
-        \Backend\Behaviors\ListController::class,
-        \Backend\Behaviors\ReorderController::class
+        \Backend\Behaviors\ListController::class
     ];
 
+    /**
+     * @var string formConfig
+     */
     public $formConfig = 'config_form.yaml';
-    public $listConfig = 'config_list.yaml';
-    public $reorderConfig = 'config_reorder.yaml';
 
+    /**
+     * @var string listConfig
+     */
+    public $listConfig = 'config_list.yaml';
+
+    /**
+     * @var string requiredPermissions
+     */
     public $requiredPermissions = ['rainlab.blog.access_categories'];
 
+    /**
+     * __construct
+     */
     public function __construct()
     {
         parent::__construct();
@@ -27,6 +43,9 @@ class Categories extends Controller
         BackendMenu::setContext('RainLab.Blog', 'blog', 'categories');
     }
 
+    /**
+     * index_onDelete
+     */
     public function index_onDelete()
     {
         if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
@@ -39,7 +58,7 @@ class Categories extends Controller
                 $category->delete();
             }
 
-            Flash::success(Lang::get('rainlab.blog::lang.category.delete_success'));
+            Flash::success(__("Successfully deleted those categories."));
         }
 
         return $this->listRefresh();

@@ -2,7 +2,7 @@
 #  Form Behavior Config
 # ===================================
 
-name: rainlab.blog::lang.blog.create_category
+name: Blog category
 form: $/rainlab/blog/models/category/fields.yaml
 modelClass: RainLab\Blog\Models\Category
 defaultRedirect: rainlab/blog/categories
@@ -10,7 +10,11 @@ defaultRedirect: rainlab/blog/categories
 create:
     redirect: rainlab/blog/categories/update/:id
     redirectClose: rainlab/blog/categories
+    design:
+        displayMode: basic
 
 update:
     redirect: rainlab/blog/categories
     redirectClose: rainlab/blog/categories
+    design:
+        displayMode: basic

@@ -36,8 +36,8 @@ class RssFeed extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'rainlab.blog::lang.settings.rssfeed_title',
-            'description' => 'rainlab.blog::lang.settings.rssfeed_description'
+            'name' => "RSS Feed",
+            'description' => "Generates an RSS feed containing posts from the blog.",
         ];
     }
 
@@ -45,51 +45,60 @@ class RssFeed extends ComponentBase
     {
         return [
             'categoryFilter' => [
-                'title'       => 'rainlab.blog::lang.settings.posts_filter',
-                'description' => 'rainlab.blog::lang.settings.posts_filter_description',
-                'type'        => 'string',
-                'default'     => '',
+                'title' => "Category filter",
+                'description' => "Enter a category slug or URL parameter to filter the posts by. Leave empty to show all posts.",
+                'type' => 'string',
+                'default' => '',
             ],
             'sortOrder' => [
-                'title'       => 'rainlab.blog::lang.settings.posts_order',
-                'description' => 'rainlab.blog::lang.settings.posts_order_description',
-                'type'        => 'dropdown',
-                'default'     => 'created_at desc',
+                'title' => "Post order",
+                'description' => "Attribute on which the posts should be ordered",
+                'type' => 'dropdown',
+                'default' => 'created_at desc',
             ],
             'postsPerPage' => [
-                'title'             => 'rainlab.blog::lang.settings.posts_per_page',
-                'type'              => 'string',
+                'title' => "Posts per page",
+                'type' => 'string',
                 'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'rainlab.blog::lang.settings.posts_per_page_validation',
-                'default'           => '10',
+                'validationMessage' => "Invalid format of the posts per page value",
+                'default' => '10',
             ],
             'blogPage' => [
-                'title'       => 'rainlab.blog::lang.settings.rssfeed_blog',
-                'description' => 'rainlab.blog::lang.settings.rssfeed_blog_description',
-                'type'        => 'dropdown',
-                'default'     => 'blog/post',
-                'group'       => 'rainlab.blog::lang.settings.group_links',
+                'title' => "Blog page",
+                'description' => "Name of the main blog page file for generating links. This property is used by the default component partial.",
+                'type' => 'dropdown',
+                'default' => 'blog/post',
+                'group' => "Links",
             ],
             'postPage' => [
-                'title'       => 'rainlab.blog::lang.settings.posts_post',
-                'description' => 'rainlab.blog::lang.settings.posts_post_description',
-                'type'        => 'dropdown',
-                'default'     => 'blog/post',
-                'group'       => 'rainlab.blog::lang.settings.group_links',
+                'title' => "Post page",
+                'description' => "Name of the blog post page file for the \"Learn more\" links. This property is used by the default component partial.",
+                'type' => 'dropdown',
+                'default' => 'blog/post',
+                'group' => "Links",
             ],
         ];
     }
 
+    /**
+     * getBlogPageOptions
+     */
     public function getBlogPageOptions()
     {
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
+    /**
+     * getPostPageOptions
+     */
     public function getPostPageOptions()
     {
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
+    /**
+     * getSortOrderOptions
+     */
     public function getSortOrderOptions()
     {
         $options = BlogPost::$allowedSortingOptions;
@@ -101,6 +110,9 @@ class RssFeed extends ComponentBase
         return $options;
     }
 
+    /**
+     * onRun
+     */
     public function onRun()
     {
         $this->prepareVars();
@@ -110,6 +122,9 @@ class RssFeed extends ComponentBase
         return Response::make($xmlFeed, '200')->header('Content-Type', 'text/xml');
     }
 
+    /**
+     * prepareVars
+     */
     protected function prepareVars()
     {
         $this->blogPage = $this->page['blogPage'] = $this->property('blogPage');
@@ -121,22 +136,21 @@ class RssFeed extends ComponentBase
         $this->page['rssLink'] = $this->currentPageUrl();
     }
 
+    /**
+     * listPosts
+     */
     protected function listPosts()
     {
         $category = $this->category ? $this->category->id : null;
 
-        /*
-         * List all the posts, eager load their categories
-         */
+        // List all the posts, eager load their categories
         $posts = BlogPost::with('categories')->listFrontEnd([
-            'sort'     => $this->property('sortOrder'),
-            'perPage'  => $this->property('postsPerPage'),
+            'sort' => $this->property('sortOrder'),
+            'perPage' => $this->property('postsPerPage'),
             'category' => $category
         ]);
 
-        /*
-         * Add a "url" helper attribute for linking to each post and category
-         */
+        // Add a "url" helper attribute for linking to each post and category
         $posts->each(function($post) {
             $post->setUrl($this->postPage, $this->controller);
         });
@@ -144,6 +158,9 @@ class RssFeed extends ComponentBase
         return $posts;
     }
 
+    /**
+     * loadCategory
+     */
     protected function loadCategory()
     {
         if (!$categoryId = $this->property('categoryFilter')) {

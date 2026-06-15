@@ -4,56 +4,59 @@
 
 fields:
     title:
-        label: rainlab.blog::lang.post.title
+        label: Title
         span: left
-        placeholder: rainlab.blog::lang.post.title_placeholder
+        placeholder: New post title
 
     slug:
-        label: rainlab.blog::lang.post.slug
+        label: Slug
         span: right
-        placeholder: rainlab.blog::lang.post.slug_placeholder
+        placeholder: new-post-slug
         preset:
             field: title
             type: slug
 
-    toolbar:
-        type: partial
-        path: post_toolbar
-        cssClass: collapse-visible
-
-secondaryTabs:
-    stretch: true
+tabs:
     fields:
         content:
-            tab: rainlab.blog::lang.post.tab_edit
-            type: RainLab\Blog\FormWidgets\BlogMarkdown
-            cssClass: field-slim blog-post-preview
-            stretch: true
+            tab: Edit
+            type: markdown
+            cssClass: field-slim
+            span: adaptive
             mode: split
             sideBySide: true
 
         categories:
-            tab: rainlab.blog::lang.post.tab_categories
+            tab: Categories
             type: relation
-            commentAbove: rainlab.blog::lang.post.categories_comment
-            placeholder: rainlab.blog::lang.post.categories_placeholder
+            commentAbove: Select categories the blog post belongs to
+            placeholder: "There are no categories, you should create one first!"
+
+        featured_images:
+            tab: Images
+            label: Featured Images
+            type: fileupload
+            mode: image
+            imageWidth: 200
+            imageHeight: 200
+            span: adaptive
 
         published:
-            tab: rainlab.blog::lang.post.tab_manage
-            label: rainlab.blog::lang.post.published
+            tab: Manage
+            label: Published
             span: left
             type: checkbox
 
         user:
-            tab: rainlab.blog::lang.post.tab_manage
-            label: rainlab.blog::lang.post.published_by
+            tab: Manage
+            label: Published by
             span: right
             type: dropdown
-            emptyOption: rainlab.blog::lang.post.current_user
+            emptyOption: Current user
 
         published_at:
-            tab: rainlab.blog::lang.post.tab_manage
-            label: rainlab.blog::lang.post.published_on
+            tab: Manage
+            label: Published on
             span: left
             cssClass: checkbox-align
             type: datepicker
@@ -64,15 +67,7 @@ secondaryTabs:
                 condition: checked
 
         excerpt:
-            tab: rainlab.blog::lang.post.tab_manage
-            label: rainlab.blog::lang.post.excerpt
+            tab: Manage
+            label: Excerpt
             type: textarea
             size: small
-
-        featured_images:
-            tab: rainlab.blog::lang.post.tab_manage
-            label: rainlab.blog::lang.post.featured_images
-            type: fileupload
-            mode: image
-            imageWidth: 200
-            imageHeight: 200

@@ -10,9 +10,9 @@ class Category extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \October\Rain\Database\Traits\NestedTree;
+    use \October\Rain\Database\Traits\Translatable;
 
     public $table = 'rainlab_blog_categories';
-    public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
 
     /*
      * Validation
@@ -24,12 +24,12 @@ class Category extends Model
     ];
 
     /**
-     * @var array Attributes that support translation, if available.
+     * @var array Attributes that support translation.
      */
     public $translatable = [
         'name',
         'description',
-        ['slug', 'index' => true]
+        'slug',
     ];
 
     protected $guarded = [];

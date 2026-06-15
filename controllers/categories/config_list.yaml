@@ -9,7 +9,7 @@ list: $/rainlab/blog/models/category/columns.yaml
 modelClass: RainLab\Blog\Models\Category
 
 # List Title
-title: rainlab.blog::lang.categories.list_title
+title: Manage the blog categories
 
 # Link URL for each record
 recordUrl: rainlab/blog/categories/update/:id

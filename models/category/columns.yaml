@@ -5,9 +5,9 @@
 columns:
 
     name:
-        label: rainlab.blog::lang.category.name
+        label: Name
         searchable: true
 
     post_count:
-        label: rainlab.blog::lang.category.posts
+        label: Posts
         sortable: false

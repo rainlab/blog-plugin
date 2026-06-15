@@ -5,7 +5,7 @@
 columns:
 
     title:
-        label: rainlab.blog::lang.post.title
+        label: Title
         searchable: true
 
     # author:
@@ -15,22 +15,22 @@ columns:
     #   searchable: true
 
     categories:
-        label: rainlab.blog::lang.post.categories
+        label: Categories
         relation: categories
         select: name
         searchable: true
         sortable: false
 
     created_at:
-        label: rainlab.blog::lang.post.created
+        label: Created
         type: date
         invisible: true
 
     updated_at:
-        label: rainlab.blog::lang.post.updated
+        label: Updated
         type: date
         invisible: true
 
     published_at:
-        label: rainlab.blog::lang.post.published
+        label: Published
         type: date

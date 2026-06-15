@@ -1,7 +1,5 @@
 <?php namespace RainLab\Blog\Components;
 
-use Db;
-use Carbon\Carbon;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Category as BlogCategory;
@@ -23,35 +21,41 @@ class Categories extends ComponentBase
      */
     public $currentCategorySlug;
 
+    /**
+     * componentDetails
+     */
     public function componentDetails()
     {
         return [
-            'name'        => 'rainlab.blog::lang.settings.category_title',
-            'description' => 'rainlab.blog::lang.settings.category_description'
+            'name' => "Category List",
+            'description' => "Displays a list of blog categories on the page.",
         ];
     }
 
+    /**
+     * defineProperties
+     */
     public function defineProperties()
     {
         return [
             'slug' => [
-                'title'       => 'rainlab.blog::lang.settings.category_slug',
-                'description' => 'rainlab.blog::lang.settings.category_slug_description',
-                'default'     => '{{ :slug }}',
-                'type'        => 'string',
+                'title' => "Category slug",
+                'description' => "Look up the blog category using the supplied slug value. This property is used by the default component partial for marking the currently active category.",
+                'default' => '{{ :slug }}',
+                'type' => 'string',
             ],
             'displayEmpty' => [
-                'title'       => 'rainlab.blog::lang.settings.category_display_empty',
-                'description' => 'rainlab.blog::lang.settings.category_display_empty_description',
-                'type'        => 'checkbox',
-                'default'     => 0,
+                'title' => "Display empty categories",
+                'description' => "Show categories that do not have any posts.",
+                'type' => 'checkbox',
+                'default' => 0,
             ],
             'categoryPage' => [
-                'title'       => 'rainlab.blog::lang.settings.category_page',
-                'description' => 'rainlab.blog::lang.settings.category_page_description',
-                'type'        => 'dropdown',
-                'default'     => 'blog/category',
-                'group'       => 'rainlab.blog::lang.settings.group_links',
+                'title' => "Category page",
+                'description' => "Name of the category page file for the category links. This property is used by the default component partial.",
+                'type' => 'dropdown',
+                'default' => 'blog/category',
+                'group' => "Links",
             ],
         ];
     }
@@ -75,6 +79,7 @@ class Categories extends ComponentBase
     protected function loadCategories()
     {
         $categories = BlogCategory::with('posts_count')->getNested();
+
         if (!$this->property('displayEmpty')) {
             $iterator = function ($categories) use (&$iterator) {
                 return $categories->reject(function ($category) use (&$iterator) {
@@ -90,9 +95,7 @@ class Categories extends ComponentBase
             $categories = $iterator($categories);
         }
 
-        /*
-         * Add a "url" helper attribute for linking to each category
-         */
+        // Add a "url" helper attribute for linking to each category
         return $this->linkCategories($categories);
     }
 

@@ -2,7 +2,7 @@
 #  Form Behavior Config
 # ===================================
 
-name: rainlab.blog::lang.blog.create_post
+name: Blog post
 form: $/rainlab/blog/models/post/fields.yaml
 modelClass: RainLab\Blog\Models\Post
 defaultRedirect: rainlab/blog/posts
@@ -10,7 +10,11 @@ defaultRedirect: rainlab/blog/posts
 create:
     redirect: rainlab/blog/posts/update/:id
     redirectClose: rainlab/blog/posts
+    design:
+        displayMode: document
 
 update:
     redirect: rainlab/blog/posts
     redirectClose: rainlab/blog/posts
+    design:
+        displayMode: document
