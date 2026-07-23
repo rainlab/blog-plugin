@@ -177,9 +177,7 @@ class Posts extends ComponentBase
         $this->category = $this->page['category'] = $this->loadCategory();
         $this->posts = $this->page['posts'] = $this->listPosts();
 
-        /*
-         * If the page number is not valid, redirect
-         */
+        // If the page number is not valid, redirect
         if ($pageNumberParam = $this->paramName('pageNumber')) {
             $currentPage = $this->property('pageNumber');
 
@@ -194,9 +192,7 @@ class Posts extends ComponentBase
         $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber');
         $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
 
-        /*
-         * Page links
-         */
+        // Page links
         $this->postPage = $this->page['postPage'] = $this->property('postPage');
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
     }
@@ -206,19 +202,17 @@ class Posts extends ComponentBase
         $category = $this->category ? $this->category->id : null;
         $categorySlug = $this->category ? $this->category->slug : null;
 
-        /*
-         * List all the posts, eager load their categories
-         */
+        //  List all the posts, eager load their categories
         $isPublished = !$this->checkEditor();
 
         $posts = BlogPost::with(['categories', 'featured_images'])->listFrontEnd([
-            'page'             => $this->property('pageNumber'),
-            'sort'             => $this->property('sortOrder'),
-            'perPage'          => $this->property('postsPerPage'),
-            'search'           => trim(input('search')),
-            'category'         => $category,
-            'published'        => $isPublished,
-            'exceptPost'       => is_array($this->property('exceptPost'))
+            'page' => $this->property('pageNumber'),
+            'sort' => $this->property('sortOrder'),
+            'perPage' => $this->property('postsPerPage'),
+            'search' => trim(input('search')),
+            'category' => $category,
+            'published' => $isPublished,
+            'exceptPost' => is_array($this->property('exceptPost'))
                 ? $this->property('exceptPost')
                 : preg_split('/,\s*/', $this->property('exceptPost'), -1, PREG_SPLIT_NO_EMPTY),
             'exceptCategories' => is_array($this->property('exceptCategories'))
@@ -246,7 +240,7 @@ class Posts extends ComponentBase
             return null;
         }
 
-        $category = BlogCategory::where('slug', $slug)->first();
+        $category = BlogCategory::transWhere('slug', $slug)->first();
 
         return $category ?: null;
     }

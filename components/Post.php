@@ -92,7 +92,7 @@ class Post extends ComponentBase
     {
         $slug = $this->property('slug');
 
-        $query = BlogPost::where('slug', $slug);
+        $query = BlogPost::transWhere('slug', $slug);
 
         if (!$this->checkEditor()) {
             $query->isPublished();
@@ -100,9 +100,7 @@ class Post extends ComponentBase
 
         $post = $query->first();
 
-        /*
-         * Add a "url" helper attribute for linking to each category
-         */
+        // Add a "url" helper attribute for linking to each category
         if ($post && $post->exists && $post->categories->count()) {
             $post->categories->each(function($category) {
                 $category->setUrl($this->categoryPage, $this->controller);
