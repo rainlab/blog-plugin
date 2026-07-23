@@ -70,3 +70,4 @@ v1.7.3: Compatibility with October CMS v4.2
 v2.0.0:
     - Complete support with October CMS v4.2
     - migrate_v2_0_0.php
+v2.0.1: Fixes translated slug resolution for posts and categories
