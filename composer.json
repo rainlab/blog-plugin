@@ -19,5 +19,8 @@
     ],
     "require": {
         "php": ">=8.2"
+    },
+    "conflict": {
+        "october/rain": "<4.2"
     }
 }
