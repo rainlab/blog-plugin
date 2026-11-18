@@ -5,8 +5,7 @@
         handler: 'onSave',
         icon: 'icon-save-cloud',
         primary: true,
-        hotkey: ['ctrl+s', 'cmd+s'],
-        dataRequestData: "redirect: 0"
+        hotkey: ['ctrl+s', 'cmd+s']
     ) ?>
 <?php else: ?>
     <?= Ui::ajaxButton(
